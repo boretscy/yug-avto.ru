@@ -1,0 +1,241 @@
+#YappsShowroom .blue-cover {
+    height: 210px; 
+    z-index: -1; 
+    top:0;
+}
+#YappsShowroom .blue-cover.active {
+    height: 360px;
+}
+
+#YappsShowroom .filter-button {
+    padding: 10.5px;
+    height: 54px;
+}
+#YappsShowroom .form-dropdown {
+    height: 54px;
+    border-radius: var(--yaradius16);
+    color: var(--yablack);
+    padding: 16px;
+	background: var(--yalightbluegray) url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-down.svg) calc(100% - 16px) 50% no-repeat;
+    font-size: 15px;
+}
+#YappsShowroom .form-dropdown:hover {
+    color: var(--yadarkgray);
+    background-image: url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-down-a.svg);
+}
+#YappsShowroom .form-dropdown.form-dropdown-opened {
+    color: var(--yadarkgray);
+    background-color: var(--yalightgray);
+    background-image: url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-cross.svg);
+    border-radius: var(--yaradius16) var(--yaradius16) 0 0;
+}
+#YappsShowroom .form-droplist-item {
+    color: var(--yablack);
+    background: url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-item.svg) left center no-repeat;
+}
+#YappsShowroom .form-droplist-item:hover {
+    color: var(--yadarkgray);
+}
+#YappsShowroom .form-droplist-item.selected {
+    background: url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-item-selected.svg) left center no-repeat;
+    color: var(--yadarkgray);
+}
+#YappsShowroom .form-droplist {
+    max-height: 280px;
+    border-radius: 0 0 var(--yaradius16) var(--yaradius16);
+    background-color: var(--yalightgray);
+    z-index: 5;
+    font-size: 15px;
+}
+#YappsShowroom .form-droplist .form-droplist-container {
+    max-height: 250px;
+    overflow-y: auto;
+}
+#YappsShowroom .form-droplist .form-droplist-container::-webkit-scrollbar {
+    width: 10px;
+    background-color: var(--yawhite);
+}
+#YappsShowroom .form-droplist .form-droplist-container::-webkit-scrollbar-thumb {
+    background-color: var(--yadarkgray);
+    border-radius: 5px;
+}
+
+#YappsShowroom .range-row {
+    padding: 11px 15.5px 3px;
+    border-radius: 16px;
+    height: 54px;
+}
+#YappsShowroom .range-row .range-title-from {
+    top: 5px;
+    left: 15px;
+    font-size: 12px;
+}
+#YappsShowroom .range-row .range-title-to {
+    top: 5px;
+    left: calc(50% + 10px);
+    font-size: 12px;
+}
+#YappsShowroom .range-row .range-title-param {
+    top: 5px;
+    right: 15.5px;
+    font-size: 12px;
+}
+#YappsShowroom .range-row input {
+    border: none;
+    background-color: unset;
+    outline: none;
+    width: 48.9%;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+#YappsShowroom .range-slider {
+    height: 5px;
+    position: relative;
+    background-color: var(--yadarkgray);
+    border-radius: 2.5px;
+    width: 90%;
+    left: 5%;
+    top: -5px;
+}
+#YappsShowroom .range-selected {
+    height: 100%;
+    left: 0%;
+    right: 0%;
+    position: absolute;
+    border-radius: 1.5px;
+    background-color: var(--yayellow);
+}
+#YappsShowroom .range-input {
+    position: relative;
+}
+#YappsShowroom .range-input input {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: -10px;
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 90%;
+    left: 5%;
+    cursor: pointer;
+}
+#YappsShowroom .range-input input::-webkit-slider-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background-color: #fff;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4);
+}
+#YappsShowroom .range-input input::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background-color: #fff;
+    pointer-events: auto;
+    -moz-appearance: none;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4);
+}
+
+#YappsShowroom .brands-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(225px,1fr));
+    gap: 5px 20px;
+    margin-bottom: 2rem;
+    align-items: start;
+}
+#YappsShowroom .brands-list-item .h2-to-div {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    margin: 0;
+    display: flex;
+}
+#YappsShowroom .brands-list-item a {
+    width: 94%;
+    margin-left: 3%;
+}
+#YappsShowroom .brands-list-item:hover a {
+    font-weight: 500 !important;
+}
+#YappsShowroom .brands-list-item:hover .brands-list-item-count {
+    background-color: var(--yayellow) !important;
+    color: var(--yawhite) !important;
+}
+#YappsShowroom .brands-list-item-count {
+   min-width: 30px;
+   text-align: right; 
+}
+#YappsShowroom .tags-list-item img {
+    width: 9px;
+    height: 9px;
+}
+
+#YappsShowroom .sorting .check {
+    width: 20px;
+    height: 20px;
+}
+
+#YappsShowroom .cta-card {
+    height: calc(100% - 16px);
+}
+#YappsShowroom .cta-card-img {
+    margin-bottom: -80px;
+    z-index: 1;
+}
+#YappsShowroom .cta-card-img img {
+    width: 95%;
+}
+#YappsShowroom .cta-card-button {
+    padding: 9.5px;
+    bottom: 17px;
+    width: calc(100% - 48px);
+}
+
+#YappsShowroom .filter-droplist {
+    left: 0;
+    top: 42px;
+    max-height: 360px;
+    z-index: 15;
+    text-align: left;
+}
+#YappsShowroom .filter-droplist::before {
+    content: '';
+	width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 14px 12px 14px;
+    border-color: transparent transparent var(--yagray) transparent;
+    transform: rotate(0deg);
+    position: absolute;
+    top: -12px;
+    left: calc(50% - 14px);
+}
+#YappsShowroom .filter-droplist::after {
+    content: '';
+	width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 13px 11px 13px;
+    border-color: transparent transparent var(--yawhite) transparent;
+    transform: rotate(0deg);
+    position: absolute;
+    top: -11px;
+    left: calc(50% - 13px);
+}
+#YappsShowroom .sorting .icon-wrap {
+    width: 33px;
+    height: 33px;
+}
+
+@media (max-width: 991.98px) {
+    #YappsShowroom .blue-cover {
+        height: 250px; 
+        z-index: -1; 
+        top:0;
+    }
+}

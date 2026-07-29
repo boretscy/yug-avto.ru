@@ -1,0 +1,72 @@
+.footer-seo-text {
+	height: 110px;
+	overflow: hidden;
+	transition: var(--transition);
+}
+.footer-seo-text.full {
+	height: auto;
+	transition: var(--transition);
+}
+.footer-disclamer-text {
+	/* height: 80px; */
+	height: auto;
+	overflow: hidden;
+	transition: var(--transition);
+}
+.footer-disclamer-text.full {
+	height: auto;
+	transition: var(--transition);
+}
+.footer-seo-text a, .footer-disclamer-text a {
+	color: var(--yayellow);
+}
+.footer-seo-text a:hover, .footer-disclamer-text a:hover {
+	color: var(--yablue);
+}
+.footer-seo svg, .footer-disclamer svg {
+	fill: var(--yayellow);
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+}
+.footer-social a {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	padding-top: 7px;
+}
+.footer-social a svg {
+	fill: var(--yablackgray);
+	width: 26px;
+	height: 26px;
+	transition: var(--transition);
+}
+.footer-social a:hover svg {
+	fill: var(--yayellow);
+	transition: var(--transition);
+}
+
+.cookie {
+	background-color: rgba(0, 0, 0, .8);
+	z-index: 1000;
+	display: none;
+}
+.cookie [role="close-cookie"] {
+	right: 5px;
+	top: 15px;
+}
+.cookie [role="close-cookie"] svg {
+	fill: var(--yagray);
+	width: 30px;
+	height: 30px;
+}
+@media (max-width: 991.98) {
+	.cookie {
+		min-height: 100px;
+	}
+}
+@media (max-width: 767.98px) {
+    .cookie {
+		min-height: 310px;
+	}
+}

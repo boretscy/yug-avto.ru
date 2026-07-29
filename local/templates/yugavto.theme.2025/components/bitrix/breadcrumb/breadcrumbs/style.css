@@ -1,0 +1,8 @@
+.breadcrumbs img.breadcrumbs-arrow {
+	width: 4px;
+	height: auto;
+	margin: 0 10px;
+}
+.breadcrumbs-item {
+	display: inline-block;;
+}

@@ -1,0 +1,57 @@
+# === Исключение ядра Битрикса ===
+/bitrix/*
+!/bitrix/.gitkeep
+
+# Исключаем кэш, сессии, временные файлы и бэкапы ядра
+/bitrix/cache/
+/bitrix/managed_cache/
+/bitrix/local_cache/
+/bitrix/stack_cache/
+/bitrix/session/
+/bitrix/tmp/
+/bitrix/backup/
+/bitrix/updates/
+
+# === Загрузки (пользовательский контент) ===
+/upload/
+
+# === Конфигурация БД и локальные настройки (у каждого окружения свои) ===
+/local/settings.php
+/local/php_interface/dbconn.php
+/local/php_interface/yapps_config.php
+/local/php_interface/*.json
+
+# === Исключение папок логов YApp ===
+/about/log_request/
+/logs/
+/log_request/
+
+# === Логи, дампы, медиафайлы и временные файлы ===
+*.log
+*.bak
+*.tmp
+*.swp
+*.mp4
+*.avi
+*.mov
+*.zip
+*.tar.gz
+*.tar
+*.gz
+*.rar
+*.sql
+.DS_Store
+Thumbs.db
+
+# === Специфические папки IDE и инструментов ===
+.idea/
+.vscode/
+*.sublime-*
+.nbproject/
+
+# === Зависимости (если используются) ===
+/node_modules/
+/package-lock.json
+/vendor/
+/local/php_interface/vendor/
+/composer.lock

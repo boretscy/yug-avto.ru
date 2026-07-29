@@ -1,0 +1,38 @@
+:root {
+    --yatopbg: #fff;
+    --yawhite: #fff;
+    --yasocial: #FDBA4D;
+    --yashare: #EAEDF2;
+    --yasecondbutton: #fff;
+    --yatitle: #000;
+    --yatitlephoto: #000;
+    --yatextphoto: #222;
+    --yatextnophoto: #222;
+    --yatext: #222;
+    --yabottombg: #EAEDF2;
+    --yacircle: #fff;
+    --yalink: #FDBA4D;
+	--yalinkhover: #FFB234;
+
+    --yabuttonicon: 5px;
+    --yatopicon: 8px;
+    --yabutton: 15px;
+    --yasmallbg: 25px;
+    --yabigbg: 40px;
+
+    --yasizebigtitle: 36px;
+    --yasizesmalltitle: 24px;
+    --yasizetext: 16px;
+    --yasizebigbutton: 18px;
+    --yasizesmallbutton: 14px;
+}
+
+
+
+img.logo {width: 150px;}
+img.photo { width: 150px; height: 150px; object-fit: cover;}
+.row.whisphoto {margin-bottom: -75px;}
+.row.photobottom {height: 75px;}
+.button {height: 48px;}
+.button .icon {width: 28px; height: 28px;}
+.social {width: 42px; height: 42px;}

@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Грачёв Антон Сергеевич
+N:Грачёв;Антон;Сергеевич
+ORG:Юг-Авто Холдинг
+TITLE:ВЭБ программист
+URL:https://yug-avto.ru/
+EMAIL;TYPE=INTERNET:anton.grachev@yug-avto.ru
+TEL:+7 (929) 843-64-32
+TEL:+7 (861) 212-72-00
+END:VCARD

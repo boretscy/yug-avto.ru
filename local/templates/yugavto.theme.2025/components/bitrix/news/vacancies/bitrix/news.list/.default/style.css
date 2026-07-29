@@ -1,0 +1,141 @@
+.vacancies-filter .filter-dropdown {
+    padding: 11px 15.5px;
+    cursor: pointer;
+    transition: none;
+}
+.vacancies-filter .filter-dropdown-opened {
+    border-radius: var(--yaradius15) var(--yaradius15) 0 0;
+    transition: none;
+}
+.vacancies-filter .filter-droplist {
+    left: 0;
+    top: 42px;
+    max-height: 360px;
+    overflow-y: auto;
+    z-index: 15;
+    text-align: left;
+}
+.vacancies-filter .filter-droplist.active {
+    display: block;
+}
+.vacancies-filter .filter-droplist-item {
+    padding: 0 11px;
+    cursor: pointer;
+}
+.vacancies-filter .filter-droplist-item.not-link {
+    padding: 0 11px;
+    cursor: not-allowed;
+}
+.vacancies-filter .filter-droplist-item:hover:after {
+    content: 'Выбрать';
+    float: right;
+    color: var(--yadarkgray);
+    font-size: var(--yatextminusminus);
+    font-weight: normal;
+}
+.vacancies-filter .filter-droplist-item.not-link:hover:after {
+    content: '';
+}
+.vacancies-filter .filter-droplist-item.selected:hover:after {
+    content: 'Отменить';
+    float: right;
+    color: var(--yadarkgray);
+    font-size: var(--yatextminusminus);
+    font-weight: normal;
+}
+
+
+
+.vacancies-item {
+    min-height: 210px;
+}
+.vacancies-item img {
+    width: 5px;
+    height: auto;
+}
+
+@media (max-width: 1199.98px) {
+
+	h1.h2,
+    .vacancies h3, 
+    .vacancies .h3 {
+		font-size: 24px;
+		line-height: 130%;
+	}
+    .vacancies-filter-tags {
+        overflow-x: scroll;
+    }
+
+}
+@media (max-width: 575.98px) {
+    /* .vacancies-filter .vacancies-filter-tags {
+        flex-wrap: nowrap !important;
+        overflow-x: scroll;
+    } */
+}
+
+
+
+/* 2025 */
+.vacancies-filter-tabs .vacancies-filter-tabs-item {
+    font-size: 15px;
+    width: 25%;
+    height: 54px;
+    background-color: #D6D8DB;
+    border-radius: var(--yaradius16) var(--yaradius16) 0 0;
+}
+.vacancies-filter-tabs .vacancies-filter-tabs-item.active {
+    background-color: var(--yawhite);
+}
+.vacancies-filter-tabs .vacancies-filter-tabs-item:hover   {
+    background-color: var(--yalightgray);
+}
+
+.vacancies-filter-tabs-content {
+    border-radius: 0 0 var(--yaradius16) var(--yaradius16);
+}
+
+.vacancies-item {
+    border-radius: var(--yaradius16) var(--yaradius16) 0 var(--yaradius16);
+    min-height: 212px;
+}
+.vacancies-item .pay {
+    color: var(--yablack);
+    transition: var(--transition);
+}
+.vacancies-item:hover .pay {
+    color: var(--yadarkgray);
+    font-weight: bold;
+    transition: var(--transition);
+}
+.vacansies-item-footer {
+    height: 65px;
+    right: 0;
+    bottom: 0;
+}
+.vacansies-item-footer-left-wrap-corner {
+    border-radius: 0 0 var(--yaradius16) 0;
+    width: 16px;    
+}
+.vacansies-item-footer-right-top {
+    height: 16px;
+}
+.vacansies-item-footer-right-top-wrap  {
+    border-radius: 0 0 var(--yaradius16) 0;
+    height: 16px;
+}
+.vacansies-item-footer-right-bottom-wrap-content  {
+    border-radius: var(--yaradius16) 0 0 0;
+    padding-top: 8px;
+}
+.vacansies-item-footer-right-bottom-icon {
+    background: url(./images/svg/icon-vacansies-corner.svg) center no-repeat var(--yalightbluegray);
+    width: 41px;
+    height: 41px;
+    margin: 0 0 0 8px;
+    transition: var(--transition);
+}
+.vacancies-item:hover .vacansies-item-footer-right-bottom-icon {
+    background: url(./images/svg/icon-vacansies-corner-a.svg) center no-repeat var(--yalightbluegray);
+    transition: var(--transition);
+}

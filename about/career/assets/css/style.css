@@ -1,0 +1,138 @@
+.career-filter-tabs .career-filter-tabs-item {
+    font-size: 15px;
+    width: 25%;
+    height: 54px;
+    background-color: #D6D8DB;
+    border-radius: var(--yaradius16) var(--yaradius16) 0 0;
+}
+.career-filter-tabs .career-filter-tabs-item.active {
+    background-color: var(--yawhite);
+}
+.career-filter-tabs .career-filter-tabs-item:hover   {
+    background-color: var(--yalightgray);
+}
+.career-filter-tabs-content {
+    border-radius: 0 0 var(--yaradius16) var(--yaradius16);
+    height: 600px;
+}
+.career-footer-tabs-content {
+    border-radius: 0 0 var(--yaradius16) var(--yaradius16);
+}
+.career-filter-tabs-content .title {font-size: 62px;}
+.career-filter-tabs-content .text {font-size: 28px;}
+.career-filter-tabs-content .sign {font-size: 20px;}
+
+.future {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+.future img {
+    top: -70px;
+    right: -470px;
+}
+
+.map {
+    background: #0039AA;
+    background: linear-gradient(165deg, rgba(0, 57, 170, 1) 0%, rgba(0, 111, 255, 1) 52%, rgba(110, 255, 231, 1) 100%);
+    padding: 80px;
+}
+.map::before {
+    content: '';
+    position: absolute;
+    left: -140px;
+    bottom: -110px;
+    width: 320px;
+    height: 320px;
+    background: url(./../images/map-point.png) center no-repeat;
+}
+.map-img {
+    left: 80px;
+    top: calc(50% - 225px);
+}
+
+
+
+@media (max-width: 1199.98px) {
+    .title-image {width: 100%;}
+    .map-img {
+        left: 80px;
+        top: calc(50% - 155px);
+        width: 100%;
+    }
+}
+@media (max-width: 991.98px) {
+    .career-filter-tabs-content {
+        border-radius: 0 0 var(--yaradius16) var(--yaradius16);
+        height: auto;
+    }
+     .map {
+        background: #0039AA;
+        background: linear-gradient(0deg, rgba(0, 57, 170, 1) 0%, rgba(0, 111, 255, 1) 52%, rgba(110, 255, 231, 1) 100%);
+        padding: 70px 20px;
+        margin: 0 30px;
+        height: 670px;
+    }
+    .map::before {
+        content: '';
+        position: absolute;
+        left: -70px;
+        bottom: unset;
+        top: -110px;
+        width: 200px;
+        height: 200px;
+        background: url(./../images/map-point.png) center no-repeat;
+        background-size: cover;
+    }
+    .map-img {
+        left: -20px;
+        top: unset;
+        bottom: -420px;
+        width: calc(100% + 40px);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .career-filter-tabs-content {
+        border-radius: var(--yaradius16);
+    }
+    .career-filter-tabs-content {height: unset;}
+    .career-filter-tabs-content img {width: 100%;}
+    .career-filter-tabs-content .title {font-size: 36px;}
+    .career-filter-tabs-content .text {font-size: 16px;}
+    .career-filter-tabs-content .sign {font-size: 16px;}
+    .future {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .future img {width: 100%;}
+    .map {
+        background: #0039AA;
+        background: linear-gradient(0deg, rgba(0, 57, 170, 1) 0%, rgba(0, 111, 255, 1) 52%, rgba(110, 255, 231, 1) 100%);
+        padding: 70px 20px;
+        margin: 0 30px;
+        height: 460px;
+    }
+    .map::before {
+        content: '';
+        position: absolute;
+        left: -70px;
+        bottom: unset;
+        top: -110px;
+        width: 200px;
+        height: 200px;
+        background: url(./../images/map-point.png) center no-repeat;
+        background-size: cover;
+    }
+    .map-img {
+        left: -20px;
+        top: unset;
+        bottom: -220px;
+        width: calc(100% + 40px);
+    }
+    .career-footer-tabs-content {
+        border-radius:  var(--yaradius16);
+    }
+}
+
+@media (max-width: 425px) {
+}

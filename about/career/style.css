@@ -1,0 +1,180 @@
+.career-blockquote-cities {
+    position: absolute;
+    bottom: 0;
+}
+
+.career-buttons-item {
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+}
+.career-buttons-item::after {
+	content: "";
+	background-color: var(--yayellow);
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	bottom: -200px;
+	left: -200px;
+	transition: .2s;
+	z-index: -1;
+}
+.career-buttons-item:hover::after {
+	bottom: -100px;
+	left: -100px;
+	transition: .2s;
+}
+.career-buttons-item svg {
+	--icon-size: 65px;
+    fill: var(--yablue);
+    width: var(--icon-size);
+    height: var(--icon-size);
+    margin-bottom: 1em;
+}
+.blockquote_box {
+	position: relative;
+	padding: 1em 4em;
+}
+.blockquote_box:before {
+	content: url("/about/career/blockquote-icons.svg");
+	position: absolute;
+	top: 1em;
+	left: 1em;
+}
+.category_box {}
+.category_box .title:after {
+	content: url("/about/career/rigth-arrow.svg ");
+	position: absolute;
+	top: 0.2em;
+	right: 0;
+}
+.hover-orange {
+	position: relative;
+	overflow: hidden;
+}
+
+.hover-orange:after {
+	content: "";
+	background-color: var(--yayellow);
+	border-radius: 50%;
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	bottom: -300px;
+	left: -300px;
+	transition: .2s;
+	z-index: 50;
+}
+.hover-orange:hover::after {
+	bottom: -200px;
+	left: -200px;
+	transition: .2s;
+}
+
+.card-with-photo {
+	background-image: url('/upload/img/career-575х322.jpg');
+	background-position: 5% 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100%;
+}
+
+.card-with-photo,
+.card-with-txt {
+	border-top-left-radius: 25px;
+	border-top-right-radius: 25px;
+	border-bottom-left-radius: 25px;
+	border-bottom-right-radius: 25px;
+}
+
+iframe#fitvid247113 {
+	border-radius: 25px !important;
+}
+
+.tickets-links .ticket-arrow {
+	max-width: 9px;
+}
+
+@media (max-width: 1199.98px) {
+
+	.main-title-corporate .h2.block-title {
+		font-size: 24px;
+		line-height: 130%;
+	}
+	h2, .h2,
+	.connect-to-team .h1 {
+		font-size: 24px;
+		line-height: 35px;
+	}
+	.tickets-links .text-plus p {
+		font-size: 16px;
+		line-height: 24px;
+	}
+	.yug-auto-career .text-plus,
+	.text-plus.our-team-txt p {
+		font-size: 14px;
+		line-height: 21px;
+	}
+
+}
+
+@media (max-width: 767.98px) {
+
+	.main-section h1, 
+	.main-section .h1 {
+		font-size: 32px;
+		line-height: 48px;
+	}
+	.card-with-photo {
+		height: 260px;
+		border-bottom-left-radius: 0px;
+		border-bottom-right-radius: 0px;
+	}
+	.card-with-txt {
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+	}
+	iframe#fitvid247113 {
+		height: 173px;
+	}
+	.main-section a,
+	.connect-to-team a {
+		max-width: 208px;
+		font-size: 14px;
+		font-weight: 500;
+	}
+
+}
+
+@media (max-width: 425px) {
+
+	.category_box img {
+		width: 100%;
+	}
+
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+
+	.main-section h1, 
+	.main-section .h1 {
+		font-size: 32px;
+		line-height: 48px;
+	}
+
+}
+
+@media (min-width: 768px) {
+
+	.card-with-photo {
+		height: 100%;
+	}
+	.connect-to-team a {
+		max-width: 320px;
+	}
+	.connect-to-team p.h1 {
+		max-width: 530px;
+	}
+
+}

@@ -1,0 +1,521 @@
+.ymaps-2-1-79-map {border-radius: var(--yaradius16);}
+.ymaps-2-1-79-inner-panes {border-radius: var(--yaradius16);}
+
+
+
+/* 2025 */
+.dealership-card {
+    width: 385px !important;
+}
+.dealership-card-content {
+    border-radius: var(--yaradius16) var(--yaradius16) var(--yaradius16) 0;
+    padding: 24px;
+}
+.dealership-card-content span {
+    width: 24px;
+    height: 24px;
+}
+.dealership-card-info-button {
+    height: 32px;
+    font-size: 13px;
+}
+.dealership-card-info-button img {
+    height: 12px;
+    width: auto;
+}
+.dealership-card-footer {
+    height: 60px;
+}
+.dealership-card-footer-left {width: calc(100% - 59px);}
+.dealership-card-footer-right {width: 59px}
+.dealership-card-footer-left-content {
+    border-radius: 0 0 var(--yaradius16) var(--yaradius16);
+    padding: 0 12px 10px 12px;
+}
+.dealership-card-footer-right-content {
+    border-radius: var(--yaradius16) 0 0 0;
+    padding-top: 4px;
+}
+.dealership-card-button {
+    font-size: 13px;
+    padding: 10px 19px;
+}
+.dealership-card-item img {
+    top: calc(50% - 9.5px);
+    left: calc(50% - 9.5px);
+}
+.dealership-card-item img:first-child {
+    opacity: 1;
+    animation: vehicle-icon-animation-show var(--transition) ease 0s 1 normal forwards;;
+}
+.dealership-card-item img:last-child {
+    opacity: 0;
+    animation: vehicle-icon-animation-hide var(--transition) ease 0s 1 normal forwards;;
+}
+.dealership-card-item:hover img:first-child {
+    opacity: 1;
+    animation: vehicle-icon-animation-hide var(--transition) ease 0s 1 normal forwards;;
+}
+.dealership-card-item:hover img:last-child {
+    opacity: 0;
+    animation: vehicle-icon-animation-show var(--transition) ease 0s 1 normal forwards;;
+}
+.dealership-card-item {
+    cursor: pointer !important;
+    width: 51px;
+    height: 51px;
+}
+
+.dealership-map {
+    width: calc(100% - 395px);
+}
+
+
+/* SERVICES 2 */
+.dealership-services-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 0px;
+}
+.dealership-services-2 .dealership-service-1, .dealership-services-2 .dealership-service-2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.dealership-services-2 .dealership-service-1 img, .dealership-services-2 .dealership-service-2 img {
+    width: 84px;
+    height: auto;
+    margin-right: 16px;
+}
+
+
+/* SERVICES 3 */
+.dealership-services-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 0px;
+}
+.dealership-services-3 .dealership-service-1, .dealership-services-3 .dealership-service-2, .dealership-services-3 .dealership-service-3 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.dealership-services-3 .dealership-service-1 img, .dealership-services-3 .dealership-service-2 img, .dealership-services-3 .dealership-service-3 img {
+    width: 84px;
+    height: auto;
+    margin-right: 16px;
+}
+
+
+
+
+/* SERVICES 6 */
+.dealership-services-6 {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr 0.9fr 1.1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+}
+
+.dealership-services-6 .dealership-service-1 { grid-area: 1 / 1 / 3 / 2; }
+.dealership-services-6 .dealership-service-2 { grid-area: 1 / 2 / 2 / 3; }
+.dealership-services-6 .dealership-service-3 { grid-area: 2 / 2 / 3 / 3; }
+.dealership-services-6 .dealership-service-4 { grid-area: 1 / 3 / 3 / 4; }
+.dealership-services-6 .dealership-service-5 { grid-area: 1 / 4 / 2 / 5; }
+.dealership-services-6 .dealership-service-6 { grid-area: 2 / 4 / 3 / 5; }
+
+.dealership-services-6 .dealership-service-1, .dealership-services-6 .dealership-service-4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.dealership-services-6 .dealership-service-2, .dealership-services-6 .dealership-service-3, .dealership-services-6 .dealership-service-5, .dealership-services-6 .dealership-service-6 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.dealership-services-6 .dealership-service-1 img, .dealership-services-6 .dealership-service-4 img {
+    margin-top: -60px;
+    width: 80%;
+}
+.dealership-services-6 .dealership-service-2 img, .dealership-services-6 .dealership-service-3 img, .dealership-services-6 .dealership-service-5 img, .dealership-services-6 .dealership-service-6 img {
+    width: 84px;
+    height: auto;
+    margin-right: 16px;
+}
+
+
+.swiper-dealership-cis-button-prev, .swiper-dealership-cis-button-next {
+	position: absolute;
+	top: calc(50% - 8px);
+}
+.swiper-dealership-cis-button-prev {
+	left: -30px;
+    z-index: 1;
+}
+.swiper-dealership-cis-button-next {
+	right: -30px;
+    z-index: 1;
+}
+.swiper-dealership-cis .swiper-pagination {
+	bottom: 0 !important;
+	color: var(--yadarkgray);
+	font-size: 14px;
+}
+.swiper-dealership-cis .swiper-pagination-current {
+    color: var(--yayellow);
+	font-size: 16px;
+}
+img.swiper-dealership-cis-arrow-small {
+	width: 7px;
+	height: auto;
+}
+.swiper-dealership-cis-button-wrap {
+    background-color: rgba(0,0,0,.2);
+    width: 36px;
+    height: 36px;
+}
+.swiper-dealership-cis .swiper-pagination {
+	bottom: -50px !important;
+	font-size: 16px;
+	width: auto !important;
+	padding: 4px 8px;
+	border-radius: var(--yaradius8);
+	background-color: var(--yalightbluegray);
+	left: calc(50% - 16px) !important;
+}
+.swiper-dealership-cis .swiper-pagination-current {
+    color: var(--yayellow);
+	font-weight: bold;
+}
+.swiper-dealership-cis .swiper-pagination-total {
+	color: var(--yablack);
+}
+
+@media (max-width: 1199.98px) {
+	.swiper-dealership-cis-button-next {
+		right: -5px;
+	}
+	.swiper-dealership-cis-button-prev {
+		left: -5px;
+	}
+}
+@media (max-width: 991.98px) {
+	.swiper-dealership-cis-button-next {
+		right: -5px;
+	}
+	.swiper-dealership-cis-button-prev {
+		left: -5px;
+	}
+}
+@media (max-width: 767.98px) {
+	.swiper-dealership-cis-button-next {
+		right: 0px;
+	}
+	.swiper-dealership-cis-button-prev {
+		left: 0px;
+	}
+}
+
+@media (max-width: 575.98px) {
+
+	.swiper-dealership-cis-button-next {
+		right: 5px;
+	}
+	.swiper-dealership-cis-button-prev {
+		left: 5px;
+	}
+
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+
+	.swiper-dealership-cis .swiper-dealership-cis-item-title {
+		height: auto;
+	}
+
+}
+
+
+.vehicle-card {
+    overflow: hidden;
+    font-size: 14px;
+    padding: 8px 8px 0 8px;
+    border-radius: var(--yaradius16) var(--yaradius16) var(--yaradius16) 0;
+}
+.vehicle-card-images {
+    border-radius: var(--yaradius16);
+    overflow: hidden;
+}
+.vehicle-card-images, .vehicle-card-images a {
+    height: 215px;
+    cursor: ew-resize;
+}
+.vehicle-card-images a .vehicle-card-images-item-container {
+    position: relative;
+	min-height: 240px;
+}
+.vehicle-card-images a .vehicle-card-images-item-container-image::after {
+    display: block;
+    content: '';
+    padding-bottom: 78.865%;
+    background-size: cover;
+    background-position: center center;
+}
+.vehicle-card-images-item-container-image {
+    transition: transform var(--transition);
+}
+.vehicle-card-images-item-container:hover .vehicle-card-images-item-container-image {
+    transform: scale(1.08);
+}
+ .vehicle-card-discount {
+    height: 25px;
+}
+.vehicle-card-discount-item {
+    cursor: pointer !important;
+    width: 38px;
+    height: 38px;
+}
+.vehicle-card-images-row {
+    bottom: 0px;
+    width: calc(100% - 32px);
+}
+.vehicle-card-images-row-item {
+    width: 52px;
+    height: 6px;
+    border-radius: 3px;
+    opacity: .6;
+    background-color: var(--yawhite);
+    cursor: pointer;
+}
+.vehicle-card-images-row-item.active {
+    background-color: var(--yayellow);
+}
+.vehicle-card-content-title {
+    min-height: 60px;
+    font-size: 16px;
+    line-height: 1.1;
+}
+.vehicle-card-futures img {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+}
+.vehicle-card-specification {
+    min-height: 45px;
+    font-size: 13px;
+}
+.vehicle-card-specification-item {
+    position: relative;
+}
+.vehicle-card-specification-item::after {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background-color: var(--yayellow);
+    border-radius: 50%;
+    position: absolute;
+    right: -2px;
+    top: calc(50% - 2px);
+}
+.vehicle-card-specification-item:last-child:after {
+    content: unset;
+}
+.vehicle-card-button {
+    padding: 9.5px;
+}
+.vehicle-card-futures {
+    height: 35px;
+}
+.vehicle-card-discount-item {
+    border-radius: 7px;
+}
+.vehicle-card-price .price {font-size: 24px;}
+
+
+
+.vehicle-card-footer {
+    border-radius: 0 0 0 var(--yaradius16);
+    overflow: hidden;
+}
+.vehicle-card-footer-left {width: calc(100% - 92px);}
+.vehicle-card-footer-right {width: 92px;}
+.vehicle-card-footer-left-content {
+    border-radius: 0 0 var(--yaradius16) 0;
+    padding: 0 8px 10px 8px;
+}
+.vehicle-card-footer-right-content {
+    border-radius: var(--yaradius16) 0 0 0;
+}
+.vehicle-card-button {
+    font-size: 13px;
+    padding: 10px 15px;
+}
+.vehicle-card-discount-item img {
+    top: calc(50% - 9px);
+    left: calc(50% - 9px);
+}
+.vehicle-card-discount-item img:first-child {
+    opacity: 1;
+    animation: icon-animation-show var(--transition) ease 0s 1 normal forwards;;
+}
+.vehicle-card-discount-item img:last-child {
+    opacity: 0;
+    animation: icon-animation-hide var(--transition) ease 0s 1 normal forwards;;
+}
+.vehicle-card-discount-item:hover img:first-child {
+    opacity: 1;
+    animation: icon-animation-hide var(--transition) ease 0s 1 normal forwards;;
+}
+.vehicle-card-discount-item:hover img:last-child {
+    opacity: 0;
+    animation: icon-animation-show var(--transition) ease 0s 1 normal forwards;;
+} 
+.vehicle-card-discount-status {
+    height: 60px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1399.98px) {}
+@media (max-width: 1199.98px) {}
+@media (max-width: 991.98px) {
+     /* SERVICES 2 */
+    .dealership-services-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+        grid-column-gap: 16px;
+        grid-row-gap: 0px;
+    }
+    .dealership-services-2 .dealership-service-1, 
+    .dealership-services-2 .dealership-service-2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+    .dealership-services-2 .dealership-service-1 img, 
+    .dealership-services-2 .dealership-service-2 img {
+        margin-top: -60px;
+        width: 80%;
+    }
+
+    /* SERVICES 3 */
+    .dealership-services-3 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 16px;
+        grid-row-gap: 16px;
+    }
+    
+    .dealership-services-3 .dealership-service-1 { grid-area: 1 / 1 / 2 / 2; }
+    .dealership-services-3 .dealership-service-2 { grid-area: 1 / 2 / 2 / 3; }
+    .dealership-services-3 .dealership-service-3 { grid-area: 2 / 1 / 3 / 3; }
+
+    .dealership-services-3 .dealership-service-1, 
+    .dealership-services-3 .dealership-service-2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+    .dealership-services-3 .dealership-service-1 img, 
+    .dealership-services-3 .dealership-service-2 img {
+        margin-top: -60px;
+        width: 80%;
+    }
+    .dealership-services-3 .dealership-service-3 {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .dealership-services-3 .dealership-service-3 img {
+        width: 84px;
+        height: auto;
+        margin-right: 16px;
+    }
+
+    /* SERVICES 6 */
+    .dealership-services-6 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 16px;
+        grid-row-gap: 16px;
+    }
+
+    .dealership-services-6 .dealership-service-1 { grid-area: unset; }
+    .dealership-services-6 .dealership-service-2 { grid-area: unset; }
+    .dealership-services-6 .dealership-service-3 { grid-area: unset; }
+    .dealership-services-6 .dealership-service-4 { grid-area: unset; }
+    .dealership-services-6 .dealership-service-5 { grid-area: unset; }
+    .dealership-services-6 .dealership-service-6 { grid-area: unset; }
+
+    .dealership-services-6 .dealership-service-1, 
+    .dealership-services-6 .dealership-service-2, 
+    .dealership-services-6 .dealership-service-3, 
+    .dealership-services-6 .dealership-service-4, 
+    .dealership-services-6 .dealership-service-5, 
+    .dealership-services-6 .dealership-service-6 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+    .dealership-services-6 .dealership-service-1, 
+    .dealership-services-6 .dealership-service-2, 
+    .dealership-services-6 .dealership-service-3, 
+    .dealership-services-6 .dealership-service-4, 
+    .dealership-services-6 .dealership-service-5, 
+    .dealership-services-6 .dealership-service-6 {
+        margin-bottom: 35px;
+    }
+    .dealership-services-6 .dealership-service-1 img, 
+    .dealership-services-6 .dealership-service-2 img, 
+    .dealership-services-6 .dealership-service-3 img, 
+    .dealership-services-6 .dealership-service-4 img, 
+    .dealership-services-6 .dealership-service-5 img, 
+    .dealership-services-6 .dealership-service-6 img {
+        margin-top: -60px;
+        width: 80%;
+    }
+}
+@media (max-width: 767.98px) {
+    .dealership-card {
+        width: 100% !important;
+    }
+    .dealership-map {
+        width: 100%;
+        height: 280px;
+    }
+
+   
+    
+}
+@media (max-width: 575.98px) {
+}

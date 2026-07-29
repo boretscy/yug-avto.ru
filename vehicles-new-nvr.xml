@@ -1,0 +1,1453 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<yml_catalog date="2023-11-03 10:44">
+<shop>
+<name>Юг-Авто</name>
+<company>ООО "Юг-Авто"</company>
+<url>https://yug-avto.ru/</url>
+<currencies><currency rate="1" id="RUR"/></currencies>
+<categories>
+<category id="9999999996">Новые автомобили Юг-Авто</category>
+<category id="132" parentId="9999999996">Москвич</category>
+<category id="2088" parentId="132">3</category>
+<category id="152" parentId="9999999996">HAVAL</category>
+<category id="1638" parentId="152">Jolion</category>
+<category id="1761" parentId="152">Dargo</category>
+<category id="1745" parentId="152">Обновленный F7x</category>
+<category id="2178" parentId="152">Kingkong POER</category>
+<category id="2217" parentId="152">M6</category>
+<category id="1742" parentId="152">Обновленный F7</category>
+<category id="2345" parentId="152">Dargo x</category>
+</categories>
+<sets>
+<set id="auto"><name>Новые автомобили в Новороссийске</name><url>https://yug-avto.ru/cars/new/novorossiysk/</url></set>
+</sets>
+<offers>
+<offer id="1113587" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1113587/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1113587/sm/00.jpg?90d695d9b53ebff21c55e4b607443e76</picture>
+<name>Москвич 3 Комфорт 1,5 (150 л.с.)</name>
+<price>2478000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">2.26403</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1111019" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1111019/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111019/sm/00.jpg?1dca56fd1f80db04c1df2f022eab68ff</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111019/sm/01.jpg?413eedc76cd157013ae4e1a8faed82ef</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111019/sm/02.jpg?b41066536716c9181a4eb8171fad0f0a</picture>
+<name>HAVAL Jolion Elite 1,5 (143 л.с.)</name>
+<price>1998487</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">6.833356</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 445 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1111016" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1111016/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111016/sm/00.jpg?c23f60bb67fc3028a1fd3969e0b2373a</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111016/sm/01.jpg?da6af47be6a96602c79df5f6fffbfded</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111016/sm/02.jpg?caea3e30f95a9a6dcf7797131f0d5631</picture>
+<name>HAVAL Jolion Premium 1,5 (143 л.с.)</name>
+<price>2173997</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">5.938932</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Серебристый</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 445 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1111013" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1111013/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111013/sm/00.jpg?dc392ac2a50b9074fd468a15091df52e</picture>
+<name>HAVAL Jolion Premium 1,5 (143 л.с.)</name>
+<price>2089000</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">6.77952</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 445 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1111010" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1111010/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111010/sm/00.jpg?38aab66d6ed0f7a9799f33b7f28efe2e</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111010/sm/01.jpg?14c4c823a7bdcdaad48795933e82484d</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111010/sm/02.jpg?2bd8cdfb07eb95d4cbcc4da0dcc47e9f</picture>
+<name>HAVAL Jolion Elite 1,5 (150 л.с.)</name>
+<price>2089000</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">6.630256</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 625 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1111007" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1111007/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111007/sm/00.jpg?1292d9efd199ee73d8cb308b58b36104</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111007/sm/01.jpg?a3c2ebfc7215112e7992821cfa7a34e4</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111007/sm/02.jpg?48d40fc23723a4d96199edf9ab274e13</picture>
+<name>HAVAL Jolion Premium 1,5 (150 л.с.)</name>
+<price>2290365</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">1.612853</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 625 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1111004" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1111004/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111004/sm/00.jpg?1dca56fd1f80db04c1df2f022eab68ff</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111004/sm/01.jpg?413eedc76cd157013ae4e1a8faed82ef</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111004/sm/02.jpg?b41066536716c9181a4eb8171fad0f0a</picture>
+<name>HAVAL Jolion Elite 1,5 (150 л.с.)</name>
+<price>2059000</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">4.004611</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 625 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1111001" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1111001/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111001/sm/00.jpg?f9d52c7b5811b7d1476aa62372ca9e6d</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111001/sm/01.jpg?0b418f84f3200c660bb83d2bb6339fa9</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1111001/sm/02.jpg?1852267f25de9c5eade8ac13f38b6984</picture>
+<name>HAVAL Jolion Elite 1,5 (150 л.с.)</name>
+<price>2089000</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">7.799165</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Серебристый</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 625 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1107524" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1107524/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107524/sm/00.jpg?b19bd154b33f35fd2756367a7c86d420</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107524/sm/01.jpg?41f40ad69716306bbd4cd84ee73376fb</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107524/sm/02.jpg?93ead6c448b0877c689c65135d5d6f8a</picture>
+<name>HAVAL Jolion Premium 1,5 (150 л.с.)</name>
+<price>2331570</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">9.681651</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 625 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1107521" available="true">
+<url>https://yug-avto.ru/cars/new/haval/dargo/1107521/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107521/sm/00.jpg?9380d4a4eb249ca599d237af8578dc42</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107521/sm/01.jpg?4912ed7b39fb1a9f364982f3936894ab</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107521/sm/02.jpg?6e702392dd9c7c4990e3e413015b7f26</picture>
+<name>HAVAL Dargo Tech Plus 2,0 (192 л.с.)</name>
+<price>3190384</price>
+<vendor>HAVAL</vendor>
+<categoryId>1761</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">8.790498</param><param name="Двигатель">2,0 (192 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">180 км/ч</param>
+<param name="Объем бака">60 л</param>
+<param name="Масса">1 700 кг</param>
+<param name="Длина">4 620 мм</param>
+<param name="Ширина">1 890 - 1910 мм</param>
+<param name="Высота">1 780 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1107359" available="true">
+<url>https://yug-avto.ru/cars/new/haval/new-f7x/1107359/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107359/sm/00.jpg?11e741fd56cb327ed9635c59a577a0f3</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107359/sm/01.jpg?d1ae3a0f37318b52b5d80d77056aa8bb</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107359/sm/02.jpg?ce357c355a82524a3b26a71fb963f374</picture>
+<name>HAVAL Обновленный F7x Elite 2,0 (190 л.с.)</name>
+<price>2632263</price>
+<vendor>HAVAL</vendor>
+<categoryId>1745</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">1.040343</param><param name="Двигатель">2,0 (190 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">195 км/ч</param>
+<param name="Объем бака">56 л</param>
+<param name="Масса">1 756 кг</param>
+<param name="Длина">4 615 мм</param>
+<param name="Ширина">1 846 мм</param>
+<param name="Высота">1 655 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1107356" available="true">
+<url>https://yug-avto.ru/cars/new/haval/new-f7x/1107356/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107356/sm/00.jpg?94107d8ea8a11a6e609532f467ad7ca4</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107356/sm/01.jpg?090491270ea5deba33549eb569955e95</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107356/sm/02.jpg?10ae6fa437078536910e573895f7b008</picture>
+<name>HAVAL Обновленный F7x Elite 2,0 (190 л.с.)</name>
+<price>2674491</price>
+<vendor>HAVAL</vendor>
+<categoryId>1745</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">8.656463</param><param name="Двигатель">2,0 (190 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Серебристый</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">195 км/ч</param>
+<param name="Объем бака">56 л</param>
+<param name="Масса">1 756 кг</param>
+<param name="Длина">4 615 мм</param>
+<param name="Ширина">1 846 мм</param>
+<param name="Высота">1 655 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1107353" available="true">
+<url>https://yug-avto.ru/cars/new/haval/new-f7x/1107353/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107353/sm/00.jpg?8a2717eb06773c8eddfe2f24b5d6ad13</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107353/sm/01.jpg?f646840fcac3339bfd01cde6fbd02244</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107353/sm/02.jpg?16117a047b517575cfe13d185feb591d</picture>
+<name>HAVAL Обновленный F7x Premium 2,0 (190 л.с.)</name>
+<price>2809443</price>
+<vendor>HAVAL</vendor>
+<categoryId>1745</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">3.914441</param><param name="Двигатель">2,0 (190 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Серый</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">195 км/ч</param>
+<param name="Объем бака">56 л</param>
+<param name="Масса">1 756 кг</param>
+<param name="Длина">4 615 мм</param>
+<param name="Ширина">1 846 мм</param>
+<param name="Высота">1 655 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1107350" available="true">
+<url>https://yug-avto.ru/cars/new/haval/new-f7x/1107350/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107350/sm/00.jpg?23164a5d3437025db68edc34f555077f</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107350/sm/01.jpg?0df805607b99a0928d6721a665f1c9b8</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107350/sm/02.jpg?0630dd6c6ace1eb788430fed7ba51fcc</picture>
+<name>HAVAL Обновленный F7x Premium 2,0 (190 л.с.)</name>
+<price>2835136</price>
+<vendor>HAVAL</vendor>
+<categoryId>1745</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">3.16253</param><param name="Двигатель">2,0 (190 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">195 км/ч</param>
+<param name="Объем бака">56 л</param>
+<param name="Масса">1 756 кг</param>
+<param name="Длина">4 615 мм</param>
+<param name="Ширина">1 846 мм</param>
+<param name="Высота">1 655 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1107347" available="true">
+<url>https://yug-avto.ru/cars/new/haval/dargo/1107347/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107347/sm/00.jpg?611ff14e5400f682a52da0c1ed916b7a</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107347/sm/01.jpg?c39d69698bde1058c7c15329b2a86fbc</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1107347/sm/02.jpg?715e1bcc0fe1ccfce1c353b5fa6ff881</picture>
+<name>HAVAL Dargo Premium 2,0 (192 л.с.)</name>
+<price>3071299</price>
+<vendor>HAVAL</vendor>
+<categoryId>1761</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">5.622807</param><param name="Двигатель">2,0 (192 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">180 км/ч</param>
+<param name="Объем бака">60 л</param>
+<param name="Масса">1 700 кг</param>
+<param name="Длина">4 620 мм</param>
+<param name="Ширина">1 890 - 1910 мм</param>
+<param name="Высота">1 780 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1086236" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1086236/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1086236/sm/00.jpg?38aab66d6ed0f7a9799f33b7f28efe2e</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1086236/sm/01.jpg?14c4c823a7bdcdaad48795933e82484d</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1086236/sm/02.jpg?4587be083bb46c780646c3d1ad9cd150</picture>
+<name>HAVAL Jolion Elite 1,5 (143 л.с.)</name>
+<price>1887863</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">8.500823</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Механика</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 420 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1086104" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1086104/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1086104/sm/00.jpg?6fda2251ef3f3a6293ce60058ec631d4</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1086104/sm/01.jpg?1300fab5a8c24a4d0ce70312d1c037aa</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1086104/sm/02.jpg?35d80fad321bbd9aef8e243ae68992cb</picture>
+<name>HAVAL Jolion Premium 1,5 (143 л.с.)</name>
+<price>2174000</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">2.324603</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 445 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1084901" available="true">
+<url>https://yug-avto.ru/cars/new/haval/kingkong-poer/1084901/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084901/sm/00.jpg?99c8c72a0a1583e1ad251738772ae79c</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084901/sm/01.jpg?1513f06a46a756606720385d1ac7adfe</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084901/sm/02.jpg?84d9a69ef469b4e82358b2c4b677d440</picture>
+<name>HAVAL Kingkong POER Elite 2,0 (150 л.с.)</name>
+<price>3163789</price>
+<vendor>HAVAL</vendor>
+<categoryId>2178</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">6.58183</param><param name="Двигатель">2,0 (150 л.с.)</param>
+<param name="Трансмиссия">Механика</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Серебристый</param>
+<param name="Кузов">Пикап</param>
+<param name="Макс. скорость">160 км/ч</param>
+<param name="Масса">2 090 кг</param>
+<param name="Длина">5 641 мм</param>
+<param name="Ширина">1 880 мм</param>
+<param name="Высота">1 815 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1084898" available="true">
+<url>https://yug-avto.ru/cars/new/haval/m6/1084898/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084898/sm/00.jpg?2d8ff4e8d833f4a707fa33efbd68a979</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084898/sm/01.jpg?72db28b09591e06e5ae5b313b0551111</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084898/sm/02.jpg?88377cd3d0124877b0fd54225e732923</picture>
+<name>HAVAL M6 Family 1,5 (143 л.с.)</name>
+<price>2026642</price>
+<vendor>HAVAL</vendor>
+<categoryId>2217</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">6.844781</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">175 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 550 л</param>
+<param name="Масса">1 565 кг</param>
+<param name="Длина">4 664 мм</param>
+<param name="Ширина">1 830 мм</param>
+<param name="Высота">1 729 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1084895" available="true">
+<url>https://yug-avto.ru/cars/new/haval/m6/1084895/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084895/sm/00.jpg?2d8ff4e8d833f4a707fa33efbd68a979</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084895/sm/01.jpg?72db28b09591e06e5ae5b313b0551111</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084895/sm/02.jpg?88377cd3d0124877b0fd54225e732923</picture>
+<name>HAVAL M6 Family 1,5 (143 л.с.)</name>
+<price>2002284</price>
+<vendor>HAVAL</vendor>
+<categoryId>2217</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">2.624222</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">175 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 550 л</param>
+<param name="Масса">1 565 кг</param>
+<param name="Длина">4 664 мм</param>
+<param name="Ширина">1 830 мм</param>
+<param name="Высота">1 729 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1084766" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1084766/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084766/sm/00.jpg?3c7b70d6a14afd37ffba16f834a9e206</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084766/sm/01.jpg?aa8b4f6479ca4afb74be37427cfbf2e6</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084766/sm/02.jpg?d4d4b8b9a7a0de9348672ad4062e5d30</picture>
+<name>HAVAL Jolion Premium 1,5 (150 л.с.)</name>
+<price>2290950</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">4.116579</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Красный</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 625 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1084751" available="true">
+<url>https://yug-avto.ru/cars/new/haval/dargo/1084751/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084751/sm/00.jpg?611ff14e5400f682a52da0c1ed916b7a</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084751/sm/01.jpg?c39d69698bde1058c7c15329b2a86fbc</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1084751/sm/02.jpg?57c4125f801858e06326b65b6c32e451</picture>
+<name>HAVAL Dargo Tech Plus 2,0 (192 л.с.)</name>
+<price>3199389</price>
+<vendor>HAVAL</vendor>
+<categoryId>1761</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">4.967771</param><param name="Двигатель">2,0 (192 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">180 км/ч</param>
+<param name="Объем бака">60 л</param>
+<param name="Масса">1 700 кг</param>
+<param name="Длина">4 620 мм</param>
+<param name="Ширина">1 890 - 1910 мм</param>
+<param name="Высота">1 780 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1080822" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1080822/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080822/sm/00.jpg?ab208bb120e7913860337d1687df7ff9</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080822/sm/01.jpg?91cbbdc30d2f2e892e36243b164e7b38</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080822/sm/02.jpg?ffbcd3035ab679317f900ce69365133a</picture>
+<name>Москвич 3 Комфорт 1,5 (150 л.с.)</name>
+<price>1866000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">8.230021</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Серый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1080819" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1080819/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080819/sm/00.jpg?d03c33ddbc33c041490030128cff6f58</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080819/sm/01.jpg?50748d4860579918ddaad4c37c717c51</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080819/sm/02.jpg?34ca37753f9d21a7a77ffa461c133a40</picture>
+<name>Москвич 3 Комфорт 1,5 (150 л.с.)</name>
+<price>1865023</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">1.733186</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Голубой</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1080816" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1080816/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080816/sm/00.jpg?ab208bb120e7913860337d1687df7ff9</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080816/sm/01.jpg?91cbbdc30d2f2e892e36243b164e7b38</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080816/sm/02.jpg?ffbcd3035ab679317f900ce69365133a</picture>
+<name>Москвич 3 Комфорт 1,5 (150 л.с.)</name>
+<price>1847080</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">1.741982</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Серый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1080813" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1080813/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080813/sm/00.jpg?d03c33ddbc33c041490030128cff6f58</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080813/sm/01.jpg?50748d4860579918ddaad4c37c717c51</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1080813/sm/02.jpg?34ca37753f9d21a7a77ffa461c133a40</picture>
+<name>Москвич 3 Комфорт 1,5 (150 л.с.)</name>
+<price>1858000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">7.090516</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Голубой</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1076658" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1076658/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076658/sm/00.jpg?41f40ad69716306bbd4cd84ee73376fb</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076658/sm/01.jpg?93ead6c448b0877c689c65135d5d6f8a</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076658/sm/02.jpg?605be1d386357f033c2bf067eebd7069</picture>
+<name>HAVAL Jolion Elite Plus 1,5 (143 л.с.)</name>
+<price>2009000</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">4.938937</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 445 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1076640" available="true">
+<url>https://yug-avto.ru/cars/new/haval/m6/1076640/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076640/sm/00.jpg?db7e3fa9132bf3bf413e8df18f89854b</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076640/sm/01.jpg?f843fd1c73f718491de0db011186feeb</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076640/sm/02.jpg?4e0625a036948bdfaa87ed0cd98a2bc3</picture>
+<name>HAVAL M6 Family 1,5 (143 л.с.)</name>
+<price>2047611</price>
+<vendor>HAVAL</vendor>
+<categoryId>2217</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">2.019465</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">175 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 550 л</param>
+<param name="Масса">1 565 кг</param>
+<param name="Длина">4 664 мм</param>
+<param name="Ширина">1 830 мм</param>
+<param name="Высота">1 729 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1076637" available="true">
+<url>https://yug-avto.ru/cars/new/haval/m6/1076637/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076637/sm/00.jpg?db7e3fa9132bf3bf413e8df18f89854b</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076637/sm/01.jpg?f843fd1c73f718491de0db011186feeb</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076637/sm/02.jpg?4e0625a036948bdfaa87ed0cd98a2bc3</picture>
+<name>HAVAL M6 Family 1,5 (143 л.с.)</name>
+<price>2054429</price>
+<vendor>HAVAL</vendor>
+<categoryId>2217</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">7.264385</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">175 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 550 л</param>
+<param name="Масса">1 565 кг</param>
+<param name="Длина">4 664 мм</param>
+<param name="Ширина">1 830 мм</param>
+<param name="Высота">1 729 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1076496" available="true">
+<url>https://yug-avto.ru/cars/new/haval/dargo/1076496/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076496/sm/00.jpg?969e704f4d0071941bcfee5212c973f5</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076496/sm/01.jpg?3c86e8e6bfedd2c306be48fcd8d81bd5</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1076496/sm/02.jpg?0f8bc9075defa5a13adb5a333b81acda</picture>
+<name>HAVAL Dargo Tech Plus 2,0 (192 л.с.)</name>
+<price>3282811</price>
+<vendor>HAVAL</vendor>
+<categoryId>1761</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">1.262102</param><param name="Двигатель">2,0 (192 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Серый</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">180 км/ч</param>
+<param name="Объем бака">60 л</param>
+<param name="Масса">1 700 кг</param>
+<param name="Длина">4 620 мм</param>
+<param name="Ширина">1 890 - 1910 мм</param>
+<param name="Высота">1 780 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1075158" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1075158/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1075158/sm/00.jpg?b824d06f00f81748f786beb6d67090c5</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1075158/sm/01.jpg?b4274b12b963ffe8a15c7f418a46469b</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1075158/sm/02.jpg?51d83e596d8067a1a126c4030b06230c</picture>
+<name>HAVAL Jolion Elite 1,5 (150 л.с.)</name>
+<price>2142630</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">8.330425</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Голубой</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 625 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1075149" available="true">
+<url>https://yug-avto.ru/cars/new/haval/new-f7/1075149/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1075149/sm/00.jpg?cd25a5bd8022b6ed9a0a5234a16cfa7e</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1075149/sm/01.jpg?814139486187b1a557da9b1cbd76f12e</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1075149/sm/02.jpg?8f106737a39594985fcfa7af1eac05f5</picture>
+<name>HAVAL Обновленный F7 Elite 2,0 (190 л.с.)</name>
+<price>2616777</price>
+<vendor>HAVAL</vendor>
+<categoryId>1742</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">5.243831</param><param name="Двигатель">2,0 (190 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Масса">1 720 кг</param>
+<param name="Длина">4 620 мм</param>
+<param name="Ширина">1 846 мм</param>
+<param name="Высота">1 690 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1074183" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1074183/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1074183/sm/00.jpg?90d695d9b53ebff21c55e4b607443e76</picture>
+<name>Москвич 3 Комфорт 1,5 (150 л.с.)</name>
+<price>2478000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">5.969255</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1074003" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1074003/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1074003/sm/00.jpg?2b2603950d4829e05669323d9ed94365</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1074003/sm/01.jpg?121270920a45fccc71fedd2da20f0017</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1074003/sm/02.jpg?3b050de07f9a4fde1a11914316b81458</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1573300</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">8.312692</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Механика</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1067613" available="true">
+<url>https://yug-avto.ru/cars/new/haval/dargo-x/1067613/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067613/sm/00.jpg?09c6b73b67d00a767cb19a747e9c8b85</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067613/sm/01.jpg?3c86e8e6bfedd2c306be48fcd8d81bd5</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067613/sm/02.jpg?76f700dc0afc0a7a95c85160265afdb9</picture>
+<name>HAVAL Dargo x Premium 2,0 (192 л.с.)</name>
+<price>3242579</price>
+<vendor>HAVAL</vendor>
+<categoryId>2345</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">5.132295</param><param name="Двигатель">2,0 (192 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Серый</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">180 км/ч</param>
+<param name="Объем бака">60 л</param>
+<param name="Масса">1 700 кг</param>
+<param name="Длина">4 620 мм</param>
+<param name="Ширина">1 890 - 1910 мм</param>
+<param name="Высота">1 780 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1067607" available="true">
+<url>https://yug-avto.ru/cars/new/haval/jolion/1067607/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067607/sm/00.jpg?6fda2251ef3f3a6293ce60058ec631d4</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067607/sm/01.jpg?1300fab5a8c24a4d0ce70312d1c037aa</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067607/sm/02.jpg?35d80fad321bbd9aef8e243ae68992cb</picture>
+<name>HAVAL Jolion Premium 1,5 (143 л.с.)</name>
+<price>2207000</price>
+<vendor>HAVAL</vendor>
+<categoryId>1638</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">4.072168</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Кроссовер</param>
+<param name="Макс. скорость">185 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 133 л</param>
+<param name="Масса">1 445 кг</param>
+<param name="Длина">4 472 мм</param>
+<param name="Ширина">1 841 мм</param>
+<param name="Высота">1 574 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1067448" available="true">
+<url>https://yug-avto.ru/cars/new/haval/new-f7x/1067448/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067448/sm/00.jpg?a1e4a11d40e170138914f9021159ca4b</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067448/sm/01.jpg?83da656cc570c1f09214d87c56c32fb3</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067448/sm/02.jpg?0234ee398af7c435ccc2bce48612557d</picture>
+<name>HAVAL Обновленный F7x Tech Plus 2,0 (190 л.с.)</name>
+<price>3108030</price>
+<vendor>HAVAL</vendor>
+<categoryId>1745</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">4.196997</param><param name="Двигатель">2,0 (190 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Серебристый</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">195 км/ч</param>
+<param name="Объем бака">56 л</param>
+<param name="Масса">1 756 кг</param>
+<param name="Длина">4 615 мм</param>
+<param name="Ширина">1 846 мм</param>
+<param name="Высота">1 655 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1067439" available="true">
+<url>https://yug-avto.ru/cars/new/haval/new-f7x/1067439/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067439/sm/00.jpg?c1d850162389ca23a7d4663c5a34bfec</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067439/sm/01.jpg?0aa7ea59e832ed3153a7c80f564f9f27</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067439/sm/02.jpg?cca65813ba7f2df371bca32446f3cadf</picture>
+<name>HAVAL Обновленный F7x Tech Plus 2,0 (190 л.с.)</name>
+<price>3029000</price>
+<vendor>HAVAL</vendor>
+<categoryId>1745</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">5.305628</param><param name="Двигатель">2,0 (190 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">195 км/ч</param>
+<param name="Объем бака">56 л</param>
+<param name="Масса">1 756 кг</param>
+<param name="Длина">4 615 мм</param>
+<param name="Ширина">1 846 мм</param>
+<param name="Высота">1 655 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1067433" available="true">
+<url>https://yug-avto.ru/cars/new/haval/new-f7x/1067433/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067433/sm/00.jpg?501cbfebd28a23125d8e8b89ece4a2e1</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067433/sm/01.jpg?5992be06f7af9cbbce45aa7623f0e590</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067433/sm/02.jpg?46250250200f7b876b27f1f83d459f18</picture>
+<name>HAVAL Обновленный F7x Premium 2,0 (190 л.с.)</name>
+<price>2929885</price>
+<vendor>HAVAL</vendor>
+<categoryId>1745</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">6.413072</param><param name="Двигатель">2,0 (190 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Голубой</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">195 км/ч</param>
+<param name="Объем бака">56 л</param>
+<param name="Масса">1 756 кг</param>
+<param name="Длина">4 615 мм</param>
+<param name="Ширина">1 846 мм</param>
+<param name="Высота">1 655 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1067427" available="true">
+<url>https://yug-avto.ru/cars/new/haval/new-f7x/1067427/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067427/sm/00.jpg?1a9864339bc2feeb137a5a42cd1fd673</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067427/sm/01.jpg?8e34c8a129f0e916e7704d395be76e52</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1067427/sm/02.jpg?57a21479a27a9a621d00e53874e50c5e</picture>
+<name>HAVAL Обновленный F7x Tech Plus 2,0 (190 л.с.)</name>
+<price>3140024</price>
+<vendor>HAVAL</vendor>
+<categoryId>1745</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">8.428687</param><param name="Двигатель">2,0 (190 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Красный</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">195 км/ч</param>
+<param name="Объем бака">56 л</param>
+<param name="Масса">1 756 кг</param>
+<param name="Длина">4 615 мм</param>
+<param name="Ширина">1 846 мм</param>
+<param name="Высота">1 655 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1058574" available="true">
+<url>https://yug-avto.ru/cars/new/haval/m6/1058574/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1058574/sm/00.jpg?db7e3fa9132bf3bf413e8df18f89854b</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1058574/sm/01.jpg?f843fd1c73f718491de0db011186feeb</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1058574/sm/02.jpg?4e0625a036948bdfaa87ed0cd98a2bc3</picture>
+<name>HAVAL M6 Family 1,5 (143 л.с.)</name>
+<price>2094720</price>
+<vendor>HAVAL</vendor>
+<categoryId>2217</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">4.836138</param><param name="Двигатель">1,5 (143 л.с.)</param>
+<param name="Трансмиссия">Робот</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">175 км/ч</param>
+<param name="Объем бака">55 л</param>
+<param name="Объем багажника">1 550 л</param>
+<param name="Масса">1 565 кг</param>
+<param name="Длина">4 664 мм</param>
+<param name="Ширина">1 830 мм</param>
+<param name="Высота">1 729 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1058568" available="true">
+<url>https://yug-avto.ru/cars/new/haval/dargo-x/1058568/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1058568/sm/00.jpg?ec6199590a50cb4d47c07223400e844e</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1058568/sm/01.jpg?b3e10fc327c4d026ea872d57b5a38ba5</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1058568/sm/02.jpg?f8a681386259e46b49a9d2ea56a52b30</picture>
+<name>HAVAL Dargo x Premium 2,0 (192 л.с.)</name>
+<price>3236681</price>
+<vendor>HAVAL</vendor>
+<categoryId>2345</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">7.745266</param><param name="Двигатель">2,0 (192 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Полный</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Универсал</param>
+<param name="Макс. скорость">180 км/ч</param>
+<param name="Объем бака">60 л</param>
+<param name="Масса">1 700 кг</param>
+<param name="Длина">4 620 мм</param>
+<param name="Ширина">1 890 - 1910 мм</param>
+<param name="Высота">1 780 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047738" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047738/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047738/sm/00.jpg?86f5036d5971833969bbab31c9f8981a</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047738/sm/01.jpg?f6841f1113f6d08cf99f10b605e9c200</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047738/sm/02.jpg?cb46b72d02e763b46db31b75f7b910cb</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1590000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">1.45133</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Механика</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047735" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047735/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047735/sm/00.jpg?d03c33ddbc33c041490030128cff6f58</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047735/sm/01.jpg?50748d4860579918ddaad4c37c717c51</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047735/sm/02.jpg?34ca37753f9d21a7a77ffa461c133a40</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1590000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">3.327871</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Механика</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Голубой</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047732" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047732/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047732/sm/00.jpg?2b2603950d4829e05669323d9ed94365</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047732/sm/01.jpg?121270920a45fccc71fedd2da20f0017</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047732/sm/02.jpg?3b050de07f9a4fde1a11914316b81458</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>2105000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">9.11328</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047729" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047729/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047729/sm/00.jpg?86f5036d5971833969bbab31c9f8981a</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047729/sm/01.jpg?f6841f1113f6d08cf99f10b605e9c200</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047729/sm/02.jpg?cb46b72d02e763b46db31b75f7b910cb</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1662216</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">4.285836</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047726" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047726/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047726/sm/00.jpg?ab208bb120e7913860337d1687df7ff9</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047726/sm/01.jpg?91cbbdc30d2f2e892e36243b164e7b38</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047726/sm/02.jpg?ffbcd3035ab679317f900ce69365133a</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1655000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">2.183379</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Серый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047723" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047723/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047723/sm/00.jpg?d03c33ddbc33c041490030128cff6f58</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047723/sm/01.jpg?50748d4860579918ddaad4c37c717c51</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047723/sm/02.jpg?34ca37753f9d21a7a77ffa461c133a40</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1595999</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">4.506365</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Механика</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Голубой</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047720" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047720/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047720/sm/00.jpg?ab208bb120e7913860337d1687df7ff9</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047720/sm/01.jpg?91cbbdc30d2f2e892e36243b164e7b38</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047720/sm/02.jpg?ffbcd3035ab679317f900ce69365133a</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1655000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">1.671522</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Серый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047717" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047717/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047717/sm/00.jpg?86f5036d5971833969bbab31c9f8981a</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047717/sm/01.jpg?f6841f1113f6d08cf99f10b605e9c200</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047717/sm/02.jpg?cb46b72d02e763b46db31b75f7b910cb</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>2176000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">3.902171</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047492" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047492/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047492/sm/00.jpg?2b2603950d4829e05669323d9ed94365</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047492/sm/01.jpg?121270920a45fccc71fedd2da20f0017</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047492/sm/02.jpg?3b050de07f9a4fde1a11914316b81458</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1590000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">1.052855</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Механика</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047489" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047489/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047489/sm/00.jpg?2b2603950d4829e05669323d9ed94365</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047489/sm/01.jpg?121270920a45fccc71fedd2da20f0017</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047489/sm/02.jpg?3b050de07f9a4fde1a11914316b81458</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1655000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">4.934264</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047486" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047486/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047486/sm/00.jpg?ab208bb120e7913860337d1687df7ff9</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047486/sm/01.jpg?91cbbdc30d2f2e892e36243b164e7b38</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047486/sm/02.jpg?ffbcd3035ab679317f900ce69365133a</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1655000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">1.48078</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Серый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047483" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047483/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047483/sm/00.jpg?d03c33ddbc33c041490030128cff6f58</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047483/sm/01.jpg?50748d4860579918ddaad4c37c717c51</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047483/sm/02.jpg?34ca37753f9d21a7a77ffa461c133a40</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1654199</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">9.105983</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Голубой</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047480" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047480/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047480/sm/00.jpg?d03c33ddbc33c041490030128cff6f58</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047480/sm/01.jpg?50748d4860579918ddaad4c37c717c51</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047480/sm/02.jpg?34ca37753f9d21a7a77ffa461c133a40</picture>
+<name>Москвич 3 Комфорт 1,5 (150 л.с.)</name>
+<price>1650693</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">8.666915</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Голубой</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047477" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047477/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047477/sm/00.jpg?2b2603950d4829e05669323d9ed94365</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047477/sm/01.jpg?121270920a45fccc71fedd2da20f0017</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047477/sm/02.jpg?3b050de07f9a4fde1a11914316b81458</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1655000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">6.070042</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047474" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047474/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047474/sm/00.jpg?d03c33ddbc33c041490030128cff6f58</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047474/sm/01.jpg?50748d4860579918ddaad4c37c717c51</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047474/sm/02.jpg?34ca37753f9d21a7a77ffa461c133a40</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1655000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">3.257222</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Голубой</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047471" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047471/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047471/sm/00.jpg?2b2603950d4829e05669323d9ed94365</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047471/sm/01.jpg?121270920a45fccc71fedd2da20f0017</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047471/sm/02.jpg?3b050de07f9a4fde1a11914316b81458</picture>
+<name>Москвич 3 Стандарт 1,5 (150 л.с.)</name>
+<price>1655000</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">3.84366</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Белый</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+<offer id="1047468" available="true">
+<url>https://yug-avto.ru/cars/new/moskvich/3/1047468/</url>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047468/sm/00.jpg?86f5036d5971833969bbab31c9f8981a</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047468/sm/01.jpg?f6841f1113f6d08cf99f10b605e9c200</picture>
+<picture>https://apps.yug-avto.ru/upload/Cis/vehicles/1047468/sm/02.jpg?cb46b72d02e763b46db31b75f7b910cb</picture>
+<name>Москвич 3 Комфорт 1,5 (150 л.с.)</name>
+<price>1846200</price>
+<vendor>Москвич</vendor>
+<categoryId>2088</categoryId>
+<currencyId>RUR</currencyId>
+<set-ids>auto</set-ids>
+<param name="Конверсия">5.290478</param><param name="Двигатель">1,5 (150 л.с.)</param>
+<param name="Трансмиссия">Автомат</param>
+<param name="Привод">Передний</param>
+<param name="Цвет">Черный</param>
+<param name="Кузов">Внедорожник</param>
+<param name="Макс. скорость">170 км/ч</param>
+<param name="Объем бака">50 л</param>
+<param name="Масса">1 440 кг</param>
+<param name="Длина">4 410 мм</param>
+<param name="Ширина">1 800 мм</param>
+<param name="Высота">1 660 мм</param>
+<delivery>false</delivery>
+</offer>
+</offers>
+</shop>
+</yml_catalog>
