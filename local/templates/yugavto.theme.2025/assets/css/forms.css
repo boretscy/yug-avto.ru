@@ -1,0 +1,277 @@
+form .form-dropdown {
+    height: 54px;
+    border-radius: var(--yaradius16);
+    color: var(--yadarkgray);
+    padding: 16px;
+	background: var(--yalightbluegray);
+    font-size: 15px;
+    border: 1px var(--yalightbluegray) solid;
+}
+form .form-dropdown.is-invalid {
+    border-color: #f04124;
+}
+form .form-dropcontainer .form-dropdown .after {
+    position: absolute;
+    top: calc(50% - 8px);
+    right: 16px;
+    width: 16px;
+    height: 16px;
+    background-image: url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-down.svg?2);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+form .form-dropcontainer .form-dropdown:hover {
+    color: var(--yablack);
+}
+form .form-dropcontainer .form-dropdown:hover .after {
+    background-image: url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-down-a.svg?2);
+}
+form .form-dropcontainer .form-dropdown.form-dropdown-opened {
+    color: var(--yablack);
+    background-color: var(--yalightgray);
+    border-radius: var(--yaradius16) var(--yaradius16) 0 0;
+}
+form .form-dropcontainer .form-dropdown.form-dropdown-opened .after {
+    background-image: url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-cross-a.svg?2);
+}
+form .form-dropcontainer .form-dropdown .before {
+    position: absolute;
+    top: calc(50% - 8px);
+    right: 48px;
+    width: 16px;
+    height: 16px;
+    background-image: url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-cross.svg?2);
+    background-position: center;
+    background-repeat: no-repeat;
+    display: none;
+}
+form .form-dropcontainer.selected .form-dropdown:not(.form-dropdown-opened) .before {
+    display: block;
+}
+form .form-dropcontainer.selected .form-dropdown:not(.form-dropdown-opened):hover .before {
+    background-image: url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-cross-a.svg?2);
+}
+form .form-dropcontainer.selected .form-dropdown:hover {
+    color: var(--yablack);
+}
+form .form-droplist-item {
+    color: var(--yablack);
+    background: url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-item.svg) left center no-repeat;
+}
+form .form-droplist-item:hover {
+    color: var(--yadarkgray);
+}
+form .form-droplist-item.selected {
+    background: url(/local/templates/yugavto.theme.2025/assets/images/svg/icon-form-dropdown-item-selected.svg) left center no-repeat;
+    color: var(--yadarkgray);
+}
+form .form-droplist {
+    max-height: 280px;
+    border-radius: 0 0 var(--yaradius16) var(--yaradius16);
+    background-color: var(--yalightgray);
+    z-index: 5;
+    font-size: 15px;
+}
+form .form-droplist .form-droplist-container {
+    max-height: 250px;
+    overflow-y: auto;
+}
+form .form-droplist .form-droplist-container::-webkit-scrollbar {
+    width: 10px;
+    background-color: var(--yawhite);
+}
+form .form-droplist .form-droplist-container::-webkit-scrollbar-thumb {
+    background-color: var(--yadarkgray);
+    border-radius: 5px;
+}
+
+form .form-group input {
+    height: 54px;
+    border-radius: 16px;
+    color: var(--yablack);
+    padding: 16px;
+    font-size: 15px;
+    outline: none;
+    border: 1px var(--yalightbluegray) solid;
+}
+form .form-group textarea {
+    min-height: 54px;
+    border-radius: 16px;
+    color: var(--yablack);
+    padding: 16px;
+    font-size: 15px;
+    outline: none;
+    border: 0;
+    border: 1px var(--yalightbluegray) solid;
+}
+form .form-group input:hover, form .form-group textarea:hover {
+    color: var(--yadarkgray);
+}
+form .form-check-input:checked {
+    background-color: var(--yayellow);
+    border-color: var(--yayellow);
+}
+form .form-check-input:focus {
+    box-shadow: none;
+    border-color: var(--yagray);
+}
+.form-check-input.is-invalid~.form-check-label, .was-validated .form-check-input:invalid~.form-check-label {
+    color: #f04124 !important;
+}
+
+form .range-row {
+    padding: 11px 15.5px 3px;
+    border-radius: 16px;
+    height: 54px;
+}
+form .range-row .range-title-from {
+    top: 5px;
+    left: 15px;
+    font-size: 12px;
+}
+form .range-row .range-title-to {
+    top: 5px;
+    left: calc(50% + 10px);
+    font-size: 12px;
+}
+form .range-row .range-title-param {
+    top: 5px;
+    right: 15.5px;
+    font-size: 12px;
+}
+form .range-row input {
+    border: none;
+    background-color: unset;
+    outline: none;
+    width: 48.9%;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+form .range-slider {
+    height: 5px;
+    position: relative;
+    background-color: var(--yadarkgray);
+    border-radius: 2.5px;
+    width: 90%;
+    left: 5%;
+    top: -5px;
+}
+form .range-selected {
+    height: 100%;
+    left: 0%;
+    right: 0%;
+    position: absolute;
+    border-radius: 1.5px;
+    background-color: var(--yayellow);
+}
+form .range-input {
+    position: relative;
+}
+form .range-input input {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: -10px;
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 90%;
+    left: 5%;
+    cursor: pointer;
+}
+form .range-input input::-webkit-slider-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background-color: #fff;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4);
+}
+form .range-input input::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background-color: #fff;
+    pointer-events: auto;
+    -moz-appearance: none;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.4);
+}
+
+
+
+.form-blobk-white-title-image {
+    left: 20px;
+    top: 30px;
+}
+[data-form="FORM_TRADEIN"] .form-blobk-white-title-image {
+    left: 20px;
+    top: 0;
+}
+.form-blobk-white-image {
+    top: -60px;
+    right: -50px;
+}
+[data-form="FORM_UNKOWN_CAR_2023"] .form-blobk-white-title-image {
+    left: 20px;
+    top: 40px;
+}
+.form-line-white-title-image {
+    margin-top: 30px;
+}
+.form-line-white-image {
+    top: -60px;
+    right: -20px;
+}
+
+.form-page-white-image {
+    right: -110px;
+    bottom: -100px;
+}
+
+
+
+.form-description {font-size: 18px;}
+.form-input-title {
+    height: 54px;
+    border-radius: 16px;
+    color: var(--yablack);
+    padding: 8px 16px;
+    font-size: 15px;
+    border: 0;
+    line-height: 1;
+}
+
+.form-block-white [role="success"],
+.form-block-white [role="error"],
+.form-blank [role="success"],
+.form-blank [role="error"]
+{
+	min-height: 323px;
+}
+
+
+@media (max-width: 1199.98px) {
+
+	.form-blobk-white-title-image, .form-page-white-image {
+        width: 100%;
+    }
+    .form-blobk-white-image {
+        width: 100%;
+        margin-top: -60px;
+    }
+    .form-line-white-title-image {
+        width: 100%;
+    }
+    .form-page-white-image {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    input, textarea, select {
+        font-size: 16px !important;
+    }
+}

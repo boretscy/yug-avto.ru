@@ -1,0 +1,60 @@
+.brands-item {
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 24px !important;
+}
+.brands-item:hover {
+    text-decoration: underline;
+    transition: var(--transition);
+}
+
+.modal-brands-item {
+    text-decoration: none;
+    transition: var(--transition);
+}
+.modal-brands-item:hover {
+    text-decoration: underline;
+    transition: var(--transition);
+}
+
+
+.corp-modal-cover {
+    z-index: 10;
+    background-color: rgba(0,0,0,.3);
+    transition: .3s;
+    display: none;
+}
+.corp-modal-cover.active {
+    transition: .3s;
+    display: block;
+}
+.corp-modal {
+    width: 540px;
+    z-index: 16000;
+    left: -540px;
+    transition: .3s;
+    overflow-y: auto;
+}
+.corp-modal.active {
+    left: 0;
+    transition: .3s;
+    z-index: 17000;
+}
+.corp-modal img.arrow {
+    width: 7px;
+    height: auto;
+}
+.corp-modal::-webkit-scrollbar {
+    width: 5px;
+    background-color: var(--yalightgray);
+}
+.corp-modal::-webkit-scrollbar-thumb {
+    background-color: var(--yadarkgray);
+    border-radius: 2.5px;
+}
+@media (max-width: 767.98px) {
+    .corp-modal {
+        width: 100%;
+        left: -100%;
+    }
+}

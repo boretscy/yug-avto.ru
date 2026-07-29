@@ -1,0 +1,138 @@
+.vacancy-title ul li {
+    list-style-type: none;
+    position: relative;
+}
+.vacancy-title ul li::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: url(./images/svg/icon-vacancy-list-corner.svg) center no-repeat;
+    display: block;
+    position: absolute;
+    left: -20px;
+    top: calc(50% - 5px);
+}
+
+.vacancy-address {
+    border-radius: var(--yaradius16) var(--yaradius16) 0 var(--yaradius16);
+    min-height: 274px;
+}
+
+.vacancy-address .pay {
+    color: var(--yablack);
+    transition: var(--transition);
+    width: 87%;
+}
+.vacancy-address-footer {
+    height: 65px;
+    right: 0;
+    bottom: 0;
+}
+.vacancy-address-footer-left-wrap-corner {
+    border-radius: 0 0 var(--yaradius16) 0;
+    width: 16px;    
+}
+.vacancy-address-footer-right-top {
+    height: 16px;
+}
+.vacancy-address-footer-right-top-wrap  {
+    border-radius: 0 0 var(--yaradius16) 0;
+    height: 16px;
+}
+.vacancy-address-footer-right-bottom-wrap-content  {
+    border-radius: var(--yaradius16) 0 0 0;
+    padding-top: 8px;
+}
+.vacancy-address-footer-right-bottom-icon {
+    background: url(./images/svg/icon-vacancy-corner.svg) center no-repeat var(--yalightbluegray);
+    width: 41px;
+    height: 41px;
+    margin: 0 0 0 8px;
+    transition: var(--transition);
+}
+
+.vacancy-address-button {
+    font-size: 15px;
+    padding: 10px 15px;
+}
+
+
+.vacancy-future {
+    border-radius: var(--yaradius16) 0 var(--yaradius16) var(--yaradius16);
+}
+.vacancy-future-title {height: 101px;}
+.vacancy-future-footer {
+    height: 105px;
+    right: 0;
+    top: 0;
+}
+.vacancy-future-footer-left-wrap-corner {
+    border-radius: 0 var(--yaradius16) 0 0;
+    width: 16px;    
+}
+.vacancy-future-footer-right-top {
+    height: 16px;
+}
+.vacancy-future-footer-right-top-wrap  {
+    border-radius: 0 var(--yaradius16) 0 0;
+    height: 16px;
+}
+.vacancy-future-footer-right-bottom{
+    margin-top: -12px;
+}
+.vacancy-future-footer-right-bottom-wrap-content  {
+    border-radius: 0 0 0 var(--yaradius16);
+    padding-bottom: 12px;
+}
+.vacancy-future-footer-right-bottom-icon {
+    width: 85px;
+    height: 85px;
+    margin: 12px 0 0 12px;
+    font-size: 60px;
+}
+
+.sendmail {
+    margin-top: 40px;
+}
+.sendmail .sendmail-title {
+    font-size: 60px;
+    line-height: 1;
+}
+.sendmail .sendmail-description {
+    font-size: 18px;
+}
+.sendmail .sendmail-img {
+    margin-top: -110px;
+}
+.sendmail-button {
+    padding: 14.5px 0;
+}
+
+@media (max-width: 1199.98px) {
+    .vacancy-address-button {
+        width: calc(100% - 10px);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .sendmail {
+        margin-top: 0;
+    }
+    .sendmail .sendmail-title {
+        font-size: 40px;
+        line-height: 1;
+    }
+    .sendmail .sendmail-description {
+        font-size: 18px;
+    }
+    .sendmail .sendmail-img {
+        margin-top: 0;
+        width: 100%;
+    }
+    .sendmail-button {
+        padding: 14.5px 0;
+    }
+}
+
+@media (max-width: 425px) {
+}

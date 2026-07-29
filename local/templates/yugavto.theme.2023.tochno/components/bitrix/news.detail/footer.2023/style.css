@@ -1,0 +1,81 @@
+.footer-seo-text {
+	height: 70px;
+	overflow: hidden;
+	transition: .2s;
+}
+.footer-seo-text.full {
+	height: auto;
+	transition: .2s;
+}
+.footer-disclamer-text {
+	height: 60px;
+	overflow: hidden;
+	transition: .2s;
+}
+.footer-disclamer-text.full {
+	height: auto;
+	transition: .2s;
+}
+.footer-seo-text a, .footer-disclamer-text a {
+	color: var(--yayellow);
+}
+.footer-seo-text a:hover, .footer-disclamer-text a:hover {
+	color: var(--yablue);
+}
+.footer-seo svg, .footer-disclamer svg {
+	fill: var(--yayellow);
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+}
+.footer-social a {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	padding-top: 7px;
+}
+.footer-social a svg {
+	fill: var(--yablackgray);
+	width: 26px;
+	height: 26px;
+	transition: .2s;
+}
+.footer-social a:hover svg {
+	fill: var(--yayellow);
+	transition: .2s;
+}
+
+.cookie {
+	background-color: rgba(0, 0, 0, .8);
+	z-index: 1000;
+	display: none;
+}
+.cookie [role="close-cookie"] {
+	right: 5px;
+	top: 15px;
+}
+.cookie [role="close-cookie"] svg {
+	fill: var(--yagray);
+	width: 30px;
+	height: 30px;
+}
+@media (max-width: 991px) {
+	.cookie {
+		min-height: 200px;
+	}
+}
+
+
+/* 2023 */
+.up-button {
+	background-color: rgba(123, 130, 132, .25);
+	width: 30px;
+	height: 30px;
+	right: 150px;
+	bottom: 150px;
+}
+.up-button img {
+	transform: rotate(180deg);
+	width: 8px;
+	height: auto;
+}

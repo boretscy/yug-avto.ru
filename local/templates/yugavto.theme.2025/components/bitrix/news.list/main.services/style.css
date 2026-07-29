@@ -1,0 +1,29 @@
+.services-item .services-item-info {
+    flex-direction: column;
+}
+.services-item-info {
+
+}
+.services-yug-avto-list ul {
+    padding-left: 10px;
+}
+.block-title-link img {
+    width: unset;
+}
+
+@media (max-width: 767.98px) {
+    .services-yug-avto-list ul li {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px)  {
+    .services-item-info h3, 
+    .services-item-info .h3 {
+        font-size: 18px;
+        line-height: 27px;
+    }
+    .services-yug-avto-list ul li {
+        font-size: 12px;
+    }
+}

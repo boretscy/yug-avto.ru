@@ -1,0 +1,13 @@
+#YappsShowroom .fav-com-icon {
+    width: 33px;
+    height: 33px;
+}
+#YappsShowroom .no-fav-com {
+    height: 270px;
+}
+
+@media (max-width: 767.98px) {
+    #YappsShowroom .no-fav-com {
+        height: auto;
+    }
+}

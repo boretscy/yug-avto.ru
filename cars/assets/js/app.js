@@ -1,0 +1,1 @@
+// app.js теперь разделен на core.js, filter.js, vehicle.js и compare.js

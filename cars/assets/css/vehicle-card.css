@@ -1,0 +1,192 @@
+#YappsShowroom .vehicle-card {
+    overflow: hidden;
+    width: 100%;
+}
+.vehicle-card-images {
+    border-radius: var(--yaradius16);
+    overflow: hidden;
+}
+#YappsShowroom .vehicle-card-images, #YappsShowroom .vehicle-card-images a {
+    height: auto;
+    cursor: ew-resize;
+}
+#YappsShowroom .vehicle-card-images a .vehicle-card-images-item-container {
+    position: relative;
+}
+#YappsShowroom .vehicle-card-images a .vehicle-card-images-item-container-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 0.78865;
+    object-fit: cover;
+    object-position: center center;
+    transform: scale(1);
+    transition: transform var(--transition);
+}
+#YappsShowroom .vehicle-card-images-item-container:hover .vehicle-card-images-item-container-image {
+    transform: scale(1.08);
+}
+#YappsShowroom  .vehicle-card-discount-row {
+    top: 0;
+    width: calc(100% - 32px);
+    z-index: 10;
+}
+#YappsShowroom .vehicle-card-discount-item {
+    padding: 6px;
+    cursor: pointer !important;
+}
+#YappsShowroom .vehicle-card-images-row {
+    bottom: 0;
+    width: calc(100% - 32px);
+}
+#YappsShowroom .vehicle-card-images-row-item {
+    width: 52px;
+    height: 6px;
+    border-radius: 3px;
+    opacity: .6;
+    background-color: var(--yawhite);
+    cursor: pointer;
+}
+#YappsShowroom .vehicle-card-images-row-item.active {
+    background-color: var(--yayellow);
+}
+#YappsShowroom .vehicle-card-content-title {
+    min-height: 40px;
+    line-height: 1;
+}
+#YappsShowroom .vehicle-card-futures  {
+    height: 35px;
+}
+#YappsShowroom .vehicle-card-futures img {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+}
+#YappsShowroom .vehicle-card-specification {
+    min-height: 68px;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#YappsShowroom .vehicle-card-specification-item {
+    position: relative;
+}
+#YappsShowroom .vehicle-card-specification-item img {
+    width: 4px !important;
+    height: 4px !important;
+    display: inline-block !important;
+    margin-bottom: 3px;
+}
+#YappsShowroom .vehicle-card-specification-item:last-child:after {
+    content: unset;
+}
+#YappsShowroom .vehicle-card-button, #YappsShowroom .vehicles-more-button {
+    padding: 9.5px;
+}
+#YappsShowroom .vehicle-card {
+    overflow: hidden;
+    font-size: 14px;
+    padding: 8px 8px 0 8px;
+    border-radius: var(--yaradius16) var(--yaradius16) var(--yaradius16) 0;
+}
+#YappsShowroom #YappsShowroom .vehicle-card-images {
+    border-radius: var(--yaradius16);
+    overflow: hidden;
+}
+.vehicle-card-button {
+    padding: 9.5px;
+}
+#YappsShowroom .vehicle-card-futures {
+    height: 35px;
+}
+#YappsShowroom .vehicle-card-discount-item {
+    border-radius: 7px;
+}
+#YappsShowroom .vehicle-card-price .price {font-size: 24px;}
+ 
+@keyframes vehicle-icon-animation-hide {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes vehicle-icon-animation-show {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.vehicle-card-discount-status {
+    height: 60px;
+}
+
+#YappsShowroom .vehicle-card-footer {
+    border-radius: 0 0 0 var(--yaradius16);
+    overflow: hidden;
+}
+#YappsShowroom .vehicle-card-footer-left {width: calc(100% - 92px);}
+#YappsShowroom .vehicle-card-footer-right {width: 92px;}
+#YappsShowroom .vehicle-card-footer-left-content {
+    border-radius: 0 0 var(--yaradius16) 0;
+    padding: 0 8px 10px 8px;
+}
+#YappsShowroom .vehicle-card-footer-right-content {
+    border-radius: var(--yaradius16) 0 0 0;
+}
+#YappsShowroom .vehicle-card-button {
+    font-size: 13px;
+    padding: 10px 19px;
+}
+#YappsShowroom .vehicle-card-discount-item {
+    cursor: pointer !important;
+    width: 38px;
+    height: 38px;
+}
+#YappsShowroom .vehicle-card-discount-item img {
+    top: calc(50% - 9px);
+    left: calc(50% - 9px);
+    width: 18px;
+    height: 18px;
+}
+#YappsShowroom .vehicle-card-discount-item img:nth-child(1) {
+    opacity: 1;
+    animation: vehicle-icon-animation-show var(--transition) ease 0s 1 normal forwards;
+    display: block;
+}
+#YappsShowroom .vehicle-card-discount-item img:nth-child(2) {
+    opacity: 0;
+    animation: vehicle-icon-animation-hide var(--transition) ease 0s 1 normal forwards;
+    display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+    #YappsShowroom .vehicle-card-discount-item:hover img:nth-child(1) {
+        opacity: 0;
+        animation: vehicle-icon-animation-hide var(--transition) ease 0s 1 normal forwards;
+        display: none;
+    }
+    #YappsShowroom .vehicle-card-discount-item:hover img:nth-child(2) {
+        opacity: 1;
+        animation: vehicle-icon-animation-show var(--transition) ease 0s 1 normal forwards;
+        display: block;
+    }
+}
+#YappsShowroom .vehicle-card-discount-item.active img:nth-child(1) {
+    opacity: 0;
+    animation: vehicle-icon-animation-hide var(--transition) ease 0s 1 normal forwards;
+    display: none;
+}
+#YappsShowroom .vehicle-card-discount-item.active img:nth-child(2) {
+    opacity: 1;
+    animation: vehicle-icon-animation-show var(--transition) ease 0s 1 normal forwards;
+    display: block;
+}
+
+#YappsShowroom .vehicle-card-footer-compare .vehicle-card-footer-left {width: calc(100% - 46px);}
+#YappsShowroom .vehicle-card-footer-compare .vehicle-card-footer-right {width: 46px;}

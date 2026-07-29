@@ -1,0 +1,309 @@
+#YappsShowroom .vehicle-title {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+#YappsShowroom .vehicle-title .vehicle-title-price {
+    margin-top: 16px;
+}
+#YappsShowroom .vehicle-title-button {
+    padding: 16px;
+}
+#YappsShowroom .vehicle-title-button.without-discount {
+    padding: 16px;
+}
+#YappsShowroom .vehicle-title li::after {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background-color: var(--yayellow);
+    border-radius: 50%;
+    position: absolute;
+    right: -12px;
+    top: calc(50% - 2px);
+}
+#YappsShowroom .vehicle-title li:last-child:after {
+    content: unset;
+}
+
+#YappsShowroom .vehicle {
+}
+#YappsShowroom .vehicle-full-image {
+    cursor: all-scroll;
+}
+#YappsShowroom .vehicle .vehicle-discounts-disclamer {
+    display: none;
+}
+#YappsShowroom .vehicle .vehicle-discounts:hover .vehicle-discounts-disclamer {
+    display: block;
+}
+
+#YappsShowroom .vehicle .check {
+    width: 20px;
+    height: 20px;
+}
+#YappsShowroom .vehicle .vehicle-tabs-title-item {
+    cursor: pointer;
+}
+#YappsShowroom .vehicle-futures img {
+    width: 55px;
+    height: 55px;
+}
+#YappsShowroom .vehicle-button {
+    padding: 12.5px;
+}
+#YappsShowroom .vehicle .vehicle-tabs .vehicle-tabs-item {
+    font-size: 15px;
+    text-align: center;
+    width: 25%;
+    height: 54px;
+    background-color: #D6D8DB;
+    border-radius: var(--yaradius16) var(--yaradius16) 0 0;
+}
+#YappsShowroom .vehicle .vehicle-tabs .vehicle-tabs-item.active {
+    background-color: var(--yawhite);
+}
+#YappsShowroom .vehicle .vehicle-tabs .vehicle-tabs-item:hover {
+    background-color: var(--yalightgray);
+}
+#YappsShowroom .vehicle .vehicle-tabs-content {
+    border-radius: 0 0 var(--yaradius16) var(--yaradius16);
+}
+
+#YappsShowroom .vehicle-tabs-content.active {
+    display: flex !important;
+}
+#YappsShowroom .vehicle-tabs-content-accordeon-title {
+    cursor: pointer;
+}
+#YappsShowroom .toggle-vehicle-options {
+    cursor: pointer;
+}
+#YappsShowroom ul.vehicle-options {
+    max-height: 350px;
+    overflow-y: auto;
+    display: none;
+}
+#YappsShowroom .ymaps-2-1-79-map {border-radius: var(--yaradius16);}
+#YappsShowroom .ymaps-2-1-79-inner-panes {border-radius: var(--yaradius16);}
+#YappsShowroom .vehicle-swiper-buttons-row {
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+}
+#YappsShowroom .vehicle-swiper-buttons-row-item {
+    width: 38px;
+    height: 38px;
+}
+#YappsShowroom .dealership .dealership-image {
+    background-size: cover;
+    background-position: center;
+}
+
+#YappsShowroom .swiper {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#YappsShowroom .swiper-slide {
+    text-align: left;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#YappsShowroom .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#YappsShowroom .vehicle-swiper {
+    height: 80%;
+    width: 100%;
+    z-index: auto;
+}
+#YappsShowroom .vehicle-swiper-thumbs {
+    height: 20%;
+    box-sizing: border-box;
+    padding: 0;
+}
+#YappsShowroom .vehicle-swiper-thumbs .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.4;
+}
+#YappsShowroom .vehicle-swiper-thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+}
+#YappsShowroom .vehicle-swiper .vehicle-swiper-next, #YappsShowroom .vehicle-swiper .vehicle-swiper-prev {
+    width: 32px;
+    height: 32px;
+    top: calc(50% - 16px);
+    z-index: 10;
+    cursor: pointer;
+}
+#YappsShowroom .vehicle-swiper .vehicle-swiper-next img, #YappsShowroom .vehicle-swiper .vehicle-swiper-prev img {
+    width: 9px;
+    height: 15px;
+}
+#YappsShowroom .vehicle-swiper .vehicle-swiper-next {
+    right: 12px;
+}
+#YappsShowroom .vehicle-swiper .vehicle-swiper-prev {
+    left: 12px;
+}
+#YappsShowroom .vehicle-swiper-thumds-photo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 151.5px;
+    height: 105px;
+    background-color: rgba(0,0,0,.5);
+}
+
+/* others */
+#YappsShowroom .vehicle-others-swiper .swiper-slide {
+    text-align: left;
+}
+#YappsShowroom .vehicle-others-swiper .swiper-slide .vehicle-card-futures img {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+}
+#YappsShowroom .vehicle-card-discount-item img {
+    top: calc(50% - 9px);
+    left: calc(50% - 9px);
+    width: 18px;
+    height: 18px;
+}
+#YappsShowroom .vehicle-others-swiper-next, #YappsShowroom .vehicle-others-swiper-prev {
+    width: 26px;
+    height: 26px;
+    top: calc(50% - 13px);
+    z-index: 10;
+    cursor: pointer;
+}
+#YappsShowroom .vehicle-others-swiper-next img, #YappsShowroom .vehicle-others-swiper-prev img {
+    width: 9px;
+    height: 15px;
+}
+#YappsShowroom .vehicle-others-swiper-next {
+    right: -30px;
+}
+#YappsShowroom .vehicle-others-swiper-prev {
+    left: -30px;
+}
+
+#YappsShowroom .ya-share2 {
+    display: inline-block;
+    position: absolute;
+    right: 84px;
+}
+#YappsShowroom .ya-share2__container_size_m .ya-share2__item_more.ya-share2__item_has-pretty-view .ya-share2__link_more.ya-share2__link_more-button-type_short {
+    background: none;
+}
+#YappsShowroom .ya-share2__container_size_m .ya-share2__item_more.ya-share2__item_has-pretty-view .ya-share2__popup_direction_bottom {
+    width: 180px;
+}
+#YappsShowroom .ya-share2__container_mobile.ya-share2__container_size_m .ya-share2__icon {
+    height: 24px;
+    width: 24px;
+}
+#YappsShowroom .ya-share2__container.ya-share2__container_color-scheme_whiteblack .ya-share2__popup-body .ya-share2__mobile-popup-badge {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#YappsShowroom .ya-share2__popup.ya-share2__popup_mobile.ya-share2__popup_visible .ya-share2__popup-content {
+    height: 60%;
+}
+#YappsShowroom .ya-share2__popup-content .ya-share2__popup-body {
+    height: 100%;
+}
+#YappsShowroom .ya-share2__item_more.ya-share2__item_has-pretty-view .ya-share2__icon_more {
+    background-image: url(./../images/svg/icon-vehicle-share.svg);
+    background-size: 24px;
+}
+
+#YappsShowroom .vehicle .vehicle-tabs-title-item {
+    cursor: pointer;
+    font-size: 18px;
+}
+#YappsShowroom .vehicle .sepcifications li:nth-child(odd) {
+    background-color: var(--yalightgray);
+}
+
+.vehicle-recomended-swiper-prev, .vehicle-recomended-swiper-next {
+	position: absolute;
+	top: calc(50% - 8px);
+}
+.vehicle-recomended-swiper-prev {
+	left: -30px;
+    z-index: 1;
+}
+.vehicle-recomended-swiper-next {
+	right: -30px;
+    z-index: 1;
+}
+.vehicle-recomended-swiper-wrap {
+    background-color: rgba(0,0,0,.2);
+    width: 36px;
+    height: 36px;
+}
+
+@media (max-width: 1399.98px) {
+    #YappsShowroom .vehicle-discounts-item-value {
+        font-size: var(--yatextminusmplus);
+    }
+    #YappsShowroom .discount-price {
+        font-size: var(--yatextminusmplus);
+    }
+}
+@media (max-width: 1199.98px) {
+    #YappsShowroom .vehicle-discounts-item-value {
+        font-size: var(--yatext);
+    }
+    #YappsShowroom .discount-price {
+        font-size: var(--yatext);
+    }
+}
+@media (max-width: 991.98px) {
+    #YappsShowroom .vehicle-recomended-swiper-next {
+        right: -15px;
+    }
+    #YappsShowroom .vehicle-recomended-swiper-prev {
+        left: -15px;
+    }
+    #YappsShowroom .vehicle-others-swiper-next {
+        right: -15px;
+    }
+    #YappsShowroom .vehicle-others-swiper-prev {
+        left: -15px;
+    }
+}
+@media (max-width: 767.98px) {
+    #YappsShowroom .vehicle-title{
+        position: unset;
+    }
+    #YappsShowroom .vehicle-recomended-swiper-next {
+        right: 0;
+    }
+    #YappsShowroom .vehicle-recomended-swiper-prev {
+        left: 0;
+    }
+    #YappsShowroom .vehicle-others-swiper-next {
+        right: 0;
+    }
+    #YappsShowroom .vehicle-others-swiper-prev {
+        left: 0;
+    }
+    #YappsShowroom .dealership .dealership-image {
+        height: 250px !important;
+    }
+    #YappsShowroom .vehicle-map {
+        height: 280px !important;
+    }
+}

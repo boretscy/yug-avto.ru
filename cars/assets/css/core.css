@@ -1,0 +1,330 @@
+#YappsShowroom {
+
+    --yawhite: #fff;
+    --yablack: #222;
+    --yalightblack: #1c1c1c;
+    --yadarkgray: #7B8284;
+    --yagray: #EBEBEB;
+    --yalightgray: #F5F5F5;
+	--yalightbluegray: #EAEDF2;
+    --yabluegray: #D6D8DB;
+    --yablue: #1B46AC;
+    --yayellow: #FDBA4D;
+	--yadarkyellow: #FFB234;
+    --yadarkblue: #343C44;
+
+    --yaradius3: 3px;
+    --yaradius7: 7px;
+    --yaradius8: 8px;
+    --yaradius10: 10px;
+    --yaradius15: 15px;
+    --yaradius25: 25px;
+    --yaradius50: 50px;
+
+    --yatext: 14px;
+    --yatextplus: 16px;
+    --yatextplusplus: 18px;
+    --yatextminus: 12px;
+    --yatextminusminus: 10px;
+    --yatextminusmplus: 13px;
+
+    --yaborder2: 2px;
+
+    color: var(--yalightblack);
+    
+}
+
+#YappsShowroom {font-size: var(--yatext);}
+#YappsShowroom .text-minus {font-size: var(--yatextminus);}
+#YappsShowroom .text-minus-minus {font-size: var(--yatextminusminus);}
+#YappsShowroom .text-plus-plus {font-size: var(--yatextplusplus);}
+
+/* color */
+#YappsShowroom .c-yawhite {color: var(--yawhite) !important;transition: .2s;}
+#YappsShowroom .c-yablack {color: var(--yablack) !important;transition: .2s;}
+#YappsShowroom .c-yalightblack {color: var(--yalightblack) !important;transition: .2s;}
+#YappsShowroom .c-yadarkgray {color: var(--yadarkgray) !important;transition: .2s;}
+#YappsShowroom .c-yagray {color: var(--yagray) !important;transition: .2s;}
+#YappsShowroom .c-yalightgray {color: var(--yalightgray) !important;transition: .2s;}
+#YappsShowroom .c-yablue {color: var(--yablue) !important;transition: .2s;}
+#YappsShowroom .c-yayellow {color: var(--yayellow) !important;transition: .2s;}
+#YappsShowroom .c-yadarkblue {color: var(--yadarkblue) !important;transition: .2s;}
+
+/* :hover color */
+#YappsShowroom .c-h-yawhite:hover {color: var(--yawhite) !important;transition: .2s;}
+#YappsShowroom .c-h-yablack:hover {color: var(--yablack) !important;transition: .2s;}
+#YappsShowroom .c-h-yalightblack:hover {color: var(--yalightblack) !important;transition: .2s;}
+#YappsShowroom .c-h-yadarkgray:hover {color: var(--yadarkgray) !important;transition: .2s;}
+#YappsShowroom .c-h-yagray:hover {color: var(--yagray) !important;transition: .2s;}
+#YappsShowroom .c-h-yalightgray:hover {color: var(--yalightgray) !important;transition: .2s;}
+#YappsShowroom .c-h-yablue:hover {color: var(--yablue) !important;transition: .2s;}
+#YappsShowroom .c-h-yayellow:hover {color: var(--yayellow) !important;transition: .2s;}
+#YappsShowroom .c-h-yadarkblue:hover {color: var(--yadarkblue) !important;transition: .2s;}
+
+/* background-color */
+#YappsShowroom .bg-yawhite {background-color: var(--yawhite);transition: .2s;}
+#YappsShowroom .bg-yablack {background-color: var(--yablack);transition: .2s;}
+#YappsShowroom .bg-yalightblack {background-color: var(--yalightblack);transition: .2s;}
+#YappsShowroom .bg-yadarkgray {background-color: var(--yadarkgray);transition: .2s;}
+#YappsShowroom .bg-yagray {background-color: var(--yagray);transition: .2s;}
+#YappsShowroom .bg-yalightgray {background-color: var(--yalightgray);transition: .2s;}
+#YappsShowroom .bg-yablue {background-color: var(--yablue);transition: .2s;}
+#YappsShowroom .bg-yayellow {background-color: var(--yayellow);transition: .2s;}
+#YappsShowroom .bg-yadarkblue {background-color: var(--yadarkblue);transition: .2s;}
+#YappsShowroom .bg-yabluegray {background-color: var(--yabluegray);transition: .2s;}
+#YappsShowroom .bg-yagradient {
+    background: var(--yalightgray);
+    background: linear-gradient(90deg, rgba(225,225,225,1) 0%, rgba(243,245,246,1) 100%);
+}
+
+/* :hover background-color */
+#YappsShowroom .bg-h-yawhite:hover {background-color: var(--yawhite);transition: .2s;}
+#YappsShowroom .bg-h-yablack:hover {background-color: var(--yablack);transition: .2s;}
+#YappsShowroom .bg-h-yalightblack:hover {background-color: var(--yalightblack);transition: .2s;}
+#YappsShowroom .bg-h-yadarkgray:hover {background-color: var(--yadarkgray);transition: .2s;}
+#YappsShowroom .bg-h-yagray:hover {background-color: var(--yagray);transition: .2s;}
+#YappsShowroom .bg-h-yalightgray:hover {background-color: var(--yalightgray);transition: .2s;}
+#YappsShowroom .bg-h-yablue:hover {background-color: var(--yablue);transition: .2s;}
+#YappsShowroom .bg-h-yayellow:hover {background-color: var(--yayellow);transition: .2s;}
+#YappsShowroom .bg-h-yadarkblue:hover {background-color: var(--yadarkblue);transition: .2s;}
+#YappsShowroom .bg-h-yabluegray:hover {background-color: var(--yabluegray);transition: .2s;}
+
+/* border */
+#YappsShowroom .b-yawhite {border: var(--yawhite) 1px solid;transition: .2s;}
+#YappsShowroom .b-yablack {border: var(--yablack) 1px solid;transition: .2s;}
+#YappsShowroom .b-yalightblack {border: var(--yalightblack) 1px solid;transition: .2s;}
+#YappsShowroom .b-yadarkgray {border: var(--yadarkgray) 1px solid;transition: .2s;}
+#YappsShowroom .b-yagray {border: var(--yagray) 1px solid;transition: .2s;}
+#YappsShowroom .b-yalightgray {border: var(--yalightgray) 1px solid;transition: .2s;}
+#YappsShowroom .b-yablue {border: var(--yablue) 1px solid;transition: .2s;}
+#YappsShowroom .b-yayellow {border: var(--yayellow) 1px solid;transition: .2s;}
+#YappsShowroom .b-yadarkblue {border: var(--yadarkblue) 1px solid;transition: .2s;}
+
+/* border-bottom */
+#YappsShowroom .b-b-yalightgray {border-bottom: var(--yalightgray) 1px solid;transition: .2s;}
+#YappsShowroom .b-b-yayellow {border-bottom: var(--yayellow) 1px solid;transition: .2s;}
+
+/* :hover border */
+#YappsShowroom .b-h-yawhite:hover {border: var(--yawhite) 1px solid;transition: .2s;}
+#YappsShowroom .b-h-yablack:hover {border: var(--yablack) 1px solid;transition: .2s;}
+#YappsShowroom .b-h-yalightblack:hover {border: var(--yalightblack) 1px solid;transition: .2s;}
+#YappsShowroom .b-h-yadarkgray:hover {border: var(--yadarkgray) 1px solid;transition: .2s;}
+#YappsShowroom .b-h-yagray:hover {border: var(--yagray) 1px solid;transition: .2s;}
+#YappsShowroom .b-h-yalightgray:hover {border: var(--yalightgray) 1px solid;transition: .2s;}
+#YappsShowroom .b-h-yablue:hover {border: var(--yablue) 1px solid;transition: .2s;}
+#YappsShowroom .b-h-yayellow:hover {border: var(--yayellow) 1px solid;transition: .2s;}
+#YappsShowroom .b-h-yadarkblue:hover {border: var(--yadarkblue) 1px solid;transition: .2s;}
+
+/* border-top */
+#YappsShowroom .b-t-yadarkgray {border-top: var(--yadarkgray) 1px solid;transition: .2s;}
+
+/* border-right */
+#YappsShowroom .b-r-yadarkgray {border-right: var(--yadarkgray) 1px solid;transition: .2s;}
+
+/* border-bottom */
+#YappsShowroom .b-b-yadarkgray {border-bottom: var(--yadarkgray) 1px solid;transition: .2s;}
+
+/* border-left */
+#YappsShowroom .b-l-yadarkgray {border-left: var(--yadarkgray) 1px solid;transition: .2s;}
+#YappsShowroom .b-l-yagray {border-left: var(--yagray) 1px solid;transition: .2s;}
+
+/* :hover border-top */
+#YappsShowroom .b-t-h-yadarkgray:hover {border-top: var(--yadarkgray) 1px solid;transition: .2s;}
+
+/* :hover border-right */
+#YappsShowroom .b-r-h-yadarkgray:hover {border-right: var(--yadarkgray) 1px solid;transition: .2s;}
+
+/* :hover border-bottom */
+#YappsShowroom .b-b-h-yadarkgray:hover {border-bottom: var(--yadarkgray) 1px solid;transition: .2s;}
+
+/* :hover border-left */
+#YappsShowroom .b-l-h-yadarkgray:hover {border-left: var(--yadarkgray) 1px solid;transition: .2s;}
+
+/* border-radius */
+#YappsShowroom .b-radius-yaradius-3 {border-radius: var(--yaradius3);}
+#YappsShowroom .b-radius-yaradius-7 {border-radius: var(--yaradius7);}
+#YappsShowroom .b-radius-yaradius-8 {border-radius: var(--yaradius8);}
+#YappsShowroom .b-radius-yaradius-10 {border-radius: var(--yaradius10);}
+#YappsShowroom .b-radius-yaradius-15 {border-radius: var(--yaradius15);}
+#YappsShowroom .b-radius-yaradius-25 {border-radius: var(--yaradius25);}
+#YappsShowroom .b-radius-yaradius-50 {border-radius: var(--yaradius50);}
+/* border-radius-circle */
+#YappsShowroom .b-radius-c-yaradius {border-radius: 50%;}
+
+#YappsShowroom .b-border-2 {border-width: var(--yaborder2);}
+
+#YappsShowroom .rotate-180 {rotate: 180deg;}
+#YappsShowroom .transition-none {transition: none !important;}
+#YappsShowroom .cursor-pointer {cursor: pointer;}
+#YappsShowroom .sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 1rem;
+    z-index: 1;
+}
+
+#YappsShowroom .but {
+    padding: 8px;
+    height: 45px;
+}
+#YappsShowroom h1, #YappsShowroom .h1 {font-size: 38px; line-height: normal;}
+#YappsShowroom h2, #YappsShowroom .h2 {}
+#YappsShowroom h3, #YappsShowroom .h3 {font-size: 24px; line-height: normal;}
+#YappsShowroom h4, #YappsShowroom .h4 {font-size: 20px; line-height: normal;}
+
+#YappsShowroom .top-container {
+    border-radius: 0 0 var(--yaradius24) var(--yaradius24);
+}
+#YappsShowroom .middle-container {
+    border-radius: var(--yaradius24);
+}
+#YappsShowroom .bottom-container {
+    border-radius: var(--yaradius24) var(--yaradius24) 0 0;
+}
+
+#YappsShowroom .form-control, 
+#YappsShowroom .form-select, 
+#YappsShowroom .yappsshowroom .form-control, 
+#YappsShowroom .yappsshowroom .form-select {
+    height: 50px;
+}
+#YappsShowroom .form-button,
+#YappsShowroom .yappsshowroom .form-button {
+    padding: 14.5px;
+}
+#YappsShowroom .blue-form-cover {
+    height: 185px; 
+    z-index: -1; 
+    bottom: 0;
+}
+#YappsShowroom .form-check-input:checked,
+#YappsShowroom .yappsshowroom .form-check-input:checked {
+    background-color: var(--yayellow);
+    border-color: var(--yayellow);
+    cursor: pointer;
+}
+#YappsShowroom .form-img {
+    right: -60px;
+    bottom: -15px;
+}
+
+.city-list[data-v-d2a61826] {
+    z-index: 1200 !important;
+}
+
+#YappsShowroom .cover {
+    z-index: 5000;
+    opacity: .5;
+    top: 0;
+    cursor: wait;
+}
+
+.YappsShowroom-forms-modal-cover {
+    z-index: 20;
+    background-color: rgba(0,0,0,.3);
+    transition: .3s;
+    display: none;
+}
+#YappsShowroom .forms-modal-cover.active {
+    transition: .3s;
+    display: block;
+}
+#YappsShowroom .forms-modal {
+    width: 540px;
+    z-index: 16000;
+    left: -540px;
+    transition: .3s;
+    overflow-y: auto;
+}
+#YappsShowroom .forms-modal.active {
+    left: 0;
+    transition: .3s;
+    z-index: 17000;
+}
+#YappsShowroom .forms-modal img.arrow {
+    width: 7px;
+    height: auto;
+}
+#YappsShowroom .forms-modal::-webkit-scrollbar {
+    width: 5px;
+    background-color: var(--yalightgray);
+}
+#YappsShowroom .forms-modal::-webkit-scrollbar-thumb {
+    background-color: var(--yadarkgray);
+    border-radius: 2.5px;
+}
+
+.dealership-wrap {
+    border-radius: var(--yaradius16) var(--yaradius16) 0 var(--yaradius16);
+}
+.dealership-wrap .image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.dealership-wrap .dealership-content span {
+    width: 24px;
+    height: 24px;
+}
+.dealership-wrap .dealerships-button {
+    height: 43px;
+    width: calc(100% - 80px);
+}
+.dealerships-on-main-view-info-button {height: 32px;}
+.dealership-footer-button-wrap .top  {
+    border-radius: 0 0 var(--yaradius16) 0;
+    width: 100%;
+    height: 16px;
+}
+.dealership-footer-button-wrap .left .left-wrap  {
+    border-radius: 0 0 var(--yaradius16) 0;
+    width: 16px;
+    height: 64px;  
+}
+.dealership-footer-button-wrap .right .right-wrap {
+    border-radius: var(--yaradius16) 0 0 0;
+    padding-top: 1px;
+}
+.dealership-footer-button {
+    width: 51px;
+    height: 51px;
+    margin: 12px 12px 0 12px;
+}
+.dealership-footer-button-wrap img:nth-child(1) {
+    opacity: 1;
+    animation: vehicle-icon-animation-show var(--transition) ease 0s 1 normal forwards;;
+}
+.dealership-footer-button-wrap img:nth-child(2) {
+    opacity: 0;
+    animation: vehicle-icon-animation-hide var(--transition) ease 0s 1 normal forwards;;
+}
+.dealership-footer-button-wrap:hover img:nth-child(1) {
+    opacity: 1;
+    animation: vehicle-icon-animation-hide var(--transition) ease 0s 1 normal forwards;;
+}
+.dealership-footer-button-wrap:hover img:nth-child(2) {
+    opacity: 0;
+    animation: vehicle-icon-animation-show var(--transition) ease 0s 1 normal forwards;;
+}
+.dealership-card-rating {padding-left: 0; height: 50px;}
+
+@media (max-width: 991.98px) {
+    #YappsShowroom .form-img {
+        right: -10px;
+        bottom: -15px;
+        width: 210px;
+    }
+}
+@media (max-width: 767.98px) {
+    #YappsShowroom .top-container.sm-not-radius {
+        border-radius: unset;
+    }
+    #YappsShowroom .h1, #YappsShowroom h1 {font-size: 24px;}
+    #YappsShowroom .h3 {font-size: 16px;}
+}
+@media (max-width: 575.98px) {
+    #YappsShowroom .forms-modal {
+        width: 100vw;
+        left: calc(0px - 100vw);
+    }
+}
