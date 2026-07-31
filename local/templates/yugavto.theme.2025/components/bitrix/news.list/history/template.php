@@ -40,15 +40,15 @@ $this->setFrameMode(true);
 						<div class="item d-flex justify-content-between">
 							<div class="item-left position-relative d-flex justify-content-center align-items-center <?= (($i==count($arResult['ITEMS'])&&$k+1==count($arSection['ITEMS']))?'item-end':'');?>">
 								<div class="delimiter-bg position-absolute <?= (($i==count($arResult['ITEMS'])&&$k+1==count($arSection['ITEMS']))?'bg-yahalfyellow':'bg-yayellow');?>"></div>
-								<img src="<?= $templateFolder.'/images/svg/icon-'.(($arItem['PROPERTIES']['ICON']['VALUE_XML_ID'])?:'point').'.svg?2';?>" />
+								<img src="<?= $templateFolder.'/images/svg/icon-'.(($arItem['PROPERTIES']['ICON']['VALUE_XML_ID'])?:'point').'.svg?2';?>" alt="" title="" />
 							</div>
 							<div class="item-right position-relative bg-yalightbluegray d-flex flex-column flex-lg-row justify-content-between justify-content-lg-start align-items-start">
 								<div class="flex-fill d-flex justify-content-start align-items-center mb-3 mb-lg-0">
 									<?php foreach ( $arItem['DISPLAY_PROPERTIES']['BRAND']['LINK_ELEMENT_VALUE'] as $arBrand ) { ?>
-									<img class="b-radius-yaradius-16 me-4" src="<?= CFile::GetPath($arBrand['PREVIEW_PICTURE']);?>" />
+									<img class="b-radius-yaradius-16 me-4" src="<?= CFile::GetPath($arBrand['PREVIEW_PICTURE']);?>" alt="Логотип <?= htmlspecialchars(YApp::getCleanAltText($arBrand['NAME']));?>" title="Логотип <?= htmlspecialchars(YApp::getCleanAltText($arBrand['NAME']));?>" />
 									<?php } // foreach BRANDS ?>
 									<?php foreach ( $arItem['PROPERTIES']['OLD_BRAND']['VALUE'] as $item ) { ?>
-									<img class="b-radius-yaradius-16 me-4" src="<?= CFile::GetPath($item);?>" />
+									<img class="b-radius-yaradius-16 me-4" src="<?= CFile::GetPath($item);?>" alt="<?= htmlspecialchars(YApp::getCleanAltText($arItem['NAME']));?>" title="<?= htmlspecialchars(YApp::getCleanAltText($arItem['NAME']));?>" />
 									<?php } // if OLD LOGO ?>
 									<div class="item-right-content d-flex justify-content-start align-items-center"><?= $arItem['~NAME'];?></div>
 								</div>
