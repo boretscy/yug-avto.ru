@@ -6,13 +6,7 @@ $carMileage = (!empty($item['mileage'])) ? number_format($item['mileage'], 0, '.
 $carEquipment = (($item['entity'] == 'new' && !empty($item['equipment'])) ? $item['equipment'] : '');
 $carType = (($item['entity'] == 'used') ? 'с пробегом' : 'новый');
 
-$pageH1 = $GLOBALS['META']['meta']['h1'] ?? $data['meta']['meta']['h1'] ?? '';
-if (!empty($pageH1)) {
-	$carImgText = $pageH1;
-} else {
-	$imgAltParts = array_filter([$carBrand, $carModel, $carEquipment, $carYear ? $carYear . ' года' : '', $carMileage ? 'с пробегом ' . $carMileage : $carType]);
-	$carImgText = implode(' ', $imgAltParts) . ' купить в Краснодаре';
-}
+$carImgText = $carBrand . ' ' . $carModel;
 ?>
 <div class="bg-yalightbluegray vehicle-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/Product">
     <meta itemprop="brand" content="<?= htmlspecialchars($item['brand']['name'] ?? '');?>" />

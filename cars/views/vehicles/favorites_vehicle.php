@@ -1,3 +1,6 @@
+<?php 
+$carImgText = ($item['brand']['name'] ?? '') . ' ' . ($item['model']['name'] ?? '');
+?>
 <div class="bg-yalightbluegray vehicle-card" itemscope itemtype="https://schema.org/Product">
     <div class="vehicle-card-images position-relative">
 		<a href="<?= $app->Conf()['assetsUrl'];?>/<?= $item['entity'];?>/<?= $item['brand']['code'];?>/<?= $item['model']['code'];?>/<?= $item['id'];?>/" role="vehicle-image">
@@ -10,13 +13,14 @@
 						<img 
 							src="<?= (($i['preview'])?:$i['preview_large']);?>"
 							class="vehicle-card-images-item-container-image"
-							alt="<?= $item['brand']['name'];?> <?= $item['model']['name'];?>"
+							alt="<?= htmlspecialchars(YApp::getCleanAltText($carImgText . (($k > 0) ? ' - ракурс ' . ($k + 1) : '')));?>"
+							title="<?= htmlspecialchars(YApp::getCleanAltText($carImgText . (($k > 0) ? ' - ракурс ' . ($k + 1) : '')));?>"
 							loading="<?= ($k==0)?'eager':'lazy';?>"
 						>
 					</div>
 				<?php } ?>
 			<?php } else { ?>
-				<img src="https://<?= YApp::GO_API_DOMAIN ?>/upload/Cis/bodies/<?= $item['body']['code'];?>_sm.webp" class="w-100" />
+				<img src="https://<?= YApp::GO_API_DOMAIN ?>/upload/Cis/bodies/<?= $item['body']['code'];?>_sm.webp" class="w-100" alt="<?= htmlspecialchars(YApp::getCleanAltText($carImgText));?>" title="<?= htmlspecialchars(YApp::getCleanAltText($carImgText));?>" />
 			<?php } ?>
 		</a>
 		<div class="m-3 vehicle-card-images-row position-absolute d-flex justify-content-between">

@@ -6,13 +6,7 @@
 	$carEquipment = (($item['entity'] == 'new' && !empty($item['equipment'])) ? $item['equipment'] : '');
 	$carType = (($item['entity'] == 'used') ? 'с пробегом' : 'новый');
 
-	$pageH1 = $GLOBALS['META']['meta']['h1'] ?? $data['meta']['meta']['h1'] ?? '';
-	if (!empty($pageH1)) {
-		$carImgText = $pageH1;
-	} else {
-		$imgAltParts = array_filter([$carBrand, $carModel, $carEquipment, $carYear ? $carYear . ' года' : '', $carType]);
-		$carImgText = implode(' ', $imgAltParts) . ' купить в Краснодаре';
-	}
+	$carImgText = $carBrand . ' ' . $carModel;
 	?>
     <div class="vehicle-card-images position-relative">
 		<a href="<?= $app->Conf()['assetsUrl'];?>/<?= $item['entity'];?>/<?= $item['brand']['code'];?>/<?= $item['model']['code'];?>/<?= $item['id'];?>/" role="vehicle-image">

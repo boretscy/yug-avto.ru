@@ -15,13 +15,7 @@ $carMileage = (!empty($item['mileage'])) ? number_format($item['mileage'], 0, '.
 $carEquipment = (($vehicleMode == 'new' && !empty($item['equipment'])) ? $item['equipment'] : '');
 $carType = (($vehicleMode == 'used') ? 'с пробегом' : 'новый');
 
-$pageH1 = $GLOBALS['META']['meta']['h1'] ?? $data['meta']['meta']['h1'] ?? '';
-if (!empty($pageH1)) {
-	$carImgText = $pageH1;
-} else {
-	$imgAltParts = array_filter([$carBrand, $carModel, $carEquipment, $carYear ? $carYear . ' года' : '', $carMileage ? 'с пробегом ' . $carMileage : $carType]);
-	$carImgText = implode(' ', $imgAltParts) . ' купить в Краснодаре';
-}
+$carImgText = $carBrand . ' ' . $carModel;
 ?>
 <div class="swiper-slide h-auto">
 	<div class="vehicle-card bg-yalightbluegray text-start w-100">
