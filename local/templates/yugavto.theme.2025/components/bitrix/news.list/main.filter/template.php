@@ -25,7 +25,7 @@ $this->setFrameMode(true);
 							data-remodal-target="stories"
 							data-indx="<?= $k;?>"
 							class="d-block stories-item me-3" data-hash="<?= md5($item['ID'].'-'.$item['NAME'].'-'.$item['ACTIVE_FROM_X'].'-'.$item['PROPERTY_STORIES_LINK_VALUE']);?>">
-							<img src="<?= CFile::GetPath($item['PROPERTY_STORIES_MOBILE_PREVIEW_PICTURE_VALUE']);?>" alt="<?= $item['NAME'];?>" class="w-100 h-100" style="object-fit: cover;">
+							<img src="<?= CFile::GetPath($item['PROPERTY_STORIES_MOBILE_PREVIEW_PICTURE_VALUE']);?>" alt="<?= htmlspecialchars(YApp::getCleanAltText($item['NAME']));?>" title="<?= htmlspecialchars(YApp::getCleanAltText($item['NAME']));?>" class="w-100 h-100" style="object-fit: cover;">
 						</a>
 					<?php } ?>
 				</div>
@@ -44,7 +44,7 @@ $this->setFrameMode(true);
 				<link id="bgpreload" rel="preload" as="image" href="<?= CFile::GetPath($item['PROPERTY_STORIES_MOBILE_DETAIL_PICTURE_VALUE']);?>" />
 				<div class="swiper-slide b-radius-yaradius-16">
 					<div class="position-relative swiper-slide-img b-radius-yaradius-16 h-100 w-100">
-						<img class="h-100 w-100" src="<?= CFile::GetPath($item['PROPERTY_STORIES_MOBILE_DETAIL_PICTURE_VALUE']);?>" alt="<?= $item['NAME'];?>" style="object-fit: cover;">
+						<img class="h-100 w-100" src="<?= CFile::GetPath($item['PROPERTY_STORIES_MOBILE_DETAIL_PICTURE_VALUE']);?>" alt="<?= htmlspecialchars(YApp::getCleanAltText($item['NAME']));?>" title="<?= htmlspecialchars(YApp::getCleanAltText($item['NAME']));?>" style="object-fit: cover;">
 						<div class="swiper-main-stories-m-footer position-absolute bottom-0 w-100">
 							<div class="mb-3 d-flex justify-content-center">
 								<a 
@@ -421,7 +421,7 @@ $this->setFrameMode(true);
 							<?php foreach ( $arResult['STORIES'] as $item ) { ?>
 							<div class="swiper-slide b-radius-yaradius-16 overflow-hidden">
 								<a href="<?= (($item['PROPERTY_STORIES_LINK_VALUE'])?:'/offers/'.$item['CODE'].'/');?>">
-									<img src="<?= CFile::GetPath($item['PROPERTY_STORIES_DESKTOP_DETAIL_PICTURE_VALUE']);?>" class="w-100" />
+									<img src="<?= CFile::GetPath($item['PROPERTY_STORIES_DESKTOP_DETAIL_PICTURE_VALUE']);?>" class="w-100" alt="<?= htmlspecialchars(YApp::getCleanAltText($item['NAME']));?>" title="<?= htmlspecialchars(YApp::getCleanAltText($item['NAME']));?>" />
 								</a>
 							</div>
 							<?php } ?>
