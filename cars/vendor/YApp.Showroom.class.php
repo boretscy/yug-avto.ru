@@ -596,7 +596,7 @@
 				unset($filter['brand']);
 			}
 			unset($filter['page']);
-			if ( $page ) $filter['page'] = $page;
+			if ( (int)$page > 1 ) $filter['page'] = (int)$page;
 
 			if ( !$filter['brand'] || !$filter['model'] ) {
 
@@ -609,7 +609,13 @@
 						case 'page':
 						case 'color':
 							if ( count(explode(',', $filter[$p])) == 1 ) {
-								if ($filter[$p]) $res .= $p.'-'.$filter[$p].'/';
+								if ($p == 'page') {
+									if ((int)$filter[$p] > 1) {
+										$res .= $p.'-'.$filter[$p].'/';
+									}
+								} else {
+									if ($filter[$p]) $res .= $p.'-'.$filter[$p].'/';
+								}
 								unset($filter[$p]);
 								break;
 							}
