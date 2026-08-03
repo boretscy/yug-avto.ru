@@ -263,15 +263,76 @@ if ( $data['meta']['status'] === '404_vehicles' || $data['meta']['status'] === 4
 <script type='application/ld+json'>
 <?= json_encode($schemaData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
 </script>
-<?php } else { ?>
+<?php } else { 
+    $offerList = [];
+    $lowPrice = 0;
+    $highPrice = 0;
+
+    if (!empty($data['items']) && is_array($data['items'])) {
+        $prices = [];
+        foreach (array_slice($data['items'], 0, 24) as $item) {
+            $itemPrice = (float)($item['min_price'] ?? $item['price'] ?? 0);
+            if ($itemPrice > 0) {
+                $prices[] = $itemPrice;
+            }
+
+            $itemImg = '';
+            if (!empty($item['images']) && is_array($item['images'])) {
+                $firstImg = $item['images'][0]['preview'] ?? $item['images'][0]['preview_large'] ?? $item['images'][0]['src'] ?? '';
+                if (is_string($firstImg)) {
+                    $itemImg = explode('?', $firstImg)[0];
+                }
+            }
+            if (!$itemImg && !empty($item['body']['code'])) {
+                $itemImg = "https://" . YApp::GO_API_DOMAIN . "/upload/Cis/bodies/" . $item['body']['code'] . "_sm.webp";
+            }
+
+            $brandName = trim($item['brand']['name'] ?? '');
+            $modelName = trim($item['model']['name'] ?? '');
+            $year = $item['year'] ?? '';
+            $entityType = ($item['entity'] ?? 'new') == 'used' ? 'с пробегом' : 'новый';
+            $itemName = trim($brandName . ' ' . $modelName);
+            if ($year) {
+                $itemName .= ' ' . $year;
+            }
+
+            $itemUrl = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'] . $app->Conf()['assetsUrl'] . '/' . ($item['entity'] ?? 'new') . '/' . ($item['brand']['code'] ?? '') . '/' . ($item['model']['code'] ?? '') . '/' . ($item['id'] ?? '') . '/';
+
+            $offerList[] = [
+                "@type" => "Offer",
+                "name" => $itemName ?: "Автомобиль Юг-Авто",
+                "price" => $itemPrice,
+                "priceCurrency" => "RUB",
+                "url" => $itemUrl,
+                "availability" => ($item['status']['id'] == 1 || !isset($item['status']['id'])) ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                "itemCondition" => ($item['entity'] ?? 'new') == 'used' ? "https://schema.org/UsedCondition" : "https://schema.org/NewCondition",
+                "image" => $itemImg ?: null
+            ];
+        }
+
+        if (!empty($prices)) {
+            $lowPrice = min($prices);
+            $highPrice = max($prices);
+        }
+    }
+
+    $listSchema = [
+        "@context" => "https://schema.org/",
+        "@type" => "Product",
+        "name" => htmlspecialchars_decode($data['meta']['meta']['title'] ?? 'Купить автомобили в Юг-Авто'),
+        "description" => htmlspecialchars_decode($data['meta']['meta']['description'] ?? ''),
+        "offers" => [
+            "@type" => "AggregateOffer",
+            "offerCount" => (int)($data['filter']['totalCount'] ?? count($data['items'] ?? [])),
+            "priceCurrency" => "RUB",
+            "lowPrice" => $lowPrice,
+            "highPrice" => $highPrice,
+            "offers" => $offerList
+        ]
+    ];
+?>
 <script type='application/ld+json'>
-{
-	"@context": "https://schema.org/",
-	"@type": "ItemList",
-	"name": "<?= htmlspecialchars($data['meta']['meta']['title'] ?? '');?>",
-	"description": "<?= htmlspecialchars($data['meta']['meta']['description'] ?? '');?>",
-	"url": "<?= $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>"
-}
+<?= json_encode($listSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
 </script>
 <?php } ?>
 
