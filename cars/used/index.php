@@ -1,4 +1,11 @@
 <?php 
+	if ( preg_match('#/page-1/?($|\?)#', $_SERVER['REQUEST_URI']) ) {
+		$cleanUri = preg_replace('#/page-1/?($|\?)#', '/$1', $_SERVER['REQUEST_URI']);
+		$cleanUri = preg_replace('#//+#', '/', $cleanUri);
+		header("HTTP/1.1 301 Moved Permanently"); 
+		header("Location: ".$cleanUri); 
+		exit();
+	}
 	$p = explode('/', $_SERVER['REQUEST_URI']);
 	if ( !!$p[4] && $p[3] == $p[4] ) {
 		header("HTTP/1.1 301 Moved Permanently"); 

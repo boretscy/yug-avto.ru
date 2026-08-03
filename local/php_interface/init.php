@@ -5,8 +5,18 @@
 		define('ENABLE_FRONTEND_OPTIMIZATION', true);
 	}
 
-	// 301-редирект множественных слэшей в URL (Пункт 3 ТЗ)
+	// 301-редирект index.php, index.html, index.htm на главную (Пункт 1 ТЗ)
 	$requestUri = $_SERVER['REQUEST_URI'] ?? '';
+	$cleanPath = parse_url($requestUri, PHP_URL_PATH);
+	if ($cleanPath === '/index.php' || $cleanPath === '/index.html' || $cleanPath === '/index.htm') {
+		$queryString = $_SERVER['QUERY_STRING'] ?? '';
+		$targetUrl = '/' . ($queryString ? '?' . $queryString : '');
+		header("HTTP/1.1 301 Moved Permanently");
+		header("Location: " . $targetUrl);
+		exit();
+	}
+
+	// 301-редирект множественных слэшей в URL (Пункт 3 ТЗ)
 	if (!empty($requestUri) && preg_match('#/{2,}#', $requestUri)) {
 		$cleanUri = preg_replace('#/{2,}#', '/', $requestUri);
 		header("HTTP/1.1 301 Moved Permanently");

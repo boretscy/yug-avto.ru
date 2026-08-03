@@ -1,77 +1,9 @@
 Options -Indexes 
 ErrorDocument 404 /404.php
 
-
-	RewriteEngine On
-
-	RewriteCond %{HTTP_HOST} ^www\.yug-avto\.ru [NC]
-	RewriteRule ^(.*)$ http://yug-avto.ru/$1 [L,R=301]
-
-<IfModule mod_php5.c>
-	php_flag allow_call_time_pass_reference 1
-	php_flag session.use_trans_sid off
-
-	#php_value display_errors 1
-
-	#php_value mbstring.internal_encoding UTF-8
-</IfModule>
-
 <IfModule mod_rewrite.c>
 	Options +FollowSymLinks
 	RewriteEngine On
-
-	RewriteCond %{HTTP_HOST} ^www\.yug-avto\.ru [NC]
-	RewriteRule ^(.*)$ http://yug-avto.ru/$1 [L,R=301]
-
-	## начало отруба ботов
-	RewriteBase /
-	### сюда пишем правила
-	# проверка на хобя бы одного из referer
-	RewriteCond %{HTTP_REFERER} click.my.mail.ru [NC,OR]
-	RewriteCond %{HTTP_REFERER} l.instagram.com [NC,OR]
-	RewriteCond %{HTTP_REFERER} t.co [NC,OR]
-	RewriteCond %{HTTP_REFERER} away.vk.com [NC,OR]
-	RewriteCond %{HTTP_REFERER} zen.yandex.ru [NC,OR]
-	RewriteCond %{HTTP_REFERER} youtube.com [NC,OR]
-	RewriteCond %{HTTP_REFERER} ok.ru [NC,OR]
-	RewriteCond %{HTTP_REFERER} mamba.ru [NC,OR]
-	RewriteCond %{HTTP_REFERER} facebook.com [NC]
-	RewriteRule .? - [F,L]
-	# проверка 2-ух условий
-	#1. на пустой referer
-	#2. и совпадения хотя бы одного ip
-	RewriteCond %{HTTP_REFERER} ^$
-	RewriteCond %{REMOTE_ADDR} ^178.176.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^83.220.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^176.59.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^213.87.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^91.193.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^188.170.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^185.3.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^92.38.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^89.112.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^89.113.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^217.66.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^193.34.232.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^94.25.*.*$ [OR]
-	RewriteCond %{REMOTE_ADDR} ^31.173.*.*$
-	RewriteRule .? - [F,L]
-
-	# Force non-www in a Generic Way
-	# RewriteCond %{HTTP_HOST} ^www\.
-	# RewriteCond %{HTTPS}s ^on(s)|off
-	# RewriteCond http%1://%{HTTP_HOST} ^(https?://)(www\.)?(.+)$
-	# RewriteRule ^ %1%3%{REQUEST_URI} [R=301,L]
-
-	# Force Trailing Slash
-	RewriteCond %{REQUEST_URI} /+[^\.]+$
-	RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301,L]
-
-	RewriteCond %{REQUEST_URI} ^(.*?)\/{2,}(.*?)$
-	RewriteRule . %1/%2 [L,R=301]
-	RewriteCond %{THE_REQUEST} //
-	RewriteRule .* /$0 [R=301,L]
-
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-l
 	RewriteCond %{REQUEST_FILENAME} !-d
@@ -88,18 +20,4 @@ ErrorDocument 404 /404.php
 	ExpiresActive on
 	ExpiresByType image/jpeg "access plus 3 day"
 	ExpiresByType image/gif "access plus 3 day"
-	ExpiresByType image/png "access plus 3 day"
-	ExpiresByType text/css "access plus 3 day"
-	ExpiresByType application/javascript "access plus 3 day"  
 </IfModule>
-
-
-Redirect 301 /buy-car/ https://yug-avto.ru/cars/
-Redirect 301 /buy-car/new/ https://yug-avto.ru/cars/
-# Redirect 301 /cars/new/geely/coolray/ https://yug-avto.ru/cars/new/geely/new-coolray/
-
-# Костыль для omoda-КРАСНОДАР
-Redirect 301 /cars/new/krasnodar/omoda/ https://yug-avto.ru/cars/new/omoda-krasnodar/
-Redirect 301 /cars/new/krasnodar/chery/ https://yug-avto.ru/cars/new/chery-krasnodar/
-Redirect 301 /cars/new/krasnodar/baic/ https://yug-avto.ru/cars/new/baic-krasnodar/
-Redirect 301 /cars/new/krasnodar/jaecoo/ https://yug-avto.ru/cars/new/jaecoo-krasnodar/

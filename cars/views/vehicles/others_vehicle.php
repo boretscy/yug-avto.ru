@@ -1,4 +1,4 @@
-<div class="bg-yalightbluegray vehicle-card" itemscope itemtype="https://schema.org/Product">
+<div class="bg-yalightbluegray vehicle-card">
 	<?php
 	$carBrand = $item['brand']['name'] ?? '';
 	$carModel = $item['model']['name'] ?? '';
@@ -6,13 +6,7 @@
 	$carEquipment = (($item['entity'] == 'new' && !empty($item['equipment'])) ? $item['equipment'] : '');
 	$carType = (($item['entity'] == 'used') ? 'с пробегом' : 'новый');
 
-	$pageH1 = $GLOBALS['META']['meta']['h1'] ?? $data['meta']['meta']['h1'] ?? '';
-	if (!empty($pageH1)) {
-		$carImgText = $pageH1;
-	} else {
-		$imgAltParts = array_filter([$carBrand, $carModel, $carEquipment, $carYear ? $carYear . ' года' : '', $carType]);
-		$carImgText = implode(' ', $imgAltParts) . ' купить в Краснодаре';
-	}
+	$carImgText = $carBrand . ' ' . $carModel;
 	?>
     <div class="vehicle-card-images position-relative">
 		<a href="<?= $app->Conf()['assetsUrl'];?>/<?= $item['entity'];?>/<?= $item['brand']['code'];?>/<?= $item['model']['code'];?>/<?= $item['id'];?>/" role="vehicle-image">
@@ -44,7 +38,7 @@
     <div class="vehicle-card-content py-3 px-2">
 		<a 
 			href="<?= $app->Conf()['assetsUrl'];?>/<?= $item['entity'];?>/<?= $item['brand']['code'];?>/<?= $item['model']['code'];?>/<?= $item['id'];?>/" 
-			class="c-yalightblack c-h-yalightblack text-decoration-none h5 line-height-one d-block fw-bold vehicle-card-content-title" itemprop="name"
+			class="c-yalightblack c-h-yalightblack text-decoration-none h5 line-height-one d-block fw-bold vehicle-card-content-title"
             ><div><?= $item['brand']['name'];?> <?= $item['model']['name'];?> <?= (($item['equipment']&&$item['entity']=='new')?$item['equipment']:'');?></div></a>
         <div class="vehicle-card-futures">
             <?php foreach ( $item['_tags'] as $tag ) { ?>
@@ -53,7 +47,7 @@
                 </a>
             <?php } ?>
         </div>
-        <div class="vehicle-card-specification my-3 c-yablack text-minus" itemprop="description">
+        <div class="vehicle-card-specification my-3 c-yablack text-minus">
             <?php foreach (array_chunk($item['_general'], 3) as $s_row) { ?>
             <div>
                 <?php foreach ( $s_row as $k => $i ) { ?>

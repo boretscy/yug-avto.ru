@@ -6,19 +6,11 @@ $carMileage = (!empty($item['mileage'])) ? number_format($item['mileage'], 0, '.
 $carEquipment = (($item['entity'] == 'new' && !empty($item['equipment'])) ? $item['equipment'] : '');
 $carType = (($item['entity'] == 'used') ? 'с пробегом' : 'новый');
 
-$pageH1 = $GLOBALS['META']['meta']['h1'] ?? $data['meta']['meta']['h1'] ?? '';
-if (!empty($pageH1)) {
-	$carImgText = $pageH1;
-} else {
-	$imgAltParts = array_filter([$carBrand, $carModel, $carEquipment, $carYear ? $carYear . ' года' : '', $carMileage ? 'с пробегом ' . $carMileage : $carType]);
-	$carImgText = implode(' ', $imgAltParts) . ' купить в Краснодаре';
-}
+$carImgText = $carBrand . ' ' . $carModel;
 ?>
-<div class="bg-yalightbluegray vehicle-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/Product">
-    <meta itemprop="brand" content="<?= htmlspecialchars($item['brand']['name'] ?? '');?>" />
-    <meta itemprop="model" content="<?= htmlspecialchars($item['model']['name'] ?? '');?>" />
+<div class="bg-yalightbluegray vehicle-card">
     <div class="vehicle-card-images position-relative">
-		<a href="<?= $app->Conf()['assetsUrl'];?>/<?= $item['entity'];?>/<?= $item['brand']['code'];?>/<?= $item['model']['code'];?>/<?= $item['id'];?>/" role="vehicle-image" itemprop="url">
+		<a href="<?= $app->Conf()['assetsUrl'];?>/<?= $item['entity'];?>/<?= $item['brand']['code'];?>/<?= $item['model']['code'];?>/<?= $item['id'];?>/" role="vehicle-image">
 			<?php if ( !empty($item['images']) ) { ?>
 				<?php foreach ( $item['images'] as $k => $i ) { ?>
 					<div 
@@ -31,13 +23,13 @@ if (!empty($pageH1)) {
 							alt="<?= htmlspecialchars(YApp::getCleanAltText($carImgText . (($k > 0) ? ' - ракурс ' . ($k + 1) : '')));?>"
 							title="<?= htmlspecialchars(YApp::getCleanAltText($carImgText . (($k > 0) ? ' - ракурс ' . ($k + 1) : '')));?>"
 							loading="<?= ($k==0)?'eager':'lazy';?>"
-							<?= ($k==0)?'fetchpriority="high" itemprop="image"':'';?>
+							<?= ($k==0)?'fetchpriority="high"':'';?>
 							decoding="async"
 						>
 					</div>
 				<?php } ?>
 			<?php } else { ?>
-				<img src="https://<?= YApp::GO_API_DOMAIN ?>/upload/Cis/bodies/<?= $item['body']['code'];?>_sm.webp" class="w-100" alt="<?= htmlspecialchars(YApp::getCleanAltText($carImgText));?>" title="<?= htmlspecialchars(YApp::getCleanAltText($carImgText));?>" itemprop="image" />
+				<img src="https://<?= YApp::GO_API_DOMAIN ?>/upload/Cis/bodies/<?= $item['body']['code'];?>_sm.webp" class="w-100" alt="<?= htmlspecialchars(YApp::getCleanAltText($carImgText));?>" title="<?= htmlspecialchars(YApp::getCleanAltText($carImgText));?>" />
 			<?php } ?>
 		</a>
 		<div class="m-3 vehicle-card-images-row position-absolute d-flex justify-content-between">
@@ -49,7 +41,7 @@ if (!empty($pageH1)) {
     <div class="vehicle-card-content py-3 px-2">
 		<a 
 			href="<?= $app->Conf()['assetsUrl'];?>/<?= $item['entity'];?>/<?= $item['brand']['code'];?>/<?= $item['model']['code'];?>/<?= $item['id'];?>/" 
-			class="c-yalightblack c-h-yalightblack text-decoration-none h5 line-height-one d-block fw-bold vehicle-card-content-title" itemprop="name"
+			class="c-yalightblack c-h-yalightblack text-decoration-none h5 line-height-one d-block fw-bold vehicle-card-content-title"
             ><div><?= $item['brand']['name'];?> <?= $item['model']['name'];?> <?= (($item['equipment']&&$item['entity']=='new')?$item['equipment']:'');?></div></a>
         <div class="vehicle-card-futures">
             <?php foreach ( $item['_tags'] as $tag ) { ?>
@@ -58,7 +50,7 @@ if (!empty($pageH1)) {
                 </a>
             <?php } ?>
         </div>
-        <div class="vehicle-card-specification my-3 c-yablack text-minus" itemprop="description">
+        <div class="vehicle-card-specification my-3 c-yablack text-minus">
             <?php foreach (array_chunk($item['_general'], 3) as $s_row) { ?>
             <div>
                 <?php foreach ( $s_row as $k => $i ) { ?>
@@ -83,10 +75,7 @@ if (!empty($pageH1)) {
 			<?php } ?>
 			<div class="vehicle-card-status text-uppercase my-2 <?= (($item['status']['id']==1)?'c-yayellow':'c-yadarkgray');?> fw-bold"><?= $item['status']['name'];?></div>
 		</div>
-		<div class="vehicle-card-price my-2 d-flex justify-content-between align-items-end" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-			<meta itemprop="price" content="<?= $item['min_price'];?>">
-			<meta itemprop="priceCurrency" content="RUB">
-			<link itemprop="availability" href="http://schema.org/InStock">
+		<div class="vehicle-card-price my-2 d-flex justify-content-between align-items-end">
 			<span class="price c-yablack fw-bold"><?= number_format($item['min_price'], 0, '.', ' ');?> ₽</span>
 			<?php if ( $item['min_price'] < $item['price'] ) { ?>
 			<span class="fw-light c-yadarkgray text-decoration-line-through mb-1"><?= number_format($item['price'], 0, '.', ' ');?> ₽</span>

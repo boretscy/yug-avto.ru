@@ -7,13 +7,7 @@
     $dCarEquipment = ($data['is_used'] ? '' : ($data['equipment'] ?? ''));
     $dCarType = ($data['is_used'] ? 'с пробегом' : 'новый');
 
-    $pageH1 = $data['meta']['meta']['h1'] ?? $GLOBALS['META']['meta']['h1'] ?? '';
-    if (!empty($pageH1)) {
-        $dImgText = $pageH1;
-    } else {
-        $dImgParts = array_filter([$dCarBrand, $dCarModel, $dCarEquipment, $dCarYear ? $dCarYear . ' года' : '', $dCarMileage ? 'с пробегом ' . $dCarMileage : $dCarType]);
-        $dImgText = implode(' ', $dImgParts) . ' купить в Краснодаре';
-    }
+    $dImgText = $dCarBrand . ' ' . $dCarModel . ' ' . $dCarYear . ' года с пробегом ' . $dCarMileage;
     ?>
     <div class="sticky-top" style="top: 9rem;">
         <div class="swiper vehicle-swiper position-relative">

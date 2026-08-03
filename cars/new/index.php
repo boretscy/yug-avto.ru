@@ -1,4 +1,11 @@
 <?php 
+	if ( preg_match('#/page-1/?($|\?)#', $_SERVER['REQUEST_URI']) ) {
+		$cleanUri = preg_replace('#/page-1/?($|\?)#', '/$1', $_SERVER['REQUEST_URI']);
+		$cleanUri = preg_replace('#//+#', '/', $cleanUri);
+		header("HTTP/1.1 301 Moved Permanently"); 
+		header("Location: ".$cleanUri); 
+		exit();
+	}
 	$p = explode('/', $_SERVER['REQUEST_URI']);
 	if ( isset($p[4]) && $p[3] == $p[4] ) {
 		header("HTTP/1.1 301 Moved Permanently"); 
@@ -183,41 +190,158 @@ if ( $data['meta']['status'] === '404_vehicles' || $data['meta']['status'] === 4
 	}
 }
 ?>
-<script type='application/ld+json'>
-    {
-		"@context": "http://schema.org/",
-        "name": "<?= $data['meta']['meta']['title'];?>",
-        "description": "<?= $data['meta']['meta']['description'];?>",
-        "image": "<?= (($data['meta']['meta']['image'])?explode('?', $data['meta']['meta']['image'])[0]:$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].SITE_TEMPLATE_PATH.'/assets/images/logo-25.jpg');?>",
-
-        "speakable": {
-            "@type": "SpeakableSpecification",
-            "xpath": [
-                "/html/head/title",
-                "/html/head/meta[@name='description_page']/@content"
-                ]
-        },
-
-		<?php if ( $data['meta']['meta']['level'] == 'vehicle' ) { ?>
-		"@type": "Product",
-		"brand": {
-			"@type": "Brand",
-			"name": "<?= $data['meta']['meta']['brand'];?>"
-		},
-		"offers": {
-			"@type": "Offer",
-			"priceCurrency": "RUB",
-			"price": "<?= $data['meta']['meta']['price'];?>",
-			"url": "<?= $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>",
-			"availability": "https://schema.org/InStock",
-			"itemCondition": "https://schema.org/NewCondition"
-		}
-		<?php } else { ?>
-        "@type": "Organization",
-        "url": "<?= $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>",
-		<?php } ?>
+<?php if ( $data['meta']['meta']['level'] == 'vehicle' ) { 
+    $brandName = trim($data['brand']['name'] ?? $data['meta']['meta']['brand'] ?? '');
+    $modelName = trim($data['model']['name'] ?? '');
+    $prodYear = $data['general'][4]['value'] ?? $data['year'] ?? '';
+    
+    $cleanTitle = trim('Новый ' . $brandName . ' ' . $modelName);
+    if ($prodYear) {
+        $cleanTitle .= ' ' . $prodYear . ' года';
     }
+
+    $imagesList = [];
+    if (!empty($data['images']) && is_array($data['images'])) {
+        foreach ($data['images'] as $imgItem) {
+            $urlStr = '';
+            if (is_string($imgItem)) {
+                $urlStr = $imgItem;
+            } elseif (is_array($imgItem)) {
+                $urlStr = $imgItem['src'] ?? $imgItem['url'] ?? $imgItem[0] ?? '';
+            }
+            if ($urlStr && is_string($urlStr)) {
+                $imagesList[] = explode('?', $urlStr)[0];
+            }
+        }
+    }
+    if (empty($imagesList) && !empty($data['meta']['meta']['image']) && is_string($data['meta']['meta']['image'])) {
+        $imagesList[] = explode('?', $data['meta']['meta']['image'])[0];
+    }
+    if (empty($imagesList)) {
+        $imagesList[] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].SITE_TEMPLATE_PATH.'/assets/images/logo-25.jpg';
+    }
+
+    $descText = trim($data['meta']['meta']['description'] ?? '');
+    if (!empty($data['general']) && is_array($data['general'])) {
+        $specs = [];
+        foreach ($data['general'] as $spec) {
+            if (!empty($spec['name']) && !empty($spec['value'])) {
+                $specs[] = $spec['name'] . ': ' . $spec['value'];
+            }
+        }
+        if (!empty($specs)) {
+            $descText .= "\n\nХарактеристики и комплектация:\n• " . implode("\n• ", $specs);
+        }
+    }
+
+    $sellerName = "Официальный дилер Юг-Авто";
+    if (!empty($data['dealership']['name'])) {
+        $sellerName .= " (" . $data['dealership']['name'] . ")";
+    }
+
+    $schemaData = [
+        "@context" => "https://schema.org/",
+        "@type" => "Product",
+        "name" => $cleanTitle ?: htmlspecialchars($data['meta']['meta']['title'] ?? ''),
+        "description" => $descText,
+        "image" => count($imagesList) === 1 ? $imagesList[0] : $imagesList,
+        "brand" => [
+            "@type" => "Brand",
+            "name" => $brandName
+        ],
+        "offers" => [
+            "@type" => "Offer",
+            "priceCurrency" => "RUB",
+            "price" => (float)($data['min_price'] ?? $data['price'] ?? $data['meta']['meta']['price'] ?? 0),
+            "url" => $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],
+            "availability" => ($data['status']['id'] == 1 || !isset($data['status']['id'])) ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+            "itemCondition" => "https://schema.org/NewCondition",
+            "seller" => [
+                "@type" => "AutoDealer",
+                "name" => $sellerName,
+                "url" => $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST']
+            ]
+        ]
+    ];
+    if ($prodYear) {
+        $schemaData['productionDate'] = (string)$prodYear;
+    }
+?>
+<script type='application/ld+json'>
+<?= json_encode($schemaData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
 </script>
+<?php } else { 
+    $offerList = [];
+    $lowPrice = 0;
+    $highPrice = 0;
+
+    if (!empty($data['items']) && is_array($data['items'])) {
+        $prices = [];
+        foreach (array_slice($data['items'], 0, 24) as $item) {
+            $itemPrice = (float)($item['min_price'] ?? $item['price'] ?? 0);
+            if ($itemPrice > 0) {
+                $prices[] = $itemPrice;
+            }
+
+            $itemImg = '';
+            if (!empty($item['images']) && is_array($item['images'])) {
+                $firstImg = $item['images'][0]['preview'] ?? $item['images'][0]['preview_large'] ?? $item['images'][0]['src'] ?? '';
+                if (is_string($firstImg)) {
+                    $itemImg = explode('?', $firstImg)[0];
+                }
+            }
+            if (!$itemImg && !empty($item['body']['code'])) {
+                $itemImg = "https://" . YApp::GO_API_DOMAIN . "/upload/Cis/bodies/" . $item['body']['code'] . "_sm.webp";
+            }
+
+            $brandName = trim($item['brand']['name'] ?? '');
+            $modelName = trim($item['model']['name'] ?? '');
+            $year = $item['year'] ?? '';
+            $entityType = ($item['entity'] ?? 'new') == 'used' ? 'с пробегом' : 'новый';
+            $itemName = trim($brandName . ' ' . $modelName);
+            if ($year) {
+                $itemName .= ' ' . $year;
+            }
+
+            $itemUrl = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'] . $app->Conf()['assetsUrl'] . '/' . ($item['entity'] ?? 'new') . '/' . ($item['brand']['code'] ?? '') . '/' . ($item['model']['code'] ?? '') . '/' . ($item['id'] ?? '') . '/';
+
+            $offerList[] = [
+                "@type" => "Offer",
+                "name" => $itemName ?: "Автомобиль Юг-Авто",
+                "price" => $itemPrice,
+                "priceCurrency" => "RUB",
+                "url" => $itemUrl,
+                "availability" => ($item['status']['id'] == 1 || !isset($item['status']['id'])) ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                "itemCondition" => ($item['entity'] ?? 'new') == 'used' ? "https://schema.org/UsedCondition" : "https://schema.org/NewCondition",
+                "image" => $itemImg ?: null
+            ];
+        }
+
+        if (!empty($prices)) {
+            $lowPrice = min($prices);
+            $highPrice = max($prices);
+        }
+    }
+
+    $listSchema = [
+        "@context" => "https://schema.org/",
+        "@type" => "Product",
+        "name" => htmlspecialchars_decode($data['meta']['meta']['title'] ?? 'Купить автомобили в Юг-Авто'),
+        "description" => htmlspecialchars_decode($data['meta']['meta']['description'] ?? ''),
+        "offers" => [
+            "@type" => "AggregateOffer",
+            "offerCount" => (int)($data['filter']['totalCount'] ?? count($data['items'] ?? [])),
+            "priceCurrency" => "RUB",
+            "lowPrice" => $lowPrice,
+            "highPrice" => $highPrice,
+            "offers" => $offerList
+        ]
+    ];
+?>
+<script type='application/ld+json'>
+<?= json_encode($listSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
+</script>
+<?php } ?>
 
 <style>
 	body {background-color: var(--yawhite);}

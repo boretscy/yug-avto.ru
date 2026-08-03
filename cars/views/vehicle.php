@@ -4,17 +4,14 @@
     $Asset->addCss($app->Conf()['assetsUrl'].'/assets/css/vehicle.css?'.md5_file($_SERVER['DOCUMENT_ROOT'].$app->Conf()['assetsUrl'].'/assets/css/vehicle.css'));
     $Asset->addJs($app->Conf()['assetsUrl'].'/assets/js/vehicle.js?'.md5_file($_SERVER['DOCUMENT_ROOT'].$app->Conf()['assetsUrl'].'/assets/js/vehicle.js'));
 ?>
-<div class="bg-yalightbluegray c-yablack vehicle-title py-1" itemscope itemtype="https://schema.org/Product">
-    <meta itemprop="brand" content="<?= htmlspecialchars($data['brand']['name'] ?? '');?>" />
-    <meta itemprop="model" content="<?= htmlspecialchars($data['model']['name'] ?? '');?>" />
-    <link itemprop="url" href="<?= $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>" />
+<div class="bg-yalightbluegray c-yablack vehicle-title py-1">
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="bg-yawhite px-3 py-4 b-radius-yaradius-16">
                     <div class="row">
                         <div class="col-md-7 col-xl-7">
-                            <h1 class="h3 fw-bold" itemprop="name"><?= $data['brand']['name'];?> <?= $data['model']['name'];?> <?= (($data['equipment'])?:'');?></h1>
+                            <h1 class="h3 fw-bold"><?= $data['brand']['name'];?> <?= $data['model']['name'];?> <?= (($data['equipment'])?:'');?></h1>
                             <ul class="list-inline my-1 d-md-block">
                                 <li class="list-inline-item position-relative me-3 text-uppercase"><?= $data['status']['name'];?></li>
                                 <li class="list-inline-item position-relative me-3"><?= $data['dealership']['name'];?></li>
@@ -24,15 +21,7 @@
                                 <li class="list-inline-item position-relative me-3">Обновлено <?= $data['_updated'];?></li>
                             </ul>
                         </div>
-                        <div class="col-md-5 col-xl-2 text-md-end" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                            <meta itemprop="price" content="<?= $data['min_price'];?>">
-                            <meta itemprop="priceCurrency" content="RUB">
-                            <?php if ($data['status']['id']==1) { ?>
-                            <link itemprop="availability" href="http://schema.org/InStock">
-                            <?php } else { ?>
-                            <link itemprop="availability" href="http://schema.org/OutOfStock">
-                            <?php } ?>
-                            <link itemprop="url" href="<?= $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>" />
+                        <div class="col-md-5 col-xl-2 text-md-end">
                             <div class="h3 fw-bold my-1 <?= (($data['price']-$data['min_price']==0)?'vehicle-title-price':'');?>" role="min-price">
                                 <?= number_format($data['min_price'], 0, '.', ' ');?> ₽
                             </div>
