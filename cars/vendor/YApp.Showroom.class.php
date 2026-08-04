@@ -545,9 +545,15 @@
 
 			unset($filter['site'], $filter['city']);
 
+			if ( !empty($params['brand']) && !empty($params['model']) ) {
+				$filter['brand'] = $params['brand'];
+				$filter['model'] = $params['model'];
+				unset($params['brand'], $params['model']);
+			}
+
 			foreach ( array_keys($params) as $p ) {
 				if ( !$params[$p] ) unset($filter[$p]);
-				if ( $filter[$p] ) {
+				if ( !empty($filter[$p]) ) {
 					switch ( $p ) {
 						case 'price': 
 						case 'power':
@@ -563,7 +569,7 @@
 							$needle = array_search($params[$p], $tmp);
 							if ( $needle !== false ) {
 								unset($tmp[$needle]);
-								if ( $filter['brand'] ) unset($filter['model']);
+								if ( $p == 'brand' && !empty($filter['brand']) ) unset($filter['model']);
 							} else {
 								$tmp[] = $params[$p];
 							}
@@ -582,18 +588,21 @@
 			}
 
 			$res = $this->Conf['baseUrl'].'/';
-			if ( $filter['city'] && count(explode(',', $filter['city']))==1 ) {
+			if ( !empty($filter['city']) && count(explode(',', $filter['city']))==1 ) {
 				// 
 				$res .= $this->getCityAlias($filter['city']).'/';
 				unset($filter['city']);
 			}
-			if ( $filter['brand'] && count(explode(',', $filter['brand']))==1 ) {
+			if ( !empty($filter['brand']) && count(explode(',', $filter['brand']))==1 ) {
 				$res .= $filter['brand'].'/';
-				if ( $filter['model']  && count(explode(',', $filter['model']))==1 ) {
+				if ( !empty($filter['model'])  && count(explode(',', $filter['model']))==1 ) {
 					$res .= $filter['model'].'/';
 					unset($filter['model']);
 				}
 				unset($filter['brand']);
+			} elseif ( !empty($filter['model']) && count(explode(',', $filter['model']))==1 ) {
+				$res .= $filter['model'].'/';
+				unset($filter['model']);
 			}
 			unset($filter['page']);
 			if ( (int)$page > 1 ) $filter['page'] = (int)$page;
