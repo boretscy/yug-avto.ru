@@ -62,6 +62,7 @@
             if ( !empty($user) ) {
                 $user['WHATSAPP'] = 'https://api.whatsapp.com/send?text='.$user['UF_FULL_NAME'].', '.$user['WORK_POSITION'].', '.$user['WORK_COMPANY'].' '.str_replace(' ', '%2520', $url);
                 $user['TELEGRAM'] = 'https://t.me/share/url?url='.str_replace(' ', '%2520', $url).'&text='.$user['UF_FULL_NAME'].', '.$user['WORK_POSITION'].', '.$user['WORK_COMPANY'];                
+                $user['MAX'] = 'max://share?text='.$user['UF_FULL_NAME'].', '.$user['WORK_POSITION'].', '.$user['WORK_COMPANY'].' '.str_replace(' ', '%2520', $url);
                 // $user['WHATSAPP'] = 'https://api.whatsapp.com/send?text='.$user['LAST_NAME'].' '.$user['NAME'].', '.$user['WORK_POSITION'].', '.$user['WORK_COMPANY'].' https://yug-avto.ru/';
                 // $user['TELEGRAM'] = 'https://t.me/share/url?url=https://yug-avto.ru/&text='.$user['LAST_NAME'].' '.$user['NAME'].', '.$user['WORK_POSITION'].', '.$user['WORK_COMPANY'];
 

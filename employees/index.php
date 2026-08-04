@@ -120,10 +120,13 @@ if ( $_GET['photo'] == 'no' ) $user['PERSONAL_PHOTO'] = false;
 <div class="container footer bg-yabottombg">
     <div class="row py-3 pb-5">
         <div class="col d-flex justify-content-center align-items-top">
-            <a href="<?= $user['WHATSAPP'];?>" target="_blank" class="social bg-yasocial d-flex justify-content-center align-items-center text-decoration-none b-radius-yabutton">
+            <a href="<?= $user['MAX'];?>" target="_blank" class="social bg-yasocial d-flex justify-content-center align-items-center text-decoration-none b-radius-yabutton me-4">
+                <img src="<?= SITE_TEMPLATE_PATH.'/assets/images/svg/'.$user['DESIGN'].'/icon-max.svg?'.md5_file($_SERVER['DOCUMENT_ROOT'].SITE_TEMPLATE_PATH.'/assets/images/svg/'.$user['DESIGN'].'/icon-max.svg');?>" />
+            </a>
+            <a href="<?= $user['WHATSAPP'];?>" target="_blank" class="social bg-yasocial d-flex justify-content-center align-items-center text-decoration-none b-radius-yabutton me-4">
                 <img src="<?= SITE_TEMPLATE_PATH.'/assets/images/svg/'.$user['DESIGN'].'/icon-whatsapp.svg?'.md5_file($_SERVER['DOCUMENT_ROOT'].SITE_TEMPLATE_PATH.'/assets/images/svg/'.$user['DESIGN'].'/icon-whatsapp.svg');?>" />
             </a>
-            <a href="<?= $user['TELEGRAM'];?>" target="_blank" class="social bg-yasocial d-flex justify-content-center align-items-center text-decoration-none b-radius-yabutton mx-4">
+            <a href="<?= $user['TELEGRAM'];?>" target="_blank" class="social bg-yasocial d-flex justify-content-center align-items-center text-decoration-none b-radius-yabutton me-4">
                 <img src="<?= SITE_TEMPLATE_PATH.'/assets/images/svg/'.$user['DESIGN'].'/icon-telegram.svg?'.md5_file($_SERVER['DOCUMENT_ROOT'].SITE_TEMPLATE_PATH.'/assets/images/svg/'.$user['DESIGN'].'/icon-telegram.svg');?>" />
             </a>
             <!-- <a href="../vcards/<?= $user['UF_FULL_NAME'].'.vcf';?>" target="_blank" download class="social bg-yasocial d-flex justify-content-center align-items-center text-decoration-none b-radius-yabutton me-4">
