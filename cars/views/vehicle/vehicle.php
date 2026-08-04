@@ -97,22 +97,66 @@
                 
             </div>
             <div class="col-md-6">
-                <?php if ( $data['price']-$data['min_price'] > 0 ) { ?>
+                <?php if ( $data['price']-$data['min_price'] > 0 ) { 
+                    $normalizedDiscounts = [];
+                    if ( !empty($data['discounts']) && is_array($data['discounts']) ) {
+                        foreach ( $data['discounts'] as $item ) {
+                            $name = trim($item['name'] ?? '');
+                            $description = trim($item['description'] ?? '');
+                            $sum = (float)($item['sum'] ?? 0);
+                            $types = $item['types'] ?? [];
+                            if (!is_array($types)) $types = [];
+
+                            $str = mb_strtolower($name . ' ' . $description, 'UTF-8');
+
+                            if (str_contains($str, 'trade') || str_contains($str, 'трейд') || str_contains($str, 'обмен') || in_array('trade_in', $types)) {
+                                $typeTitle = 'Трейд-ин';
+                            } elseif (str_contains($str, 'кредит') || str_contains($str, 'credit') || str_contains($str, 'рассрочка') || str_contains($str, 'финанс') || in_array('credit', $types)) {
+                                $typeTitle = 'Кредит';
+                            } elseif (str_contains($str, 'семь') || str_contains($str, 'семейн') || str_contains($str, 'господдержка') || str_contains($str, 'первый авто') || str_contains($str, 'второй авто')) {
+                                $typeTitle = 'Семейный автомобиль';
+                            } elseif (str_contains($str, 'корпоратив') || str_contains($str, 'лизинг') || str_contains($str, 'флит')) {
+                                $typeTitle = 'Корпоративная скидка';
+                            } elseif (str_contains($str, 'каско') || str_contains($str, 'страхов') || str_contains($str, 'доп') || in_array('insurance', $types)) {
+                                $typeTitle = 'КАСКО в подарок';
+                            } elseif (str_contains($str, 'прямая') || str_contains($str, 'наличные') || str_contains($str, 'наличка') || str_contains($str, 'выгода') || str_contains($str, 'ррц') || str_contains($str, 'спеццен')) {
+                                $typeTitle = 'Прямая скидка';
+                            } else {
+                                $typeTitle = !empty($description) ? $description : ($name ?: 'Специальное предложение');
+                            }
+
+                            if (!isset($normalizedDiscounts[$typeTitle])) {
+                                $normalizedDiscounts[$typeTitle] = [
+                                    'name' => $typeTitle,
+                                    'description' => $typeTitle,
+                                    'sum' => 0,
+                                    'active' => true,
+                                    'original_names' => []
+                                ];
+                            }
+
+                            $normalizedDiscounts[$typeTitle]['sum'] += $sum;
+                            if ($name && !in_array($name, $normalizedDiscounts[$typeTitle]['original_names'])) {
+                                $normalizedDiscounts[$typeTitle]['original_names'][] = $name;
+                            }
+                        }
+                    }
+                    $displayDiscounts = array_values($normalizedDiscounts);
+                ?>
                 <div class="h5 fw-bold">Выгода на авто</div>
                 <div class="text-minus c-yadarkgray vehicle-discounts position-relative">
                     Максимальная сумма выгод - <?= number_format($data['price']-$data['min_price'], 0, '.', ' ');?> ₽  <img src="<?= $app->Conf()['assetsUrl'];?>/assets/images/svg/question.svg" />
                     <div class="vehicle-discounts-disclamer bg-yawhite p-3 position-absolute">
                         Данная выгода действительна в случае приобретения автомобиля клиентом при условии использования специальных программ Производителя и/или ДЦ, а именно:<br />
                         <ul>
-                            <?php foreach ( $data['discounts'] as $item ) { ?>
-                            <?php /* <li><?= $item['name'];?></li> */ ?>
-                            <li><?= str_ireplace(['Trade-in', 'Trade in'], 'Трейд-ин', $item['name']);?></li>
+                            <?php foreach ( $displayDiscounts as $item ) { ?>
+                            <li><?= $item['name'];?></li>
                             <?php } ?>
                         </ul>
                     </div>
                 </div>
                 <ul class="list-unstyled my-3">
-                    <?php foreach ( $data['discounts'] as $item) { ?>
+                    <?php foreach ( $displayDiscounts as $item) { ?>
                     <li>
                         <div class="row vehicle-discounts-item active cursor-pointer" data-sum="<?= $item['sum'];?>" data-price="<?= $data['price'];?>" data-min="<?= $data['min_price'];?>">
                             <div class="col-8 text-minus d-flex justify-content-start align-items-center py-2">
@@ -121,7 +165,7 @@
                                     <img src="<?= $app->Conf()['assetsUrl'];?>/assets/images/svg/icon-check.svg" />
                                     <?php } ?>
                                 </span>
-                                <span><?= !empty($item['description']) ? $item['description'] : str_ireplace(['Trade-in', 'Trade in'], 'Трейд-ин', $item['name']);?></span>
+                                <span><?= $item['name'];?></span>
                             </div>
                             <div class="col-4 fw-bold d-flex justify-content-end align-items-center vehicle-discounts-item-value"><?= number_format($item['sum'], 0, '.', ' ');?> ₽</div>
                         </div>
