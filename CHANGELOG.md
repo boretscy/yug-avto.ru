@@ -1,14 +1,15 @@
 # Changelog
 
 ## [2026-08-07]
+### Added
+- Реализована генерация уникального мета-тега `title` на витринах автомобилей (`/cars/new/` и `/cars/used/`) при наличии пагинации (на страницах 2 и более добавляется суффикс ` — Страница #N`).
+- Внедрена микроразметка Schema.org (`Blog`, `BlogPosting`, `NewsArticle`/`Article`, `Organization`, `WebPage`, `PostalAddress`) на странице списка новостей (`/news/`), на детальных страницах новостей, на детальных страницах автосалонов и на главной странице (`main.news`).
+  - Добавлены рекомендуемые свойства `NewsArticle`: `headline`, `description`, `image`, `author`, `publisher`, `datePublished`, `dateModified`, `mainEntityOfPage`, `articleSection`, `keywords`, `inLanguage`.
+
 ### Fixed
 - Исправлена микроразметка `ListItem` в компоненте `bitrix:breadcrumb`:
   - Вложенность `ListItem` приведена в строгое соответствие со стандартом `BreadcrumbList`.
   - Для всех элементов гарантирована абсолютная ссылка `itemprop="item"` с понятными свойствами `name` и `position`.
-
-### Added
-- Внедрена микроразметка Schema.org (`Blog`, `BlogPosting`, `NewsArticle`/`Article`, `Organization`, `WebPage`, `PostalAddress`) на странице списка новостей (`/news/`), на детальных страницах новостей, на детальных страницах автосалонов и на главной странице (`main.news`).
-  - Добавлены рекомендуемые свойства `NewsArticle`: `headline`, `description`, `image`, `author`, `publisher`, `datePublished`, `dateModified`, `mainEntityOfPage`, `articleSection`, `keywords`, `inLanguage`.
 
 ## [2026-08-04]
 ### Added
