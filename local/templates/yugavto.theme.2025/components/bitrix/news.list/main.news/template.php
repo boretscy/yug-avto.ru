@@ -70,12 +70,12 @@ $logoUrl = $host . '/local/templates/yugavto.theme.2025/assets/images/svg/logo.s
 											</a>
 											<p itemprop="description" class="d-none"><?= htmlspecialchars($previewText);?></p>
 											<p itemprop="articleBody" class="d-none"><?= htmlspecialchars($previewText);?></p>
-											<meta itemprop="author" content="Юг-Авто">
+											<div itemprop="author" itemscope itemtype="https://schema.org/Organization" class="d-none"><meta itemprop="name" content="Юг-Авто"></div>
 											<meta itemprop="dateModified" content="<?= $dateIso;?>">
 											<meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="<?= $detailUrl;?>"/>
 											<div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" class="d-none">
 												<div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
-													<img itemprop="url image" src="<?= $logoUrl;?>" alt="Юг-Авто" />
+													<img itemprop="url" src="<?= $logoUrl;?>" alt="Юг-Авто" />
 												</div>
 												<link itemprop="url" href="<?= $host;?>/">
 												<div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
@@ -85,7 +85,7 @@ $logoUrl = $host . '/local/templates/yugavto.theme.2025/assets/images/svg/logo.s
 													<span itemprop="addressLocality">Краснодар</span>, 
 													<span itemprop="streetAddress">ул. Уральская, 98/11</span>
 												</div>
-												<div>Телефон: <a itemprop="telephone" href="tel:+78612031405">+7 (861) 203-14-05</a></div>
+												<div>Телефон: <a href="tel:+78612031405"><span itemprop="telephone">+7 (861) 203-14-05</span></a></div>
 												<div>Почта: <a href="mailto:info@yug-avto.ru"><span itemprop="email">info@yug-avto.ru</span></a></div>
 												<meta itemprop="name" content="Юг-Авто">
 											</div>
