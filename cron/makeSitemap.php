@@ -17,6 +17,30 @@ if (file_exists($dd.'/local/php_interface/YApp/YApp.php')) {
     require_once $dd.'/local/php_interface/YApp/YApp.php';
 }
 
+$apiDomain = class_exists('YApp') ? YApp::GO_API_DOMAIN : 'apps.yug-avto.ru';
+
+function fetchBrandsFromApi($apiDomain, $mode)
+{
+    $url = "https://{$apiDomain}/API/get/cis/brands?mode={$mode}&token=34b5ac8b71018c0bc7e5c050ed90b243";
+    $jsonRaw = @file_get_contents($url);
+    if (!$jsonRaw) return [];
+    $data = json_decode($jsonRaw, true);
+    $brandsList = $data['dropLists']['brands'] ?? [];
+
+    $brands = [];
+    foreach ($brandsList as $b) {
+        if (!empty($b['code']) && !empty($b['name'])) {
+            $bCode = $b['code'];
+            $brands[$bCode] = [
+                'code' => $b['code'],
+                'name' => trim($b['name']),
+                'models' => []
+            ];
+        }
+    }
+    return $brands;
+}
+
 function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
 {
     $sitemapName = "sitemap-cis-{$section}.xml";
@@ -32,8 +56,32 @@ function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
 
     if (!is_array($vehicles) || !count($vehicles)) return ['vehicles' => [], 'brands' => []];
 
+    // Collect ALL brands and models BEFORE any dealership filtering
+    $brands = [];
+    foreach ($vehicles as $v) {
+        if (!empty($v['brand']['code']) && !empty($v['brand']['name'])) {
+            $bCode = $v['brand']['code'];
+            if (!isset($brands[$bCode])) {
+                $brands[$bCode] = [
+                    'code' => $v['brand']['code'],
+                    'name' => trim($v['brand']['name']),
+                    'ext_id' => $v['brand']['ext_id'] ?? '',
+                    'models' => []
+                ];
+            }
+            if (!empty($v['model']['code']) && !empty($v['model']['name'])) {
+                $mCode = $v['model']['code'];
+                $brands[$bCode]['models'][$mCode] = [
+                    'code' => $v['model']['code'],
+                    'name' => trim($v['model']['name']),
+                    'ext_id' => $v['model']['ext_id'] ?? '',
+                ];
+            }
+        }
+    }
+
     $vehicles = array_filter($vehicles, fn($v) => !empty($v['brand']['code']) && !empty($v['id']));
-    if (!count($vehicles)) return ['vehicles' => [], 'brands' => []];
+    if (!count($vehicles)) return ['vehicles' => [], 'brands' => $brands];
 
     $ss = file_exists($dd.'/sitemap.xml') ? file_get_contents($dd.'/sitemap.xml') : '';
     if ($ss) {
@@ -61,15 +109,12 @@ function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
     $xml .= '</sitemapindex>';
     file_put_contents($dd.'/'.$sitemapName, $xml);
 
-    $brands = [];
     $xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
     foreach ($vehicles as $v) {
         $xml .= '<url><loc>';
         $xml .= 'https://'.$domain.'/'.$urlPath.$v['brand']['code'].'/'.$v['model']['code'].'/'.$v['id'].'/';
         $xml .= '</loc><lastmod>'.date('c', !empty($v['created']) ? (int)$v['created'] : time()).'</lastmod></url>';
-
-        $brands[$v['brand']['ext_id']] = $v['brand'];
 
         if ($v['type'] == 'vehicle' && !empty($v['dealership']['id']) && in_array($v['dealership']['id'], $dealershipIds)) {
             if ((int)($v['created'] ?? 0) > time() - 3600) {
@@ -79,12 +124,6 @@ function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
     }
     $xml .= '</urlset>';
     file_put_contents($dd.'/'.$vehiclesFile, $xml);
-
-    foreach ($vehicles as $v) {
-        if (!empty($v['brand']['ext_id']) && !empty($v['model']['ext_id'])) {
-            $brands[$v['brand']['ext_id']]['models'][$v['model']['ext_id']] = $v['model'];
-        }
-    }
 
     $xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
     foreach ($brands as $b) {
@@ -122,17 +161,17 @@ function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
                 }
             }
         } catch (\Throwable $e) {
-            // Suppress google indexing errors to avoid breaking sitemap/llms.txt generation
+            // Suppress google indexing errors
         }
     }
 
     return ['vehicles' => $vehicles, 'brands' => $brands];
 }
 
-function generateLlmsTxt($dd, $domain, $newData, $usedData)
+function generateLlmsTxt($dd, $domain, $newData, $usedData, $allNewBrandsApi, $allUsedBrandsApi)
 {
-    $newBrands = $newData['brands'] ?? [];
-    $usedBrands = $usedData['brands'] ?? [];
+    $newBrands = array_replace_recursive($allNewBrandsApi, $newData['brands'] ?? []);
+    $usedBrands = array_replace_recursive($allUsedBrandsApi, $usedData['brands'] ?? []);
 
     $lines = [];
     $lines[] = "# Юг-Авто — официальный дилер новых и подержанных б/у автомобилей с пробегом в Краснодаре, Новороссийске и Республике Адыгея";
@@ -248,10 +287,13 @@ function generateLlmsTxt($dd, $domain, $newData, $usedData)
     file_put_contents($dd . '/llms.txt', implode("\n", $lines));
 }
 
+$allNewBrandsApi = fetchBrandsFromApi($apiDomain, 'new');
+$allUsedBrandsApi = fetchBrandsFromApi($apiDomain, 'used');
+
 $newData = processSitemapSection(
     $dd,
     $domain,
-    'https://' . (class_exists('YApp') ? YApp::GO_API_DOMAIN : 'apps.yug-avto.ru') . '/API/get/cis/vehicles/new?token=34b5ac8b71018c0bc7e5c050ed90b243',
+    "https://{$apiDomain}/API/get/cis/vehicles/new?token=34b5ac8b71018c0bc7e5c050ed90b243",
     'new',
     [20, 256, 949, 1227, 1262, 1268, 1271, 1309, 1328, 1331, 1334, 1340, 1343, 1346, 1349, 1355, 1358, 1361, 1455, 1458, 1461, 1650, 1655, 1670, 1676, 1679, 1724, 1725, 1758]
 );
@@ -259,10 +301,10 @@ $newData = processSitemapSection(
 $usedData = processSitemapSection(
     $dd,
     $domain,
-    'https://' . (class_exists('YApp') ? YApp::GO_API_DOMAIN : 'apps.yug-avto.ru') . '/API/get/cis/vehicles/used?token=34b5ac8b71018c0bc7e5c050ed90b243',
+    "https://{$apiDomain}/API/get/cis/vehicles/used?token=34b5ac8b71018c0bc7e5c050ed90b243",
     'used',
     [1364, 1367, 1489, 1492, 1499, 1502, 1533]
 );
 
-generateLlmsTxt($dd, $domain, $newData, $usedData);
+generateLlmsTxt($dd, $domain, $newData, $usedData, $allNewBrandsApi, $allUsedBrandsApi);
 echo "SITEMAP_AND_LLMS_OK\n";

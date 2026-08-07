@@ -2,7 +2,7 @@
 
 ## [2026-08-07]
 ### Added
-- Оптимизирована генерация файла `llms.txt` в `cron/makeSitemap.php`: внедрена публикация полного каталога категорий всех брендов и всех моделей автомобилей (новых и с пробегом) вместо временных ссылок на единичные авто.
+- Оптимизирована генерация файла `llms.txt` в `cron/makeSitemap.php`: реализовано обращение к API брендов для выгрузки 100% марок (55+ марок новых и б/у авто) и категорий моделей холдинга.
 - Переведена генерация уникального мета-тега `title` при пагинации на сторону Go API; клиенты витрин (`/cars/new/` и `/cars/used/`) получают единый `meta.title` из Go API с суффиксом ` — Страница #N`.
 - Внедрена микроразметка Schema.org (`Blog`, `BlogPosting`, `NewsArticle`/`Article`, `Organization`, `WebPage`, `PostalAddress`) на странице списка новостей (`/news/`), на детальных страницах новостей, на детальных страницах автосалонов и на главной странице (`main.news`).
   - Добавлены рекомендуемые свойства `NewsArticle`: `headline`, `description`, `image`, `author`, `publisher`, `datePublished`, `dateModified`, `mainEntityOfPage`, `articleSection`, `keywords`, `inLanguage`.
