@@ -1,5 +1,3 @@
-const getStore = () => window.YAppStore;
-
 $(document).on('mouseover', '[role="submenu"]', function(e) {
     $('.submenu').hide();
     $('.submenu[data-menu="'+$(this).data('menu')+'"]').show();
@@ -77,8 +75,8 @@ $(document).on('click', '.top-menu-cities-item', function() {
             break;
     }
 
-    if (getStore()) {
-        getStore().setCity(uniqueCities);
+    if (window.YAppStore) {
+        window.YAppStore.setCity(uniqueCities);
     }
     return false;
 });
@@ -183,7 +181,7 @@ $(document).on('click', '.menu-search', function() {
 
 // Реактивное обновление счетчиков Избранного и Сравнения через YAppStore
 function initTopMenuStoreListeners() {
-    const store = getStore();
+    const store = window.YAppStore;
     if (!store) return;
 
     store.addEventListener('favorites:updated', (e) => {

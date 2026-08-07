@@ -1,5 +1,3 @@
-const getStore = () => window.YAppStore;
-
 const CompilationsOnMain_range_price = $('.main-compilations [data-range="price"] .range-selected');
 const CompilationsOnMain_rangeInput_price = $('.main-compilations [data-range="price"][role="range"] .range-input input');
 const CompilationsOnMain_rangeView_price = $('.main-compilations [data-range="price"][role="view"] .range-view .range-view-item');
@@ -49,7 +47,7 @@ CompilationsOnMain_rangeInput_price.each(function(i, e) {
     const triggerRender = (e) => {
         let minRange = parseInt(CompilationsOnMain_rangeInput_price[0].value);
         let maxRange = parseInt(CompilationsOnMain_rangeInput_price[1].value);
-        const store = getStore();
+        const store = window.YAppStore;
         if (minRange + 1 < maxRange) {
             let data = {
                 query: $('.main-compilations-data').data('query'),
@@ -165,7 +163,7 @@ function renderCompilations(data) {
 
 $(document).on('click', '.main-compilations .main-compilations-item', function() {
     const isAlreadyActive = $(this).hasClass('active');
-    const store = getStore();
+    const store = window.YAppStore;
     const currentEntity = store ? store.entity : 'new';
 
     if (isAlreadyActive) {
@@ -194,12 +192,12 @@ $(document).on('click', '.main-compilations-tabs-item', function() {
     $('.main-compilations-tabs-item').removeClass('active');
     $(this).addClass('active');
     const action = $(this).data('action');
-    const store = getStore();
+    const store = window.YAppStore;
     if (store) store.setEntity(action);
 });
 
 function initCompilationsStoreListeners() {
-    const store = getStore();
+    const store = window.YAppStore;
     if (!store) return;
 
     const updateCompilationsFromStore = () => {

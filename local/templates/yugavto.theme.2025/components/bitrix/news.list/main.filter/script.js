@@ -1,5 +1,3 @@
-const getStore = () => window.YAppStore;
-
 if (!window.YAPP) window.YAPP = {};
 if (!window.YAPP.MAIN_FILTER) window.YAPP.MAIN_FILTER = {};
 if (!window.YAPP.CONNECTOR) window.YAPP.CONNECTOR = {};
@@ -7,7 +5,7 @@ if (!window.YAPP.CONNECTOR) window.YAPP.CONNECTOR = {};
 window.YAPP.CONNECTOR.COUNTS = {};
 
 window.YAPP.MAIN_FILTER.getCISCounts = function() {
-    const store = getStore();
+    const store = window.YAppStore;
     const cityStr = store ? store.city.join() : '';
     let post = { data: { city: cityStr }, update: { data: true } };
 
@@ -102,7 +100,7 @@ window.YAPP.MAIN_FILTER.renderSelect = function(e) {
 
 window.YAPP.MAIN_FILTER.renderLink = function() {
     let data = {};
-    const store = getStore();
+    const store = window.YAppStore;
     if (window.YAPP.FORMS && window.YAPP.FORMS.MAIN_FILTER) {
         data.brands = window.YAPP.FORMS.MAIN_FILTER.brands.VALUE;
         data.models = window.YAPP.FORMS.MAIN_FILTER.models.VALUE;
@@ -125,7 +123,7 @@ window.YAPP.MAIN_FILTER.renderLink = function() {
 };
 
 window.YAPP.MAIN_FILTER.renderBrands = function() {
-    const store = getStore();
+    const store = window.YAppStore;
     fetch('/api/main-filter-brands/render/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -177,7 +175,7 @@ $(document).on('click', '.main-filter-tabs-item', function() {
 
 $(document).on('click', '.main-filter-tabs-item[role="toggleEntity"]', function() {
     const entity = $(this).data('entity');
-    const store = getStore();
+    const store = window.YAppStore;
     if (store) store.setEntity(entity);
 });
 
@@ -188,7 +186,7 @@ $(document).on('click', '[role="toggleBrands"]', function() {
 });
 
 $(document).on('click', '[data-sid="MAIN_FILTER"] .form-dropcontainer .form-droplist-item', function() {
-    const store = getStore();
+    const store = window.YAppStore;
     if ($(this).attr('role') === 'toggleEntity') {
         const entity = $(this).data('entity');
         if (store) store.setEntity(entity);
@@ -238,7 +236,7 @@ rangeInput_price.each(function(i, e) {
     const triggerPriceChange = () => {
         let minRange = parseInt(rangeInput_price[0].value);
         let maxRange = parseInt(rangeInput_price[1].value);
-        const store = getStore();
+        const store = window.YAppStore;
         if (minRange !== parseInt($(range_price).data('min')) || maxRange !== parseInt($(range_price).data('max'))) {
             if (window.YAPP.FORMS && window.YAPP.FORMS.MAIN_FILTER) {
                 window.YAPP.FORMS.MAIN_FILTER.price = [minRange, maxRange];
@@ -281,7 +279,7 @@ rangeView_price.each(function(i, e) {
     e.addEventListener('blur', () => {
         let minView = parseInt(String(rangeView_price[0].value).replace(/\D/g, ""));
         let maxView = parseInt(String(rangeView_price[1].value).replace(/\D/g, ""));
-        const store = getStore();
+        const store = window.YAppStore;
         if (minView !== parseInt($(range_price).data('min')) || maxView !== parseInt($(range_price).data('max'))) {
             if (window.YAPP.FORMS && window.YAPP.FORMS.MAIN_FILTER) {
                 window.YAPP.FORMS.MAIN_FILTER.price = [minView, maxView];
@@ -383,7 +381,7 @@ if (typeof window !== 'undefined') {
 }
 
 function initMainFilterStoreListeners() {
-    const store = getStore();
+    const store = window.YAppStore;
     if (!store) return;
 
     store.addEventListener('entity:changed', (e) => {

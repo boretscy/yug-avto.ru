@@ -1,5 +1,3 @@
-const getStore = () => window.YAppStore;
-
 var dealershipsMap;
 if (typeof ymaps !== 'undefined') {
     ymaps.ready(firstInit);
@@ -178,7 +176,7 @@ $(document).on('click', '.form-dropcontainer .form-dropdown .before', function()
 });
 
 function initDealershipsStoreListeners() {
-    const store = getStore();
+    const store = window.YAppStore;
     if (!store) return;
 
     store.addEventListener('city:changed', (e) => {
