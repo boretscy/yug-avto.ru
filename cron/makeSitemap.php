@@ -19,28 +19,6 @@ if (file_exists($dd.'/local/php_interface/YApp/YApp.php')) {
 
 $apiDomain = class_exists('YApp') ? YApp::GO_API_DOMAIN : 'apps.yug-avto.ru';
 
-function fetchBrandsFromApi($apiDomain, $mode)
-{
-    $url = "https://{$apiDomain}/API/get/cis/brands?mode={$mode}&token=34b5ac8b71018c0bc7e5c050ed90b243";
-    $jsonRaw = @file_get_contents($url);
-    if (!$jsonRaw) return [];
-    $data = json_decode($jsonRaw, true);
-    $brandsList = $data['dropLists']['brands'] ?? [];
-
-    $brands = [];
-    foreach ($brandsList as $b) {
-        if (!empty($b['code']) && !empty($b['name'])) {
-            $bCode = $b['code'];
-            $brands[$bCode] = [
-                'code' => $b['code'],
-                'name' => trim($b['name']),
-                'models' => []
-            ];
-        }
-    }
-    return $brands;
-}
-
 function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
 {
     $sitemapName = "sitemap-cis-{$section}.xml";
@@ -168,10 +146,10 @@ function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
     return ['vehicles' => $vehicles, 'brands' => $brands];
 }
 
-function generateLlmsTxt($dd, $domain, $newData, $usedData, $allNewBrandsApi, $allUsedBrandsApi)
+function generateLlmsTxt($dd, $domain, $newData, $usedData)
 {
-    $newBrands = array_replace_recursive($allNewBrandsApi, $newData['brands'] ?? []);
-    $usedBrands = array_replace_recursive($allUsedBrandsApi, $usedData['brands'] ?? []);
+    $newBrands = $newData['brands'] ?? [];
+    $usedBrands = $usedData['brands'] ?? [];
 
     $lines = [];
     $lines[] = "# Юг-Авто — официальный дилер новых и подержанных б/у автомобилей с пробегом в Краснодаре, Новороссийске и Республике Адыгея";
@@ -287,13 +265,10 @@ function generateLlmsTxt($dd, $domain, $newData, $usedData, $allNewBrandsApi, $a
     file_put_contents($dd . '/llms.txt', implode("\n", $lines));
 }
 
-$allNewBrandsApi = fetchBrandsFromApi($apiDomain, 'new');
-$allUsedBrandsApi = fetchBrandsFromApi($apiDomain, 'used');
-
 $newData = processSitemapSection(
     $dd,
     $domain,
-    "https://{$apiDomain}/API/get/cis/vehicles/new?token=34b5ac8b71018c0bc7e5c050ed90b243",
+    "https://{$apiDomain}/API/get/cis/vehicles/new?token=34b5ac8b71018c0bc7e5c050ed90b243&perpage=10000",
     'new',
     [20, 256, 949, 1227, 1262, 1268, 1271, 1309, 1328, 1331, 1334, 1340, 1343, 1346, 1349, 1355, 1358, 1361, 1455, 1458, 1461, 1650, 1655, 1670, 1676, 1679, 1724, 1725, 1758]
 );
@@ -301,10 +276,10 @@ $newData = processSitemapSection(
 $usedData = processSitemapSection(
     $dd,
     $domain,
-    "https://{$apiDomain}/API/get/cis/vehicles/used?token=34b5ac8b71018c0bc7e5c050ed90b243",
+    "https://{$apiDomain}/API/get/cis/vehicles/used?token=34b5ac8b71018c0bc7e5c050ed90b243&perpage=10000",
     'used',
     [1364, 1367, 1489, 1492, 1499, 1502, 1533]
 );
 
-generateLlmsTxt($dd, $domain, $newData, $usedData, $allNewBrandsApi, $allUsedBrandsApi);
+generateLlmsTxt($dd, $domain, $newData, $usedData);
 echo "SITEMAP_AND_LLMS_OK\n";
