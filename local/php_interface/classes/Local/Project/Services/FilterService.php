@@ -7,13 +7,10 @@ use Bitrix\Iblock\ElementTable;
 use Bitrix\Iblock\PropertyEnumerationTable;
 use Bitrix\Main\Data\Cache;
 use Bitrix\Main\Loader;
+use YApp;
 
 class FilterService
 {
-    private const IBLOCK_BRANDS = 8;
-    private const IBLOCK_DEALERSHIPS = 4;
-    private const IBLOCK_NEWS = 11;
-
     /**
      * Подготовка фильтра для страницы автосалонов (/dealerships/)
      */
@@ -27,55 +24,59 @@ class FilterService
 
         // 1. Фильтр по брендам
         if (!empty($queryParams['brand']) && is_string($queryParams['brand'])) {
-            $brandCodes = explode(',', $queryParams['brand']);
-            $cache = Cache::createInstance();
-            $cacheId = 'dl_filter_brands_' . md5(implode(',', $brandCodes));
-            $cacheDir = '/dealerships_filter';
+            $brandCodes = array_filter(array_map('trim', explode(',', $queryParams['brand'])));
+            if (!empty($brandCodes)) {
+                $cache = Cache::createInstance();
+                $cacheId = 'dl_filter_brands_v2_' . md5(implode(',', $brandCodes));
+                $cacheDir = '/dealerships_filter';
 
-            if ($cache->initCache(3600, $cacheId, $cacheDir)) {
-                $brandIds = $cache->getVars();
-            } else {
-                $brandIds = [];
-                $elements = ElementTable::getList([
-                    'select' => ['ID'],
-                    'filter' => [
-                        '=IBLOCK_ID' => self::IBLOCK_BRANDS,
-                        '=ACTIVE' => 'Y',
-                        '=CODE' => $brandCodes
-                    ],
-                    'cache' => ['ttl' => 3600]
-                ])->fetchAll();
+                if ($cache->initCache(3600, $cacheId, $cacheDir)) {
+                    $brandIds = $cache->getVars();
+                } else {
+                    $brandIds = [];
+                    $elements = ElementTable::getList([
+                        'select' => ['ID'],
+                        'filter' => [
+                            '=IBLOCK_ID' => YApp::IBLOCK_BRANDS, // IBLOCK_ID = 5
+                            '=ACTIVE' => 'Y',
+                            '=CODE' => $brandCodes
+                        ],
+                        'cache' => ['ttl' => 3600]
+                    ])->fetchAll();
 
-                foreach ($elements as $el) {
-                    $brandIds[] = (int)$el['ID'];
-                }
+                    foreach ($elements as $el) {
+                        $brandIds[] = (int)$el['ID'];
+                    }
 
-                if (!empty($brandIds)) {
                     $cache->startDataCache();
                     $cache->endDataCache($brandIds);
                 }
-            }
 
-            if (!empty($brandIds)) {
-                $arFilter['PROPERTY_BRAND'] = $brandIds;
+                if (!empty($brandIds)) {
+                    $arFilter['PROPERTY_BRAND'] = $brandIds;
+                } else {
+                    $arFilter['PROPERTY_BRAND'] = -1; // Если бренд не найден, не выводим ничего
+                }
             }
         }
 
         // 2. Фильтр по тегам
         if (!empty($queryParams['tag']) && is_string($queryParams['tag'])) {
-            $tagXmlIds = explode(',', $queryParams['tag']);
-            $enums = PropertyEnumerationTable::getList([
-                'select' => ['VALUE', 'XML_ID'],
-                'filter' => [
-                    '=PROPERTY.IBLOCK_ID' => self::IBLOCK_DEALERSHIPS,
-                    '=PROPERTY.CODE' => 'TAG'
-                ],
-                'cache' => ['ttl' => 86400]
-            ])->fetchAll();
+            $tagXmlIds = array_filter(array_map('trim', explode(',', $queryParams['tag'])));
+            if (!empty($tagXmlIds)) {
+                $enums = PropertyEnumerationTable::getList([
+                    'select' => ['VALUE', 'XML_ID'],
+                    'filter' => [
+                        '=PROPERTY.IBLOCK_ID' => YApp::IBLOCK_DEALERSHIPS,
+                        '=PROPERTY.CODE' => 'TAG'
+                    ],
+                    'cache' => ['ttl' => 86400]
+                ])->fetchAll();
 
-            foreach ($enums as $enum) {
-                if (in_array($enum['XML_ID'], $tagXmlIds, true)) {
-                    $arFilter['PROPERTY_TAG_VALUE'][] = $enum['VALUE'];
+                foreach ($enums as $enum) {
+                    if (in_array($enum['XML_ID'], $tagXmlIds, true)) {
+                        $arFilter['PROPERTY_TAG_VALUE'][] = $enum['VALUE'];
+                    }
                 }
             }
         }
@@ -85,7 +86,7 @@ class FilterService
             $enums = PropertyEnumerationTable::getList([
                 'select' => ['VALUE'],
                 'filter' => [
-                    '=PROPERTY.IBLOCK_ID' => self::IBLOCK_DEALERSHIPS,
+                    '=PROPERTY.IBLOCK_ID' => YApp::IBLOCK_DEALERSHIPS,
                     '=PROPERTY.CODE' => 'CITY'
                 ],
                 'cache' => ['ttl' => 86400]
@@ -117,19 +118,24 @@ class FilterService
 
         // 1. Фильтр по брендам
         if (!empty($queryParams['brand']) && is_string($queryParams['brand'])) {
-            $brandCodes = explode(',', $queryParams['brand']);
-            $elements = ElementTable::getList([
-                'select' => ['ID'],
-                'filter' => [
-                    '=IBLOCK_ID' => self::IBLOCK_BRANDS,
-                    '=ACTIVE' => 'Y',
-                    '=CODE' => $brandCodes
-                ],
-                'cache' => ['ttl' => 3600]
-            ])->fetchAll();
+            $brandCodes = array_filter(array_map('trim', explode(',', $queryParams['brand'])));
+            if (!empty($brandCodes)) {
+                $elements = ElementTable::getList([
+                    'select' => ['ID'],
+                    'filter' => [
+                        '=IBLOCK_ID' => YApp::IBLOCK_BRANDS, // IBLOCK_ID = 5
+                        '=ACTIVE' => 'Y',
+                        '=CODE' => $brandCodes
+                    ],
+                    'cache' => ['ttl' => 3600]
+                ])->fetchAll();
 
-            foreach ($elements as $el) {
-                $arFilter['PROPERTY_BRAND'][] = (int)$el['ID'];
+                foreach ($elements as $el) {
+                    $arFilter['PROPERTY_BRAND'][] = (int)$el['ID'];
+                }
+                if (empty($arFilter['PROPERTY_BRAND'])) {
+                    $arFilter['PROPERTY_BRAND'] = -1;
+                }
             }
         }
 
@@ -144,19 +150,24 @@ class FilterService
 
         // 3. Фильтр по автосалонам
         if (!empty($queryParams['dealership']) && is_string($queryParams['dealership'])) {
-            $dealershipCodes = explode(',', $queryParams['dealership']);
-            $elements = ElementTable::getList([
-                'select' => ['ID'],
-                'filter' => [
-                    '=IBLOCK_ID' => self::IBLOCK_DEALERSHIPS,
-                    '=ACTIVE' => 'Y',
-                    '=CODE' => $dealershipCodes
-                ],
-                'cache' => ['ttl' => 3600]
-            ])->fetchAll();
+            $dealershipCodes = array_filter(array_map('trim', explode(',', $queryParams['dealership'])));
+            if (!empty($dealershipCodes)) {
+                $elements = ElementTable::getList([
+                    'select' => ['ID'],
+                    'filter' => [
+                        '=IBLOCK_ID' => YApp::IBLOCK_DEALERSHIPS,
+                        '=ACTIVE' => 'Y',
+                        '=CODE' => $dealershipCodes
+                    ],
+                    'cache' => ['ttl' => 3600]
+                ])->fetchAll();
 
-            foreach ($elements as $el) {
-                $arFilter['PROPERTY_DEALERSHIP'][] = (int)$el['ID'];
+                foreach ($elements as $el) {
+                    $arFilter['PROPERTY_DEALERSHIP'][] = (int)$el['ID'];
+                }
+                if (empty($arFilter['PROPERTY_DEALERSHIP'])) {
+                    $arFilter['PROPERTY_DEALERSHIP'] = -1;
+                }
             }
         }
 
