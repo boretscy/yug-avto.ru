@@ -1,52 +1,45 @@
+import { store } from '/local/templates/yugavto.theme.2025/assets/js/modules/store.js';
+
 $(document).on('mouseover', '[role="submenu"]', function(e) {
     $('.submenu').hide();
     $('.submenu[data-menu="'+$(this).data('menu')+'"]').show();
-    return false
-})
-jQuery(function($){
-	$(document).mouseup( function(e){ // событие клика по веб-документу
-		var el = $( '.submenu' ); // тут указываем ID элемента
-		if ( !el.is(e.target) // если клик был не по нашему блоку
-		    && el.has(e.target).length === 0 ) { // и не по его дочерним элементам
-		el.hide(); // скрываем его
-		}
-	});
-});
-jQuery(function($){
-	$(document).mouseup( function(e){ // событие клика по веб-документу
-		var el = $( '.top-menu-cities, .top-menu-cities-list' ); // тут указываем ID элемента
-		if ( !el.is(e.target) // если клик был не по нашему блоку
-		    && el.has(e.target).length === 0 ) { // и не по его дочерним элементам
-		$('.top-menu-cities-list').addClass('d-none'); // скрываем его
-		}
-	});
+    return false;
 });
 
 jQuery(function($){
-    $(document).mouseover( function(e){ // событие клика по веб-документу
-        var el = $( '.single_menu' ); // тут указываем ID элемента
-        if (el.is(e.target)) // если наведение было не по нашему блоку
-        {
-            $('.submenu').hide() // скрываем его
+    $(document).mouseup( function(e){
+        var el = $( '.submenu' );
+        if ( !el.is(e.target) && el.has(e.target).length === 0 ) {
+            el.hide();
+        }
+    });
+
+    $(document).mouseup( function(e){
+        var el = $( '.top-menu-cities, .top-menu-cities-list' );
+        if ( !el.is(e.target) && el.has(e.target).length === 0 ) {
+            $('.top-menu-cities-list').addClass('d-none');
+        }
+    });
+
+    $(document).mouseover( function(e){
+        var el = $( '.single_menu' );
+        if (el.is(e.target)) {
+            $('.submenu').hide();
         }
     });
 });
 
 $(document).on('click', '[role="submenu-mobile"]', function() {
-    
-    $('[role="submenu-mobile"').removeClass('active');
+    $('[role="submenu-mobile"]').removeClass('active');
     $(this).addClass('active');
     $('.submenu-mobile').addClass('d-none');
     $('.submenu-mobile[data-menu="'+$(this).data('menu')+'"]').removeClass('d-none');
-
     return false;
 });
+
 $(document).on('click', '[role="cities"]', function() {
     $('.city-wrap').toggleClass('d-none');
-})
-
-
-
+});
 
 $(document).on('click', '.top-menu [role="menu"]', function() {
     $(this).find('img').toggleClass('d-none');
@@ -55,58 +48,49 @@ $(document).on('click', '.top-menu [role="menu"]', function() {
     return false;
 });
 
-
 $(document).on('click', '.top-menu-cities-item', function() {
-    
     $('.top-menu-cities-item[data-name="'+$(this).data('name')+'"]').toggleClass('selected');
     let cities = [];
 
-    YAPP.CONNECTOR.CITIES = [];
-    $('.top-menu-cities-item').each(function(i,e) {
-        if ( $(e).hasClass('selected') ) cities.push( $(e).data('name') );
-    })
-    if ( cities.length == 0 ) {
+    $('.top-menu-cities-item').each(function(i, e) {
+        if ($(e).hasClass('selected')) cities.push($(e).data('name'));
+    });
+
+    if (cities.length === 0) {
         $('.top-menu-cities-item').addClass('selected');
-        $('.top-menu-cities-item').each(function(i,e) {
-            if ( $(e).hasClass('selected') ) cities.push( $(e).data('name') );
-        })
+        $('.top-menu-cities-item').each(function(i, e) {
+            if ($(e).hasClass('selected')) cities.push($(e).data('name'));
+        });
     }
 
-    YAPP.CONNECTOR.CITIES = [...new Set(cities)];
+    const uniqueCities = [...new Set(cities)];
 
-    $('.top-menu-cities span').text( ((YAPP.CONNECTOR.CITIES.length>1)?YAPP.CITIES.TITLE[YAPP.CONNECTOR.CITIES.length]:YAPP.CONNECTOR.CITIES[0]) );
-    switch ( YAPP.CONNECTOR.CITIES.length ) {
+    switch (uniqueCities.length) {
         case 4:
             $('.city-menu-title').text('Все города');
             break;
         case 1:
-            $('.city-menu-title').text(YAPP.CONNECTOR.CITIES[0]);
+            $('.city-menu-title').text(uniqueCities[0]);
             break;
         default:
-             $('.city-menu-title').text(YAPP.CONNECTOR.CITIES.length + ' города');
+            $('.city-menu-title').text(uniqueCities.length + ' города');
             break;
     }
 
-    YAPP.CONNECTOR.SELECTED_CITY = [... YAPP.CONNECTOR.CITIES];
-    let now = new Date();
-    let time = now.getTime();
-    let expireTime = time+3600;
-    now.setTime(expireTime);
-    YAPP.setCookie('SELECTED_CITY', JSON.stringify(YAPP.CONNECTOR.SELECTED_CITY), {
-        'max-age': now.toUTCString()
-    });
-
+    // Сохранение через реактивный стор YAppStore без бага таймаута куки
+    store.setCity(uniqueCities);
     return false;
 });
+
 jQuery(function($){
-	$(document).mouseup( function(e){ // событие клика по веб-документу
-		var el = $( '.city-wrap' ); // тут указываем ID элемента
-		if ( !el.is(e.target) // если клик был не по нашему блоку
-		    && el.has(e.target).length === 0 ) { // и не по его дочерним элементам
+    $(document).mouseup( function(e){
+        var el = $( '.city-wrap' );
+        if ( !el.is(e.target) && el.has(e.target).length === 0 ) {
             $('.city-wrap').addClass('d-none');
-		}
-	});
+        }
+    });
 });
+
 $(document).on('click', '[role="top-menu-cities"], #YappsShowroom .top-menu-cities', function() {
     $('.top-menu-cities-list').toggleClass('d-none');
     $('html, body').animate({
@@ -115,35 +99,36 @@ $(document).on('click', '[role="top-menu-cities"], #YappsShowroom .top-menu-citi
     return false;
 });
 
+const search = function(query) {
+    fetch('/api/search/render/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ query })
+    })
+    .then(res => res.text())
+    .then(resp => {
+        $('.search-wrap').html(resp).show();
+    })
+    .catch(() => {});
+};
 
-search = function( query ) {
-    $.ajax({
-        type: 'POST',
-        url: '/api/search/render/',
-        data: {query: query},
-        success: (resp) => {
-            $('.search-wrap').html(resp).show();
-        },
-        error: () => {
-        }
-    });
-}
-
-let f = _.debounce(search, 250);
+let debounceSearchTimer = null;
 $('.top-menu input.search').on('input', function() {
-    if ( $(this).val().length > 2 ) {
-        f($(this).val());
+    const val = $(this).val();
+    clearTimeout(debounceSearchTimer);
+    if (val.length > 2) {
+        debounceSearchTimer = setTimeout(() => search(val), 250);
     } else {
         $('.search-wrap').html('').hide();
         $('.top-menu .search-clear').show();
     }
-})
+});
+
 $(document).on('click', '.top-menu .search-clear', function() {
     $('.top-menu input.search').val('');
     $(this).hide();
     $('.search-wrap').html('').hide();
 });
-
 
 $(document).on('click', '[role="menu-mobile"]', function() {
     $('.top-menu-mobile').toggleClass('d-flex d-none');
@@ -154,8 +139,9 @@ $(document).on('click', '[role="menu-mobile"]', function() {
     $('.menu-search, .menu-cities').find('img:last-child').addClass('d-none');
     return false;
 });
+
 $(document).on('click', '[role="submenu-mobile"]', function(e) {
-    if ( !$(e.target).is('.submenu-item a') ) {
+    if (!$(e.target).is('.submenu-item a')) {
         $('.submenu-mobile[data-menu="'+$(this).data('menu')+'"]').toggle();
         $(this).toggleClass('fw-bold');
         $(this).siblings('.is_submenu').removeClass('fw-bold');
@@ -166,6 +152,7 @@ $(document).on('click', '[role="submenu-mobile"]', function(e) {
         return false;
     }
 });
+
 $(document).on('click', '[role="change-screen"]', function() {
     $('[role="screen"]').toggleClass('d-none');
     return false;
@@ -181,6 +168,7 @@ $(document).on('click', '.menu-cities', function() {
     $('[role="menu-mobile"]').find('img:nth-child(1)').addClass('d-none');
     $('[role="menu-mobile"]').find('img:nth-child(2)').removeClass('d-none');
 });
+
 $(document).on('click', '.menu-search', function() {
     $(this).find('img').toggleClass('d-none');
     $('.menu-cities').find('img:first-child').removeClass('d-none');
@@ -192,28 +180,33 @@ $(document).on('click', '.menu-search', function() {
     $('[role="menu-mobile"]').find('img:nth-child(2)').removeClass('d-none');
 });
 
+// Реактивное обновление счетчиков Избранного и Сравнения без таймеров setInterval
+store.addEventListener('favorites:updated', (e) => {
+    const count = e.detail.count;
+    const favIcons = document.querySelectorAll('.top-menu-icon[data="CIS_FAVORITES"]');
+    favIcons.forEach(icon => {
+        const countEl = icon.querySelector('.icon-count');
+        if (count > 0) {
+            icon.classList.add('active');
+            if (countEl) countEl.textContent = count;
+        } else {
+            icon.classList.remove('active');
+            if (countEl) countEl.textContent = '';
+        }
+    });
+});
 
-YAPP.CIS_FAVORITES = [-1];
-YAPP.CIS_COMPARE = [-1];
-setInterval(() => {
-    if ( YAPP.CIS_FAVORITES.length != YAPP.CONNECTOR.CIS_FAVORITES.length ) {
-        YAPP.CIS_FAVORITES = [...YAPP.CONNECTOR.CIS_FAVORITES];
-        if ( YAPP.CONNECTOR.CIS_FAVORITES.length > 0 ) {
-            $('.top-menu-icon[data="CIS_FAVORITES"]').addClass('active');
-            $('.top-menu-icon[data="CIS_FAVORITES"] .icon-count').text(YAPP.CONNECTOR.CIS_FAVORITES.length);
+store.addEventListener('compare:updated', (e) => {
+    const count = e.detail.count;
+    const compareIcons = document.querySelectorAll('.top-menu-icon[data="CIS_COMPARE"]');
+    compareIcons.forEach(icon => {
+        const countEl = icon.querySelector('.icon-count');
+        if (count > 0) {
+            icon.classList.add('active');
+            if (countEl) countEl.textContent = count;
         } else {
-            $('.top-menu-icon[data="CIS_FAVORITES"]').removeClass('active');
-            $('.top-menu-icon[data="CIS_FAVORITES"] .icon-count').text('');
+            icon.classList.remove('active');
+            if (countEl) countEl.textContent = '';
         }
-    }
-    if ( YAPP.CIS_COMPARE.length != YAPP.CONNECTOR.CIS_COMPARE.length ) {
-        YAPP.CIS_COMPARE = [...YAPP.CONNECTOR.CIS_COMPARE];
-        if ( YAPP.CONNECTOR.CIS_COMPARE.length > 0 ) {
-            $('.top-menu-icon[data="CIS_COMPARE"]').addClass('active');
-            $('.top-menu-icon[data="CIS_COMPARE"] .icon-count').text(YAPP.CONNECTOR.CIS_COMPARE.length);
-        } else {
-            $('.top-menu-icon[data="CIS_COMPARE"]').removeClass('active');
-            $('.top-menu-icon[data="CIS_COMPARE"] .icon-count').text('');
-        }
-    }
-}, 100);
+    });
+});

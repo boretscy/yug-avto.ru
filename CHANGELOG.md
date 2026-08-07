@@ -15,7 +15,12 @@
   - Компоненты `main.filter` и `footer`: выборка историй (stories) и SEO-текстов переведена с `CIBlockElement::GetList` на D7 ORM c кэшированием `\Bitrix\Main\Data\Cache`.
   - Страницы `/dealerships/` и `/news/`: убраны прямые вызовы старого ядра, выгрузка фильтров вынесена в `FilterService`, включено кэширование компонентов.
 
-- Составлен и сохранен детальный план рефакторинга клиентского JS-стека сайта dev-холдинга и витрины `/cars/` (`refactoring_plan_js.md` в корне сайта) с полным аудитом всех компонентов и витрины, устранением 8 параллельных интервалов `setInterval(100)`, переходом на `EventTarget` / PubSub и отказом от jQuery. Файл добавлен в `.gitignore`.
+- Реализован рефакторинг клиентского JS-стека сайта холдинга (согласно `refactoring_plan_js.md`):
+  - **`YAppStore`**: Создан событиями управляемый реактивный стор (`store.js`) на базе нативного `EventTarget` с Pub/Sub событиями `city:changed`, `entity:changed`, `favorites:updated`, `compare:updated`.
+  - **Ликвидация 8 вечных таймеров `setInterval(100)`**: Полностью вырезаны все фоновые опросники в компонентах `menu/top`, `main.compilations`, `main.dealerships` и `main.filter`.
+  - **Отмена сетевых запросов**: Внедрен нативный `fetch()` с `AbortController` для мгновенной отмены зависших AJAX-запросов подборок авто.
+  - **Изолированный менеджер форм `FormHandler`**: Модульный класс `form-handler.js` заменил устаревший `forms.js`, устранены все глобальные утечки переменных (`let form, sendData = {}, flag = true`).
+
 - Составлен и сохранен детальный план архитектурного PHP-рефакторинга витрины `/cars/` (`refactoring_plan_cars_php.md` в корне сайта) в автономное независимое приложение `YugAvto\Showroom` (PHP 8.2+, PSR-4/PSR-7/PSR-18, DTO, Standalone Router) с поддержкой легковесных PHP-виджетов для лендингов (`ShowroomWidget`), кастомной верстки/стилей, REST API фильтрации по маркам/моделям/дате (`WidgetApiAdapter`), службами Избранного и Сравнения. Файл добавлен в `.gitignore`.
 
 

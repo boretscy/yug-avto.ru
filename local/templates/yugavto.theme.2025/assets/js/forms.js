@@ -1,226 +1,155 @@
-YAPP.FORMS = {};
-$('form').each( function(i, e) {
-    YAPP.FORMS[$(e).data('sid')] = {}
-    $(e).find('.form-dropcontainer').each( function(id, ed) {
-        YAPP.FORMS[$(e).data('sid')][$(ed).children('.form-dropdown').data('list')] = {};
-        YAPP.FORMS[$(e).data('sid')][$(ed).children('.form-dropdown').data('list')].MULTIPLE = ( $(ed).children('.form-droplist').data('multiple') ) ? true : false;
-        YAPP.FORMS[$(e).data('sid')][$(ed).children('.form-dropdown').data('list')].OPTIONS = [];
-        YAPP.FORMS[$(e).data('sid')][$(ed).children('.form-dropdown').data('list')].VALUE = [];
-        YAPP.FORMS[$(e).data('sid')][$(ed).children('.form-dropdown').data('list')].NAME = $(ed).data('name');
-        $(ed).find('.form-droplist-item').each( function(io, eo) {
-            YAPP.FORMS[$(e).data('sid')][$(ed).children('.form-dropdown').data('list')].OPTIONS.push({
-                name: $(eo).text(),
+import { FormHandler } from './modules/form-handler.js';
+
+if (!window.YAPP) window.YAPP = {};
+window.YAPP.FORMS = window.YAPP.FORMS || {};
+
+// Инициализация структуры дропдаунов и диапазонов
+$('form').each(function(i, e) {
+    const sid = $(e).data('sid');
+    if (!sid) return;
+    window.YAPP.FORMS[sid] = window.YAPP.FORMS[sid] || {};
+
+    $(e).find('.form-dropcontainer').each(function(id, ed) {
+        const listName = $(ed).children('.form-dropdown').data('list');
+        if (!listName) return;
+
+        window.YAPP.FORMS[sid][listName] = {
+            MULTIPLE: !!$(ed).children('.form-droplist').data('multiple'),
+            OPTIONS: [],
+            VALUE: [],
+            NAME: $(ed).data('name') || ''
+        };
+
+        $(ed).find('.form-droplist-item').each(function(io, eo) {
+            const opt = {
+                name: $(eo).text().trim(),
                 value: $(eo).data('value'),
                 indx: $(eo).data('indx')
-            });
-            if ( $(eo).hasClass('selected') ) {
-                YAPP.FORMS[$(e).data('sid')][$(ed).children('.form-dropdown').data('list')].VALUE.push({
-                    name: $(eo).text(),
-                    value: $(eo).data('value'),
-                    indx: $(eo).data('indx')
-                });
+            };
+            window.YAPP.FORMS[sid][listName].OPTIONS.push(opt);
+            if ($(eo).hasClass('selected')) {
+                window.YAPP.FORMS[sid][listName].VALUE.push(opt);
             }
         });
     });
-    $(e).find('.range').each( function(ir, er) {
-        YAPP.FORMS[$(e).data('sid')][$(er).data('range')] = [
-            Number($(er).find('input[type="range"].min').val()),
-            Number($(er).find('input[type="range"].max').val())
-        ];
-    })
+
+    $(e).find('.range').each(function(ir, er) {
+        const rangeName = $(er).data('range');
+        if (rangeName) {
+            window.YAPP.FORMS[sid][rangeName] = [
+                Number($(er).find('input[type="range"].min').val()),
+                Number($(er).find('input[type="range"].max').val())
+            ];
+        }
+    });
 });
 
-YAPP.FORMS.dropDownSelect = function( el ) {
-    
-    let f = $(el).closest('form').data('sid');
-    let l = $(el).parent().parent().data('list');
-    let v = {
-        name: $(el).text(),
-        value: $(el).data('value'),
-        indx: $(el).data('indx')
-    };
-
+window.YAPP.FORMS.dropDownSelect = function(el) {
     let form = $(el).closest('form');
-    let dropcontainer = $(form).find('.form-dropcontainer[data-list="'+l+'"]');
-    let input = $(form).find('input[name="'+l+'"]');
+    let f = form.data('sid');
+    let l = $(el).parent().parent().data('list');
+    if (!f || !l || !window.YAPP.FORMS[f] || !window.YAPP.FORMS[f][l]) return;
+
+    let dropcontainer = $(form).find('.form-dropcontainer[data-list="' + l + '"]');
+    let input = $(form).find('input[name="' + l + '"]');
 
     $(el).toggleClass('selected');
-    if ( !$(dropcontainer).find('.form-droplist').attr('data-multiple')  ) {
+    if (!$(dropcontainer).find('.form-droplist').attr('data-multiple')) {
         $(el).siblings('.form-droplist-item').removeClass('selected');
         $(dropcontainer).find('.form-droplist').removeClass('d-block').addClass('d-none');
         $(dropcontainer).find('.form-dropdown').removeClass('form-dropdown-opened');
     }
 
-   
-    YAPP.FORMS[f][l].VALUE = [];
-    $(dropcontainer).find('.form-droplist-item').each( function(i, e) {
-        if ( $(e).hasClass('selected') ) {
-            YAPP.FORMS[f][l].VALUE.push({
-                name: $(e).text(),
+    window.YAPP.FORMS[f][l].VALUE = [];
+    $(dropcontainer).find('.form-droplist-item').each(function(i, e) {
+        if ($(e).hasClass('selected')) {
+            window.YAPP.FORMS[f][l].VALUE.push({
+                name: $(e).text().trim(),
                 value: $(e).data('value'),
                 indx: $(e).data('indx')
-            })
+            });
         }
     });
-    let val = [];
-    YAPP.FORMS[f][l].VALUE.forEach(e => {
-        val.push(e.value);
-    });
-    $(input).val( val.join(',') );
-    switch ( YAPP.FORMS[f][l].VALUE.length ) {
+
+    let val = window.YAPP.FORMS[f][l].VALUE.map(e => e.value);
+    $(input).val(val.join(','));
+
+    switch (window.YAPP.FORMS[f][l].VALUE.length) {
         case 0:
-            $(dropcontainer).find('.form-dropdown span').text(YAPP.FORMS[f][l].NAME+(($(input).attr('required'))?' *':''));
+            $(dropcontainer).find('.form-dropdown span').text(window.YAPP.FORMS[f][l].NAME + ($(input).attr('required') ? ' *' : ''));
             $(dropcontainer).removeClass('selected');
             break;
         case 1:
-            $(dropcontainer).find('.form-dropdown span').text(YAPP.FORMS[f][l].VALUE[0].name);
+            $(dropcontainer).find('.form-dropdown span').text(window.YAPP.FORMS[f][l].VALUE[0].name);
             $(dropcontainer).addClass('selected');
             break;
         default:
-            $(dropcontainer).find('.form-dropdown span').text(YAPP.FORMS[f][l].NAME+': '+YAPP.FORMS[f][l].VALUE.length+' выбрано');
+            $(dropcontainer).find('.form-dropdown span').text(window.YAPP.FORMS[f][l].NAME + ': ' + window.YAPP.FORMS[f][l].VALUE.length + ' выбрано');
             $(dropcontainer).addClass('selected');
             break;
     }
-}
+};
 
 $(document).on('click', '.form-dropcontainer', function(e) {
-
-    if ( !$(e.target).is('.before') && !$(e.target).is('.after') ) {
+    if (!$(e.target).is('.before') && !$(e.target).is('.after')) {
         $('.form-dropcontainer').not(this).find('.form-dropdown').removeClass('form-dropdown-opened');
         $(this).find('.form-dropdown').toggleClass('form-dropdown-opened');
         $(this).find('.form-droplist').toggleClass('d-none d-block');
     }
 });
-$(document).on('click', '.form-dropcontainer .form-droplist-item', function() {
 
-    let form = $(this).closest('form').data('sid');
-    let list = $(this).parent().parent().data('list');
-    let value = {
-        name: $(this).text(),
-        value: $(this).data('value'),
-        indx: $(this).data('indx')
-    };
-    
-    if ( !$(this).parent().parent().attr('data-link') ) {
-        
-        YAPP.FORMS.dropDownSelect( $(this) );
+$(document).on('click', '.form-dropcontainer .form-droplist-item', function() {
+    if (!$(this).parent().parent().attr('data-link')) {
+        window.YAPP.FORMS.dropDownSelect($(this));
         return false;
     }
 });
-jQuery(function($){
-	$(document).mouseup( function(e){ // событие клика по веб-документу
-		var el = $( '.form-droplist' ); // тут указываем ID элемента
-		var dropdown = $( '.form-dropdown' );
-		if ( !el.is(e.target) // если клик был не по нашему блоку
-		    && el.has(e.target).length === 0 // и не по его дочерним элементам
-		    && !dropdown.is(e.target)
-		    && dropdown.has(e.target).length === 0 ) {
+
+jQuery(function($) {
+    $(document).mouseup(function(e) {
+        var el = $('.form-droplist');
+        var dropdown = $('.form-dropdown');
+        if (!el.is(e.target) && el.has(e.target).length === 0 && !dropdown.is(e.target) && dropdown.has(e.target).length === 0) {
             $('.form-droplist').removeClass('d-block').addClass('d-none');
             $('.form-dropdown').removeClass('form-dropdown-opened');
-		}
-	});
+        }
+    });
 });
+
 $(document).on('click', '.form-dropcontainer .form-dropdown .after', function() {
     $(this).parent().toggleClass('form-dropdown-opened');
     $(this).parent().siblings('.form-droplist').toggleClass('d-block d-none');
     return false;
 });
+
 $(document).on('click', '.form-dropcontainer .form-dropdown div.before', function() {
+    const formSid = $(this).closest('form').data('sid');
+    const listName = $(this).parent().siblings('.form-droplist').data('list');
+
     $(this).parent().toggleClass('form-dropdown-opened');
     $(this).parent().siblings('.form-droplist').toggleClass('d-none d-block').find('.form-droplist-item').removeClass('selected');
     $(this).closest('.form-dropcontainer').removeClass('selected');
-    $(this).parent().find('span').text(YAPP.FORMS[$(this).closest('form').data('sid')][$(this).parent().siblings('.form-droplist').data('list')].NAME);
+
+    if (formSid && listName && window.YAPP.FORMS[formSid] && window.YAPP.FORMS[formSid][listName]) {
+        $(this).parent().find('span').text(window.YAPP.FORMS[formSid][listName].NAME);
+    }
     return false;
 });
+
 $(document).on('click', '[role="setDealership"], [action="setDealership"]', function() {
     let modal = $(this).data('remodal-target'), code = $(this).data('dealership');
-    $('[data-remodal-id="'+modal+'"] form input[name="DEALERSHIP"]').val( code );
-    $('[data-remodal-id="'+modal+'"] form .form-dropcontainer[name="DEALERSHIP"]').addClass('selected');
-    $('[data-remodal-id="'+modal+'"] form .form-dropcontainer[name="DEALERSHIP"] .form-droplist-item').each( function(i, e) {
+    $('[data-remodal-id="' + modal + '"] form input[name="DEALERSHIP"]').val(code);
+    $('[data-remodal-id="' + modal + '"] form .form-dropcontainer[name="DEALERSHIP"]').addClass('selected');
+    $('[data-remodal-id="' + modal + '"] form .form-dropcontainer[name="DEALERSHIP"] .form-droplist-item').each(function(i, e) {
         $(e).removeClass('selected');
-        if ( $(e).data('value') == code ) {
-            $('[data-remodal-id="'+modal+'"] form .form-dropcontainer[name="DEALERSHIP"] .form-dropdown span noindex').text( $(e).data('text') );
+        if ($(e).data('value') == code) {
+            $('[data-remodal-id="' + modal + '"] form .form-dropcontainer[name="DEALERSHIP"] .form-dropdown span noindex').text($(e).data('text'));
             $(e).addClass('selected');
         }
     });
 });
 
-let form, sendData = {}, flag = true
-$(document).on('click', '[role="sendForm"]', function() {
-
-    flag = true;
-
-    $(form).find('input, select, textarea, .form-dropdown').removeClass('is-invalid')
-    
-    form = $(this).parent().parent().parent();
-    form.parent().find('[role="success"], [role="error"], [role="description"]').height( form.height() );
-
-    $(form).find('input, select, textarea').each( function( i, e ) {
-        if ( $(e).attr('required') && !$(e).val() ) {
-            flag = false;
-            $(e).addClass('is-invalid');
-            $(e).siblings('.form-group').find('.form-dropdown').addClass('is-invalid');
-        }
-        sendData[$(e).attr('name')] = $(e).val()
-    })
-    if ( !$(form.find('input[name="AGRYY"]')).is(':checked') ) {
-        flag = false;
-        $(form.find('input[name="AGRYY"]')).addClass('is-invalid');
-    } else {
-        sendData.AGRYY = 'on';
-    }
-
-    if ( flag ) {
-
-        $.ajax({
-            type: 'POST',
-            url: '/api/send_new/',
-            data: sendData,
-            success: (data) => { 
-                res = JSON.parse( data )
-                
-                if ( res.status == 'success'  ) {
-
-                    form.parent().find('[role="success"], [role="error"], [role="description"]').addClass('d-none')
-                    form.parent().find('[role="success"]').removeClass('d-none')
-                    form.addClass('d-none')
-
-                    $(form).find('.form-cover').removeClass('d-flex').addClass('d-none')
-
-                    let CallTouchURL = 'https://api.calltouch.ru/calls-service/RestAPI/requests/20621/register/';
-					CallTouchURL += '?subject=Формы - '+sendData.FORM;
-					CallTouchURL += '&sessionId='+window['call_value_78d47ede']
-					CallTouchURL += '&fio='+sendData.NAME;
-					CallTouchURL += '&phoneNumber='+sendData.PHONE.replace(/[^\d;]/g, '');
-
-                    let request = new XMLHttpRequest();
-                    request.open('GET', CallTouchURL, true);
-                    request.send();
-
-                    ym(6251896,'reachGoal',$(form).data('sid'))
-
-                } else {
-                    
-                    form.parent().find('[role="success"], [role="error"]').addClass('d-none')
-                    form.parent().find('[role="error"]').removeClass('d-none')
-                }
-
-                setTimeout(() => {
-                    
-                    form.parent().find('[role="success"], [role="error"]').addClass('d-none')
-                    form.removeClass('d-none')
-
-                }, 5000);
-            },
-            error: () => { 
-                console.log( 'error' ); 
-                res = {status: 'error', description: 'Ошибка на сервере'}
-                
-                form.parent().find('[role="success"], [role="error"]').addClass('d-none')
-                form.parent().find('[role="error"]').removeClass('d-none')
-            }
-        });
-    }
-
-    return false;
+// Инициализация FormHandler для всех форм на странице без глобальных утечек
+document.addEventListener('DOMContentLoaded', () => {
+    FormHandler.autoInit();
 });
