@@ -1,9 +1,7 @@
 <?php
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
-use Bitrix\Iblock\ElementTable;
 use Bitrix\Main\Data\Cache;
-use Bitrix\Main\Loader;
 
 $cache = Cache::createInstance();
 $cacheTime = 300; // 5 минут
@@ -57,58 +55,47 @@ if ($arResult['BRANDS']) {
 }
 
 // --------------------------------------------------------------------------
-// Выборка историй (Stories) через D7 ORM с кэшированием
+// Выборка историй (Stories) с кэшированием через Bitrix D7 Cache
 // --------------------------------------------------------------------------
 $storiesCache = Cache::createInstance();
-$storiesCacheId = 'main_filter_stories_d7';
+$storiesCacheId = 'main_filter_stories_cached_v2';
 $storiesCacheDir = '/main_filter_stories';
 
 if ($storiesCache->initCache(3600, $storiesCacheId, $storiesCacheDir)) {
     $arResult['STORIES'] = $storiesCache->getVars();
 } else {
     $arResult['STORIES'] = [];
-    if (Loader::includeModule('iblock')) {
-        $rs = ElementTable::getList([
-            'select' => [
-                'ID',
-                'NAME',
-                'CODE',
-                'ACTIVE_FROM',
-                'STORIES_MOBILE_PREVIEW_PICTURE' => 'PROPERTY_STORIES_MOBILE_PREVIEW_PICTURE.VALUE',
-                'STORIES_MOBILE_DETAIL_PICTURE' => 'PROPERTY_STORIES_MOBILE_DETAIL_PICTURE.VALUE',
-                'STORIES_DESKTOP_DETAIL_PICTURE' => 'PROPERTY_STORIES_DESKTOP_DETAIL_PICTURE.VALUE',
-                'STORIES_LINK' => 'PROPERTY_STORIES_LINK.VALUE',
-                'STORIES_COUNT_LIKE' => 'PROPERTY_STORIES_COUNT_LIKE.VALUE',
-                'STORIES_COUNT_DISLIKE' => 'PROPERTY_STORIES_COUNT_DISLIKE.VALUE',
-                'STORIES_COUNT_HEART' => 'PROPERTY_STORIES_COUNT_HEART.VALUE',
-                'STORIES_COUNT_FIRE' => 'PROPERTY_STORIES_COUNT_FIRE.VALUE',
-            ],
-            'filter' => [
-                '=IBLOCK_ID' => YApp::IBLOCK_OFFERS,
-                '=ACTIVE' => 'Y',
-                '!=PROPERTY_STORIES_LINK.VALUE' => false
-            ],
-            'order' => ['SORT' => 'ASC'],
-            'cache' => ['ttl' => 3600]
-        ]);
+    $rs = CIBlockElement::GetList(
+        ['SORT' => 'ASC'],
+        [
+            'IBLOCK_ID' => YApp::IBLOCK_OFFERS,
+            'ACTIVE' => 'Y',
+            'ACTIVE_DATE' => 'Y',
+            '!PROPERTY_IS_STORIES' => false
+        ],
+        false, false,
+        [
+            'ID', 
+            'NAME', 
+            'CODE',
+            'ACTIVE_FROM', 
+            'PROPERTY_STORIES_MOBILE_PREVIEW_PICTURE', 
+            'PROPERTY_STORIES_MOBILE_DETAIL_PICTURE', 
+            'PROPERTY_STORIES_DESKTOP_DETAIL_PICTURE', 
+            'PROPERTY_STORIES_LINK', 
+            'PROPERTY_STORIES_COUNT_LIKE', 
+            'PROPERTY_STORIES_COUNT_DISLIKE', 
+            'PROPERTY_STORIES_COUNT_HEART', 
+            'PROPERTY_STORIES_COUNT_FIRE'
+        ]
+    );
+    while ($ob = $rs->GetNextElement()) {
+        $arResult['STORIES'][] = $ob->GetFields();
+    }
 
-        while ($item = $rs->fetch()) {
-            // Форматируем ключи для полной обратной совместимости со старым GetNextElement()
-            $item['PROPERTY_STORIES_MOBILE_PREVIEW_PICTURE_VALUE'] = $item['STORIES_MOBILE_PREVIEW_PICTURE'];
-            $item['PROPERTY_STORIES_MOBILE_DETAIL_PICTURE_VALUE'] = $item['STORIES_MOBILE_DETAIL_PICTURE'];
-            $item['PROPERTY_STORIES_DESKTOP_DETAIL_PICTURE_VALUE'] = $item['STORIES_DESKTOP_DETAIL_PICTURE'];
-            $item['PROPERTY_STORIES_LINK_VALUE'] = $item['STORIES_LINK'];
-            $item['PROPERTY_STORIES_COUNT_LIKE_VALUE'] = $item['STORIES_COUNT_LIKE'];
-            $item['PROPERTY_STORIES_COUNT_DISLIKE_VALUE'] = $item['STORIES_COUNT_DISLIKE'];
-            $item['PROPERTY_STORIES_COUNT_HEART_VALUE'] = $item['STORIES_COUNT_HEART'];
-            $item['PROPERTY_STORIES_COUNT_FIRE_VALUE'] = $item['STORIES_COUNT_FIRE'];
-            $arResult['STORIES'][] = $item;
-        }
-
-        if (!empty($arResult['STORIES'])) {
-            $storiesCache->startDataCache();
-            $storiesCache->endDataCache($arResult['STORIES']);
-        }
+    if (!empty($arResult['STORIES'])) {
+        $storiesCache->startDataCache();
+        $storiesCache->endDataCache($arResult['STORIES']);
     }
 }
 ?>
