@@ -46,7 +46,7 @@ $articleType = (!empty($arResult['PROPERTIES']['IS_ARTICLE']['VALUE']) && $arRes
 			<span itemprop="streetAddress">ул. Уральская, 98/11</span>
 		</div>
 		<div>Телефон: <a itemprop="telephone" href="tel:+78612031405">+7 (861) 203-14-05</a></div>
-		<div>Почта: <a itemprop="email" href="mailto:info@yug-avto.ru">info@yug-avto.ru</a></div>
+		<div>Почта: <a href="mailto:info@yug-avto.ru"><span itemprop="email">info@yug-avto.ru</span></a></div>
 		<meta itemprop="name" content="Юг-Авто"> 
 	</div>
 	<div class="container">

@@ -8,6 +8,7 @@
   - Добавлены рекомендуемые свойства `NewsArticle`: `headline`, `description`, `image`, `author`, `publisher`, `datePublished`, `dateModified`, `mainEntityOfPage`, `articleSection`, `keywords`, `inLanguage`.
 
 ### Fixed
+- Исправлена ошибка валидации микроразметки `itemprop="email"` для Schema.org: атрибут перенесен с тега ссылки `<a>` с префиксом `mailto:` на внутренний тег `<span>` с текстом адреса электронной почты.
 - Устранена ошибка HTTP 500 в скрипте `cron/makeSitemap.php` (подключен класс `YApp` и добавлено безопасное отключение генерации системных ошибок с поддержкой `?debug=1`).
 - Исправлена микроразметка `ListItem` в компоненте `bitrix:breadcrumb`:
   - Вложенность `ListItem` приведена в строгое соответствие со стандартом `BreadcrumbList`.
