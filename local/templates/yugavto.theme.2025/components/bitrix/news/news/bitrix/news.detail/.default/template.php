@@ -18,13 +18,21 @@ $logoUrl = $host . '/local/templates/yugavto.theme.2025/assets/images/svg/logo.s
 $detailPicUrl = !empty($arResult['DETAIL_PICTURE']['SRC']) ? ((strpos($arResult['DETAIL_PICTURE']['SRC'], 'http') === 0) ? $arResult['DETAIL_PICTURE']['SRC'] : $host . $arResult['DETAIL_PICTURE']['SRC']) : $logoUrl;
 $pageUrl = $host . $_SERVER['REQUEST_URI'];
 $previewText = !empty($arResult['PREVIEW_TEXT']) ? strip_tags($arResult['PREVIEW_TEXT']) : htmlspecialchars($arResult['NAME']);
+$keywords = !empty($arResult['IPROPERTY_VALUES']['ELEMENT_META_KEYWORDS']) ? $arResult['IPROPERTY_VALUES']['ELEMENT_META_KEYWORDS'] : 'новости, юг-авто, автоновости, краснодар';
+$sectionName = !empty($arResult['SECTION']['NAME']) ? $arResult['SECTION']['NAME'] : 'Новости';
+$articleType = (!empty($arResult['PROPERTIES']['IS_ARTICLE']['VALUE']) && $arResult['PROPERTIES']['IS_ARTICLE']['VALUE'] == 'Y') ? 'Article' : 'NewsArticle';
 ?>
-<div class="bg-yalightbluegray pb-4" itemscope itemtype="http://schema.org/BlogPosting">
+<div class="bg-yalightbluegray pb-4" itemscope itemtype="http://schema.org/<?= $articleType;?>">
 	<meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="<?= $pageUrl;?>"/>
 	<time itemprop="datePublished" datetime="<?= date('c', strtotime($arResult['ACTIVE_FROM'] ?? 'now'));?>" class="d-none"><?= date('Y-m-d', strtotime($arResult['ACTIVE_FROM'] ?? 'now'));?></time>
 	<meta itemprop="dateModified" content="<?= date('c', strtotime($arResult['TIMESTAMP_X'] ?? 'now'));?>">
-	<p itemprop="description" class="d-none"><?= htmlspecialchars($previewText);?></p>
+	<meta itemprop="description" content="<?= htmlspecialchars($previewText);?>">
+	<meta itemprop="inLanguage" content="ru-RU">
+	<meta itemprop="articleSection" content="<?= htmlspecialchars($sectionName);?>">
+	<meta itemprop="keywords" content="<?= htmlspecialchars($keywords);?>">
 	<meta itemprop="author" content="Юг-Авто">
+	<meta itemprop="image" content="<?= $detailPicUrl;?>">
+
 	<div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" class="d-none">
 		<div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
 			<img itemprop="url image" src="<?= $logoUrl;?>" alt="Юг-Авто" />

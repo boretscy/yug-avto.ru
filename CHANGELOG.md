@@ -7,7 +7,8 @@
   - Для всех элементов гарантирована абсолютная ссылка `itemprop="item"` с понятными свойствами `name` и `position`.
 
 ### Added
-- Внедрена микроразметка Schema.org (`Blog`, `BlogPosting`, `Organization`, `WebPage`, `PostalAddress`) на странице списка новостей (`/news/`), на детальных страницах новостей, на детальных страницах автосалонов и на главной странице (`main.news`).
+- Внедрена микроразметка Schema.org (`Blog`, `BlogPosting`, `NewsArticle`/`Article`, `Organization`, `WebPage`, `PostalAddress`) на странице списка новостей (`/news/`), на детальных страницах новостей, на детальных страницах автосалонов и на главной странице (`main.news`).
+  - Добавлены рекомендуемые свойства `NewsArticle`: `headline`, `description`, `image`, `author`, `publisher`, `datePublished`, `dateModified`, `mainEntityOfPage`, `articleSection`, `keywords`, `inLanguage`.
 
 ## [2026-08-04]
 ### Added
