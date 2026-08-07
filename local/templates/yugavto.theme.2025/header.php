@@ -128,6 +128,9 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
         <?php
             // Вывод телефонов из Highloadblock с кэшированием D7
             $contactPhones = \Local\Project\Services\PhoneService::getContacts();
+            if (!empty($contactPhones)) {
+                $GLOBALS['itemHl'] = $contactPhones['PHONE_HOLDING'] ?? $contactPhones['MAIN_PHONE'] ?? reset($contactPhones);
+            }
         ?>
 
         <?php $APPLICATION->ShowPanel();?>
