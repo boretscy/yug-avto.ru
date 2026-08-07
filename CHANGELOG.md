@@ -7,6 +7,21 @@
 - Переведена генерация уникального мета-тега `title` при пагинации на сторону Go API; клиенты витрин (`/cars/new/` и `/cars/used/`) получают единый `meta.title` из Go API с суффиксом ` — Страница #N`.
 - Внедрена микроразметка Schema.org (`Blog`, `BlogPosting`, `NewsArticle`/`Article`, `Organization`, `WebPage`, `PostalAddress`) на странице списка новостей (`/news/`), на детальных страницах новостей, на детальных страницах автосалонов и на главной странице (`main.news`).
   - Добавлены рекомендуемые свойства `NewsArticle`: `headline`, `description`, `image`, `author`, `publisher`, `datePublished`, `dateModified`, `mainEntityOfPage`, `articleSection`, `keywords`, `inLanguage`.
+- Реализован рефакторинг сайта холдинга на Bitrix D7 (согласно `refactoring_plan_d7.md`):
+  - Создан архитектурный базис `Local\Project` (`Handlers\SEO`, `Services\LastModified`, `Services\PhoneService`, `Services\FilterService`).
+  - `init.php`: 301-редиректы переведены на D7-событие `OnBeforeProlog`, вычисление `Last-Modified` переведено со старого SQL `$DB->Query` на D7 ORM `\Bitrix\Iblock\ElementTable::getList()` с кэшированием.
+  - `header.php`: устаревшие вызовы `CModule::IncludeModule` заменены на `\Bitrix\Main\Loader::includeModule()`, выгрузка контактов из Highloadblock вынесена в `PhoneService::getContacts()` с кэшем.
+  - `footer.php`: для подвала включено управляемое кэширование компонентов (`CACHE_TYPE => A`).
+  - Компоненты `main.filter` и `footer`: выборка историй (stories) и SEO-текстов переведена с `CIBlockElement::GetList` на D7 ORM c кэшированием `\Bitrix\Main\Data\Cache`.
+  - Страницы `/dealerships/` и `/news/`: убраны прямые вызовы старого ядра, выгрузка фильтров вынесена в `FilterService`, включено кэширование компонентов.
+
+- Составлен и сохранен детальный план рефакторинга клиентского JS-стека сайта dev-холдинга и витрины `/cars/` (`refactoring_plan_js.md` в корне сайта) с полным аудитом всех компонентов и витрины, устранением 8 параллельных интервалов `setInterval(100)`, переходом на `EventTarget` / PubSub и отказом от jQuery. Файл добавлен в `.gitignore`.
+- Составлен и сохранен детальный план архитектурного PHP-рефакторинга витрины `/cars/` (`refactoring_plan_cars_php.md` в корне сайта) в автономное независимое приложение `YugAvto\Showroom` (PHP 8.2+, PSR-4/PSR-7/PSR-18, DTO, Standalone Router) с поддержкой легковесных PHP-виджетов для лендингов (`ShowroomWidget`), кастомной верстки/стилей, REST API фильтрации по маркам/моделям/дате (`WidgetApiAdapter`), службами Избранного и Сравнения. Файл добавлен в `.gitignore`.
+
+
+
+
+
 
 ### Fixed
 - Исправлена ошибка валидации микроразметки `itemprop="email"` для Schema.org: атрибут перенесен с тега ссылки `<a>` с префиксом `mailto:` на внутренний тег `<span>` с текстом адреса электронной почты.

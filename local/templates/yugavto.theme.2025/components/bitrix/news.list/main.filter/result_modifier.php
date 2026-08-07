@@ -1,7 +1,11 @@
 <?php
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
-$cache = \Bitrix\Main\Data\Cache::createInstance();
+use Bitrix\Iblock\ElementTable;
+use Bitrix\Main\Data\Cache;
+use Bitrix\Main\Loader;
+
+$cache = Cache::createInstance();
 $cacheTime = 300; // 5 минут
 $cacheId = 'main_filter_api_data';
 $cacheDir = '/main_filter_api';
@@ -37,7 +41,7 @@ if ($cache->initCache($cacheTime, $cacheId, $cacheDir)) {
 }
 
 $arResult['BRANDS'] = $arResult['FILTER']['dropLists']['brands'] ?? [];
-if ( $arResult['FILTER'] && isset($arResult['FILTER']['dropLists']['brands']) ) {
+if ($arResult['FILTER'] && isset($arResult['FILTER']['dropLists']['brands'])) {
     usort($arResult['FILTER']['dropLists']['brands'], function($a, $b) {
         $nameA = $a['name'] ?? '';
         $nameB = $b['name'] ?? '';
@@ -48,34 +52,63 @@ if ( $arResult['FILTER'] && isset($arResult['FILTER']['dropLists']['brands']) ) 
         return strcmp(mb_strtolower($nameA, 'UTF-8'), mb_strtolower($nameB, 'UTF-8'));
     });
 }
-if ( $arResult['BRANDS'] ) array_multisort(array_column($arResult['BRANDS'], 'vehicles'), SORT_DESC, SORT_NUMERIC, $arResult['BRANDS']);
-
-
-$rs = CIBlockElement::GetList(
-    ['SORT'=>'ASC'],
-    [
-        'IBLOCK_ID' => YApp::IBLOCK_OFFERS,
-        'ACTIVE' => 'Y',
-        'ACTIVE_DATE' => 'Y',
-        '!PROPERTY_IS_STORIES' => false
-    ],
-    false, false,
-    [
-        'ID', 
-        'NAME', 
-        'CODE',
-        'ACTIVE_FROM', 
-        'PROPERTY_STORIES_MOBILE_PREVIEW_PICTURE', 
-        'PROPERTY_STORIES_MOBILE_DETAIL_PICTURE', 
-        'PROPERTY_STORIES_DESKTOP_DETAIL_PICTURE', 
-        'PROPERTY_STORIES_LINK', 
-        'PROPERTY_STORIES_COUNT_LIKE', 
-        'PROPERTY_STORIES_COUNT_DISLIKE', 
-        'PROPERTY_STORIES_COUNT_HEART', 
-        'PROPERTY_STORIES_COUNT_FIRE']
-);
-while ( $ob = $rs->GetNextElement() ) {
-    $arResult['STORIES'][] = $ob->GetFields();
+if ($arResult['BRANDS']) {
+    array_multisort(array_column($arResult['BRANDS'], 'vehicles'), SORT_DESC, SORT_NUMERIC, $arResult['BRANDS']);
 }
-    // YApp::sp($arResult['STORIES'][0]);
+
+// --------------------------------------------------------------------------
+// Выборка историй (Stories) через D7 ORM с кэшированием
+// --------------------------------------------------------------------------
+$storiesCache = Cache::createInstance();
+$storiesCacheId = 'main_filter_stories_d7';
+$storiesCacheDir = '/main_filter_stories';
+
+if ($storiesCache->initCache(3600, $storiesCacheId, $storiesCacheDir)) {
+    $arResult['STORIES'] = $storiesCache->getVars();
+} else {
+    $arResult['STORIES'] = [];
+    if (Loader::includeModule('iblock')) {
+        $rs = ElementTable::getList([
+            'select' => [
+                'ID',
+                'NAME',
+                'CODE',
+                'ACTIVE_FROM',
+                'STORIES_MOBILE_PREVIEW_PICTURE' => 'PROPERTY_STORIES_MOBILE_PREVIEW_PICTURE.VALUE',
+                'STORIES_MOBILE_DETAIL_PICTURE' => 'PROPERTY_STORIES_MOBILE_DETAIL_PICTURE.VALUE',
+                'STORIES_DESKTOP_DETAIL_PICTURE' => 'PROPERTY_STORIES_DESKTOP_DETAIL_PICTURE.VALUE',
+                'STORIES_LINK' => 'PROPERTY_STORIES_LINK.VALUE',
+                'STORIES_COUNT_LIKE' => 'PROPERTY_STORIES_COUNT_LIKE.VALUE',
+                'STORIES_COUNT_DISLIKE' => 'PROPERTY_STORIES_COUNT_DISLIKE.VALUE',
+                'STORIES_COUNT_HEART' => 'PROPERTY_STORIES_COUNT_HEART.VALUE',
+                'STORIES_COUNT_FIRE' => 'PROPERTY_STORIES_COUNT_FIRE.VALUE',
+            ],
+            'filter' => [
+                '=IBLOCK_ID' => YApp::IBLOCK_OFFERS,
+                '=ACTIVE' => 'Y',
+                '!=PROPERTY_STORIES_LINK.VALUE' => false
+            ],
+            'order' => ['SORT' => 'ASC'],
+            'cache' => ['ttl' => 3600]
+        ]);
+
+        while ($item = $rs->fetch()) {
+            // Форматируем ключи для полной обратной совместимости со старым GetNextElement()
+            $item['PROPERTY_STORIES_MOBILE_PREVIEW_PICTURE_VALUE'] = $item['STORIES_MOBILE_PREVIEW_PICTURE'];
+            $item['PROPERTY_STORIES_MOBILE_DETAIL_PICTURE_VALUE'] = $item['STORIES_MOBILE_DETAIL_PICTURE'];
+            $item['PROPERTY_STORIES_DESKTOP_DETAIL_PICTURE_VALUE'] = $item['STORIES_DESKTOP_DETAIL_PICTURE'];
+            $item['PROPERTY_STORIES_LINK_VALUE'] = $item['STORIES_LINK'];
+            $item['PROPERTY_STORIES_COUNT_LIKE_VALUE'] = $item['STORIES_COUNT_LIKE'];
+            $item['PROPERTY_STORIES_COUNT_DISLIKE_VALUE'] = $item['STORIES_COUNT_DISLIKE'];
+            $item['PROPERTY_STORIES_COUNT_HEART_VALUE'] = $item['STORIES_COUNT_HEART'];
+            $item['PROPERTY_STORIES_COUNT_FIRE_VALUE'] = $item['STORIES_COUNT_FIRE'];
+            $arResult['STORIES'][] = $item;
+        }
+
+        if (!empty($arResult['STORIES'])) {
+            $storiesCache->startDataCache();
+            $storiesCache->endDataCache($arResult['STORIES']);
+        }
+    }
+}
 ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetPageProperty("title", "Новости Юг-Авто");
 $APPLICATION->SetPageProperty("description", "Новости компании ЮГ-Авто, новости дилерского центра в Краснодаре");
@@ -8,49 +8,8 @@ $APPLICATION->SetTitle("Новости Юг-Авто");
 	body {background-color: var(--yawhite);}
 </style>
 <?php 
-
-	if ( $_GET['brand'] ) {
-		
-		$rs = CIBlockElement::GetList(
-			[],
-			[
-				'IBLOCK_ID' => YApp::IBLOCK_BRANDS,
-				'ACTIVE' => 'Y',
-				'CODE' => explode(',', $_GET['brand'])
-			],
-			false, false,
-			['ID']  
-		);
-		while ( $ob = $rs->GetNextElement() ) {
-
-			$arFilterNews['PROPERTY_BRAND'][] = $ob->GetFields()['ID'];
-		}
-	}
-
-	if ( $_GET['tag'] ) {
-
-		if ( $_GET['tag'] == 'news' ) $arFilterNews['PROPERTY_VIDEO'] = false;
-		if ( $_GET['tag'] == 'videoreviews' ) $arFilterNews['!PROPERTY_VIDEO'] = false;
-	}
-
-	if ( $_GET['dealership'] ) {
-		
-		$rs = CIBlockElement::GetList(
-			[],
-			[
-				'IBLOCK_ID' => YApp::IBLOCK_DEALERSHIPS,
-				'ACTIVE' => 'Y',
-				'CODE' => explode(',', $_GET['dealership'])
-			],
-			false, false,
-			['ID']  
-		);
-		while ( $ob = $rs->GetNextElement() ) {
-
-			$arFilterNews['PROPERTY_DEALERSHIP'][] = $ob->GetFields()['ID'];
-		}
-	}
-	// YApp::sp($arFilterNews);
+	// Подготовка фильтра через D7 сервис FilterService
+	$arFilterNews = \Local\Project\Services\FilterService::getNewsFilter($_GET);
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news", 
@@ -64,10 +23,10 @@ $APPLICATION->SetTitle("Новости Юг-Авто");
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "N",
 		"BROWSER_TITLE" => "-",
-		"CACHE_FILTER" => "N",
+		"CACHE_FILTER" => "Y",
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "N",
+		"CACHE_TYPE" => "A",
 		"CHECK_DATES" => "Y",
 		"DETAIL_ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",

@@ -1,4 +1,4 @@
-<?
+<?php
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetPageProperty("title", "Дилерские центры - Юг-Авто");
 $APPLICATION->SetPageProperty("description", "Адреса дилерских центров ЮГ-Авто, контакты отдела продаж и отдела сервиса");
@@ -8,55 +8,9 @@ $APPLICATION->SetTitle("Дилерские центры - Юг-Авто");
 	body {background-color: var(--yawhite);}
 </style>
 <?php 
-
-// if filter brands
-if ( $_GET['brand'] ) {
-    
-    $rs = CIBlockElement::GetList(
-        [],
-        [
-            'IBLOCK_ID' => YApp::IBLOCK_BRANDS,
-            'ACTIVE' => 'Y',
-            'CODE' => explode(',', $_GET['brand'])
-        ],
-        false, false,
-        ['ID']  
-    );
-    while ( $ob = $rs->GetNextElement() ) {
-
-        $arFilterDealerships['PROPERTY_BRAND'][] = $ob->GetFields()['ID'];
-    }
-}
-
-// if filter tags
-if ( $_GET['tag'] ) {
-
-    $rs = CIBlockPropertyEnum::GetList(
-        ['sort'=>'asc'],
-        [
-            'IBLOCK_ID' => YApp::IBLOCK_DEALERSHIPS,
-            'CODE' => 'TAG'
-        ]
-    );
-    while ( $ob = $rs->Fetch() ) if ( in_array($ob['XML_ID'], explode(',', $_GET['tag'])) ) $arFilterDealerships['PROPERTY_TAG_VALUE'][] = $ob['VALUE'];
-
-}
-// if filter city
-if ( $_GET['city'] ) {
-
-    $rs = CIBlockPropertyEnum::GetList(
-        ['sort'=>'asc'],
-        [
-            'IBLOCK_ID' => YApp::IBLOCK_DEALERSHIPS,
-            'CODE' => 'CITY'
-        ]
-    );
-    while ( $ob = $rs->Fetch() ) if ( $_GET['city'] == $ob['VALUE'] ) $arFilterDealerships['PROPERTY_CITY_VALUE'] = $ob['VALUE'];
-} else {
-	$arFilterDealerships['!PROPERTY_CITY_VALUE'] = ['Ставрополь'];
-}
+	// Подготовка фильтра через D7 сервис FilterService
+	$arFilterDealerships = \Local\Project\Services\FilterService::getDealershipsFilter($_GET);
 ?>
-<?php $arFilterDealerships['PROPERTY_INCOGNITO_VALUE'] = false; ?>
 
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news", 
@@ -70,10 +24,10 @@ if ( $_GET['city'] ) {
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "N",
 		"BROWSER_TITLE" => "-",
-		"CACHE_FILTER" => "N",
+		"CACHE_FILTER" => "Y",
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "N",
+		"CACHE_TYPE" => "A",
 		"CHECK_DATES" => "Y",
 		"DETAIL_ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"DETAIL_DISPLAY_BOTTOM_PAGER" => "N",
