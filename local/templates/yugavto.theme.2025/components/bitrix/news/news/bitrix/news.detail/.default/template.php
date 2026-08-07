@@ -11,14 +11,35 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+
+$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http");
+$host = $protocol . "://" . ($_SERVER['HTTP_HOST'] ?? 'htest.yug-avto.ru');
+$logoUrl = $host . '/local/templates/yugavto.theme.2025/assets/images/svg/logo.svg';
+$detailPicUrl = !empty($arResult['DETAIL_PICTURE']['SRC']) ? ((strpos($arResult['DETAIL_PICTURE']['SRC'], 'http') === 0) ? $arResult['DETAIL_PICTURE']['SRC'] : $host . $arResult['DETAIL_PICTURE']['SRC']) : $logoUrl;
+$pageUrl = $host . $_SERVER['REQUEST_URI'];
+$previewText = !empty($arResult['PREVIEW_TEXT']) ? strip_tags($arResult['PREVIEW_TEXT']) : htmlspecialchars($arResult['NAME']);
 ?>
-<div class="bg-yalightbluegray pb-4" itemscope itemtype="https://schema.org/NewsArticle">
-	<meta itemprop="mainEntityOfPage" content="<?= $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>">
-	<meta itemprop="datePublished" content="<?= date('c', strtotime($arResult['ACTIVE_FROM'] ?? 'now'));?>">
+<div class="bg-yalightbluegray pb-4" itemscope itemtype="http://schema.org/BlogPosting">
+	<meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage" itemid="<?= $pageUrl;?>"/>
+	<time itemprop="datePublished" datetime="<?= date('c', strtotime($arResult['ACTIVE_FROM'] ?? 'now'));?>" class="d-none"><?= date('Y-m-d', strtotime($arResult['ACTIVE_FROM'] ?? 'now'));?></time>
 	<meta itemprop="dateModified" content="<?= date('c', strtotime($arResult['TIMESTAMP_X'] ?? 'now'));?>">
-	<div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-		<meta itemprop="name" content="Юг-Авто">
-		<meta itemprop="url" content="https://yug-avto.ru">
+	<p itemprop="description" class="d-none"><?= htmlspecialchars($previewText);?></p>
+	<meta itemprop="author" content="Юг-Авто">
+	<div itemprop="publisher" itemscope itemtype="https://schema.org/Organization" class="d-none">
+		<div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+			<img itemprop="url image" src="<?= $logoUrl;?>" alt="Юг-Авто" />
+		</div>
+		<link itemprop="url" href="<?= $host;?>/">
+		<div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+			<span itemprop="postalCode">350000</span>,
+			<span itemprop="addressCountry">Россия</span>, 
+			<span itemprop="addressRegion">Краснодарский край</span>, 
+			<span itemprop="addressLocality">Краснодар</span>, 
+			<span itemprop="streetAddress">ул. Уральская, 98/11</span>
+		</div>
+		<div>Телефон: <a itemprop="telephone" href="tel:+78612031405">+7 (861) 203-14-05</a></div>
+		<div>Почта: <a itemprop="email" href="mailto:info@yug-avto.ru">info@yug-avto.ru</a></div>
+		<meta itemprop="name" content="Юг-Авто"> 
 	</div>
 	<div class="container">
 		<div class="row">
