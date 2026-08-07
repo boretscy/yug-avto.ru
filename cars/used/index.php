@@ -244,11 +244,7 @@ if ( $data['meta']['status'] === '404_vehicles' || $data['meta']['status'] === 4
             include __DIR__.'/../views/vehicle.php';
         } else {
             $APPLICATION->SetPageProperty("description", $data['meta']['meta']['description']);
-            $pageTitle = $data['meta']['meta']['title'];
-            if ( !empty($filter['page']) && (int)$filter['page'] > 1 ) {
-                $pageTitle .= ' — Страница #' . (int)$filter['page'];
-            }
-            $APPLICATION->SetPageProperty('title', $pageTitle);
+            $APPLICATION->SetPageProperty('title', $data['meta']['meta']['title']);
             $APPLICATION->SetPageProperty('image', explode('?', $data['meta']['meta']['image'])[0]);
             if ( $filter['page'] ) {
                 $pfilter = $filter;

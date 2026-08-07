@@ -2,7 +2,7 @@
 
 ## [2026-08-07]
 ### Added
-- Реализована генерация уникального мета-тега `title` на витринах автомобилей (`/cars/new/` и `/cars/used/`) при наличии пагинации (на страницах 2 и более добавляется суффикс ` — Страница #N`).
+- Переведена генерация уникального мета-тега `title` при пагинации на сторону Go API; клиенты витрин (`/cars/new/` и `/cars/used/`) получают единый `meta.title` из Go API с суффиксом ` — Страница #N`.
 - Внедрена микроразметка Schema.org (`Blog`, `BlogPosting`, `NewsArticle`/`Article`, `Organization`, `WebPage`, `PostalAddress`) на странице списка новостей (`/news/`), на детальных страницах новостей, на детальных страницах автосалонов и на главной странице (`main.news`).
   - Добавлены рекомендуемые свойства `NewsArticle`: `headline`, `description`, `image`, `author`, `publisher`, `datePublished`, `dateModified`, `mainEntityOfPage`, `articleSection`, `keywords`, `inLanguage`.
 
