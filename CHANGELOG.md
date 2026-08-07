@@ -2,11 +2,13 @@
 
 ## [2026-08-07]
 ### Added
+- Добавлена автоматическая генерация файла `llms.txt` в корне сайта (`cron/makeSitemap.php`) с полным структурированным описанием холдинга, дилерской сети, основных разделов, активных брендов новых/б/у автомобилей и рекомендациями по цитированию для ИИ.
 - Переведена генерация уникального мета-тега `title` при пагинации на сторону Go API; клиенты витрин (`/cars/new/` и `/cars/used/`) получают единый `meta.title` из Go API с суффиксом ` — Страница #N`.
 - Внедрена микроразметка Schema.org (`Blog`, `BlogPosting`, `NewsArticle`/`Article`, `Organization`, `WebPage`, `PostalAddress`) на странице списка новостей (`/news/`), на детальных страницах новостей, на детальных страницах автосалонов и на главной странице (`main.news`).
   - Добавлены рекомендуемые свойства `NewsArticle`: `headline`, `description`, `image`, `author`, `publisher`, `datePublished`, `dateModified`, `mainEntityOfPage`, `articleSection`, `keywords`, `inLanguage`.
 
 ### Fixed
+- Устранена ошибка HTTP 500 в скрипте `cron/makeSitemap.php` (подключен класс `YApp` и добавлено безопасное отключение генерации системных ошибок с поддержкой `?debug=1`).
 - Исправлена микроразметка `ListItem` в компоненте `bitrix:breadcrumb`:
   - Вложенность `ListItem` приведена в строгое соответствие со стандартом `BreadcrumbList`.
   - Для всех элементов гарантирована абсолютная ссылка `itemprop="item"` с понятными свойствами `name` и `position`.
