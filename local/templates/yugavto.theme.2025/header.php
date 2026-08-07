@@ -107,9 +107,16 @@
         <meta property="og:url" content="<?= $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>"/>
         <meta property="og:image" content="<?= $APPLICATION->ShowProperty('image', $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].SITE_TEMPLATE_PATH.'/assets/images/svg/logo.2023.svg');?>">
 
-        <?php if ($APPLICATION->GetProperty('canonical')): ?>
-            <link rel="canonical" href="<?= $APPLICATION->GetProperty('canonical');?>"/>
-        <?php endif; ?>
+        <?php 
+            $canonicalUrl = $APPLICATION->GetProperty('canonical');
+            if (empty($canonicalUrl)) {
+                $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+                $host = $_SERVER['HTTP_HOST'] ?? 'htest.yug-avto.ru';
+                $requestUri = explode('?', $_SERVER['REQUEST_URI'])[0];
+                $canonicalUrl = $protocol . '://' . $host . $requestUri;
+            }
+        ?>
+        <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl);?>"/>
 
     </head>
 
