@@ -1,4 +1,4 @@
-import { store } from '/local/templates/yugavto.theme.2025/assets/js/modules/store.js';
+const getStore = () => window.YAppStore;
 
 $(document).on('mouseover', '[role="submenu"]', function(e) {
     $('.submenu').hide();
@@ -77,8 +77,9 @@ $(document).on('click', '.top-menu-cities-item', function() {
             break;
     }
 
-    // Сохранение через реактивный стор YAppStore без бага таймаута куки
-    store.setCity(uniqueCities);
+    if (getStore()) {
+        getStore().setCity(uniqueCities);
+    }
     return false;
 });
 
@@ -180,33 +181,44 @@ $(document).on('click', '.menu-search', function() {
     $('[role="menu-mobile"]').find('img:nth-child(2)').removeClass('d-none');
 });
 
-// Реактивное обновление счетчиков Избранного и Сравнения без таймеров setInterval
-store.addEventListener('favorites:updated', (e) => {
-    const count = e.detail.count;
-    const favIcons = document.querySelectorAll('.top-menu-icon[data="CIS_FAVORITES"]');
-    favIcons.forEach(icon => {
-        const countEl = icon.querySelector('.icon-count');
-        if (count > 0) {
-            icon.classList.add('active');
-            if (countEl) countEl.textContent = count;
-        } else {
-            icon.classList.remove('active');
-            if (countEl) countEl.textContent = '';
-        }
-    });
-});
+// Реактивное обновление счетчиков Избранного и Сравнения через YAppStore
+function initTopMenuStoreListeners() {
+    const store = getStore();
+    if (!store) return;
 
-store.addEventListener('compare:updated', (e) => {
-    const count = e.detail.count;
-    const compareIcons = document.querySelectorAll('.top-menu-icon[data="CIS_COMPARE"]');
-    compareIcons.forEach(icon => {
-        const countEl = icon.querySelector('.icon-count');
-        if (count > 0) {
-            icon.classList.add('active');
-            if (countEl) countEl.textContent = count;
-        } else {
-            icon.classList.remove('active');
-            if (countEl) countEl.textContent = '';
-        }
+    store.addEventListener('favorites:updated', (e) => {
+        const count = e.detail.count;
+        const favIcons = document.querySelectorAll('.top-menu-icon[data="CIS_FAVORITES"]');
+        favIcons.forEach(icon => {
+            const countEl = icon.querySelector('.icon-count');
+            if (count > 0) {
+                icon.classList.add('active');
+                if (countEl) countEl.textContent = count;
+            } else {
+                icon.classList.remove('active');
+                if (countEl) countEl.textContent = '';
+            }
+        });
     });
-});
+
+    store.addEventListener('compare:updated', (e) => {
+        const count = e.detail.count;
+        const compareIcons = document.querySelectorAll('.top-menu-icon[data="CIS_COMPARE"]');
+        compareIcons.forEach(icon => {
+            const countEl = icon.querySelector('.icon-count');
+            if (count > 0) {
+                icon.classList.add('active');
+                if (countEl) countEl.textContent = count;
+            } else {
+                icon.classList.remove('active');
+                if (countEl) countEl.textContent = '';
+            }
+        });
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTopMenuStoreListeners);
+} else {
+    initTopMenuStoreListeners();
+}

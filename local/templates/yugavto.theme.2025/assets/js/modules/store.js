@@ -2,7 +2,7 @@
  * YAppStore - Единый событиями управляемый стор приложения (Event-driven Architecture)
  * Наследуется от нативного EventTarget для реализации Pub/Sub без библиотечных зависимостей.
  */
-export class YAppStore extends EventTarget {
+class YAppStore extends EventTarget {
     #state = {
         city: [],
         entity: 'new',
@@ -125,10 +125,8 @@ export class YAppStore extends EventTarget {
     }
 }
 
-// Экспорт синглтона глобального стора
-export const store = new YAppStore();
-
-// Доступ в window для устаревших не-модульных скриптов
+// Создаем синглтон глобального стора в window.YAppStore
 if (typeof window !== 'undefined') {
-    window.YAppStore = store;
+    window.YAppStoreInstance = window.YAppStoreInstance || new YAppStore();
+    window.YAppStore = window.YAppStoreInstance;
 }

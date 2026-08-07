@@ -1,5 +1,3 @@
-import { FormHandler } from './modules/form-handler.js';
-
 if (!window.YAPP) window.YAPP = {};
 window.YAPP.FORMS = window.YAPP.FORMS || {};
 
@@ -149,7 +147,15 @@ $(document).on('click', '[role="setDealership"], [action="setDealership"]', func
     });
 });
 
-// Инициализация FormHandler для всех форм на странице без глобальных утечек
-document.addEventListener('DOMContentLoaded', () => {
-    FormHandler.autoInit();
-});
+// Инициализация FormHandler без import/export
+function initFormsHandler() {
+    if (window.FormHandler && window.FormHandler.autoInit) {
+        window.FormHandler.autoInit();
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFormsHandler);
+} else {
+    initFormsHandler();
+}

@@ -51,6 +51,8 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
             $Asset->addJs(SITE_TEMPLATE_PATH.'/assets/js/lib/swiper-bundle.min.js');
             $Asset->addJs(SITE_TEMPLATE_PATH.'/assets/js/lib/mask.min.js');
             $Asset->addJs(SITE_TEMPLATE_PATH.'/assets/js/lib/lodash.min.js');
+            $Asset->addJs(SITE_TEMPLATE_PATH.'/assets/js/modules/store.js');
+            $Asset->addJs(SITE_TEMPLATE_PATH.'/assets/js/modules/form-handler.js');
             
             if (defined('ENABLE_FRONTEND_OPTIMIZATION') && ENABLE_FRONTEND_OPTIMIZATION) {
                 $Asset->addJs(SITE_TEMPLATE_PATH.'/assets/js/bundle.app.min.js?'.md5_file($_SERVER['DOCUMENT_ROOT'].SITE_TEMPLATE_PATH.'/assets/js/bundle.app.min.js'));

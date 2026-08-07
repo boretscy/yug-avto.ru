@@ -1,4 +1,4 @@
-import { store } from '/local/templates/yugavto.theme.2025/assets/js/modules/store.js';
+const getStore = () => window.YAppStore;
 
 const CompilationsOnMain_range_price = $('.main-compilations [data-range="price"] .range-selected');
 const CompilationsOnMain_rangeInput_price = $('.main-compilations [data-range="price"][role="range"] .range-input input');
@@ -49,13 +49,14 @@ CompilationsOnMain_rangeInput_price.each(function(i, e) {
     const triggerRender = (e) => {
         let minRange = parseInt(CompilationsOnMain_rangeInput_price[0].value);
         let maxRange = parseInt(CompilationsOnMain_rangeInput_price[1].value);
+        const store = getStore();
         if (minRange + 1 < maxRange) {
             let data = {
                 query: $('.main-compilations-data').data('query'),
                 link: $('.main-compilations-data').data('link'),
                 price: minRange + ',' + maxRange,
-                city: store.city || null,
-                entity: store.entity || null
+                city: store ? store.city : null,
+                entity: store ? store.entity : null
             };
             renderCompilations(data);
         } else {
@@ -164,14 +165,15 @@ function renderCompilations(data) {
 
 $(document).on('click', '.main-compilations .main-compilations-item', function() {
     const isAlreadyActive = $(this).hasClass('active');
-    const currentEntity = store.entity || 'new';
+    const store = getStore();
+    const currentEntity = store ? store.entity : 'new';
 
     if (isAlreadyActive) {
         $(this).removeClass('active');
         renderCompilations({
             query: {},
             link: '/cars/' + currentEntity + '/',
-            city: store.city || null,
+            city: store ? store.city : null,
             entity: currentEntity
         });
     } else {
@@ -181,7 +183,7 @@ $(document).on('click', '.main-compilations .main-compilations-item', function()
         renderCompilations({
             query: $(this).data('query-' + currentEntity),
             link: $(this).data('link-' + currentEntity) || ('/cars/' + currentEntity + '/'),
-            city: store.city || null,
+            city: store ? store.city : null,
             entity: currentEntity
         });
     }
@@ -192,39 +194,44 @@ $(document).on('click', '.main-compilations-tabs-item', function() {
     $('.main-compilations-tabs-item').removeClass('active');
     $(this).addClass('active');
     const action = $(this).data('action');
-    store.setEntity(action);
+    const store = getStore();
+    if (store) store.setEntity(action);
 });
 
-// Реактивное обновление подборок при смене сущности или города БЕЗ таймеров setInterval
-const updateCompilationsFromStore = () => {
-    const currentEntity = store.entity || 'new';
-    $('.main-compilations-tabs-item').removeClass('active');
-    $('.main-compilations-tabs-item[data-action="' + currentEntity + '"]').addClass('active');
+function initCompilationsStoreListeners() {
+    const store = getStore();
+    if (!store) return;
 
-    const activeItem = $('.main-compilations .main-compilations-item.active');
-    const data = {
-        query: activeItem.length ? activeItem.data('query-' + currentEntity) : {},
-        link: activeItem.length ? activeItem.data('link-' + currentEntity) : ('/cars/' + currentEntity + '/'),
-        city: store.city || null,
-        entity: currentEntity
+    const updateCompilationsFromStore = () => {
+        const currentEntity = store.entity || 'new';
+        $('.main-compilations-tabs-item').removeClass('active');
+        $('.main-compilations-tabs-item[data-action="' + currentEntity + '"]').addClass('active');
+
+        const activeItem = $('.main-compilations .main-compilations-item.active');
+        const data = {
+            query: activeItem.length ? activeItem.data('query-' + currentEntity) : {},
+            link: activeItem.length ? activeItem.data('link-' + currentEntity) : ('/cars/' + currentEntity + '/'),
+            city: store.city || null,
+            entity: currentEntity
+        };
+        renderCompilations(data);
     };
-    renderCompilations(data);
-};
 
-store.addEventListener('entity:changed', updateCompilationsFromStore);
-store.addEventListener('city:changed', updateCompilationsFromStore);
+    store.addEventListener('entity:changed', updateCompilationsFromStore);
+    store.addEventListener('city:changed', updateCompilationsFromStore);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCompilationsStoreListeners);
+} else {
+    initCompilationsStoreListeners();
+}
 
 if (typeof window !== 'undefined') {
     if (!window.YAPP) window.YAPP = {};
     window.YAPP.SwiperCompilationsOnMain = new Swiper('.swiper-main-compilations', {
-        pagination: {
-            el: ".swiper-pagination",
-            type: "fraction",
-        },
-        navigation: {
-            nextEl: '.swiper-main-compilations-button-next',
-            prevEl: '.swiper-main-compilations-button-prev',
-        },
+        pagination: { el: ".swiper-pagination", type: "fraction" },
+        navigation: { nextEl: '.swiper-main-compilations-button-next', prevEl: '.swiper-main-compilations-button-prev' },
         slidesPerView: 4,
         spaceBetween: 16,
         breakpoints: {

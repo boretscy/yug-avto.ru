@@ -1,4 +1,4 @@
-import { store } from '/local/templates/yugavto.theme.2025/assets/js/modules/store.js';
+const getStore = () => window.YAppStore;
 
 var dealershipsMap;
 if (typeof ymaps !== 'undefined') {
@@ -94,7 +94,6 @@ window.YAPP.DEALERSHIPS.DATA = {
     FIRST: false
 };
 
-// Оптимизированный buildVew без 6 уровней вложенности if/else
 window.YAPP.DEALERSHIPS.buildVew = function(__select = false) {
     const { TAGS, CITY, BRAND, DEALERSHIP } = window.YAPP.DEALERSHIPS.DATA;
 
@@ -178,27 +177,37 @@ $(document).on('click', '.form-dropcontainer .form-dropdown .before', function()
     dealershipsMapInit();
 });
 
-// Реактивное обновление карты при смене города БЕЗ таймера setInterval
-store.addEventListener('city:changed', (e) => {
-    const selectedCities = e.detail.city || [];
-    window.YAPP.DEALERSHIPS.DATA.CITY = [];
+function initDealershipsStoreListeners() {
+    const store = getStore();
+    if (!store) return;
 
-    $('.dealerships-on-main .form-dropcontainer[data-list="CITY"] .form-droplist-item')
-        .removeClass('selected')
-        .each(function(i, e) {
-            if (selectedCities.includes($(e).text())) {
-                if (window.YAPP && window.YAPP.FORMS && window.YAPP.FORMS.dropDownSelect) {
-                    window.YAPP.FORMS.dropDownSelect($(e));
+    store.addEventListener('city:changed', (e) => {
+        const selectedCities = e.detail.city || [];
+        window.YAPP.DEALERSHIPS.DATA.CITY = [];
+
+        $('.dealerships-on-main .form-dropcontainer[data-list="CITY"] .form-droplist-item')
+            .removeClass('selected')
+            .each(function(i, e) {
+                if (selectedCities.includes($(e).text())) {
+                    if (window.YAPP && window.YAPP.FORMS && window.YAPP.FORMS.dropDownSelect) {
+                        window.YAPP.FORMS.dropDownSelect($(e));
+                    }
                 }
+            });
+
+        $('.dealerships-on-main .form-dropcontainer[data-list="CITY"] .form-droplist-item').each(function(i, e) {
+            if ($(e).hasClass('selected')) {
+                window.YAPP.DEALERSHIPS.DATA.CITY.push($(e).data('value'));
             }
         });
 
-    $('.dealerships-on-main .form-dropcontainer[data-list="CITY"] .form-droplist-item').each(function(i, e) {
-        if ($(e).hasClass('selected')) {
-            window.YAPP.DEALERSHIPS.DATA.CITY.push($(e).data('value'));
-        }
+        window.YAPP.DEALERSHIPS.buildVew();
+        dealershipsMapInit();
     });
+}
 
-    window.YAPP.DEALERSHIPS.buildVew();
-    dealershipsMapInit();
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDealershipsStoreListeners);
+} else {
+    initDealershipsStoreListeners();
+}

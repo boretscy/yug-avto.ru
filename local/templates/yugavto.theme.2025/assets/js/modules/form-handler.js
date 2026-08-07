@@ -1,7 +1,7 @@
 /**
  * FormHandler - Изолированный менеджер валидации и отправки форм (Vanilla JS, fetch API)
  */
-export class FormHandler {
+class FormHandler {
     constructor(formElement) {
         if (!formElement || !(formElement instanceof HTMLFormElement)) {
             return;
@@ -124,6 +124,10 @@ export class FormHandler {
             }
         });
     }
+}
+
+if (typeof window !== 'undefined') {
+    window.FormHandler = FormHandler;
 }
 
 // Автоматическая инициализация при загрузке DOM

@@ -1,4 +1,4 @@
-import { store } from '/local/templates/yugavto.theme.2025/assets/js/modules/store.js';
+const getStore = () => window.YAppStore;
 
 if (!window.YAPP) window.YAPP = {};
 if (!window.YAPP.MAIN_FILTER) window.YAPP.MAIN_FILTER = {};
@@ -7,7 +7,9 @@ if (!window.YAPP.CONNECTOR) window.YAPP.CONNECTOR = {};
 window.YAPP.CONNECTOR.COUNTS = {};
 
 window.YAPP.MAIN_FILTER.getCISCounts = function() {
-    let post = { data: { city: store.city.join() }, update: { data: true } };
+    const store = getStore();
+    const cityStr = store ? store.city.join() : '';
+    let post = { data: { city: cityStr }, update: { data: true } };
 
     post.data.entity = 'new';
     fetch('/api/main-filter/', {
@@ -100,14 +102,15 @@ window.YAPP.MAIN_FILTER.renderSelect = function(e) {
 
 window.YAPP.MAIN_FILTER.renderLink = function() {
     let data = {};
+    const store = getStore();
     if (window.YAPP.FORMS && window.YAPP.FORMS.MAIN_FILTER) {
         data.brands = window.YAPP.FORMS.MAIN_FILTER.brands.VALUE;
         data.models = window.YAPP.FORMS.MAIN_FILTER.models.VALUE;
         data.price = window.YAPP.FORMS.MAIN_FILTER.price;
     }
     data.count = window.YAPP.MAIN_FILTER.DATA?.totalCount || 0;
-    data.city = store.city.join();
-    data.entity = store.entity;
+    data.city = store ? store.city.join() : '';
+    data.entity = store ? store.entity : 'new';
 
     fetch('/api/main-filter-button/render/', {
         method: 'POST',
@@ -122,13 +125,14 @@ window.YAPP.MAIN_FILTER.renderLink = function() {
 };
 
 window.YAPP.MAIN_FILTER.renderBrands = function() {
+    const store = getStore();
     fetch('/api/main-filter-brands/render/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
             brands: JSON.stringify(window.YAPP.MAIN_FILTER.DATA.dropLists.brands),
-            entity: store.entity,
-            city: store.city.join(),
+            entity: store ? store.entity : 'new',
+            city: store ? store.city.join() : '',
             in_city: window.YAPP.MAIN_FILTER.DATA.in_city
         })
     })
@@ -173,7 +177,8 @@ $(document).on('click', '.main-filter-tabs-item', function() {
 
 $(document).on('click', '.main-filter-tabs-item[role="toggleEntity"]', function() {
     const entity = $(this).data('entity');
-    store.setEntity(entity);
+    const store = getStore();
+    if (store) store.setEntity(entity);
 });
 
 $(document).on('click', '[role="toggleBrands"]', function() {
@@ -183,9 +188,10 @@ $(document).on('click', '[role="toggleBrands"]', function() {
 });
 
 $(document).on('click', '[data-sid="MAIN_FILTER"] .form-dropcontainer .form-droplist-item', function() {
+    const store = getStore();
     if ($(this).attr('role') === 'toggleEntity') {
         const entity = $(this).data('entity');
-        store.setEntity(entity);
+        if (store) store.setEntity(entity);
         if (window.YAPP.FORMS && window.YAPP.FORMS.dropDownSelect) {
             window.YAPP.FORMS.dropDownSelect($(this));
         }
@@ -200,11 +206,11 @@ $(document).on('click', '[data-sid="MAIN_FILTER"] .form-dropcontainer .form-drop
             data: true
         },
         data: {
-            entity: store.entity,
+            entity: store ? store.entity : 'new',
             price: [],
             brands: window.YAPP.FORMS?.MAIN_FILTER?.brands?.VALUE || [],
             models: window.YAPP.FORMS?.MAIN_FILTER?.models?.VALUE || [],
-            city: store.city.join()
+            city: store ? store.city.join() : ''
         }
     };
 
@@ -232,6 +238,7 @@ rangeInput_price.each(function(i, e) {
     const triggerPriceChange = () => {
         let minRange = parseInt(rangeInput_price[0].value);
         let maxRange = parseInt(rangeInput_price[1].value);
+        const store = getStore();
         if (minRange !== parseInt($(range_price).data('min')) || maxRange !== parseInt($(range_price).data('max'))) {
             if (window.YAPP.FORMS && window.YAPP.FORMS.MAIN_FILTER) {
                 window.YAPP.FORMS.MAIN_FILTER.price = [minRange, maxRange];
@@ -239,11 +246,11 @@ rangeInput_price.each(function(i, e) {
             let post = {
                 update: { price: true, models: false, brands: false, data: true },
                 data: {
-                    entity: store.entity,
+                    entity: store ? store.entity : 'new',
                     price: [minRange, maxRange],
                     brands: window.YAPP.FORMS?.MAIN_FILTER?.brands?.VALUE || [],
                     models: window.YAPP.FORMS?.MAIN_FILTER?.models?.VALUE || [],
-                    city: store.city.join()
+                    city: store ? store.city.join() : ''
                 }
             };
             window.YAPP.MAIN_FILTER.getData(post);
@@ -274,6 +281,7 @@ rangeView_price.each(function(i, e) {
     e.addEventListener('blur', () => {
         let minView = parseInt(String(rangeView_price[0].value).replace(/\D/g, ""));
         let maxView = parseInt(String(rangeView_price[1].value).replace(/\D/g, ""));
+        const store = getStore();
         if (minView !== parseInt($(range_price).data('min')) || maxView !== parseInt($(range_price).data('max'))) {
             if (window.YAPP.FORMS && window.YAPP.FORMS.MAIN_FILTER) {
                 window.YAPP.FORMS.MAIN_FILTER.price = [minView, maxView];
@@ -281,11 +289,11 @@ rangeView_price.each(function(i, e) {
             let post = {
                 update: { price: true, models: false, brands: false, data: true },
                 data: {
-                    entity: store.entity,
+                    entity: store ? store.entity : 'new',
                     price: [minView, maxView],
                     brands: window.YAPP.FORMS?.MAIN_FILTER?.brands?.VALUE || [],
                     models: window.YAPP.FORMS?.MAIN_FILTER?.models?.VALUE || [],
-                    city: store.city.join()
+                    city: store ? store.city.join() : ''
                 }
             };
             window.YAPP.MAIN_FILTER.getData(post);
@@ -374,41 +382,51 @@ if (typeof window !== 'undefined') {
     });
 }
 
-// Реактивное обновление фильтра при смене сущности или города БЕЗ таймеров setInterval
-store.addEventListener('entity:changed', (e) => {
-    let post = {
-        update: { price: true, models: true, brands: true, data: true },
-        data: {
-            entity: e.detail.entity,
-            price: [],
-            brands: [],
-            models: [],
-            city: store.city.join()
-        }
-    };
-    window.YAPP.MAIN_FILTER.getData(post);
+function initMainFilterStoreListeners() {
+    const store = getStore();
+    if (!store) return;
 
-    $('.main-filter-tabs-item').removeClass('active');
-    $('.main-filter-tabs-item[data-action="cis"][data-entity="' + e.detail.entity + '"]').addClass('active');
-    $('.main-filter-tabs-content-wrap').addClass('d-none');
-    $('.main-filter-tabs-content-wrap[data-action="cis"]').removeClass('d-none');
-});
+    store.addEventListener('entity:changed', (e) => {
+        let post = {
+            update: { price: true, models: true, brands: true, data: true },
+            data: {
+                entity: e.detail.entity,
+                price: [],
+                brands: [],
+                models: [],
+                city: store.city.join()
+            }
+        };
+        window.YAPP.MAIN_FILTER.getData(post);
 
-store.addEventListener('city:changed', (e) => {
-    window.YAPP.MAIN_FILTER.getCISCounts();
-    window.YAPP.MAIN_FILTER.brands = [];
-    window.YAPP.MAIN_FILTER.models = [];
-    window.YAPP.MAIN_FILTER.price = [];
+        $('.main-filter-tabs-item').removeClass('active');
+        $('.main-filter-tabs-item[data-action="cis"][data-entity="' + e.detail.entity + '"]').addClass('active');
+        $('.main-filter-tabs-content-wrap').addClass('d-none');
+        $('.main-filter-tabs-content-wrap[data-action="cis"]').removeClass('d-none');
+    });
 
-    let post = {
-        update: { price: true, models: true, brands: true, data: true },
-        data: {
-            entity: store.entity,
-            price: [],
-            brands: window.YAPP.FORMS?.MAIN_FILTER?.brands?.VALUE || [],
-            models: window.YAPP.FORMS?.MAIN_FILTER?.models?.VALUE || [],
-            city: e.detail.city.join()
-        }
-    };
-    window.YAPP.MAIN_FILTER.getData(post);
-});
+    store.addEventListener('city:changed', (e) => {
+        window.YAPP.MAIN_FILTER.getCISCounts();
+        window.YAPP.MAIN_FILTER.brands = [];
+        window.YAPP.MAIN_FILTER.models = [];
+        window.YAPP.MAIN_FILTER.price = [];
+
+        let post = {
+            update: { price: true, models: true, brands: true, data: true },
+            data: {
+                entity: store.entity,
+                price: [],
+                brands: window.YAPP.FORMS?.MAIN_FILTER?.brands?.VALUE || [],
+                models: window.YAPP.FORMS?.MAIN_FILTER?.models?.VALUE || [],
+                city: e.detail.city.join()
+            }
+        };
+        window.YAPP.MAIN_FILTER.getData(post);
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMainFilterStoreListeners);
+} else {
+    initMainFilterStoreListeners();
+}
