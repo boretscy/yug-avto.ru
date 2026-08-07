@@ -25,15 +25,15 @@ function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
     $urlPath = "cars/{$section}/";
 
     $jsonRaw = @file_get_contents($apiUrl);
-    if (!$jsonRaw) return [];
+    if (!$jsonRaw) return ['vehicles' => [], 'brands' => []];
     $data = json_decode($jsonRaw, true);
     $vehicles = $data['items'] ?? [];
     $google = [];
 
-    if (!is_array($vehicles) || !count($vehicles)) return [];
+    if (!is_array($vehicles) || !count($vehicles)) return ['vehicles' => [], 'brands' => []];
 
     $vehicles = array_filter($vehicles, fn($v) => !empty($v['brand']['code']) && !empty($v['id']));
-    if (!count($vehicles)) return [];
+    if (!count($vehicles)) return ['vehicles' => [], 'brands' => []];
 
     $ss = file_exists($dd.'/sitemap.xml') ? file_get_contents($dd.'/sitemap.xml') : '';
     if ($ss) {
@@ -126,11 +126,14 @@ function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
         }
     }
 
-    return $vehicles;
+    return ['vehicles' => $vehicles, 'brands' => $brands];
 }
 
-function generateLlmsTxt($dd, $domain, $newVehicles, $usedVehicles)
+function generateLlmsTxt($dd, $domain, $newData, $usedData)
 {
+    $newBrands = $newData['brands'] ?? [];
+    $usedBrands = $usedData['brands'] ?? [];
+
     $lines = [];
     $lines[] = "# Юг-Авто — официальный дилер новых и подержанных б/у автомобилей с пробегом в Краснодаре, Новороссийске и Республике Адыгея";
     $lines[] = "";
@@ -148,56 +151,67 @@ function generateLlmsTxt($dd, $domain, $newVehicles, $usedVehicles)
     $lines[] = "";
     $lines[] = "### Категории автомобилей (Новые авто у официального дилера)";
 
-    // New car brands
-    $newBrands = [];
-    foreach ($newVehicles as $v) {
-        if (!empty($v['brand']['code']) && !empty($v['brand']['name'])) {
-            $newBrands[$v['brand']['code']] = trim($v['brand']['name']);
+    // Sort new brands by name
+    uasort($newBrands, fn($a, $b) => strcmp(mb_strtolower($a['name'] ?? ''), mb_strtolower($b['name'] ?? '')));
+
+    foreach ($newBrands as $b) {
+        $bCode = $b['code'] ?? '';
+        $bName = trim($b['name'] ?? '');
+        if ($bCode && $bName) {
+            $lines[] = "[- [Продажа новых {$bName}](https://{$domain}/cars/new/{$bCode}/) (Раздел, посвященный каталогу новых автомобилей марки {$bName}.";
         }
-    }
-    ksort($newBrands);
-
-    foreach ($newBrands as $code => $name) {
-        $lines[] = "[- [Продажа новых {$name}](https://{$domain}/cars/new/{$code}/) (Раздел, посвященный каталогу новых автомобилей марки {$name}.";
-    }
-
-    $lines[] = "";
-    $lines[] = "### Категории автомобилей с пробегом (Трейд-ин / Б/у)";
-
-    // Used car brands
-    $usedBrands = [];
-    foreach ($usedVehicles as $v) {
-        if (!empty($v['brand']['code']) && !empty($v['brand']['name'])) {
-            $usedBrands[$v['brand']['code']] = trim($v['brand']['name']);
-        }
-    }
-    ksort($usedBrands);
-
-    foreach ($usedBrands as $code => $name) {
-        $lines[] = "[- [{$name} с пробегом](https://{$domain}/cars/used/{$code}/) (Раздел автомобилей с пробегом марки {$name}.";
     }
 
     $lines[] = "";
     $lines[] = "### Модели новых автомобилей в наличии";
 
-    $addedModels = [];
-    foreach ($newVehicles as $v) {
-        $bCode = $v['brand']['code'] ?? '';
-        $mCode = $v['model']['code'] ?? '';
-        $vId = $v['id'] ?? '';
-        $bName = trim($v['brand']['name'] ?? '');
-        $mName = trim($v['model']['name'] ?? '');
-        $year = $v['year'] ?? $v['general'][4]['value'] ?? date('Y');
-
-        if ($bCode && $mCode && $vId) {
-            $key = "{$bCode}_{$mCode}_{$vId}";
-            if (!isset($addedModels[$key])) {
-                $addedModels[$key] = true;
-                $titleName = trim("{$bName} {$mName}");
-                if ($year) {
-                    $titleName .= " {$year} года";
+    foreach ($newBrands as $b) {
+        $bCode = $b['code'] ?? '';
+        $bName = trim($b['name'] ?? '');
+        if (!empty($b['models']) && is_array($b['models'])) {
+            $models = $b['models'];
+            uasort($models, fn($a, $b) => strcmp(mb_strtolower($a['name'] ?? ''), mb_strtolower($b['name'] ?? '')));
+            foreach ($models as $m) {
+                $mCode = $m['code'] ?? '';
+                $mName = trim($m['name'] ?? '');
+                if ($bCode && $mCode && $mName) {
+                    $title = trim("{$bName} {$mName}");
+                    $lines[] = "[- [Продажа новых {$title}](https://{$domain}/cars/new/{$bCode}/{$mCode}/) (Каталог новых автомобилей модели {$title} у официального дилера.";
                 }
-                $lines[] = "[- [{$titleName}](https://{$domain}/cars/new/{$bCode}/{$mCode}/{$vId}/) (Страница, посвященная модели нового автомобиля {$titleName}.";
+            }
+        }
+    }
+
+    $lines[] = "";
+    $lines[] = "### Категории автомобилей с пробегом (Трейд-ин / Б/у)";
+
+    // Sort used brands by name
+    uasort($usedBrands, fn($a, $b) => strcmp(mb_strtolower($a['name'] ?? ''), mb_strtolower($b['name'] ?? '')));
+
+    foreach ($usedBrands as $b) {
+        $bCode = $b['code'] ?? '';
+        $bName = trim($b['name'] ?? '');
+        if ($bCode && $bName) {
+            $lines[] = "[- [{$bName} с пробегом](https://{$domain}/cars/used/{$bCode}/) (Раздел автомобилей с пробегом марки {$bName}.";
+        }
+    }
+
+    $lines[] = "";
+    $lines[] = "### Модели автомобилей с пробегом в наличии";
+
+    foreach ($usedBrands as $b) {
+        $bCode = $b['code'] ?? '';
+        $bName = trim($b['name'] ?? '');
+        if (!empty($b['models']) && is_array($b['models'])) {
+            $models = $b['models'];
+            uasort($models, fn($a, $b) => strcmp(mb_strtolower($a['name'] ?? ''), mb_strtolower($b['name'] ?? '')));
+            foreach ($models as $m) {
+                $mCode = $m['code'] ?? '';
+                $mName = trim($m['name'] ?? '');
+                if ($bCode && $mCode && $mName) {
+                    $title = trim("{$bName} {$mName}");
+                    $lines[] = "[- [Купить {$title} с пробегом](https://{$domain}/cars/used/{$bCode}/{$mCode}/) (Объявления о продаже автомобилей с пробегом модели {$title}.";
+                }
             }
         }
     }
@@ -234,7 +248,7 @@ function generateLlmsTxt($dd, $domain, $newVehicles, $usedVehicles)
     file_put_contents($dd . '/llms.txt', implode("\n", $lines));
 }
 
-$newVehicles = processSitemapSection(
+$newData = processSitemapSection(
     $dd,
     $domain,
     'https://' . (class_exists('YApp') ? YApp::GO_API_DOMAIN : 'apps.yug-avto.ru') . '/API/get/cis/vehicles/new?token=34b5ac8b71018c0bc7e5c050ed90b243',
@@ -242,7 +256,7 @@ $newVehicles = processSitemapSection(
     [20, 256, 949, 1227, 1262, 1268, 1271, 1309, 1328, 1331, 1334, 1340, 1343, 1346, 1349, 1355, 1358, 1361, 1455, 1458, 1461, 1650, 1655, 1670, 1676, 1679, 1724, 1725, 1758]
 );
 
-$usedVehicles = processSitemapSection(
+$usedData = processSitemapSection(
     $dd,
     $domain,
     'https://' . (class_exists('YApp') ? YApp::GO_API_DOMAIN : 'apps.yug-avto.ru') . '/API/get/cis/vehicles/used?token=34b5ac8b71018c0bc7e5c050ed90b243',
@@ -250,5 +264,5 @@ $usedVehicles = processSitemapSection(
     [1364, 1367, 1489, 1492, 1499, 1502, 1533]
 );
 
-generateLlmsTxt($dd, $domain, $newVehicles, $usedVehicles);
+generateLlmsTxt($dd, $domain, $newData, $usedData);
 echo "SITEMAP_AND_LLMS_OK\n";
