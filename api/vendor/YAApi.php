@@ -993,8 +993,15 @@
             return $res;
         }
         public static function apiRenderMainFilterSelect( $POST ) {
+            if (isset($POST['items']) && is_string($POST['items'])) {
+                $POST['items'] = json_decode($POST['items'], true) ?: [];
+            }
+            if (!is_array($POST['items'] ?? null)) {
+                $POST['items'] = [];
+            }
             
             $res = '<div class="form-droplist-container h-100">';
+            $tmp = [];
 
             if ( $POST['list'] == 'models' ) {
                 foreach ( $POST['items'] as $item ) {
@@ -1029,6 +1036,14 @@
             return $res;
         }
         public static function apiRenderMainFilterLink( $POST ) {
+            foreach (['brands', 'models', 'price'] as $key) {
+                if (isset($POST[$key]) && is_string($POST[$key])) {
+                    $decoded = json_decode($POST[$key], true);
+                    if (is_array($decoded)) {
+                        $POST[$key] = $decoded;
+                    }
+                }
+            }
             
             $link = '/cars/';
             $link .= ( $POST['entity'] ) ?: 'new'; $link .= '/';
@@ -1053,7 +1068,6 @@
             if (!empty($POST['price'])) $link .= '&price='.implode(',', $POST['price']);
             $link = str_ireplace(['?&'], '?', $link);
 
-
             $res = '<a href="'.$link.'" class="d-block b-radius-yaradius15 bg-yayellow bg-h-yadarkyellow py-3 text-center c-yablack c-h-yablack text-decoration-none text-normal">';
             $res .= 'Показать '.number_format((int)$POST['count'], 0, '.', ' ').' авто';
             $res .= '</a>';
@@ -1061,9 +1075,16 @@
             return $res;
         }
         public static function apiRenderMainFilterBrands( $POST ) {
-            $brands = $s_brands = $POST['brands'];
-            array_multisort(array_column($brands, 'vehicles'), SORT_DESC, SORT_NUMERIC, $brands);
-            array_multisort(array_column($s_brands, 'name'), SORT_ASC, SORT_STRING, $s_brands);
+            $rawBrands = $POST['brands'] ?? [];
+            if (is_string($rawBrands)) {
+                $rawBrands = json_decode($rawBrands, true) ?: [];
+            }
+            $brands = $s_brands = is_array($rawBrands) ? $rawBrands : [];
+
+            if (!empty($brands)) {
+                array_multisort(array_column($brands, 'vehicles'), SORT_DESC, SORT_NUMERIC, $brands);
+                array_multisort(array_column($s_brands, 'name'), SORT_ASC, SORT_STRING, $s_brands);
+            }
             ?>
             <div class="row mb-3">
 				<div class="col">
