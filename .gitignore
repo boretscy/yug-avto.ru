@@ -20,6 +20,7 @@
 /local/php_interface/dbconn.php
 /local/php_interface/yapps_config.php
 /local/php_interface/*.json
+/robots.txt
 
 # === Исключение папок логов YApp ===
 /about/log_request/
