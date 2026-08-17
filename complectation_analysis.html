@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анализ архитектуры: Уровень «Комплектация» в витрине Юг-Авто</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --border-color: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-primary: #38bdf8;
+            --accent-green: #10b981;
+            --accent-yellow: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-purple: #a855f7;
+            --gradient-blue: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+            --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-purple: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 32px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--gradient-gold);
+        }
+
+        .badge-header {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-yellow);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #475569;
+            transform: translateY(-2px);
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-title svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .flow-container {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+        }
+
+        .flow-step:last-child {
+            border-bottom: none;
+        }
+
+        .flow-num {
+            width: 28px;
+            height: 28px;
+            background: var(--accent-primary);
+            color: #0f172a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .flow-path {
+            font-family: monospace;
+            color: var(--accent-primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .benefits-list, .risks-list {
+            list-style: none;
+        }
+
+        .benefits-list li, .risks-list li {
+            position: relative;
+            padding-left: 32px;
+            margin-bottom: 14px;
+            color: var(--text-secondary);
+        }
+
+        .benefits-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            height: 22px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .risks-list li::before {
+            content: '!';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            height: 22px;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .section-heading {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .variant-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .variant-card.recommended {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+        }
+
+        .recommended-badge {
+            position: absolute;
+            top: -14px;
+            right: 24px;
+            background: var(--accent-green);
+            color: #0f172a;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 50px;
+        }
+
+        .variant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .variant-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stars {
+            color: var(--accent-yellow);
+            font-size: 1.2rem;
+        }
+
+        .variant-url {
+            background: #0f172a;
+            border: 1px dashed var(--border-color);
+            padding: 14px;
+            border-radius: 10px;
+            font-family: monospace;
+            color: var(--accent-primary);
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+
+        .roadmap {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-blue);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        footer {
+            margin-top: 48px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="badge-header">Архитектурный анализ • Юг-Авто</div>
+        <h1>Внедрение уровня «Комплектация» в структуру витрины</h1>
+        <p class="subtitle">Детальный разбор архитектуры Bitrix + Go API, вариантов построения ЧПУ каталога, оценки SEO-эффекта и технических рисков.</p>
+    </header>
+
+    <!-- Сравнение текущей и новой структуры -->
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-title">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--accent-primary);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                Текущая структура (4 уровня)
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">Существующий роутинг в 1С-Битрикс и Go API:</p>
+            <div class="flow-container">
+                <div class="flow-step">
+                    <span class="flow-num">1</span>
+                    <span class="flow-path">/cars/new/</span>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-num">2</span>
+                    <span class="flow-path">/cars/new/{brand}/</span>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-num">3</span>
+                    <span class="flow-path">/cars/new/{brand}/{model}/</span>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-num">4</span>
+                    <span class="flow-path">/cars/new/{brand}/{model}/{id}/</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--accent-yellow);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Предлагаемая структура с SEO-хабом
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">Добавление уровня посадочной страницы комплектации:</p>
+            <div class="flow-container">
+                <div class="flow-step">
+                    <span class="flow-num">1</span>
+                    <span class="flow-path">/cars/new/</span>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-num">2</span>
+                    <span class="flow-path">/cars/new/{brand}/</span>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-num">3</span>
+                    <span class="flow-path">/cars/new/{brand}/{model}/</span>
+                </div>
+                <div class="flow-step" style="background: rgba(245, 158, 11, 0.1); border-radius: 6px; margin: 4px 0;">
+                    <span class="flow-num" style="background: var(--accent-yellow);">★</span>
+                    <span class="flow-path" style="color: var(--accent-yellow); font-weight: bold;">/cars/new/{brand}/{model}/{equipment}/</span>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-num">4</span>
+                    <span class="flow-path">/cars/new/{brand}/{model}/{id}/</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Плюсы и Риски -->
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-title" style="color: var(--accent-green);">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Ключевые преимущества
+            </div>
+            <ul class="benefits-list">
+                <li><strong>Рост низкочастотного SEO-трафика:</strong> Посадочные страницы под запросы типа <em>«Купить Chery Tiggo 7 Pro Max Ultimate в Краснодаре»</em>.</li>
+                <li><strong>Улучшение UX:</strong> Пользователь видит сводку комплектаций, вилку цен («от ... ₽») и ключевые опции до выбора конкретной машины.</li>
+                <li><strong>Контекстная реклама:</strong> Возможность вести трафик на страницу конкретной комплектации, а не на общий листинг модели.</li>
+                <li><strong>Полнота каталога:</strong> Отражение характеристик и опций даже при временном отсутствии авто на складе (статус «Под заказ»).</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title" style="color: var(--accent-red);">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                Технические риски и ограничение данных
+            </div>
+            <ul class="risks-list">
+                <li><strong>Нерегулярность данных в 1С:</strong> Названия комплектаций приходят на русском/английском, с опечатками ("Ultimate", "Ультимейт", "Комфорт 1.5"). Потребуется нормализация.</li>
+                <li><strong>Автомобили с пробегом (used):</strong> У б/у автомобилей комплектации часто забиты вручную. Раздел комплектаций рекомендуется включать <strong>только для новых авто (`new`)</strong>.</li>
+                <li><strong>Влияние на URL карточек:</strong> Если перестроить URL авто на 5-уровневый (`.../model/equipment/id/`), ломается индексация поисковиков.</li>
+                <li><strong>Отсутствие поля `code` в БД:</strong> В текущей таблице `yapps_app_cis_equipments` нет слага (латинского кода) для ЧПУ.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Варианты реализации -->
+    <h2 class="section-heading">Варианты реализации архитектуры</h2>
+
+    <!-- Вариант 1 (Рекомендуемый) -->
+    <div class="variant-card recommended">
+        <div class="recommended-badge">Рекомендуемый выбор</div>
+        <div class="variant-header">
+            <div class="variant-title">Вариант 1: SEO-хаб комплектации (без изменения URL карточек авто)</div>
+            <div class="stars">★★★★★</div>
+        </div>
+        <p style="color: var(--text-secondary);">Посадочная страница комплектации создает новый SEO-уровень, но URL самой карточки автомобиля остается короткой и стабильной.</p>
+
+        <div class="variant-url">
+            • Страница модели: https://yug-avto.ru/cars/new/chery/tiggo-7-pro-max/<br>
+            • Страница комплектации: https://yug-avto.ru/cars/new/chery/tiggo-7-pro-max/ultimate/<br>
+            • Карточка авто: https://yug-avto.ru/cars/new/chery/tiggo-7-pro-max/1124508/
+        </div>
+
+        <ul class="benefits-list" style="margin-top: 16px;">
+            <li><strong>Сохранение стабильности ссылок:</strong> Ни один существующий URL автомобиля в поиске не ломается (не нужны массовые 301 редиректы).</li>
+            <li><strong>Устойчивость к ошибкам 1С:</strong> Если у авто изменится название комплектации в CRM, ссылка на машину не меняется.</li>
+            <li><strong>Высокий SEO-эффект:</strong> Полноценная страница комплектации с H1, Title, Description, опциями и автомобилями в наличии.</li>
+        </ul>
+    </div>
+
+    <!-- Вариант 2 -->
+    <div class="variant-card">
+        <div class="variant-header">
+            <div class="variant-title">Вариант 2: Полная 5-уровневая ЧПУ структура</div>
+            <div class="stars">★★★☆☆</div>
+        </div>
+        <p style="color: var(--text-secondary);">Все автомобили переподчиняются уровню комплектации в структуре URL.</p>
+
+        <div class="variant-url">
+            • Карточка авто: https://yug-avto.ru/cars/new/chery/tiggo-7-pro-max/ultimate/1124508/
+        </div>
+
+        <ul class="risks-list" style="margin-top: 16px;">
+            <li>Требуется сложная настройка тысяч 301 редиректов со старых ссылок.</li>
+            <li>Проблемы при отсутствии комплектации у авто (придется делать служебные слоги типа `base` или `default`).</li>
+        </ul>
+    </div>
+
+    <!-- План работ -->
+    <h2 class="section-heading">Пошаговый план внедрения (по Варианту 1)</h2>
+
+    <div class="roadmap">
+        <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h4>Доработка базы данных и нормализатора (`yapps`)</h4>
+                <p>Добавление колонки `code` в таблицу `yapps_app_cis_equipments`. Настройка автоматической генерации уникальных латинских слагов (например, `ultimate`, `flagship`) при синхронизации с AutoCRM.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h4>Доработка Go API (`atest.yug-avto.ru/go/`)</h4>
+                <p>Расширение эндпоинтов `/filter` и `/vehicles` поддержкой слага комплектации. В `meta.go` реализация логики для уровня `level = "equipment"` (генерация H1, Title, Description, вилки цен от X руб. и хлебных крошек).</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h4>Обновление роутера Битрикс (`YAppShowroom`)</h4>
+                <p>Модификация метода `makeFilter()` в `YApp.Showroom.class.php` для распознавания сегмента комплектации (отличие от ID авто и фасетных фильтров). Обновление построения хлебных крошек.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h4>Верстка UI и генерация Sitemap</h4>
+                <p>Создание блоков/табов комплектаций на странице модели и верстка посадочной страницы комплектации. Обновление `makeSitemap.php` для выгрузки страниц комплектаций в XML-карту сайта.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Отчет сформирован автоматически в рамках анализа инфраструктуры Yug-Avto DEV. Август 2026.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
