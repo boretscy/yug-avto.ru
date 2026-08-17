@@ -1,6 +1,7 @@
 <div class="container my-2">
     <div class="row vehicle-list" itemscope itemtype="https://schema.org/ItemList">
         <meta itemprop="numberOfItems" content="<?= count($data['items'] ?? []);?>" />
+        <?php if (!empty($data['items']) && is_array($data['items'])) { ?>
         <?php foreach ($data['items'] as $item) { ?>
         <div class="col-md-6 col-lg-4 col-xl-3 vehicle-list-item">
             <?php if ( $item['type'] == 'vehicle' ) { ?>
@@ -8,6 +9,11 @@
             <?php } elseif ( $item['type'] == 'random_cta' ) { ?>
                 <?php include __DIR__.'/vehicles/item_cta.php'; ?>
             <?php } ?>
+        </div>
+        <?php } ?>
+        <?php } else { ?>
+        <div class="col-12 text-center py-5">
+            <p class="h4 text-muted">Автомобили по выбранным параметрам не найдены</p>
         </div>
         <?php } ?>
     </div>

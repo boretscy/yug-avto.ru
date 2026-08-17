@@ -8,12 +8,23 @@ $rs = CIBlockElement::GetList(
     false, false,
     ['CODE']
 );
+$arForms = [];
 while ( $ob = $rs->GetNextElement() ) {
     $code = $ob->GetFields()['CODE'];
-    $arForms[] = [
-        'CODE' => $code,
-        'ID' => CForm::GetBySID($code)->Fetch()['ID']
-    ];
+    $formRes = CForm::GetBySID($code)->Fetch();
+    if ( !empty($formRes['ID']) ) {
+        $arForms[] = [
+            'CODE' => $code,
+            'ID' => (int)$formRes['ID']
+        ];
+    }
+}
+
+if (!\Bitrix\Main\Context::getCurrent()->getCulture()) {
+    $culture = \Bitrix\Main\Localization\CultureTable::getById(1)->fetchObject();
+    if ($culture) {
+        \Bitrix\Main\Context::getCurrent()->setCulture(new \Bitrix\Main\Context\Culture($culture));
+    }
 }
 
 foreach ( $arForms as $item ) {?>

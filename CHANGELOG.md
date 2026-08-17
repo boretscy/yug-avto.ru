@@ -2,6 +2,8 @@
 
 ## [2026-08-17]
 ### Fixed
+- Перенесена валидация ответа Go API, условий 404 и редиректов 301 до вызова `prolog_after.php` в `/cars/new/index.php` и `/cars/used/index.php`, устранив фатальные ошибки `headers already sent` и отдачу HTTP 500 под PHP 8.4.
+- Защищен цикл `foreach` в `/cars/views/vehicles.php` проверкой `is_array()` от падения при пустом результате каталога.
 - Файл `robots.txt` исключен из отслеживания Git и добавлен в `.gitignore` для независимого управления на разных окружениях (DEV/PROD).
 - Устранены предупреждения `PHP Warning: Undefined array key "mode"` и неинициализированный массив `$G` при редиректах устаревших параметров в `/cars/new/index.php` и `/cars/used/index.php` под PHP 8.4.
 

@@ -39,6 +39,45 @@ if ( !$filter['city'] ) $filter['city'] = $app->getCityCookie();
 
 $data = json_decode( YAppShowroom::httpGet($app->makeApiUrl($filter, (($filter['vehicle'])?'vehicle':'vehicles'))), true );
 
+// === Ранняя валидация и 404 / 301 (ДО отправки HTML и prolog_after.php) ===
+if ( $filter['vehicle'] && (!isset($data['id']) || isset($data['error']) || (isset($data['code']) && $data['code'] == 404)) ) {
+	CHTTP::SetStatus("404 Not Found");
+	@define("ERROR_404","Y");
+	require(\Bitrix\Main\Application::getDocumentRoot()."/404.php");
+	die();
+}
+
+if ( !empty($data['force_404']) || (isset($data['code']) && $data['code'] == 404) ) {
+	CHTTP::SetStatus("404 Not Found");
+	@define("ERROR_404","Y");
+	require(\Bitrix\Main\Application::getDocumentRoot()."/404.php");
+	die();
+}
+
+if ( $data == NULL ) {
+	if ( !$filter['vehicle'] && !$filter['model'] && $filter['brand'] ) {
+		unset($filter['brand']);
+	} elseif ( !$filter['vehicle'] && $filter['model'] ) {
+		unset($filter['model']);
+	} elseif ( $filter['vehicle'] ) {
+		unset($filter['vehicle']);
+	}
+    unset($filter['price'], $filter['dealership'], $filter['transmission'], $filter['engine'], $filter['drive'], $filter['body'], $filter['color'], $filter['volume'], $filter['power'], $filter['year']);
+	$targetUrl = $app->makeFilterUrl($filter);
+	if ( !empty($targetUrl) && $targetUrl !== CURRENT_URL ) {
+		header("HTTP/1.1 301 Moved Permanently"); 
+		header("Location: ".$targetUrl); 
+		exit();
+	} else {
+		CHTTP::SetStatus("404 Not Found");
+		@define("ERROR_404","Y");
+		require(\Bitrix\Main\Application::getDocumentRoot()."/404.php");
+		die();
+	}
+}
+
+$GLOBALS['META'] = $data['meta'] ?? [];
+
 // === Last-Modified & If-Modified-Since (Пункт 10 ТЗ) ===
 $LastModified_unix = 0;
 if ( $filter['vehicle'] ) {
@@ -46,7 +85,7 @@ if ( $filter['vehicle'] ) {
 		$LastModified_unix = (int)$data['created'];
 	}
 } else {
-	if ( !empty($data['items']) ) {
+	if ( !empty($data['items']) && is_array($data['items']) ) {
 		foreach ( $data['items'] as $item ) {
 			if ( !empty($item['created']) && (int)$item['created'] > $LastModified_unix ) {
 				$LastModified_unix = (int)$item['created'];
@@ -81,47 +120,8 @@ $Asset->addJs($app->Conf()['assetsUrl'].'/assets/js/libs/jquery.fancybox.min.js'
 $Asset->addJs($app->Conf()['assetsUrl'].'/assets/js/libs/share.js');
 $Asset->addJs($app->Conf()['assetsUrl'].'/assets/js/core.js?'.md5_file($_SERVER['DOCUMENT_ROOT'].$app->Conf()['assetsUrl'].'/assets/js/core.js'));
 
-if ( $filter['vehicle'] && (!isset($data['id']) || isset($data['error'])) ) {
-	CHTTP::SetStatus("404 Not Found");
-	@define("ERROR_404","Y");
-	if ($APPLICATION->RestartWorkarea()) {
-		require(\Bitrix\Main\Application::getDocumentRoot()."/404.php");
-		die();
-	}
-}
-
-if ( $data['force_404'] ) {
-	CHTTP::SetStatus("404 Not Found");
-	@define("ERROR_404","Y");
-	if ($APPLICATION->RestartWorkarea()) {
-		require(\Bitrix\Main\Application::getDocumentRoot()."/404.php");
-		die();
-	}
-}
-
-$GLOBALS['META'] = $data['meta'];
-if ( $data == NULL ) {
-	if ( !$filter['vehicle'] && !$filter['model'] && $filter['brand'] ) {
-		unset($filter['brand']);
-	} elseif ( !$filter['vehicle'] && $filter['model'] ) {
-		unset($filter['model']);
-	} elseif ( $filter['vehicle'] ) {
-		unset($filter['vehicle']);
-	}
-    unset($filter['price'], $filter['dealership'], $filter['transmission'], $filter['engine'], $filter['drive'], $filter['body'], $filter['color'], $filter['volume'], $filter['power'], $filter['year']);
-	header("HTTP/1.1 301 Moved Permanently"); 
-	header("Location: ".$app->makeFilterUrl($filter));
-	exit();
-    // CHTTP::SetStatus("404 Not Found");
-	// @define("ERROR_404","Y");
-	// if ($APPLICATION->RestartWorkarea()) {
-	// 	require(\Bitrix\Main\Application::getDocumentRoot()."/404.php");
-	// 	die();
-	// }
-}
-
-$data['FAVORITES'] = ( json_decode($_COOKIE['CIS_FAVORITES'], true) ) ?: [];
-$data['COMPARE'] = ( json_decode($_COOKIE['CIS_COMPARE'], true) ) ?: [];
+$data['FAVORITES'] = ( json_decode($_COOKIE['CIS_FAVORITES'] ?? '', true) ) ?: [];
+$data['COMPARE'] = ( json_decode($_COOKIE['CIS_COMPARE'] ?? '', true) ) ?: [];
 
 if ( !$filter['vehicle'] ) {    
     $cache = \Bitrix\Main\Data\Cache::createInstance();

@@ -9,6 +9,23 @@ if (!defined('ENABLE_FRONTEND_OPTIMIZATION')) {
     define('ENABLE_FRONTEND_OPTIMIZATION', true);
 }
 
+// Инициализация объекта сайта и Culture в контексте D7 при AJAX / неполных точках входа
+if (defined('SITE_ID')) {
+    $context = \Bitrix\Main\Context::getCurrent();
+    if (!$context->getSite()) {
+        $site = \Bitrix\Main\SiteTable::getById(SITE_ID)->fetchObject();
+        if ($site) {
+            $context->setSite($site);
+        }
+    }
+    if (!$context->getCulture()) {
+        $culture = \Bitrix\Main\Localization\CultureTable::getById(1)->fetchObject();
+        if ($culture) {
+            $context->setCulture(new \Bitrix\Main\Context\Culture($culture));
+        }
+    }
+}
+
 // Регистрация автозагрузки классов пространств имен Local\Project
 Loader::registerAutoLoadClasses(null, [
     'Local\Project\Handlers\SEO' => '/local/php_interface/classes/Local/Project/Handlers/SEO.php',
