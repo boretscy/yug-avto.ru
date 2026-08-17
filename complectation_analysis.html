@@ -232,6 +232,76 @@
             gap: 12px;
         }
 
+        /* Таблица сравнения ЧПУ vs GET */
+        .comparison-table-wrap {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            overflow-x: auto;
+        }
+
+        table.comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        table.comparison-table th {
+            padding: 14px 16px;
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        table.comparison-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+            color: var(--text-secondary);
+            vertical-align: top;
+        }
+
+        table.comparison-table tr:hover td {
+            background: rgba(51, 65, 85, 0.2);
+        }
+
+        .tag-pill {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .tag-pill.win {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+
+        .tag-pill.lose {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .example-box {
+            background: #0f172a;
+            border-left: 4px solid var(--accent-primary);
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            word-break: break-all;
+        }
+
         .variant-card {
             background: var(--bg-card);
             border: 2px solid var(--border-color);
@@ -287,6 +357,35 @@
             color: var(--accent-primary);
             margin: 16px 0;
             font-size: 0.95rem;
+        }
+
+        .hybrid-diagram {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .hybrid-diagram {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hybrid-col {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .hybrid-col-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
         }
 
         .roadmap {
@@ -350,7 +449,7 @@
     <header>
         <div class="badge-header">Архитектурный анализ • Юг-Авто</div>
         <h1>Внедрение уровня «Комплектация» в структуру витрины</h1>
-        <p class="subtitle">Детальный разбор архитектуры Bitrix + Go API, вариантов построения ЧПУ каталога, оценки SEO-эффекта и технических рисков.</p>
+        <p class="subtitle">Детальный разбор архитектуры Bitrix + Go API, вариантов построения ЧПУ каталога, сравнение ЧПУ vs GET-параметров и гибридная модель маршрутизации.</p>
     </header>
 
     <!-- Сравнение текущей и новой структуры -->
@@ -412,87 +511,124 @@
         </div>
     </div>
 
-    <!-- Плюсы и Риски -->
-    <div class="grid-2">
-        <div class="card">
-            <div class="card-title" style="color: var(--accent-green);">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Ключевые преимущества
-            </div>
-            <ul class="benefits-list">
-                <li><strong>Рост низкочастотного SEO-трафика:</strong> Посадочные страницы под запросы типа <em>«Купить Chery Tiggo 7 Pro Max Ultimate в Краснодаре»</em>.</li>
-                <li><strong>Улучшение UX:</strong> Пользователь видит сводку комплектаций, вилку цен («от ... ₽») и ключевые опции до выбора конкретной машины.</li>
-                <li><strong>Контекстная реклама:</strong> Возможность вести трафик на страницу конкретной комплектации, а не на общий листинг модели.</li>
-                <li><strong>Полнота каталога:</strong> Отражение характеристик и опций даже при временном отсутствии авто на складе (статус «Под заказ»).</li>
-            </ul>
-        </div>
+    <!-- ЧПУ против GET: Разбор подходов конкурентов -->
+    <h2 class="section-heading">ЧПУ против GET-параметров: Анализ подходов конкурентов</h2>
 
-        <div class="card">
-            <div class="card-title" style="color: var(--accent-red);">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                Технические риски и ограничение данных
+    <div class="card" style="margin-bottom: 24px;">
+        <p style="color: var(--text-secondary); margin-bottom: 16px;">
+            У некоторых крупных конкурентов комплектация передается исключительно через GET-параметры. Давайте разберем, почему они так делают и какие у этого скрытые минусы:
+        </p>
+
+        <div class="grid-2" style="margin-bottom: 16px;">
+            <div style="background: rgba(15, 23, 42, 0.5); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color);">
+                <strong style="color: var(--accent-primary);">Пример: РОЛЬФ (rolf.ru)</strong>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 6px;">Каталог построен как динамический SPA-фильтр на фронтенде:</p>
+                <div class="example-box">/cars/new/?page=1&city_id=1&brand_id%5B0%5D=2192&model_id%5B0%5D=8503&complectation%5B0%5D=Max</div>
+                <p style="color: var(--text-muted); font-size: 0.85rem;"><strong>Проблема:</strong> Поисковые боты (Яндекс/Google) экономят краулинговый бюджет и крайне плохо ранжируют URL с закодированными массивами параметров (%5B0%5D).</p>
             </div>
-            <ul class="risks-list">
-                <li><strong>Нерегулярность данных в 1С:</strong> Названия комплектаций приходят на русском/английском, с опечатками ("Ultimate", "Ультимейт", "Комфорт 1.5"). Потребуется нормализация.</li>
-                <li><strong>Автомобили с пробегом (used):</strong> У б/у автомобилей комплектации часто забиты вручную. Раздел комплектаций рекомендуется включать <strong>только для новых авто (`new`)</strong>.</li>
-                <li><strong>Влияние на URL карточек:</strong> Если перестроить URL авто на 5-уровневый (`.../model/equipment/id/`), ломается индексация поисковиков.</li>
-                <li><strong>Отсутствие поля `code` в БД:</strong> В текущей таблице `yapps_app_cis_equipments` нет слага (латинского кода) для ЧПУ.</li>
-            </ul>
+
+            <div style="background: rgba(15, 23, 42, 0.5); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color);">
+                <strong style="color: var(--accent-yellow);">Пример: Авторай (avtoray.ru)</strong>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 6px;">Использование GET-параметров для мультивыбора:</p>
+                <div class="example-box">/cars/new/lada/granta?complectations=lada-granta-classic-9&complectations=lada-granta-classic-4</div>
+                <p style="color: var(--text-muted); font-size: 0.85rem;"><strong>Обоснование:</strong> Пользователь выбрал одновременно 2 комплектации. Для мультивыбора ЧПУ физически невозможен, поэтому фильтрация корректно уходит в GET.</p>
+            </div>
         </div>
     </div>
 
-    <!-- Варианты реализации -->
-    <h2 class="section-heading">Варианты реализации архитектуры</h2>
+    <!-- Таблица детального сравнения -->
+    <div class="comparison-table-wrap">
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Критерий</th>
+                    <th style="width: 37%;">ЧПУ (например, <code>.../granta/classic/</code>)</th>
+                    <th style="width: 38%;">GET (например, <code>?complectation=classic</code>)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Ранжирование в Яндекс и Google</strong></td>
+                    <td><span class="tag-pill win">Максимальное ★★★★★</span><br>Ключевые слова в пути URL дают максимальный вес по низкочастотным запросам («Lada Granta Classic цена»).</td>
+                    <td><span class="tag-pill lose">Слабое ★★☆☆☆</span><br>Поисковики считают такие страницы параметрическими срезами или дублями с меньшим приоритетом.</td>
+                </tr>
+                <tr>
+                    <td><strong>Индексация и XML Sitemap</strong></td>
+                    <td><span class="tag-pill win">Отлично ★★★★★</span><br>Легко выгружать чистые URL в <code>sitemap.xml</code>, 100% обход поисковыми роботами.</td>
+                    <td><span class="tag-pill lose">Ограничено ★★☆☆☆</span><br>Боты часто срезают query-параметры или отбрасывают страницы по Canonical.</td>
+                </tr>
+                <tr>
+                    <td><strong>Контекстная реклама (Директ)</strong></td>
+                    <td><span class="tag-pill win">Идеально ★★★★★</span><br>Релевантная посадочная страница под конкретные группы объявлений (высокий Quality Score).</td>
+                    <td><span class="tag-pill">Удовлетворительно ★★★☆☆</span><br>Ведет на общий листинг с включенным фильтром.</td>
+                </tr>
+                <tr>
+                    <td><strong>Мультивыбор (2+ комплектации)</strong></td>
+                    <td><span class="tag-pill lose">Не применимо ❌</span><br>Нельзя создать красивый ЧПУ для нескольких значений (будет каша в URL).</td>
+                    <td><span class="tag-pill win">Идеально ★★★★★</span><br>Стандартный и удобный механизм фильтрации нескольких чекбоксов.</td>
+                </tr>
+                <tr>
+                    <td><strong>Сложность внедрения</strong></td>
+                    <td>Средняя (требуется роутер и генерация мета-тегов)</td>
+                    <td><span class="tag-pill win">Очень простая</span> (добавляется как обычное поле фильтра)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <!-- Вариант 1 (Рекомендуемый) -->
+    <!-- Рекомендованная ГИБРИДНАЯ СХЕМА -->
     <div class="variant-card recommended">
-        <div class="recommended-badge">Рекомендуемый выбор</div>
+        <div class="recommended-badge">Золотой стандарт (Best Practice)</div>
         <div class="variant-header">
-            <div class="variant-title">Вариант 1: SEO-хаб комплектации (без изменения URL карточек авто)</div>
+            <div class="variant-title">Рекомендованная Гибридная схема (ЧПУ + GET)</div>
             <div class="stars">★★★★★</div>
         </div>
-        <p style="color: var(--text-secondary);">Посадочная страница комплектации создает новый SEO-уровень, но URL самой карточки автомобиля остается короткой и стабильной.</p>
+        <p style="color: var(--text-secondary);">
+            В витрине Юг-Авто уже сейчас успешно применяется гибридная модель для кузовов, трансмиссий и двигателей. Для комплектаций оптимально реализовать аналогичный алгоритм:
+        </p>
 
-        <div class="variant-url">
-            • Страница модели: https://yug-avto.ru/cars/new/chery/tiggo-7-pro-max/<br>
-            • Страница комплектации: https://yug-avto.ru/cars/new/chery/tiggo-7-pro-max/ultimate/<br>
-            • Карточка авто: https://yug-avto.ru/cars/new/chery/tiggo-7-pro-max/1124508/
+        <div class="hybrid-diagram">
+            <div class="hybrid-col" style="border-left: 4px solid var(--accent-green);">
+                <div class="hybrid-col-title" style="color: var(--accent-green);">
+                    <span>1. Одиночный выбор (1 комплектация) → ЧПУ</span>
+                </div>
+                <div class="example-box" style="border-color: var(--accent-green);">https://yug-avto.ru/cars/new/lada/granta/classic/</div>
+                <ul class="benefits-list" style="margin-top: 12px; font-size: 0.9rem;">
+                    <li>Формирует уникальный H1, Title и Description.</li>
+                    <li>Выводит вилку цен («от X руб.»), опции и авто в наличии.</li>
+                    <li>Автоматически попадает в <code>sitemap-cis-new.xml</code>.</li>
+                    <li>Используется как посадочная для Яндекс.Директ.</li>
+                </ul>
+            </div>
+
+            <div class="hybrid-col" style="border-left: 4px solid var(--accent-yellow);">
+                <div class="hybrid-col-title" style="color: var(--accent-yellow);">
+                    <span>2. Мультивыбор (2+ комплектации) → GET</span>
+                </div>
+                <div class="example-box" style="border-color: var(--accent-yellow);">https://yug-avto.ru/cars/new/lada/granta/?equipment=classic,comfort</div>
+                <ul class="benefits-list" style="margin-top: 12px; font-size: 0.9rem;">
+                    <li>Быстрая интерактивная фильтрация на клиенте.</li>
+                    <li>Параметр <code>canonical</code> указывает на базовую страницу модели <code>/cars/new/lada/granta/</code>.</li>
+                    <li>Поисковая база защищена от сотен мусорных комбинаторных дублей.</li>
+                </ul>
+            </div>
         </div>
 
-        <ul class="benefits-list" style="margin-top: 16px;">
-            <li><strong>Сохранение стабильности ссылок:</strong> Ни один существующий URL автомобиля в поиске не ломается (не нужны массовые 301 редиректы).</li>
-            <li><strong>Устойчивость к ошибкам 1С:</strong> Если у авто изменится название комплектации в CRM, ссылка на машину не меняется.</li>
-            <li><strong>Высокий SEO-эффект:</strong> Полноценная страница комплектации с H1, Title, Description, опциями и автомобилями в наличии.</li>
-        </ul>
-    </div>
-
-    <!-- Вариант 2 -->
-    <div class="variant-card">
-        <div class="variant-header">
-            <div class="variant-title">Вариант 2: Полная 5-уровневая ЧПУ структура</div>
-            <div class="stars">★★★☆☆</div>
+        <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 14px; margin-top: 16px;">
+            <strong style="color: var(--accent-primary);">💡 Важное правило для карточек авто:</strong>
+            <span style="color: var(--text-secondary); font-size: 0.95rem;"> URL самого автомобиля сохраняет стабильный 4-уровневый вид <code>/cars/new/lada/granta/1124508/</code>, чтобы изменения комплектации в 1С не приводили к поломке ссылок и редиректам.</span>
         </div>
-        <p style="color: var(--text-secondary);">Все автомобили переподчиняются уровню комплектации в структуре URL.</p>
-
-        <div class="variant-url">
-            • Карточка авто: https://yug-avto.ru/cars/new/chery/tiggo-7-pro-max/ultimate/1124508/
-        </div>
-
-        <ul class="risks-list" style="margin-top: 16px;">
-            <li>Требуется сложная настройка тысяч 301 редиректов со старых ссылок.</li>
-            <li>Проблемы при отсутствии комплектации у авто (придется делать служебные слоги типа `base` или `default`).</li>
-        </ul>
     </div>
 
     <!-- План работ -->
-    <h2 class="section-heading">Пошаговый план внедрения (по Варианту 1)</h2>
+    <h2 class="section-heading">Пошаговый план внедрения</h2>
 
     <div class="roadmap">
         <div class="step-item">
             <div class="step-number">1</div>
             <div class="step-content">
                 <h4>Доработка базы данных и нормализатора (`yapps`)</h4>
-                <p>Добавление колонки `code` в таблицу `yapps_app_cis_equipments`. Настройка автоматической генерации уникальных латинских слагов (например, `ultimate`, `flagship`) при синхронизации с AutoCRM.</p>
+                <p>Добавление колонки `code` в таблицу `yapps_app_cis_equipments`. Настройка автоматической генерации уникальных латинских слагов (например, `ultimate`, `flagship`, `classic`) при синхронизации с AutoCRM.</p>
             </div>
         </div>
 
@@ -500,7 +636,7 @@
             <div class="step-number">2</div>
             <div class="step-content">
                 <h4>Доработка Go API (`atest.yug-avto.ru/go/`)</h4>
-                <p>Расширение эндпоинтов `/filter` и `/vehicles` поддержкой слага комплектации. В `meta.go` реализация логики для уровня `level = "equipment"` (генерация H1, Title, Description, вилки цен от X руб. и хлебных крошек).</p>
+                <p>Расширение эндпоинтов `/filter` и `/vehicles` поддержкой слага комплектации (как одиночного в path, так и массива через GET). В `meta.go` реализация логики для уровня `level = "equipment"` (генерация H1, Title, Description, вилки цен от X руб. и хлебных крошек).</p>
             </div>
         </div>
 
@@ -508,7 +644,7 @@
             <div class="step-number">3</div>
             <div class="step-content">
                 <h4>Обновление роутера Битрикс (`YAppShowroom`)</h4>
-                <p>Модификация метода `makeFilter()` в `YApp.Showroom.class.php` для распознавания сегмента комплектации (отличие от ID авто и фасетных фильтров). Обновление построения хлебных крошек.</p>
+                <p>Модификация метода `makeFilter()` и `makeFilterUrl()` в `YApp.Showroom.class.php`: одиночная комплектация формирует ЧПУ-путь, мультивыбор уходит в GET-параметры. Настройка тега `canonical` для мультивыбора.</p>
             </div>
         </div>
 
@@ -516,7 +652,7 @@
             <div class="step-number">4</div>
             <div class="step-content">
                 <h4>Верстка UI и генерация Sitemap</h4>
-                <p>Создание блоков/табов комплектаций на странице модели и верстка посадочной страницы комплектации. Обновление `makeSitemap.php` для выгрузки страниц комплектаций в XML-карту сайта.</p>
+                <p>Создание блоков/табов комплектаций на странице модели и верстка посадочной страницы комплектации. Обновление `makeSitemap.php` для автоматической выгрузки ЧПУ-страниц комплектаций в XML-карту сайта.</p>
             </div>
         </div>
     </div>
