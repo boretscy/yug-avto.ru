@@ -7,13 +7,14 @@
 		exit();
 	}
 	$p = explode('/', $_SERVER['REQUEST_URI']);
-	if ( isset($p[4]) && $p[3] == $p[4] ) {
+	if ( !empty($p[4]) && !empty($p[3]) && $p[3] == $p[4] ) {
 		header("HTTP/1.1 301 Moved Permanently"); 
 		header("Location: ".implode('/', array_slice($p, 0, 4))); 
 	}
 ?>
-<?php if ( $_GET['mode'] ) { 
+<?php if ( !empty($_GET['mode']) ) { 
 	unset($_GET['mode']);
+	$G = [];
 	$url = parse_url($_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 	foreach ($_GET as $k=>$v) $G[] = $k.'='.$v;
 	header("HTTP/1.1 301 Moved Permanently"); 
