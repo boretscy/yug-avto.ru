@@ -61,31 +61,35 @@ function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
     $vehicles = array_filter($vehicles, fn($v) => !empty($v['brand']['code']) && !empty($v['id']));
     if (!count($vehicles)) return ['vehicles' => [], 'brands' => $brands];
 
+    // Remove legacy sitemap-cis-*.xml and update sitemap.xml with direct brand & vehicle files
+    if (file_exists($dd.'/'.$sitemapName)) {
+        @unlink($dd.'/'.$sitemapName);
+    }
+
     $ss = file_exists($dd.'/sitemap.xml') ? file_get_contents($dd.'/sitemap.xml') : '';
     if ($ss) {
         $arSS = explode('</sitemap><sitemap>', $ss);
         foreach ($arSS as $k => $s) {
-            if (mb_stripos($s, $sitemapName) !== false) {
+            if (
+                mb_stripos($s, $sitemapName) !== false ||
+                mb_stripos($s, $brandsFile) !== false ||
+                mb_stripos($s, $vehiclesFile) !== false
+            ) {
                 unset($arSS[$k]);
             }
         }
+        $ss = implode('</sitemap><sitemap>', $arSS);
+
+        $nowIso = date('c');
+        $newEntries = [
+            '<loc>https://'.$domain.'/'.$brandsFile.'</loc><lastmod>'.$nowIso.'</lastmod>',
+            '<loc>https://'.$domain.'/'.$vehiclesFile.'</loc><lastmod>'.$nowIso.'</lastmod>',
+        ];
+
+        $arSS = explode('</sitemap><sitemap>', $ss);
+        array_splice($arSS, count($arSS) - 1, 0, $newEntries);
         file_put_contents($dd.'/sitemap.xml', implode('</sitemap><sitemap>', $arSS));
-
-        $ss = file_get_contents($dd.'/sitemap.xml');
-        if (mb_stripos($ss, $sitemapName) === false) {
-            $arSS = explode('</sitemap><sitemap>', $ss);
-            array_splice($arSS, count($arSS) - 1, 0, [
-                '<loc>https://'.$domain.'/'.$sitemapName.'</loc><lastmod>'.date('c').'</lastmod>',
-            ]);
-            file_put_contents($dd.'/sitemap.xml', implode('</sitemap><sitemap>', $arSS));
-        }
     }
-
-    $xml = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-    $xml .= '<sitemap><loc>https://'.$domain.'/'.$brandsFile.'</loc><lastmod>'.date('c').'</lastmod></sitemap>';
-    $xml .= '<sitemap><loc>https://'.$domain.'/'.$vehiclesFile.'</loc><lastmod>'.date('c').'</lastmod></sitemap>';
-    $xml .= '</sitemapindex>';
-    file_put_contents($dd.'/'.$sitemapName, $xml);
 
     $xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 

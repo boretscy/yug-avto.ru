@@ -1,6 +1,10 @@
 # Changelog
 
 ## [2026-08-18]
+### Changed
+- Переведена структура `sitemap.xml` на плоский одноуровневый индекс: файлы `sitemap-brands-*.xml` и `sitemap-vehicles-*.xml` внедряются напрямую в `sitemap.xml` без промежуточных индексных файлов `sitemap-cis-*.xml`.
+- Актуализированы директивы `Allow:` в `robots.txt` под плоскую структуру карт сайта.
+
 ### Fixed
 - Исправлена ошибка формирования URL в `cron/makeSitemap.php` при отправке запросов в Google Indexing API (удален ошибочный закрывающий тег `</url>`).
 - Добавлена директория `/cron/IndexingLog/` в `.gitignore`.
