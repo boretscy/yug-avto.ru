@@ -6,6 +6,8 @@
 - Добавлена директория `/cron/IndexingLog/` в `.gitignore`.
 
 ### Removed
+- Удалены устаревшие неактуальные sitemap-файлы инфоблоков (`sitemap-iblock-1,2,3,5,6,7,8,9,10,17.xml`) и бэкап `~1sitemap-files.xml`.
+- Удалены устаревшие неиспользуемые XML/YML выгрузки авто (`vehicles-new-02.xml`, `vehicles-new-krd.xml`, `vehicles-new-nvr.xml`, `vehicles-new.xml`, `vehicles-new.yml`, `vehicles-used-krd.xml`, `vehicles-used-nvr.xml`).
 - Удалены устаревшие тестовые разделы `dealerships/test/`, `offers/test/`, `about/history/test/`.
 - Удалена устаревшая директория `/about/log_request/` с логами запросов.
 
