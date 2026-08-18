@@ -1,6 +1,10 @@
 # Changelog
 
 ## [2026-08-18]
+### Fixed
+- Исправлена ошибка формирования URL в `cron/makeSitemap.php` при отправке запросов в Google Indexing API (удален ошибочный закрывающий тег `</url>`).
+- Добавлена директория `/cron/IndexingLog/` в `.gitignore`.
+
 ### Removed
 - Удалены устаревшие тестовые разделы `dealerships/test/`, `offers/test/`, `about/history/test/`.
 - Удалена устаревшая директория `/about/log_request/` с логами запросов.

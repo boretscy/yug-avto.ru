@@ -96,7 +96,7 @@ function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
 
         if ($v['type'] == 'vehicle' && !empty($v['dealership']['id']) && in_array($v['dealership']['id'], $dealershipIds)) {
             if ((int)($v['created'] ?? 0) > time() - 3600) {
-                $google[] = 'https://'.$domain.'/'.$urlPath.$v['brand']['code'].'/'.$v['model']['code'].'/'.$v['id'].'/</url>';
+                $google[] = 'https://'.$domain.'/'.$urlPath.$v['brand']['code'].'/'.$v['model']['code'].'/'.$v['id'].'/';
             }
         }
     }
