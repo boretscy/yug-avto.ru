@@ -1,5 +1,10 @@
 # Changelog
 
+## [2026-08-18]
+### Removed
+- Удалены устаревшие тестовые разделы `dealerships/test/`, `offers/test/`, `about/history/test/`.
+- Удалена устаревшая директория `/about/log_request/` с логами запросов.
+
 ## [2026-08-17]
 ### Fixed
 - Перенесена валидация ответа Go API, условий 404 и редиректов 301 до вызова `prolog_after.php` в `/cars/new/index.php` и `/cars/used/index.php`, устранив фатальные ошибки `headers already sent` и отдачу HTTP 500 под PHP 8.4.
