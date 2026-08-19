@@ -19,7 +19,7 @@
             <?php } ?>
         <?php } ?>
     </div>
-    <div class="form-droplist bg-yalightgray w-100 position-absolute d-none b-radius-yaradius-16 px-2 py-3">
+    <div class="form-droplist bg-yalightgray w-100 position-absolute d-none b-radius-yaradius-16 px-2 py-3" data-link="true">
         <div class="form-droplist-container h-100">
             <?php foreach ( $data['filter']['dropLists'][$select['list']] as $item ) { ?>
                 <?php if ( $item['code'] != 'none' ) { ?>
