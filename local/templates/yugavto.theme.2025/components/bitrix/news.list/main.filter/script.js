@@ -81,17 +81,16 @@ window.YAPP.MAIN_FILTER.getData = function(post) {
     .then(res => res.json())
     .then(resp => {
         if (post.update.data) window.YAPP.MAIN_FILTER.DATA = resp;
-        if (post.update.brands) {
+        if (post.update.brands && resp.dropLists?.brands) {
             window.YAPP.MAIN_FILTER.DATA.dropLists.brands = resp.dropLists.brands;
             window.YAPP.MAIN_FILTER.renderSelect('brands');
-            window.YAPP.MAIN_FILTER.renderSelect('models');
             window.YAPP.MAIN_FILTER.renderBrands();
         }
-        if (post.update.models) {
+        if (post.update.models && resp.dropLists?.models) {
             window.YAPP.MAIN_FILTER.DATA.dropLists.models = resp.dropLists.models;
             window.YAPP.MAIN_FILTER.renderSelect('models');
         }
-        if (post.update.price) {
+        if (post.update.price && resp.ranges?.price) {
             window.YAPP.MAIN_FILTER.renderPrice(resp.ranges.price);
         }
 
@@ -102,6 +101,8 @@ window.YAPP.MAIN_FILTER.getData = function(post) {
 };
 
 window.YAPP.MAIN_FILTER.renderSelect = function(e) {
+    if (!window.YAPP.MAIN_FILTER.DATA?.dropLists || !window.YAPP.MAIN_FILTER.DATA.dropLists[e]) return;
+
     fetch('/api/main-filter-select/render/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -240,26 +241,88 @@ $(document).on('click', '[data-sid="MAIN_FILTER"] .form-dropcontainer .form-drop
         return false;
     }
 
-    const $dropcontainer = $(this).closest('.form-dropcontainer');
-    const listName = $dropcontainer.data('list') || $(this).closest('.form-droplist').data('list');
-    const hasChildrenModels = $(this).closest('.form-droplist').data('children') === 'models' || listName === 'brands';
+    const $item = $(this);
+    const $dropcontainer = $item.closest('.form-dropcontainer');
+    const listName = $dropcontainer.data('list') || $item.closest('.form-droplist').data('list');
+    const hasChildrenModels = $item.closest('.form-droplist').data('children') === 'models' || listName === 'brands';
 
-    // 1. Применяем выбор элемента в форме через dropDownSelect (ровно 1 раз)
-    if (window.YAPP.FORMS && window.YAPP.FORMS.dropDownSelect) {
-        window.YAPP.FORMS.dropDownSelect($(this));
+    // Переключаем активный статус кликнутого элемента
+    $item.toggleClass('selected');
+
+    // Закрываем выпадающий список сразу при выборе
+    $dropcontainer.find('.form-droplist').removeClass('d-block').addClass('d-none');
+    $dropcontainer.find('.form-dropdown').removeClass('form-dropdown-opened');
+
+    // Синхронизируем массив выбранных значений в YAPP.FORMS.MAIN_FILTER
+    if (window.YAPP.FORMS && window.YAPP.FORMS.MAIN_FILTER && window.YAPP.FORMS.MAIN_FILTER[listName]) {
+        window.YAPP.FORMS.MAIN_FILTER[listName].VALUE = [];
+        $dropcontainer.find('.form-droplist-item.selected').each(function(i, el) {
+            window.YAPP.FORMS.MAIN_FILTER[listName].VALUE.push({
+                name: $(el).text().trim(),
+                value: $(el).data('value'),
+                indx: $(el).data('indx')
+            });
+        });
     }
 
-    // 2. Если меняли марку, сбрасываем выбранные модели (так как список моделей меняется)
+    // Если меняли марку, сбрасываем выбранные модели (так как список моделей меняется)
     if (listName === 'brands' && window.YAPP.FORMS?.MAIN_FILTER?.models) {
         window.YAPP.FORMS.MAIN_FILTER.models.VALUE = [];
         $('.main-filter .form-dropcontainer[data-list="models"]').removeClass('selected').find('.form-dropdown span').text('Модель');
     }
 
-    // 3. Формируем запрос данных с актуальными значениями
+    // Обновляем визуальный текст заголовков
+    window.YAPP.MAIN_FILTER.renderDropdowns();
+
+    // Формируем запрос данных с актуальными значениями
     let post = {
         update: {
             price: true,
             models: hasChildrenModels,
+            brands: false,
+            data: true
+        },
+        data: {
+            entity: store ? store.entity : 'new',
+            price: [],
+            brands: window.YAPP.FORMS?.MAIN_FILTER?.brands?.VALUE || [],
+            models: window.YAPP.FORMS?.MAIN_FILTER?.models?.VALUE || [],
+            city: store ? store.city.join() : ''
+        }
+    };
+
+    window.YAPP.MAIN_FILTER.getData(post);
+    return false;
+});
+
+// Обработка сброса селектов крестиком (.before)
+$(document).on('click', '[data-sid="MAIN_FILTER"] .form-dropdown .before', function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    const store = window.YAppStore;
+    const $dropcontainer = $(this).closest('.form-dropcontainer');
+    const listName = $dropcontainer.data('list');
+
+    $dropcontainer.find('.form-droplist-item').removeClass('selected');
+    $dropcontainer.find('.form-droplist').removeClass('d-block').addClass('d-none');
+    $dropcontainer.find('.form-dropdown').removeClass('form-dropdown-opened');
+
+    if (window.YAPP.FORMS?.MAIN_FILTER && window.YAPP.FORMS.MAIN_FILTER[listName]) {
+        window.YAPP.FORMS.MAIN_FILTER[listName].VALUE = [];
+    }
+
+    if (listName === 'brands' && window.YAPP.FORMS?.MAIN_FILTER?.models) {
+        window.YAPP.FORMS.MAIN_FILTER.models.VALUE = [];
+        $('.main-filter .form-dropcontainer[data-list="models"]').removeClass('selected').find('.form-dropdown span').text('Модель');
+    }
+
+    window.YAPP.MAIN_FILTER.renderDropdowns();
+
+    let post = {
+        update: {
+            price: true,
+            models: listName === 'brands',
             brands: false,
             data: true
         },
