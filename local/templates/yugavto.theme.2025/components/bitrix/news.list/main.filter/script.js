@@ -44,8 +44,9 @@ window.YAPP.MAIN_FILTER.renderDropdowns = function() {
     const brandsCount = brands.length;
     const modelsCount = models.length;
 
-    const $brandsContainer = $('.main-filter .form-dropcontainer[data-list="brands"]');
-    const $modelsContainer = $('.main-filter .form-dropcontainer[data-list="models"]');
+    const $form = $('form[data-sid="MAIN_FILTER"]');
+    const $brandsContainer = $form.find('.form-dropcontainer[data-list="brands"]');
+    const $modelsContainer = $form.find('.form-dropcontainer[data-list="models"]');
 
     if (brandsCount === 0) {
         $brandsContainer.find('.form-dropdown span').text('Марка');
@@ -110,7 +111,7 @@ window.YAPP.MAIN_FILTER.renderSelect = function(e) {
     })
     .then(res => res.text())
     .then(resp => {
-        const $droplist = $('.main-filter .form-droplist[data-list="' + e + '"]');
+        const $droplist = $('form[data-sid="MAIN_FILTER"] .form-droplist[data-list="' + e + '"]');
         $droplist.html(resp);
 
         // Пересинхронизируем состояние опций и выбранных элементов в YAPP.FORMS.MAIN_FILTER
@@ -144,9 +145,9 @@ window.YAPP.MAIN_FILTER.renderLink = function() {
     let data = {};
     const store = window.YAppStore;
     if (window.YAPP.FORMS && window.YAPP.FORMS.MAIN_FILTER) {
-        data.brands = window.YAPP.FORMS.MAIN_FILTER.brands.VALUE;
-        data.models = window.YAPP.FORMS.MAIN_FILTER.models.VALUE;
-        data.price = window.YAPP.FORMS.MAIN_FILTER.price;
+        data.brands = JSON.stringify(window.YAPP.FORMS.MAIN_FILTER.brands?.VALUE || []);
+        data.models = JSON.stringify(window.YAPP.FORMS.MAIN_FILTER.models?.VALUE || []);
+        data.price = JSON.stringify(window.YAPP.FORMS.MAIN_FILTER.price || []);
     }
     data.count = window.YAPP.MAIN_FILTER.DATA?.totalCount || 0;
     data.city = store ? store.city.join() : '';
@@ -189,14 +190,18 @@ window.YAPP.MAIN_FILTER.renderBrands = function() {
 };
 
 window.YAPP.MAIN_FILTER.renderPrice = function(range) {
-    const CisOnMain_range_price = $('.main-filter [data-range="price"] .range-selected');
-    const CisOnMain_rangeInput_price = $('.main-filter [data-range="price"][role="range"] .range-input input');
-    const CisOnMain_rangeView_price = $('.main-filter [data-range="price"][role="view"] .range-view input');
+    if (!range || !range.value) return;
+    const $form = $('form[data-sid="MAIN_FILTER"]');
+    const CisOnMain_range_price = $form.find('[data-range="price"] .range-selected');
+    const CisOnMain_rangeInput_price = $form.find('[data-range="price"][role="range"] .range-input input');
+    const CisOnMain_rangeView_price = $form.find('[data-range="price"][role="view"] .range-view input');
 
     $(CisOnMain_rangeInput_price[0]).attr('min', range.min).attr('max', range.max).val(range.value[0]);
     $(CisOnMain_rangeInput_price[1]).attr('min', range.min).attr('max', range.max).val(range.value[1]);
 
-    let perLeft = (range.value[0] - range.min) / (range.max - range.min), perRight = (range.max - range.value[1]) / (range.max - range.min);
+    const totalRange = (range.max - range.min) || 1;
+    let perLeft = (range.value[0] - range.min) / totalRange;
+    let perRight = (range.max - range.value[1]) / totalRange;
     $(CisOnMain_range_price).css({ 'left': perLeft * 100 + '%', 'right': perRight * 100 + '%' });
     $(CisOnMain_rangeView_price[0]).val(String(range.value[0]).replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, " "));
     $(CisOnMain_rangeView_price[1]).val(String(range.value[1]).replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, " "));
@@ -268,7 +273,7 @@ $(document).on('click', '[data-sid="MAIN_FILTER"] .form-dropcontainer .form-drop
     // Если меняли марку, сбрасываем выбранные модели (так как список моделей меняется)
     if (listName === 'brands' && window.YAPP.FORMS?.MAIN_FILTER?.models) {
         window.YAPP.FORMS.MAIN_FILTER.models.VALUE = [];
-        $('.main-filter .form-dropcontainer[data-list="models"]').removeClass('selected').find('.form-dropdown span').text('Модель');
+        $('form[data-sid="MAIN_FILTER"] .form-dropcontainer[data-list="models"]').removeClass('selected').find('.form-dropdown span').text('Модель');
     }
 
     // Обновляем визуальный текст заголовков
@@ -314,7 +319,7 @@ $(document).on('click', '[data-sid="MAIN_FILTER"] .form-dropdown .before', funct
 
     if (listName === 'brands' && window.YAPP.FORMS?.MAIN_FILTER?.models) {
         window.YAPP.FORMS.MAIN_FILTER.models.VALUE = [];
-        $('.main-filter .form-dropcontainer[data-list="models"]').removeClass('selected').find('.form-dropdown span').text('Модель');
+        $('form[data-sid="MAIN_FILTER"] .form-dropcontainer[data-list="models"]').removeClass('selected').find('.form-dropdown span').text('Модель');
     }
 
     window.YAPP.MAIN_FILTER.renderDropdowns();

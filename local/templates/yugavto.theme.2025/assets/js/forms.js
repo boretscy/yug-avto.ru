@@ -89,6 +89,9 @@ window.YAPP.FORMS.dropDownSelect = function(el) {
 };
 
 $(document).on('click', '.form-dropcontainer', function(e) {
+    if ($(e.target).closest('.form-droplist').length > 0) {
+        return;
+    }
     if (!$(e.target).is('.before') && !$(e.target).is('.after')) {
         $('.form-dropcontainer').not(this).find('.form-dropdown').removeClass('form-dropdown-opened');
         $(this).find('.form-dropdown').toggleClass('form-dropdown-opened');
@@ -97,7 +100,7 @@ $(document).on('click', '.form-dropcontainer', function(e) {
 });
 
 $(document).on('click', '.form-dropcontainer .form-droplist-item', function() {
-    if (!$(this).parent().parent().attr('data-link')) {
+    if (!$(this).closest('form[data-sid="MAIN_FILTER"]').length && !$(this).parent().parent().attr('data-link')) {
         window.YAPP.FORMS.dropDownSelect($(this));
         return false;
     }
