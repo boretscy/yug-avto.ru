@@ -226,7 +226,10 @@ $(document).on('click', '[role="toggleBrands"]', function() {
     return false;
 });
 
-$(document).on('click', '[data-sid="MAIN_FILTER"] .form-dropcontainer .form-droplist-item', function() {
+$(document).on('click', '[data-sid="MAIN_FILTER"] .form-dropcontainer .form-droplist-item', function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
     const store = window.YAppStore;
     if ($(this).attr('role') === 'toggleEntity') {
         const entity = $(this).data('entity');
@@ -241,7 +244,7 @@ $(document).on('click', '[data-sid="MAIN_FILTER"] .form-dropcontainer .form-drop
     const listName = $dropcontainer.data('list') || $(this).closest('.form-droplist').data('list');
     const hasChildrenModels = $(this).closest('.form-droplist').data('children') === 'models' || listName === 'brands';
 
-    // 1. Сначала применяем выбор элемента в форме через dropDownSelect
+    // 1. Применяем выбор элемента в форме через dropDownSelect (ровно 1 раз)
     if (window.YAPP.FORMS && window.YAPP.FORMS.dropDownSelect) {
         window.YAPP.FORMS.dropDownSelect($(this));
     }
@@ -270,7 +273,6 @@ $(document).on('click', '[data-sid="MAIN_FILTER"] .form-dropcontainer .form-drop
     };
 
     window.YAPP.MAIN_FILTER.getData(post);
-    window.YAPP.MAIN_FILTER.renderLink();
     return false;
 });
 
