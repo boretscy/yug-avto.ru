@@ -84,9 +84,13 @@
 	background-size: 103%;
 	background-position: center center;
 	background-repeat: no-repeat;
+	overflow: hidden;
 }
-.offers-item .a-image:hover {
-	animation: image-animation var(--img-animation) ease 0s 1 normal forwards;
+.offers-item .a-image img {
+	transition: transform var(--transition);
+}
+.offers-item:hover .a-image img {
+	transform: scale(1.08);
 }
 .offers-item-title {
     min-height: 75px;

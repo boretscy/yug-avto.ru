@@ -1,13 +1,13 @@
-.news-filter .filter-dropdown {
+.blog-filter .filter-dropdown {
     padding: 11px 15.5px;
     cursor: pointer;
     transition: none;
 }
-.news-filter .filter-dropdown-opened {
+.blog-filter .filter-dropdown-opened {
     border-radius: var(--yaradius15) var(--yaradius15) 0 0;
     transition: none;
 }
-.news-filter .filter-droplist {
+.blog-filter .filter-droplist {
     left: 0;
     top: 42px;
     max-height: 360px;
@@ -15,36 +15,36 @@
     z-index: 15;
     text-align: left;
 }
-.news-filter .filter-droplist.active {
+.blog-filter .filter-droplist.active {
     display: block;
 }
-.news-filter .filter-droplist-item {
+.blog-filter .filter-droplist-item {
     padding: 0 11px;
     cursor: pointer;
 }
-.news-filter .filter-droplist-item.not-link {
+.blog-filter .filter-droplist-item.not-link {
     padding: 0 11px;
     cursor: not-allowed;
 }
-.news-filter .filter-droplist-item:hover:after {
+.blog-filter .filter-droplist-item:hover:after {
     content: 'Выбрать';
     float: right;
     color: var(--yadarkgray);
     font-size: var(--yatextminusminus);
     font-weight: normal;
 }
-.news-filter .filter-droplist-item.not-link:hover:after {
+.blog-filter .filter-droplist-item.not-link:hover:after {
     content: '';
 }
-.news-filter .filter-droplist-item.selected:hover:after {
+.blog-filter .filter-droplist-item.selected:hover:after {
     content: 'Отменить';
     float: right;
     color: var(--yadarkgray);
     font-size: var(--yatextminusminus);
     font-weight: normal;
 }
-
-.news-item-arrow img {
+.blog-title-description {font-size: 18px;}
+.blog-item-arrow img {
 	width: 8px;
 	height: auto;
 }
@@ -60,22 +60,22 @@
 
 
 /* 2025 */
-.news-filter-tabs .news-filter-tabs-item {
+.blog-filter-tabs .blog-filter-tabs-item {
     font-size: 15px;
     width: 25%;
     height: 54px;
     background-color: #D6D8DB;
     border-radius: var(--yaradius16) var(--yaradius16) 0 0;
 }
-.news-filter-tabs .news-filter-tabs-item.active, .news-filter-tabs .news-filter-tabs-item:hover {
+.blog-filter-tabs .blog-filter-tabs-item.active, .blog-filter-tabs .blog-filter-tabs-item:hover {
     background-color: var(--yawhite);
 }
 
-.news-filter-tabs-content {
+.blog-filter-tabs-content {
     border-radius: var(--yaradius16);
 }
 
-.news-item .a-image {
+.blog-item .a-image {
 	height: 194px;
 	width: 100%;
 	background-size: 103%;
@@ -83,35 +83,35 @@
 	background-repeat: no-repeat;
 	overflow: hidden;
 }
-.news-item .a-image img {
+.blog-item .a-image img {
 	transition: transform var(--transition);
 }
-.news-item:hover .a-image img {
+.blog-item:hover .a-image img {
 	transform: scale(1.08);
 }
-.news-item-title {
+.blog-item-title {
     min-height: 75px;
     max-height: 75px;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 16px !important;
 }
-.news-item-title span.title {width: 80%;}
+.blog-item-title span.title {width: 80%;}
 @media (max-width: 991.98px) {
-    .news-item .a-image {height: 164px;}
+    .blog-item .a-image {height: 164px;}
 }
 @media (max-width: 429.98px) {
-    .news-item .a-image {height: 188px;}
+    .blog-item .a-image {height: 188px;}
 }
 @media (max-width: 413.98px) {
-    .news-item .a-image {height: 172px;}
+    .blog-item .a-image {height: 172px;}
 }
 @media (max-width: 389.98px) {
-    .news-item .a-image {height: 164px;}
+    .blog-item .a-image {height: 164px;}
 }
 @media (max-width: 374.98px) {
-    .news-item .a-image {height: 164px;}
+    .blog-item .a-image {height: 164px;}
 }
 @media (max-width: 359.98px) {
-    .news-item .a-image {height: 138px;}
+    .blog-item .a-image {height: 138px;}
 }

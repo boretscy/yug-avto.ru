@@ -6,9 +6,13 @@
 	background-size: 103%;
 	background-position: center center;
 	background-repeat: no-repeat;
+	overflow: hidden;
 }
-.main-news .a-image:hover {
-	animation: image-animation var(--img-animation) ease 0s 1 normal forwards;
+.main-news .a-image img {
+	transition: transform var(--transition);
+}
+.main-news .swiper-slide:hover .a-image img {
+	transform: scale(1.08);
 }
 
 

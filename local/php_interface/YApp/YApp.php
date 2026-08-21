@@ -34,6 +34,7 @@
 		const IBLOCK_SEO = 19;
 
 		const IBLOCK_STORIES = 6;
+		const IBLOCK_BLOG = 26;
 		
 		
 		////////////////////////////////////////////////////////////////

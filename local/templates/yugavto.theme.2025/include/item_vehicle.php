@@ -1,11 +1,11 @@
 <?php
 YApp::sp( $item, true );
-// $item['_general'] = $item['_general'] ?? $item['general'] ?? [];
-$item['_tags'] = $item['_tags'] ?? [];
-$item['id'] = $item['ext_id'];
+$item['_general'] = (!empty($item['_general']) && is_array($item['_general'])) ? $item['_general'] : ((!empty($item['general']) && is_array($item['general'])) ? $item['general'] : []);
+$item['_tags'] = (!empty($item['_tags']) && is_array($item['_tags'])) ? $item['_tags'] : [];
+$item['id'] = $item['ext_id'] ?? $item['id'] ?? null;
 $item['offer_link'] = true;
-$data['FAVORITES'] = [];
-$data['COMPARE'] = [];
+$data['FAVORITES'] = (!empty($data['FAVORITES']) && is_array($data['FAVORITES'])) ? $data['FAVORITES'] : [];
+$data['COMPARE'] = (!empty($data['COMPARE']) && is_array($data['COMPARE'])) ? $data['COMPARE'] : [];
 ?>
 <?php
 $carBrand = $item['brand']['name'] ?? '';
@@ -69,6 +69,7 @@ $carImgText = $carBrand . ' ' . $carModel;
 					</a>
 				<?php } ?>
 			</div>
+			<?php if ( !empty($item['_general']) && is_array($item['_general']) ) { ?>
 			<div class="vehicle-card-specification my-3 c-yablack text-minus">
 				<?php foreach (array_chunk($item['_general'], 3) as $s_row) { ?>
 				<div>
@@ -78,6 +79,7 @@ $carImgText = $carBrand . ' ' . $carModel;
 				</div>
 				<?php } ?>
 			</div>
+			<?php } ?>
 			<div class="vehicle-card-discount b-radius-yaradius-8 b-yayellow bg-yawhite pe-2 d-inline-block fw-bold">
 				<div class="d-flex justify-content-between h-100">
 					<span class="c-yawhite bg-yayellow b-radius-yaradius-8 text-uppercase me-2 fw-light h-100 px-1 d-flex justify-content-center align-items-center">Выгода</span>
