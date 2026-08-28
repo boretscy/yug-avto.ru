@@ -16,7 +16,8 @@ $this->setFrameMode(true);
 	
 <?php $this->addExternalJS('https://api-maps.yandex.ru/2.1/?apikey=34ddb940-0941-4b80-ab80-b0aa351b6560&lang=ru_RU'); ?>
 <script data-skip-moving="true">
-	YAPP.DEALERSHIPS = <?= json_encode( $arResult['MAP'] );?>
+	window.YAPP = window.YAPP || {};
+	window.YAPP.DEALERSHIPS = <?= json_encode( $arResult['MAP'] );?>;
 </script>
 
 
