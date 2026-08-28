@@ -53,8 +53,8 @@ function initMainDealershipsMap() {
             if (window.YAPP.DEALERSHIPS.DATA.VIEW) {
                 fetch('/api/main-dealership-view/render/', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams(window.YAPP.DEALERSHIPS.DATA.VIEW)
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(window.YAPP.DEALERSHIPS.DATA.VIEW)
                 })
                 .then(res => res.text())
                 .then(resp => {

@@ -1180,31 +1180,31 @@
                     <div class="row dealerships-on-main-view-info-content text-minus my-2 mx-0">
                         <div class="col-12"><?= $view['ADDRESS'];?></div>
                         <div class="col-12"><?= $view['WORK'];?></div>
-                        <?php if ( $view['PHONE'] ) { ?>
+                        <?php if ( !empty($view['PHONE']) ) { ?>
                         <div class="col-12 py-2">
                             <a href="tel:<?= YApp::phoneIn($view['PHONE']);?>" class="h3 fw-bold block-title c-yablack c-h-yablack text-decoration-none"><?= YApp::phoneOut($view['PHONE']);?></a>
                         </div>
                         <?php } ?>
-                        <?php if ( $view['SITE']['LINK'] ) { ?>
+                        <?php if ( !empty($view['SITE']) && is_array($view['SITE']) && !empty($view['SITE']['LINK']) ) { ?>
                         <div class="col-12">
-                            <a href="<?= $view['SITE']['LINK'];?>" target="_blank" class="c-yablack c-h-yablack text-decoration-none"><?= parse_url($view['SITE']['LINK'])['host'];?></a>
+                            <a href="<?= $view['SITE']['LINK'];?>" target="_blank" class="c-yablack c-h-yablack text-decoration-none"><?= parse_url($view['SITE']['LINK'])['host'] ?? $view['SITE']['LINK'];?></a>
                         </div>
                         <?php } ?>
                     </div>
                 </div>
-                <?php if ( $view['YANDEX_ID'] ) { ?>
+                <?php if ( !empty($view['YANDEX_ID']) ) { ?>
 				<div class="dealership-card-rating mb-3" data-id="<?= $view['YANDEX_ID'];?>"><iframe src="https://yandex.ru/sprav/widget/rating-badge/<?=  $view['YANDEX_ID'];?>?type=rating" width="150" height="50" frameborder="0"></iframe></div>
 				<?php } ?>
                 <div class="d-flex justify-content-between w-100 px-2">
-                    <?php if ($view['BUTTONS']['CIS']) { ?>
+                    <?php if ( !empty($view['BUTTONS']) && is_array($view['BUTTONS']) && !empty($view['BUTTONS']['CIS']) ) { ?>
                     <a 
-                        href="/cars/<?= (($POST['ENTITY'])?:'new');?>/?dealership=<?= $view['CODE'];?>"
+                        href="/cars/<?= ((!empty($POST['ENTITY'])) ? $POST['ENTITY'] : 'new');?>/?dealership=<?= $view['CODE'];?>"
                         class="dealerships-on-main-view-info-button b-radius-yaradius-8 px-2 d-flex align-items-center justify-content-center d-block c-yablack c-h-yablack text-decoration-none bg-yawhite bg-h-yayellow">
                         <img class="me-2" src="/local/templates/yugavto.theme.2025/assets/images/svg/icon-dealerships-cis.svg" />
                         <span>Авто в наличии</span>
                     </a>
                     <?php } ?>
-                    <?php if ($view['BUTTONS']['SERVICE']) { ?>
+                    <?php if ( !empty($view['BUTTONS']) && is_array($view['BUTTONS']) && !empty($view['BUTTONS']['SERVICE']) ) { ?>
                     <a 
                         href="/services/service/?dealership=<?= $view['CODE'];?>"
                         class="dealerships-on-main-view-info-button b-radius-yaradius-8 px-2 d-flex align-items-center justify-content-center d-block c-yablack c-h-yablack text-decoration-none bg-yawhite bg-h-yayellow">
@@ -1213,27 +1213,6 @@
                     </a>
                     <?php } ?>
                 </div>
-                    
-                    <?php /* 
-                    <div class="row mx-0">
-                        <div class="col-6 pe-1">
-                            <a 
-                                href="/cars/<?= (($POST['ENTITY'])?:'new');?>/?dealership=<?= $view['EXTERNAL_CODE'];?>"
-                                class="dealerships-on-main-view-info-button b-radius-yaradius-8 px-2 d-flex align-items-center justify-content-center d-block c-yablack c-h-yablack text-decoration-none bg-yawhite bg-h-yayellow">
-                                <img class="me-2" src="/local/templates/yugavto.theme.2025/assets/images/svg/icon-dealerships-cis.svg" />
-                                <span>Авто в наличии</span>
-                            </a>
-                        </div>
-                        <div class="col-6 ps-1">
-                            <a 
-                                href="/cars/<?= (($POST['ENTITY'])?:'new');?>/?dealership=<?= $view['EXTERNAL_CODE'];?>"
-                                class="dealerships-on-main-view-info-button b-radius-yaradius-8 px-2 d-flex align-items-center justify-content-center d-block c-yablack c-h-yablack text-decoration-none bg-yawhite bg-h-yayellow">
-                                <img class="me-2" src="/local/templates/yugavto.theme.2025/assets/images/svg/icon-dealerships-service.svg" />
-                                <span>Запись на сервис</span>
-                            </a>
-                        </div>
-                    </div>
-                    */ ?>
             </div>
             <div class="dealerships-on-main-view-footer d-flex justify-content-between">
 				<div class="dealerships-on-main-view-footer-left bg-yawhite d-flex">
@@ -1250,7 +1229,7 @@
 				<div class="dealerships-on-main-view-footer-right bg-yalightbluegray d-flex">
 					<div class="dealerships-on-main-view-footer-right-content bg-yawhite w-100 d-flex justify-content-end align-items-end">
 						<a 
-							href="<?= $view['BUTTONS']['MAP'];?>" 
+							href="<?= (!empty($view['BUTTONS']) && is_array($view['BUTTONS']) && !empty($view['BUTTONS']['MAP'])) ? $view['BUTTONS']['MAP'] : '#';?>" 
 							class="b-radius-yaradius-12 bg-yalightbluegray dealerships-on-main-view-item d-flex justify-content-center align-items-center position-relative">
                             <img class="position-absolute" src="/local/templates/yugavto.theme.2025/assets/images/svg/icon-dealerships-route.svg" />
                             <img class="position-absolute" src="/local/templates/yugavto.theme.2025/assets/images/svg/icon-dealerships-route-a.svg" />
