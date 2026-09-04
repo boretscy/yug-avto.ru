@@ -142,18 +142,18 @@ if ( !$filter['vehicle'] ) {
     $brandsData = json_decode(YAppShowroom::httpGet($app->makeApiUrl($filter, 'brands')), true)['dropLists']['brands'] ?? null;
     $data['filter']['dropLists']['brands'] = $data['brands'] = $brandsData;
     $data['current_page'] = ($_GET['page'] ) ? (int)$_GET['page'] : 1;
-    $data['filter']['totalCount'] = $data['totalCount'] ?? 0;
-    array_multisort(array_column($data['brands'], 'vehicles'), SORT_DESC, SORT_NUMERIC, $data['brands']);
-
     $compareFunc = function($a, $b) {
-        $nameA = $a['name'] ?? '';
-        $nameB = $b['name'] ?? '';
+        $nameA = trim($a['name'] ?? '');
+        $nameB = trim($b['name'] ?? '');
         $isRusA = preg_match('/^[А-Яа-яЁё]/u', $nameA);
         $isRusB = preg_match('/^[А-Яа-яЁё]/u', $nameB);
         if ($isRusA && !$isRusB) return -1;
         if (!$isRusA && $isRusB) return 1;
-        return strcmp(mb_strtolower($nameA, 'UTF-8'), mb_strtolower($nameB, 'UTF-8'));
+        return mb_strtolower($nameA, 'UTF-8') <=> mb_strtolower($nameB, 'UTF-8');
     };
+    if ( !empty($data['brands']) ) {
+        usort($data['brands'], $compareFunc);
+    }
     if ( !empty($data['filter']['dropLists']['brands']) ) {
         usort($data['filter']['dropLists']['brands'], $compareFunc);
     }

@@ -2,32 +2,70 @@
     <div class="row">
         <div class="col px-4">
             <div class="brands-list my-2">
-                <?php $brands_items = ( !empty($data['filter']['dropLists']['models']) ) ? $data['filter']['dropLists']['models'] : $data['brands']; ?>
-                <?php $f_key = ( !empty($data['filter']['dropLists']['models']) ) ? 'model' : 'brand'; ?>
-                <?php array_multisort(array_column($brands_items, 'vehicles'), SORT_DESC, SORT_NUMERIC, $brands_items); ?>
+                <?php 
+                    $hasSingleModel = !empty($filter['model']) && count(explode(',', $filter['model'])) == 1;
+                    $hasEquipments = !empty($data['filter']['dropLists']['equipments']);
+
+                    if ( $hasSingleModel && $hasEquipments ) {
+                        $brands_items = $data['filter']['dropLists']['equipments'];
+                        $f_key = 'equipment';
+                        $entity_title = 'комплектации';
+                    } elseif ( !empty($data['filter']['dropLists']['models']) ) {
+                        $brands_items = $data['filter']['dropLists']['models'];
+                        $f_key = 'model';
+                        $entity_title = 'модели';
+                    } else {
+                        $brands_items = $data['brands'];
+                        $f_key = 'brand';
+                        $entity_title = 'марки';
+                    }
+                ?>
                 <?php
-                usort($brands_items, function($a, $b) {
-                    $nameA = $a['name'] ?? '';
-                    $nameB = $b['name'] ?? '';
+                usort($brands_items, function($a, $b) use ($f_key) {
+                    if ($f_key !== 'brand') {
+                        $cntA = $a['vehicles'] ?? ($a['count'] ?? 0);
+                        $cntB = $b['vehicles'] ?? ($b['count'] ?? 0);
+                        if ($cntA != $cntB) return ($cntA > $cntB) ? -1 : 1;
+                    }
+                    $nameA = trim($a['name'] ?? '');
+                    $nameB = trim($b['name'] ?? '');
                     $isRusA = preg_match('/^[А-Яа-яЁё]/u', $nameA);
                     $isRusB = preg_match('/^[А-Яа-яЁё]/u', $nameB);
                     if ($isRusA && !$isRusB) return -1;
                     if (!$isRusA && $isRusB) return 1;
-                    return strcmp(mb_strtolower($nameA, 'UTF-8'), mb_strtolower($nameB, 'UTF-8'));
+                    return mb_strtolower($nameA, 'UTF-8') <=> mb_strtolower($nameB, 'UTF-8');
                 });
                 ?>
                 <?php foreach ( $brands_items as $k => $item ) { 
-                    $itemBrand = (!empty($item['brand']['code'])) ? $item['brand']['code'] : ((!empty($item['brand_code'])) ? $item['brand_code'] : $filter['brand']);
-                    $urlParams = ($f_key === 'model' && !empty($itemBrand)) ? ['brand' => $itemBrand, 'model' => $item['code']] : [$f_key => $item['code']];
+                    $itemCount = $item['vehicles'] ?? ($item['count'] ?? 0);
+                    $isActive = false;
+                    if ( $f_key === 'equipment' ) {
+                        $isActive = (!empty($filter['equipment']) && in_array($item['code'], explode(',', $filter['equipment'])));
+                        $targetFilter = $filter;
+                        if ( $isActive ) {
+                            unset($targetFilter['equipment']);
+                            $linkUrl = $app->makeFilterUrl($targetFilter);
+                        } else {
+                            $targetFilter['equipment'] = $item['code'];
+                            $linkUrl = $app->makeFilterUrl($targetFilter);
+                        }
+                    } elseif ( $f_key === 'model' ) {
+                        $itemBrand = (!empty($item['brand']['code'])) ? $item['brand']['code'] : ((!empty($item['brand_code'])) ? $item['brand_code'] : $filter['brand']);
+                        $urlParams = (!empty($itemBrand)) ? ['brand' => $itemBrand, 'model' => $item['code']] : ['model' => $item['code']];
+                        $linkUrl = $app->makeFilterUrl($filter, $urlParams);
+                    } else {
+                        $urlParams = ['brand' => $item['code']];
+                        $linkUrl = $app->makeFilterUrl($filter, $urlParams);
+                    }
                 ?>
                 <div class="brands-list-item <?= (($k>13&&count($brands_items)>15)?'hidden d-none':'');?>">
                     <a 
-                        href="<?= $app->makeFilterUrl($filter, $urlParams);?>"
-                        class="c-yablack c-h-yadarkgray text-decoration-none py-1 d-block text-uppercase"
+                        href="<?= $linkUrl;?>"
+                        class="c-yablack c-h-yadarkgray text-decoration-none py-1 d-block text-uppercase <?= ($isActive ? 'fw-bold c-yayellow' : '');?>"
                         >
                         <div class="row">
                             <<?= ((in_array($item['code'], $app->Conf()['Filter']['BrandsList']['divtoh2'])||in_array($filter['brand'], $app->Conf()['Filter']['BrandsList']['divtoh2']))?'h2':'div');?> class="col-8 d-flex justify-content-start align-items-start <?= ((in_array($item['code'], $app->Conf()['Filter']['BrandsList']['divtoh2'])||in_array($filter['brand'], $app->Conf()['Filter']['BrandsList']['divtoh2']))?'h2-to-div':'');?>"><?= $item['name'];?></<?= ((in_array($item['code'], $app->Conf()['Filter']['BrandsList']['divtoh2'])||in_array($filter['brand'], $app->Conf()['Filter']['BrandsList']['divtoh2']))?'h2':'div');?>>
-                            <div class="col d-flex justify-content-end align-items-start"><span class="d-block text-center b-radius-yaradius-3 bg-yalightgray bg-h-yayellow px-1 brands-list-item-count"><?= $item['vehicles'];?></span></div>
+                            <div class="col d-flex justify-content-end align-items-start"><span class="d-block text-center b-radius-yaradius-3 bg-yalightgray bg-h-yayellow px-1 brands-list-item-count"><?= $itemCount;?></span></div>
                         </div>
                     </a>
                 </div>
@@ -37,7 +75,7 @@
                     <a rel="nofollow" class="c-yablack c-h-yadarkgray text-decoration-noned-block py-1 d-block" href="#brands" data-remodal-target="brands" role="not-cover">
                         <div class="row">
                             <div class="col-8">
-                                <span class="me-2">Все <?= ((!empty($data['filter']['dropLists']['models']))?'модели':'марки');?></span>
+                                <span class="me-2">Все <?= $entity_title;?></span>
                                 <span class="me-2 d-none">Скрыть</span>
                             </div>
                             <div class="col text-end"><img src="<?= $app->Conf()['assetsUrl'];?>/assets/images/svg/drop-corner.svg" class="" /></div>
@@ -63,13 +101,30 @@
 		</div>
 		<div class="row brands-list-items text-minus mb-5">
 			<?php foreach ( $brands_items as $k => $item ) { 
-				$itemBrand = (!empty($item['brand']['code'])) ? $item['brand']['code'] : ((!empty($item['brand_code'])) ? $item['brand_code'] : $filter['brand']);
-				$urlParams = ($f_key === 'model' && !empty($itemBrand)) ? ['brand' => $itemBrand, 'model' => $item['code']] : [$f_key => $item['code']];
+				$itemCount = $item['vehicles'] ?? ($item['count'] ?? 0);
+				if ( $f_key === 'equipment' ) {
+					$isActive = (!empty($filter['equipment']) && in_array($item['code'], explode(',', $filter['equipment'])));
+					$targetFilter = $filter;
+					if ( $isActive ) {
+						unset($targetFilter['equipment']);
+						$modalLink = $app->makeFilterUrl($targetFilter);
+					} else {
+						$targetFilter['equipment'] = $item['code'];
+						$modalLink = $app->makeFilterUrl($targetFilter);
+					}
+				} elseif ( $f_key === 'model' ) {
+					$itemBrand = (!empty($item['brand']['code'])) ? $item['brand']['code'] : ((!empty($item['brand_code'])) ? $item['brand_code'] : $filter['brand']);
+					$urlParams = (!empty($itemBrand)) ? ['brand' => $itemBrand, 'model' => $item['code']] : ['model' => $item['code']];
+					$modalLink = !empty($item['path']) ? $item['path'].'/' : $app->makeFilterUrl($filter, $urlParams);
+				} else {
+					$urlParams = ['brand' => $item['code']];
+					$modalLink = !empty($item['path']) ? $item['path'].'/' : $app->makeFilterUrl($filter, $urlParams);
+				}
 			?>
 			<div class="col-3 py-1 brands-list-item">
-				<a href="<?= !empty($item['path']) ? $item['path'].'/' : $app->makeFilterUrl($filter, $urlParams);?>" class="c-yablack c-h-yadarkgray text-uppercase d-flex justify-content-between align-items-center text-decoration-none ">
+				<a href="<?= $modalLink;?>" class="c-yablack c-h-yadarkgray text-uppercase d-flex justify-content-between align-items-center text-decoration-none ">
 					<span><?= $item['name'];?></span>
-					<span class="brands-list-item-count me-3"><?= $item['vehicles'];?></span>
+					<span class="brands-list-item-count me-3"><?= $itemCount;?></span>
 				</a>
 			</div>
 			<?php } ?>
