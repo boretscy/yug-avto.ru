@@ -17,6 +17,14 @@
                 </a>
                 <?php }
             } ?>
+            <?php if ( !empty($filter['equipment']) ) {
+                foreach ( explode(',', $filter['equipment']) as $item) { ?>
+                <a href="<?= $app->makeFilterUrl($filter, ['equipment'=>$item]);?>" class="px-2 py-1 bg-yabluegray c-yablack c-h-yablack text-decoration-none b-radius-yaradius-7 me-2 tags-list-item mb-2 d-inline-block">
+                    <?= $app->getTagName($data['filter']['dropLists']['equipments'] ?? [], $item);?>
+                    <img src="<?= SITE_TEMPLATE_PATH;?>/assets/images/svg/cross.svg" class="ms-2" />
+                </a>
+                <?php }
+            } ?>
             <?php if ( $filter['price'] ) { ?>
                 <a href="<?= $app->makeFilterUrl($filter, ['price'=>false]);?>" class="px-2 py-1 bg-yabluegray c-yablack c-h-yablack text-decoration-none b-radius-yaradius-7 me-2 tags-list-item mb-2 d-inline-block">
                     <?= number_format((int)explode(',',$filter['price'])[0], 0, '.', ' ');?> ₽ - <?= number_format((int)explode(',',$filter['price'])[1], 0, '.', ' ');?> ₽
@@ -91,7 +99,7 @@
                 </a>
             <?php } ?>
             <?php if (
-                $filter['brand'] || $filter['model'] || $filter['price'] || $filter['body'] || $filter['transmission'] || $filter['engine'] || $filter['drive'] || $filter['color'] || $filter['dealership'] || $filter['volume'] || $filter['power'] || $filter['year']
+                $filter['brand'] || $filter['model'] || !empty($filter['equipment']) || $filter['price'] || $filter['body'] || $filter['transmission'] || $filter['engine'] || $filter['drive'] || $filter['color'] || $filter['dealership'] || $filter['volume'] || $filter['power'] || $filter['year']
             ) { ?>
                 <a href="<?= $app->makeFilterUrl($filter, ['clear'=>true]);?>" class="px-2 py-1 bg-yawhite c-yablack c-h-yablack text-decoration-none b-radius-yaradius-7 me-2 tags-list-item mb-2 d-inline-block">
                     Сбросить

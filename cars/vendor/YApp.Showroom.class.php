@@ -185,7 +185,15 @@
 						if ( explode('-', $i)[0] == 'page' ) {
 							$res['page'] = (int)explode('-', $i)[1];
 						} else {
-							$push = ( $item ) ?: [(($res['city'])?'model':'vehicle')=>$i];
+							if ( $item ) {
+								$push = $item;
+							} elseif ( $res['city'] ) {
+								$push = ['model' => $i];
+							} elseif ( is_numeric($i) ) {
+								$push = ['vehicle' => $i];
+							} else {
+								$push = ['equipment' => $i];
+							}
 							foreach ( $push as $pk => $pi ) $res[$pk] = $pi;
 						}
 						break;
@@ -194,7 +202,13 @@
 							$res['page'] = (int)explode('-', $i)[1];
 						} else {
 							$push = [];
-							if ( $res['city'] ) $push = ( $item ) ?: ['vehicle'=>$i];
+							if ( $item ) {
+								$push = $item;
+							} elseif ( $res['city'] ) {
+								$push = is_numeric($i) ? ['vehicle' => $i] : ['equipment' => $i];
+							} elseif ( is_numeric($i) ) {
+								$push = ['vehicle' => $i];
+							}
 							foreach ( $push as $pk => $pi ) $res[$pk] = $pi;
 						}
 						break;
@@ -396,7 +410,21 @@
 							break;
 						}
 					}
-					$res[] = $tmp;
+					$res[] = $model = $tmp;
+
+					if ( !empty($filter['equipment']) && count(explode(',', $filter['equipment']))==1 ) {
+						$tmp['link'] = $model['link'].$filter['equipment'].'/';
+						if ( !empty($f['dropLists']['equipments']) ) {
+							foreach ($f['dropLists']['equipments'] as $i ) {
+								if ( $i['code'] == $filter['equipment'] ) {
+									$tmp['text'] = $i['name'];
+									break;
+								}
+							}
+						}
+						if ( empty($tmp['text']) ) $tmp['text'] = $filter['equipment'];
+						$res[] = $tmp;
+					}
 				}
 			}
 
@@ -597,11 +625,19 @@
 				$res .= $filter['brand'].'/';
 				if ( !empty($filter['model'])  && count(explode(',', $filter['model']))==1 ) {
 					$res .= $filter['model'].'/';
+					if ( !empty($filter['equipment']) && count(explode(',', $filter['equipment']))==1 ) {
+						$res .= $filter['equipment'].'/';
+						unset($filter['equipment']);
+					}
 					unset($filter['model']);
 				}
 				unset($filter['brand']);
 			} elseif ( !empty($filter['model']) && count(explode(',', $filter['model']))==1 ) {
 				$res .= $filter['model'].'/';
+				if ( !empty($filter['equipment']) && count(explode(',', $filter['equipment']))==1 ) {
+					$res .= $filter['equipment'].'/';
+					unset($filter['equipment']);
+				}
 				unset($filter['model']);
 			}
 			unset($filter['page']);
