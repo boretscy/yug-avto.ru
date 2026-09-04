@@ -43,26 +43,26 @@ if ( !empty($items) ) {
     $api_url = $app->makeApiUrl($filter, 'vehicles');
     $data = json_decode( YAppShowroom::httpGet($api_url), true );
     
-    // Синхронизация куки (очистка от проданных авто)
-    $cur_items = [];
-    if ( !empty($data['items']) && is_array($data['items']) ) {
+    // Синхронизация куки (очистка от проданных авто) только при успешном ответе API
+    if ( is_array($data) && isset($data['items']) && is_array($data['items']) ) {
+        $cur_items = [];
         foreach ( $data['items'] as $item ) {
             if ( !empty($item['id']) ) {
                 $cur_items[] = (int)$item['id'];
             }
         }
-    }
-    
-    $valid_items = [];
-    foreach ( $items as $item ) {
-        if ( in_array( (int)$item, $cur_items ) ) {
-            $valid_items[] = (int)$item;
+        
+        $valid_items = [];
+        foreach ( $items as $item ) {
+            if ( in_array( (int)$item, $cur_items ) ) {
+                $valid_items[] = (int)$item;
+            }
         }
-    }
-    
-    if ( count($items) !== count($valid_items) ) {
-        $items = $valid_items;
-        setcookie(ENTITY, json_encode($items), time()+3600*24*14, '/');
+        
+        if ( count($items) !== count($valid_items) ) {
+            $items = $valid_items;
+            setcookie(ENTITY, json_encode($items), time()+3600*24*14, '/');
+        }
     }
 }
 

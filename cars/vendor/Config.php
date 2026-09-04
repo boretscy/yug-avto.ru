@@ -6,15 +6,15 @@
         'baseUrl' => '/cars/new',
         'assetsUrl' => '/cars',
         'Api' => [
-            'baseURL' => 'https://apps.avatr-yugavto.ru/API/get/cis',
+            'baseURL' => 'https://' . YApp::GO_API_DOMAIN . '/api/v1/cis',
             'token' => 'ef6541490c8bb9d481d37020b6a1953e',
             'mode' => 'all',
-            'name' => 'Новые автомобили',
+            'name' => 'Автомобили',
             'Params' => [
                 // '!dealership' => '1489'
             ],
         ],
-        'ItemsPerPage' => 15,
+        'ItemsPerPage' => 30,
         'userExternalForms' => true,
 
         'Forms' => [
