@@ -139,7 +139,11 @@ if ( !$filter['vehicle'] ) {
         $data['filter'] = $filterData;
     }
 
-    $brandsData = json_decode(YAppShowroom::httpGet($app->makeApiUrl($filter, 'brands')), true)['dropLists']['brands'] ?? null;
+    if ( !empty($filter['dealership']) && !empty($data['filter']['dropLists']['brands']) ) {
+        $brandsData = $data['filter']['dropLists']['brands'];
+    } else {
+        $brandsData = json_decode(YAppShowroom::httpGet($app->makeApiUrl($filter, 'brands')), true)['dropLists']['brands'] ?? null;
+    }
     $data['filter']['dropLists']['brands'] = $data['brands'] = $brandsData;
     $data['current_page'] = ($_GET['page'] ) ? (int)$_GET['page'] : 1;
     $compareFunc = function($a, $b) {

@@ -134,7 +134,7 @@
 				<div class="row brands-on-main-title">
 					<div class="col-12 d-flex justify-content-end align-items-center text-minus">
 						<a href="<?= $app->Conf()['baseUrl']; ?>/" class="c-yadarkgray c-h-yayellow text-decoration-none">
-							Все марки
+							Все <?= $entity_title;?>
 							<img class="ms-3" src="/local/templates/yugavto.theme.2025/components/bitrix/news.list/main.filter/images/svg/icon-main-filter-corner-right-s.svg" />
 						</a>
 					</div>
