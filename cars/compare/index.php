@@ -1,16 +1,11 @@
-<?php require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-
-use Bitrix\Main\Page\Asset;
-$Asset = Asset::getInstance();
-
-$APPLICATION->SetTitle("Сравнение автомобилей");
-?>
 <?php
 define('ENTITY', 'CIS_COMPARE');
 if ( isset($_GET['action']) && $_GET['action'] == 'clear' ) {
     unset($_COOKIE[ENTITY]);
     setcookie(ENTITY, json_encode([]), time()-3600, '/');
-    $items = [];
+    $cleanUri = explode('?', $_SERVER['REQUEST_URI'])[0];
+    header("Location: " . $cleanUri);
+    exit();
 }
 if ( isset($_GET['action']) && $_GET['action'] == 'delete' ) {
     $items = ( !empty($_COOKIE[ENTITY]) && is_string($_COOKIE[ENTITY]) ) ? json_decode($_COOKIE[ENTITY], true) : [];
@@ -19,12 +14,20 @@ if ( isset($_GET['action']) && $_GET['action'] == 'delete' ) {
     if ( $indx !== false ) unset( $items[$indx] );
     $items = array_values($items);
     setcookie(ENTITY, json_encode($items), time()+3600*24*14, '/');
+    $cleanUri = explode('?', $_SERVER['REQUEST_URI'])[0];
+    header("Location: " . $cleanUri);
+    exit();
 }
 
-if ( empty($items) ) {
-    $items = ( !empty($_COOKIE[ENTITY]) && is_string($_COOKIE[ENTITY]) ) ? json_decode($_COOKIE[ENTITY], true) : [];
-    if ( !is_array($items) ) $items = [];
-}
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+
+use Bitrix\Main\Page\Asset;
+$Asset = Asset::getInstance();
+
+$APPLICATION->SetTitle("Сравнение автомобилей");
+
+$items = ( !empty($_COOKIE[ENTITY]) && is_string($_COOKIE[ENTITY]) ) ? json_decode($_COOKIE[ENTITY], true) : [];
+if ( !is_array($items) ) $items = [];
 
 $conf = require __DIR__.'/../vendor/Config.php';
 require __DIR__.'/../vendor/YApp.Showroom.class.php';

@@ -145,6 +145,38 @@ class YAppStore extends EventTarget {
     }
 
     /**
+     * Полная очистка Избранного
+     */
+    clearFavorites() {
+        this.#state.favorites = [];
+        this.#saveCookie('CIS_FAVORITES', []);
+        this.dispatchEvent(new CustomEvent('favorites:updated', {
+            detail: {
+                favorites: [],
+                count: 0,
+                id: 0,
+                action: 'cleared'
+            }
+        }));
+    }
+
+    /**
+     * Полная очистка Сравнения
+     */
+    clearCompare() {
+        this.#state.compare = [];
+        this.#saveCookie('CIS_COMPARE', []);
+        this.dispatchEvent(new CustomEvent('compare:updated', {
+            detail: {
+                compare: [],
+                count: 0,
+                id: 0,
+                action: 'cleared'
+            }
+        }));
+    }
+
+    /**
      * Принудительная перезагрузка состояния из Cookie
      */
     refresh() {

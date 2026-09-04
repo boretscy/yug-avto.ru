@@ -226,3 +226,27 @@ $(document).on('click', 'a[href*="action=delete"]', function(e) {
         }
     }
 });
+
+// Клик-обработчик для "Очистить" (Избранное / Сравнение)
+$(document).on('click', 'a[href*="action=clear"]', function(e) {
+    e.preventDefault();
+    let isCompare = window.location.pathname.indexOf('/compare/') >= 0;
+    let target = isCompare ? 'CIS_COMPARE' : 'CIS_FAVORITES';
+
+    if (window.YAppStore) {
+        if (isCompare) {
+            window.YAppStore.clearCompare();
+        } else {
+            window.YAppStore.clearFavorites();
+        }
+        if (YAPP.CONNECTOR) {
+            YAPP.CONNECTOR.CIS_FAVORITES = window.YAppStore.favorites;
+            YAPP.CONNECTOR.CIS_COMPARE = window.YAppStore.compare;
+        }
+    } else {
+        YAPP.setCookie(target, JSON.stringify([]), {'max-age': -1});
+        if (YAPP.CONNECTOR) YAPP.CONNECTOR[target] = [];
+    }
+
+    window.location.href = window.location.pathname;
+});
