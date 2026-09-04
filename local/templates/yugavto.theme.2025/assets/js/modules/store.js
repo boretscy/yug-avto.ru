@@ -46,7 +46,7 @@ class YAppStore extends EventTarget {
     setCity(cityArray) {
         const newCity = Array.isArray(cityArray) ? [...new Set(cityArray)] : [];
         this.#state.city = newCity;
-        this.#saveCookie('SELECTED_CITY', JSON.stringify(newCity));
+        this.#saveCookie('SELECTED_CITY', newCity);
         this.dispatchEvent(new CustomEvent('city:changed', { detail: { city: newCity } }));
     }
 
@@ -76,6 +76,28 @@ class YAppStore extends EventTarget {
     }
 
     /**
+     * Прямое удаление автомобиля из Избранного
+     */
+    removeFavorite(vehicleId) {
+        const id = Number(vehicleId);
+        if (!id) return;
+
+        const index = this.#state.favorites.indexOf(id);
+        if (index >= 0) {
+            this.#state.favorites.splice(index, 1);
+            this.#saveCookie('CIS_FAVORITES', this.#state.favorites);
+            this.dispatchEvent(new CustomEvent('favorites:updated', {
+                detail: {
+                    favorites: [...this.#state.favorites],
+                    count: this.#state.favorites.length,
+                    id,
+                    action: 'removed'
+                }
+            }));
+        }
+    }
+
+    /**
      * Добавление / удаление автомобиля из Сравнения
      */
     toggleCompare(vehicleId) {
@@ -101,6 +123,35 @@ class YAppStore extends EventTarget {
     }
 
     /**
+     * Прямое удаление автомобиля из Сравнения
+     */
+    removeCompare(vehicleId) {
+        const id = Number(vehicleId);
+        if (!id) return;
+
+        const index = this.#state.compare.indexOf(id);
+        if (index >= 0) {
+            this.#state.compare.splice(index, 1);
+            this.#saveCookie('CIS_COMPARE', this.#state.compare);
+            this.dispatchEvent(new CustomEvent('compare:updated', {
+                detail: {
+                    compare: [...this.#state.compare],
+                    count: this.#state.compare.length,
+                    id,
+                    action: 'removed'
+                }
+            }));
+        }
+    }
+
+    /**
+     * Принудительная перезагрузка состояния из Cookie
+     */
+    refresh() {
+        this.#initFromCookies();
+    }
+
+    /**
      * Инициализация состояния из Cookie
      */
     #initFromCookies() {
@@ -121,7 +172,8 @@ class YAppStore extends EventTarget {
     }
 
     #saveCookie(name, val) {
-        document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(JSON.stringify(val))}; path=/; max-age=${3600 * 24 * 14}`;
+        const strVal = typeof val === 'string' ? val : JSON.stringify(val);
+        document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(strVal)}; path=/; max-age=${3600 * 24 * 14}`;
     }
 }
 
