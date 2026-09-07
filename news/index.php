@@ -9,7 +9,9 @@ $APPLICATION->SetTitle("Новости Юг-Авто");
 </style>
 <?php 
 	// Подготовка фильтра через D7 сервис FilterService
+	global $arFilterNews;
 	$arFilterNews = \Local\Project\Services\FilterService::getNewsFilter($_GET);
+	$GLOBALS['arFilterNews'] = $arFilterNews;
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news", 
