@@ -1,5 +1,10 @@
 # Changelog
 
+## [2026-09-07]
+### Removed
+- **PROD (`main`):**
+  - Удален раздел «Блог» (`/blog/`), шаблоны компонента `bitrix:news/blog/`, вывод слайдеров статей блога на главной странице (`index.php`) и в детальных карточках авто (`cars/new/index.php`, `cars/used/index.php`), пункт меню в `about/.top_menu_items.menu.php`, правило в `urlrewrite.php` и константа `IBLOCK_BLOG` из `YApp.php`.
+
 ## [2026-09-04]
 ### Changed
 - **Витрина Битрикс (`serverDEV`) и Go API (`yapps`):**
