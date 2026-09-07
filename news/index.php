@@ -1,4 +1,5 @@
 <?php
+header("X-Accel-Expires: 0");
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetPageProperty("title", "Новости Юг-Авто");
 $APPLICATION->SetPageProperty("description", "Новости компании ЮГ-Авто, новости дилерского центра в Краснодаре");
@@ -78,7 +79,7 @@ $APPLICATION->SetTitle("Новости Юг-Авто");
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"SEF_FOLDER" => "/news/",
 		"SEF_MODE" => "Y",
-		"SET_LAST_MODIFIED" => "Y",
+		"SET_LAST_MODIFIED" => "N",
 		"SET_STATUS_404" => "Y",
 		"SET_TITLE" => "Y",
 		"SHOW_404" => "Y",
