@@ -28,13 +28,29 @@ while ( $ob = $rs->Fetch() ) {
 // get BRANDS for FILTER
 $arResult['FILTER']['brand']['selected'] = 0;
 $rs = CIBlockElement::GetList(
-    ['name'=>'asc'],
+    ['name' => 'asc'],
     [
         'IBLOCK_ID' => YApp::IBLOCK_BRANDS,
-        'ACTIVE' => 'Y'
+        'ACTIVE' => 'Y',
+        'ID' => CIBlockElement::SubQuery(
+            'PROPERTY_BRAND',
+            [
+                'IBLOCK_ID' => YApp::IBLOCK_DEALERSHIPS,
+                'ACTIVE' => 'Y',
+                'ID' => CIBlockElement::SubQuery(
+                    'PROPERTY_DEALERSHIP',
+                    [
+                        'IBLOCK_ID' => YApp::IBLOCK_OFFERS,
+                        'ACTIVE' => 'Y',
+                        '!PROPERTY_DEALERSHIP_VALUE' => false
+                    ]
+                ),
+                '!PROPERTY_BRAND_VALUE' => false
+            ]
+        )
     ],
     false, false,
-    ['ID', 'NAME', 'CODE', 'PREVIEW_PICTURE']  
+    ['ID', 'NAME', 'CODE']  
 );
 while ( $ob = $rs->GetNextElement() ) {
 
@@ -77,22 +93,12 @@ $rs = CIBlockElement::GetList(
     false, false,
     ['ID', 'NAME', 'CODE', 'PROPERTY_BRAND', 'PROPERTY_EXTERNAL_CODE']  
 );
-$bcodes = [];
 while ( $ob = $rs->GetNextElement() ) {
 
-    $relation = '';
     $tmp = $ob->GetFields();
-    foreach ( $brands as $item ) {
-        if ( (string)$tmp['PROPERTY_BRAND_VALUE'] == $item['id'] && !in_array($item['code'], $bcodes) ) {
-            $relation = $item['code'];
-            $arResult['FILTER']['brand']['items'][] = $item;
-            $bcodes[] = $item['code'];
-        }
-    }
     $arResult['FILTER']['dealership']['items'][] = [
         'code' => $tmp['CODE'], 
         'name' => $tmp['NAME'], 
-        'relation' => $relation,
         'selected' => ( in_array($tmp['CODE'], explode(',', str_replace('`', '', $_GET['dealership']))) ) ? true : false
     ];
     if ( in_array($tmp['CODE'], explode(',', str_replace('`', '', $_GET['dealership']))) ) $arResult['FILTER']['dealership']['selected']++;
