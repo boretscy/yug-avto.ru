@@ -6,6 +6,8 @@
   - В `local/templates/yugavto.theme.2025/snippets/` добавлены сниппеты для форматирования статей блога («Важно», «Цитата», «Итоговый вывод») с конфигурацией `.content.php` под версионный контроль Git.
 
 ### Fixed
+- **Слайдер Swiper в блоке новостей и статей («Читайте также»):**
+  - В шаблоне `local/templates/yugavto.theme.2025/components/bitrix/news.list/main.news/template.php` добавлена надежная инлайн-инициализация Swiper с поддержкой `watchOverflow: true`, `observer: true` и пошаговым скроллом `slidesPerGroup: 1`, обеспечивающая корректную работу слайдера при вложенных вызовах в детальных статьях блога и разделах автосалонов.
 - **SEO: устранение дублирующего тега canonical:**
   - В шаблоне сайта `local/templates/yugavto.theme.2025/header.php` удален дублирующий ручной вывод `<link rel="canonical">`, конфликтовавший с каноническим тегом, штатно генерируемым Битриксом через `$APPLICATION->ShowHead()`. На главной странице оставлен единственный верхний canonical (`https://yug-avto.ru`).
 - **SEO: исправление разметки JSON-LD Schema.org в витрине б/у авто (`/cars/used/`):**
