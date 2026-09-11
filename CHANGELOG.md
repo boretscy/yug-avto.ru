@@ -2,6 +2,13 @@
 
 ## [2026-09-11]
 ### Added
+- **Сервис отправки страниц в Bing Webmaster / IndexNow с суточным лимитом и очередью:**
+  - Внедрен сервисный класс `\Local\Project\Services\IndexNowService` с поддержкой официального **Bing Webmaster URL Submission API** (и IndexNow), суточным лимитом до 100 URL/день, защитой от дубликатов и системой приоритетов.
+  - Созданы таблицы БД `ya_indexnow_queue` (очередь URL) и `ya_indexnow_log` (аудит суточной отправки).
+  - Реализован обработчик событий инфоблоков `\Local\Project\Handlers\IndexNowHandler` (новости, акции, ДЦ, вакансии) для мгновенной постановки новых и измененных страниц в очередь.
+  - В скрипт генератора каталога `cron/makeSitemap.php` интегрировано автоматическое пакетное добавление новых автомобилей и страниц моделей в очередь IndexNow.
+  - Создан автономный консольный скрипт `cron/indexNowCron.php` с поддержкой флагов `--status`, `--populate`, `--send`, `--dry-run`, `--limit=N`.
+  - В `yapps_config.php` вынесены параметры управления (`INDEXNOW_ENABLED`, `INDEXNOW_DRY_RUN`, `INDEXNOW_PROVIDER`, `INDEXNOW_KEY`, `INDEXNOW_DAILY_LIMIT`).
 - **Сниппеты визуального редактора в основном шаблоне:**
   - В `local/templates/yugavto.theme.2025/snippets/` добавлены сниппеты для форматирования статей блога («Важно», «Цитата», «Итоговый вывод») с конфигурацией `.content.php` под версионный контроль Git.
 
