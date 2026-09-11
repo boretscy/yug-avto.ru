@@ -34,6 +34,7 @@
 		const IBLOCK_SEO = 19;
 
 		const IBLOCK_STORIES = 6;
+		const IBLOCK_BLOG = 26;
 		
 		
 		////////////////////////////////////////////////////////////////
@@ -427,17 +428,14 @@
 
 		public static function makeFilterUrl( $GET = [], $params = [], $multiple = true ) {
 
-			$path = explode('?', $_SERVER['REQUEST_URI'])[0];
-			$path = preg_replace('#/index\.php$#i', '/', $path);
-			$baseUrl = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$path;
+			$baseUrl =  $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].explode('?', $_SERVER['REQUEST_URI'])[0];
 			if ( empty($params) ) return $baseUrl;
 			foreach ( array_keys($params) as $kp ) {
-				if ( empty($params[$kp]) ) {
+				if ( !$params[$kp] ) {
 					unset($GET[$kp]);
 					continue;
 				}
-				$paramVal = (string)($GET[$kp] ?? '');
-				$tmp = array_unique(array_diff(explode(',', $paramVal),['']));
+				$tmp = array_unique(array_diff(explode(',', $GET[$kp]),['']));
 				$needle = array_search($params[$kp], $tmp);
 				if ( $needle !== false ) {
 					unset($tmp[$needle]);

@@ -1,0 +1,58 @@
+.blog-content h2 {font-size: 28px; margin: 1.5rem 0 1rem;}
+.important {font-size: 22px;}
+.important::before {
+	content: 'Важно';
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--yayellow);
+	display: block;
+	margin-bottom: .5rem;
+	text-transform: uppercase;
+	font-style: normal !important;
+}
+blockquote {
+	font-size: 14px;
+}
+blockquote .title {
+	font-size: 25px;
+	color: var(--yablack);
+	font-weight: 700;
+	margin-bottom: 1rem;
+}
+blockquote .blockquote-line {
+	width: 6px;
+	border-radius: 3px;
+	flex-shrink: 0;
+}
+
+.summury::before {
+	content: 'Итог';
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--yablack);
+	display: block;
+	margin-bottom: .5rem;
+	text-transform: uppercase;
+}
+.summury .title {
+	font-size: 25px;
+	color: var(--yablack);
+	font-weight: 700;
+}
+
+
+@media (max-width: 1199.98px) {
+
+	h1.h2,
+    .h2.block-title {
+		font-size: 24px;
+		line-height: 130%;
+	}
+
+}
+
+@media (max-width: 768.98px) {
+.blog-content h2 {font-size: 18px;}
+.important {font-size: 18px;}
+blockquote .title, .summury .title {font-size: 18px;}
+}
