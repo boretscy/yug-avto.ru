@@ -108,7 +108,7 @@ YApp::sp($arFilterOffers, true);
 			1 => "BRAND",
 			2 => "",
 		],
-		"DETAIL_SET_CANONICAL_URL" => "N",
+		"DETAIL_SET_CANONICAL_URL" => "Y",
 		"DISPLAY_BOTTOM_PAGER" => "Y",
 		"DISPLAY_DATE" => "Y",
 		"DISPLAY_NAME" => "Y",

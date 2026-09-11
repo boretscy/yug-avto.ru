@@ -45,7 +45,7 @@ $APPLICATION->SetTitle("Новости Юг-Авто");
 			0 => "VIDEO",
 			1 => "",
 		],
-		"DETAIL_SET_CANONICAL_URL" => "N",
+		"DETAIL_SET_CANONICAL_URL" => "Y",
 		"DISPLAY_BOTTOM_PAGER" => "Y",
 		"DISPLAY_DATE" => "Y",
 		"DISPLAY_NAME" => "Y",

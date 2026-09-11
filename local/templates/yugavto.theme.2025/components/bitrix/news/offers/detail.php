@@ -68,3 +68,11 @@ $this->setFrameMode(true);
 	),
 	$component
 );?>
+<?php
+if (($arParams["DETAIL_SET_CANONICAL_URL"] ?? 'N') === 'Y' && $ElementID) {
+	$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
+	$host = $_SERVER['HTTP_HOST'] ?? 'yug-avto.ru';
+	$canonicalUri = explode('?', $_SERVER['REQUEST_URI'])[0];
+	$APPLICATION->SetPageProperty('canonical', $protocol . '://' . $host . $canonicalUri);
+}
+?>
