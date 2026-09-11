@@ -11,6 +11,8 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+$this->addExternalCss($templateFolder . '/style.css');
+$this->addExternalJs($templateFolder . '/script.js');
 
 $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http");
 $host = $protocol . "://" . ($_SERVER['HTTP_HOST'] ?? 'htest.yug-avto.ru');

@@ -92,7 +92,10 @@ $articleType = (!empty($arResult['PROPERTIES']['IS_ARTICLE']['VALUE']) && $arRes
 	<?php global $arFilterBlog;
 	$arFilterBlog = [
 		'!ID' => $arResult['ID']
-	];?>
+	];
+	$this->addExternalCss('/local/templates/yugavto.theme.2025/components/bitrix/news.list/main.news/style.css');
+	$this->addExternalJs('/local/templates/yugavto.theme.2025/components/bitrix/news.list/main.news/script.js');
+	?>
 	<?$APPLICATION->IncludeComponent(
 		"bitrix:news.list", 
 		"main.news", 
