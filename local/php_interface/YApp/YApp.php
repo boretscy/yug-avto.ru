@@ -428,14 +428,17 @@
 
 		public static function makeFilterUrl( $GET = [], $params = [], $multiple = true ) {
 
-			$baseUrl =  $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].explode('?', $_SERVER['REQUEST_URI'])[0];
+			$path = explode('?', $_SERVER['REQUEST_URI'])[0];
+			$path = preg_replace('#/index\.php$#i', '/', $path);
+			$baseUrl = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$path;
 			if ( empty($params) ) return $baseUrl;
 			foreach ( array_keys($params) as $kp ) {
-				if ( !$params[$kp] ) {
+				if ( empty($params[$kp]) ) {
 					unset($GET[$kp]);
 					continue;
 				}
-				$tmp = array_unique(array_diff(explode(',', $GET[$kp]),['']));
+				$paramVal = (string)($GET[$kp] ?? '');
+				$tmp = array_unique(array_diff(explode(',', $paramVal),['']));
 				$needle = array_search($params[$kp], $tmp);
 				if ( $needle !== false ) {
 					unset($tmp[$needle]);
