@@ -29,6 +29,8 @@ if (defined('SITE_ID')) {
 // Регистрация автозагрузки классов пространств имен Local\Project
 Loader::registerAutoLoadClasses(null, [
     'Local\Project\Handlers\SEO' => '/local/php_interface/classes/Local/Project/Handlers/SEO.php',
+    'Local\Project\Handlers\IndexNowHandler' => '/local/php_interface/classes/Local/Project/Handlers/IndexNowHandler.php',
+    'Local\Project\Services\IndexNowService' => '/local/php_interface/classes/Local/Project/Services/IndexNowService.php',
     'Local\Project\Services\LastModified' => '/local/php_interface/classes/Local/Project/Services/LastModified.php',
     'Local\Project\Services\PhoneService' => '/local/php_interface/classes/Local/Project/Services/PhoneService.php',
     'Local\Project\Services\FilterService' => '/local/php_interface/classes/Local/Project/Services/FilterService.php',
@@ -39,6 +41,23 @@ EventManager::getInstance()->addEventHandler(
     'main',
     'OnBeforeProlog',
     ['\Local\Project\Handlers\SEO', 'handleRedirects']
+);
+
+// 2. Регистрация событий отправки новых страниц в поисковики (IndexNow / Bing)
+EventManager::getInstance()->addEventHandler(
+    'iblock',
+    'OnAfterIBlockElementAdd',
+    ['\Local\Project\Handlers\IndexNowHandler', 'onAfterIBlockElementAdd']
+);
+EventManager::getInstance()->addEventHandler(
+    'iblock',
+    'OnAfterIBlockElementUpdate',
+    ['\Local\Project\Handlers\IndexNowHandler', 'onAfterIBlockElementUpdate']
+);
+EventManager::getInstance()->addEventHandler(
+    'iblock',
+    'OnAfterIBlockSectionAdd',
+    ['\Local\Project\Handlers\IndexNowHandler', 'onAfterIBlockSectionAdd']
 );
 
 // 2. Обработка заголовков Last-Modified через D7 ORM

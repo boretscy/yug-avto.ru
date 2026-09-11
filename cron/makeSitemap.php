@@ -16,6 +16,9 @@ require_once $dd.'/local/php_interface/vendor/autoload.php';
 if (file_exists($dd.'/local/php_interface/YApp/YApp.php')) {
     require_once $dd.'/local/php_interface/YApp/YApp.php';
 }
+if (file_exists($dd.'/local/php_interface/classes/Local/Project/Services/IndexNowService.php')) {
+    require_once $dd.'/local/php_interface/classes/Local/Project/Services/IndexNowService.php';
+}
 
 $apiDomain = class_exists('YApp') ? YApp::GO_API_DOMAIN : 'apps.yug-avto.ru';
 
@@ -91,37 +94,55 @@ function processSitemapSection($dd, $domain, $apiUrl, $section, $dealershipIds)
         file_put_contents($dd.'/sitemap.xml', implode('</sitemap><sitemap>', $arSS));
     }
 
+    $allVehicleUrls = [];
     $xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
     foreach ($vehicles as $v) {
+        $vehUrl = 'https://'.$domain.'/'.$urlPath.$v['brand']['code'].'/'.$v['model']['code'].'/'.$v['id'].'/';
+        $allVehicleUrls[] = $vehUrl;
         $xml .= '<url><loc>';
-        $xml .= 'https://'.$domain.'/'.$urlPath.$v['brand']['code'].'/'.$v['model']['code'].'/'.$v['id'].'/';
+        $xml .= $vehUrl;
         $xml .= '</loc><lastmod>'.date('c', !empty($v['created']) ? (int)$v['created'] : time()).'</lastmod></url>';
 
         if ($v['type'] == 'vehicle' && !empty($v['dealership']['id']) && in_array($v['dealership']['id'], $dealershipIds)) {
             if ((int)($v['created'] ?? 0) > time() - 3600) {
-                $google[] = 'https://'.$domain.'/'.$urlPath.$v['brand']['code'].'/'.$v['model']['code'].'/'.$v['id'].'/';
+                $google[] = $vehUrl;
             }
         }
     }
     $xml .= '</urlset>';
     file_put_contents($dd.'/'.$vehiclesFile, $xml);
 
+    $allBrandUrls = [];
     $xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
     foreach ($brands as $b) {
+        $bUrl = 'https://'.$domain.'/'.$urlPath.$b['code'];
+        $allBrandUrls[] = $bUrl;
         $xml .= '<url><loc>';
-        $xml .= 'https://'.$domain.'/'.$urlPath.$b['code'];
+        $xml .= $bUrl;
         $xml .= '</loc><lastmod>'.date('c').'</lastmod></url>';
         if (!empty($b['models'])) {
             foreach ($b['models'] as $m) {
+                $mUrl = 'https://'.$domain.'/'.$urlPath.$b['code'].'/'.$m['code'].'/';
+                $allBrandUrls[] = $mUrl;
                 $xml .= '<url><loc>';
-                $xml .= 'https://'.$domain.'/'.$urlPath.$b['code'].'/'.$m['code'].'/';
+                $xml .= $mUrl;
                 $xml .= '</loc><lastmod>'.date('c').'</lastmod></url>';
             }
         }
     }
     $xml .= '</urlset>';
     file_put_contents($dd.'/'.$brandsFile, $xml);
+
+    // Добавление URL автомобилей и брендов в очередь IndexNow / Bing
+    if (class_exists('Local\Project\Services\IndexNowService')) {
+        if (!empty($allVehicleUrls)) {
+            \Local\Project\Services\IndexNowService::enqueueBatch($allVehicleUrls, 5, 'cis_vehicles_' . $section);
+        }
+        if (!empty($allBrandUrls)) {
+            \Local\Project\Services\IndexNowService::enqueueBatch($allBrandUrls, 2, 'cis_brands_' . $section);
+        }
+    }
 
     if (!empty($google) && class_exists('Google_Client')) {
         try {
