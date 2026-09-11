@@ -63,10 +63,10 @@ $logoUrl = $host . '/local/templates/yugavto.theme.2025/assets/images/svg/logo.s
 											</p>
 											<a 
 												href="<?= $arItem['DETAIL_PAGE_URL'];?>" title="<?= htmlspecialchars($arItem['NAME']);?>"
-												class="c-yablack c-h-yablack text-decoration-none swiper-news-on-main-item-title fw-bold d-flex justify-content-between align-items-start block-title-link"
+												class="c-yablack c-h-yablack text-decoration-none swiper-news-on-main-item-title fw-bold d-flex justify-content-between align-items-start"
 												>
 												<h3 itemprop="headline" class="title h6 m-0 fw-bold"><?= $arItem['__NAME'];?></h3>
-												<div class="info-arrow d-inline-block ms-3"></div>
+												<div class="info-arrow d-inline-block ms-3 flex-shrink-0"></div>
 											</a>
 											<p itemprop="description" class="d-none"><?= htmlspecialchars($previewText);?></p>
 											<p itemprop="articleBody" class="d-none"><?= htmlspecialchars($previewText);?></p>
@@ -115,57 +115,5 @@ $logoUrl = $host . '/local/templates/yugavto.theme.2025/assets/images/svg/logo.s
 		</div>
 	</div>
 </div>
-
-<script>
-(function() {
-    function initSwiperNews() {
-        if (typeof Swiper === 'undefined') {
-            setTimeout(initSwiperNews, 100);
-            return;
-        }
-        var containers = document.querySelectorAll('.swiper-news-on-main');
-        containers.forEach(function(sliderEl) {
-            if (sliderEl.swiper) return;
-            var wrap = sliderEl.closest('.container') || sliderEl.parentElement;
-            new Swiper(sliderEl, {
-                pagination: {
-                    el: wrap ? wrap.querySelector('.swiper-pagination') : '.swiper-pagination',
-                    type: "fraction",
-                },
-                navigation: {
-                    nextEl: wrap ? wrap.querySelector('.swiper-news-on-main-button-next') : '.swiper-news-on-main-button-next',
-                    prevEl: wrap ? wrap.querySelector('.swiper-news-on-main-button-prev') : '.swiper-news-on-main-button-prev',
-                },
-                slidesPerView: 3,
-                spaceBetween: 24,
-                slidesPerGroup: 1,
-                watchOverflow: true,
-                observer: true,
-                observeParents: true,
-                breakpoints: {
-                    320: {
-                        slidesPerView: 1,
-                        spaceBetween: 10
-                    },
-                    750: {
-                        slidesPerView: 2,
-                        spaceBetween: 12
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 12
-                    },
-                }
-            });
-        });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSwiperNews);
-    } else {
-        initSwiperNews();
-    }
-})();
-</script>
 
 <?php } ?>
