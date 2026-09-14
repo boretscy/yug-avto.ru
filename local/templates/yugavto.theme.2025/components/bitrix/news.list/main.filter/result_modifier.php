@@ -29,7 +29,7 @@ if ($cache->initCache($cacheTime, $cacheId, $cacheDir)) {
         'USED' => $usedFilter['totalCount'] ?? 0
     ];
 
-    if (!empty($arResult['FILTER'])) {
+    if (!empty($arResult['FILTER']) && !empty($arResult['COUNTS']['NEW']) && $arResult['COUNTS']['NEW'] > 0) {
         $cache->startDataCache();
         $cache->endDataCache([
             'FILTER' => $arResult['FILTER'],
