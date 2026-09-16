@@ -63,7 +63,7 @@ $logoUrl = $host . '/local/templates/yugavto.theme.2025/assets/images/svg/logo.s
 							class="c-yablack c-h-yablack text-decoration-none news-item-title fw-bold d-flex justify-content-between align-items-start block-title-link"
 							>
 							<h2 itemprop="headline" class="title h6 m-0 fw-bold"><?= $arItem['__NAME'];?></h2>
-							<div class="info-arrow d-inline-block ms-3"></div>
+							<div class="info-arrow d-inline-block ms-3 flex-shrink-0"></div>
 						</a>
 						<p itemprop="description" class="d-none"><?= htmlspecialchars($previewText);?></p>
 						<p itemprop="articleBody" class="d-none"><?= htmlspecialchars($previewText);?></p>
