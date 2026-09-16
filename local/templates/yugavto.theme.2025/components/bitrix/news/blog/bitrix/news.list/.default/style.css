@@ -96,7 +96,17 @@
     text-overflow: ellipsis;
     font-size: 16px !important;
 }
-.blog-item-title span.title {width: 80%;}
+.blog-item-title .title,
+.blog-item-title span.title {
+    width: calc(100% - 32px);
+}
+.blog-item-title .info-arrow {
+    width: 23px;
+    height: 23px;
+    min-width: 23px;
+    min-height: 23px;
+    flex-shrink: 0;
+}
 @media (max-width: 991.98px) {
     .blog-item .a-image {height: 164px;}
 }

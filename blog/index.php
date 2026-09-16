@@ -10,6 +10,9 @@ $APPLICATION->SetTitle("Title");
 $APPLICATION->SetPageProperty('body_class', 'bg-yawhite');
 ?>
 
+<style>
+	body {background-color: var(--yawhite);}
+</style>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news", 
 	"blog", 
