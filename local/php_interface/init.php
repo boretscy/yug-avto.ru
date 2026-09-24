@@ -1,6 +1,26 @@
 <?php
 declare(strict_types=1);
 
+// Host Validation (Defense in Depth: block unauthorized hostnames/parasitic clones)
+if (php_sapi_name() !== 'cli') {
+    $allowedHosts = [
+        'yug-avto.ru',
+        'www.yug-avto.ru',
+        'htest.yug-avto.ru',
+        'www.htest.yug-avto.ru',
+        'localhost',
+        '127.0.0.1',
+    ];
+    $incomingHost = strtolower(explode(':', $_SERVER['HTTP_HOST'] ?? '')[0]);
+    if (!empty($incomingHost) && !in_array($incomingHost, $allowedHosts, true)) {
+        http_response_code(403);
+        header('Content-Type: text/plain; charset=utf-8');
+        header('Connection: close');
+        exit('403 Forbidden: Unauthorized Host');
+    }
+}
+
+
 use Bitrix\Main\EventManager;
 use Bitrix\Main\Loader;
 
