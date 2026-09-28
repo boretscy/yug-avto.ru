@@ -86,12 +86,40 @@
                     <div class="d-flex justify-content-between align-items-center c-yadarkgray text-minus py-2"><span>Коробка:</span><span class="c-yablack"><?= ((is_array($data['transmission']))?$data['transmission']['name']:'');?></span></div><hr class="m-0" />
                     <div class="d-flex justify-content-between align-items-center c-yadarkgray text-minus py-2"><span>Топливо:</span><span class="c-yablack"><?= ((is_array($data['engine']))?$data['engine']['name']:'');?></span></div><hr class="m-0" />
                     <div class="d-flex justify-content-between align-items-center c-yadarkgray text-minus py-2"><span>Привод:</span><span class="c-yablack"><?= ((is_array($data['drive']))?$data['drive']['name']:'');?></span></div><hr class="m-0" />
-                    <div class="d-flex justify-content-between align-items-center c-yadarkgray text-minus py-2"><span>Двигатель:</span><span class="c-yablack"><?= $data['general'][(($app->Conf['Api']['mode']=='new')?5:8)]['value'];?></span></div>
+                    <?php
+                        $dEngineVal = '';
+                        if (!empty($data['general']) && is_array($data['general'])) {
+                            foreach ($data['general'] as $gItem) {
+                                if (!empty($gItem['name']) && mb_strtolower($gItem['name'], 'UTF-8') === 'двигатель') {
+                                    $dEngineVal = $gItem['value'];
+                                    break;
+                                }
+                            }
+                        }
+                        if (!$dEngineVal) {
+                            $dEngineVal = $data['general'][(($app->Conf['Api']['mode']=='new')?5:8)]['value'] ?? ($data['engine']['name'] ?? '');
+                        }
+                    ?>
+                    <div class="d-flex justify-content-between align-items-center c-yadarkgray text-minus py-2"><span>Двигатель:</span><span class="c-yablack"><?= $dEngineVal;?></span></div>
+                    <?php 
+                        $dFuelCity = $data['specifications'][3]['value'] ?? '';
+                        $dFuelTrack = $data['specifications'][2]['value'] ?? '';
+                        if (!empty($data['specifications']) && is_array($data['specifications'])) {
+                            foreach ($data['specifications'] as $sp) {
+                                $spName = mb_strtolower($sp['name'] ?? '', 'UTF-8');
+                                if (strpos($spName, 'город') !== false) $dFuelCity = $sp['value'];
+                                if (strpos($spName, 'трасса') !== false) $dFuelTrack = $sp['value'];
+                            }
+                        }
+                        $dFuelStr = trim(($dFuelCity ? $dFuelCity : '') . ($dFuelCity && $dFuelTrack ? ' - ' : '') . ($dFuelTrack ? $dFuelTrack : ''));
+                        if ($dFuelStr) {
+                    ?>
                     <div class="d-flex justify-content-between align-items-center c-yadarkgray text-minus py-2">
-                        <span>Расход л/100км:</span><span class="c-yablack"><?= $data['specifications'][3]['value'];?> - <?= $data['specifications'][2]['value'];?></span>
+                        <span>Расход л/100км:</span><span class="c-yablack"><?= $dFuelStr;?></span>
                     </div>
+                    <?php } ?>
                     <?php if ( $app->Conf['Api']['mode']=='used' ) { ?>
-                        <div class="d-flex justify-content-between align-items-center c-yadarkgray text-minus py-2"><span>Пробег:</span><span class="c-yablack"><?= number_format($data['general'][5]['value'], 0, '.', ' ');?></span></div>
+                        <div class="d-flex justify-content-between align-items-center c-yadarkgray text-minus py-2"><span>Пробег:</span><span class="c-yablack"><?= number_format($data['general'][5]['value'] ?? $data['mileage'] ?? 0, 0, '.', ' ');?></span></div>
                     <?php } ?>
                 </div>
                 
