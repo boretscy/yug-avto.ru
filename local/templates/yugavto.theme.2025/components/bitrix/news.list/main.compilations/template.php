@@ -204,13 +204,13 @@ $this->setFrameMode(true);
 				<div class="b-radius-yaradius-16 bg-yawhite p-3 p-lg-5 text-uppercase d-flex flex-column flex-lg-row justify-content-between align-items-lg-center main-compilations-futures text-uppercase">
 					<h2 class="d-lg-none fw-bold text-uppercase">ЮГ-АВТО ЭТО</h2>
 					<div class="main-compilations-futures-item text-lg-center ms-2 d-flex d-lg-block justify-content-start align-items-center my-2 my-lg-0">
-						<div class="title fw-light me-3 me-lg-0">28</div>
+						<div class="title fw-light me-3 me-lg-0">29</div>
 						<div class="text c-yadarkgray fw-light">лет</div>
 					</div>
 					<div class="separator mx-2 bg-yayellow"></div>
 					<div class="main-compilations-futures-item text-lg-center ms-2 d-flex d-lg-block justify-content-start align-items-center my-2 my-lg-0">
-						<div class="title fw-light me-3 me-lg-0">48</div>
-						<div class="text c-yadarkgray fw-light">брендов</div>
+						<div class="title fw-light me-3 me-lg-0">51</div>
+						<div class="text c-yadarkgray fw-light">бренд</div>
 					</div>
 					<div class="separator mx-2 bg-yayellow"></div>
 					<div class="main-compilations-futures-item text-lg-center ms-2 d-flex d-lg-block justify-content-start align-items-center my-2 my-lg-0">
