@@ -1,6 +1,10 @@
 # Changelog
 
 ## [2026-09-29]
+### Fixed
+- **Устранение кратковременных 404 (Transient 404) и защита от таймаутов API:**
+  - В `cars/vendor/YApp.Showroom.class.php`: таймаут cURL скорректирован до 4с (`CONNECTTIMEOUT = 2s`), внедрен автоматический быстрый повтор запроса (`retry 150ms`) при сетевом сбое или таймауте ответа Go API.
+  - В `cars/new/index.php` и `cars/used/index.php`: внедрено строгое разделение сетевых ошибок и статуса 404. При пустом ответе бэкенда клиенту отдается статус `503 Service Unavailable` с заголовком `Cache-Control: no-store, no-cache`, полностью исключая ошибочное выставление и кэширование статуса 404 в Nginx при сетевых задержках.
 ### Changed
 - **Актуализация показателей холдинга и списка брендов:**
   - В блоке статистики главной страницы (`local/templates/yugavto.theme.2025/components/bitrix/news.list/main.compilations/template.php`) обновлены показатели: 29 лет и 51 бренд.
