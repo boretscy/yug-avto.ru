@@ -10,6 +10,24 @@
     $dImgText = $dCarBrand . ' ' . $dCarModel . ' ' . $dCarYear . ' года с пробегом ' . $dCarMileage;
     ?>
     <div class="sticky-top" style="top: 9rem;">
+        <?php 
+        $hasRealImages = false;
+        if ( !empty($data['_images']) && is_array($data['_images']) ) {
+            foreach ( $data['_images'] as $imgItem ) {
+                if ( !empty($imgItem['detail']) && strpos($imgItem['detail'], '/upload/Cis/bodies/') === false ) {
+                    $hasRealImages = true;
+                    break;
+                }
+            }
+        }
+        
+        $bodyCode = $data['body']['code'] ?? '';
+        if ( empty($bodyCode) ) {
+            $bodyCode = 'crossover';
+        }
+        $placeholderUrl = 'https://' . YApp::GO_API_DOMAIN . '/upload/Cis/bodies/' . $bodyCode . '.webp';
+        ?>
+        <?php if ( $hasRealImages ) { ?>
         <div class="swiper vehicle-swiper position-relative">
             <div class="swiper-wrapper">
                 <?php foreach ( $data['_images'] as $k => $item ) { ?>
@@ -60,15 +78,49 @@
                     <img src="<?= $item['preview'];?>" class="b-radius-yaradius-15" alt="<?= htmlspecialchars(YApp::getCleanAltText($dImgText . ' - миниатюра ' . ($k + 1)));?>" title="<?= htmlspecialchars(YApp::getCleanAltText($dImgText . ' - миниатюра ' . ($k + 1)));?>" />
                 </div>
                 <?php } ?>
-                <?php /*
-                <div class="vehicle-swiper-thumds-photo b-radius-yaradius-15 d-flex justify-content-center align-items-center c-yawhite fw-bold">
-                    <span>+ <?= count($data['_images'])-4;?><br />фото</span>
-                </div>
-                */?>
             </div>
             <div class="vehicle-swiper-thumbs-next"></div>
             <div class="vehicle-swiper-thumbs-prev"></div>
         </div>
+        <?php } else { ?>
+        <div class="position-relative">
+            <div class="b-radius-yaradius-25 bg-yawhite d-flex justify-content-center align-items-center overflow-hidden position-relative" style="min-height: 380px;">
+                <img 
+                    src="<?= $placeholderUrl;?>" 
+                    class="w-100 h-auto b-radius-yaradius-25" 
+                    style="max-height: 480px; object-fit: contain;" 
+                    alt="<?= htmlspecialchars(YApp::getCleanAltText($dImgText));?>" 
+                    title="<?= htmlspecialchars(YApp::getCleanAltText($dImgText));?>" 
+                    itemprop="image" 
+                />
+            </div>
+            <div class="vehicle-swiper-buttons-row position-absolute d-flex" style="top: 15px; right: 15px; z-index: 5;">
+                <a 
+                    href="#" rel="nofollow" 
+                    data-action="toggle-fav-com" role="not-cover"
+                    data-target="CIS_FAVORITES" 
+                    data-vehicle="<?= $data['id'];?>"
+                    aria-label="Избранное"
+                    class="ms-1 b-radius-yaradius-12 hint--bottom-left bg-yawhite vehicle-swiper-buttons-row-item vehicle-card-discount-item d-flex justify-content-center align-items-center <?= ((in_array($data['id'], $data['FAVORITES']))?'active':'');?> position-relative"
+                    >
+                    <img class="position-absolute" src="<?= SITE_TEMPLATE_PATH.'/assets/images/svg/icon-favorites.svg';?>" />
+                    <img class="position-absolute" src="<?= SITE_TEMPLATE_PATH.'/assets/images/svg/icon-favorites-a.svg';?>" />
+                </a>
+                <a 
+                    href="#" rel="nofollow" 
+                    data-action="toggle-fav-com" role="not-cover"
+                    data-target="CIS_COMPARE" 
+                    data-vehicle="<?= $data['id'];?>"
+                    aria-label="Сравнение"
+                    class="ms-1 b-radius-yaradius-12 hint--bottom-left bg-yawhite vehicle-swiper-buttons-row-item vehicle-card-discount-item d-flex justify-content-center align-items-center <?= ((in_array($data['id'], $data['COMPARE']))?'active':'');?> position-relative"
+                    >
+                    <img class="position-absolute" src="<?= SITE_TEMPLATE_PATH.'/assets/images/svg/icon-compare.svg';?>" />
+                    <img class="position-absolute" src="<?= SITE_TEMPLATE_PATH.'/assets/images/svg/icon-compare-a.svg';?>" />
+                </a>
+                <div class="ms-1 b-radius-yaradius-12 vehicle-swiper-buttons-row-item bg-yawhite d-flex justify-content-center align-items-center ya-share2" data-curtain data-shape="round" data-color-scheme="whiteblack" data-limit="0" data-more-button-type="short" data-services="messenger,vkontakte,odnoklassniki,telegram,twitter,viber,whatsapp,skype"></div>
+            </div>
+        </div>
+        <?php } ?>
     </div>
 </div>
 
