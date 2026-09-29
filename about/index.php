@@ -36,7 +36,7 @@ $APPLICATION->SetTitle("О Компании");
         <div class="col-lg-6 mb-4 mb-lg-0">
             <div class="bg-yawhite b-radius-yaradius-16 p-4">
                 <p>Юг-Авто осуществляет продажу и сервисное обслуживание автомобилей в Краснодарском крае и Республике Адыгея от ведущих мировых производителей с сентября 1997 года. Нашим дилерским центрам многократно присуждалось звание «Лучший региональный дилер». И это не удивительно, ведь главный принцип компании Юг-Авто — сделать все, чтобы вы смогли выбрать «свой» автомобиль и в дальнейшем наслаждаться его владением и качественным обслуживанием.</p>
-                <p>С нами это сделать просто, так как Юг-Авто официальный дилер 47 мировых автомобильных брендов: <span class="text-uppercase">AVATR, BAIC, BELGEE, CADILLAC, CHANGAN, CHERY, CHEVROLET, CITROEN, DEEPAL, EONYX, FORD, GAC, GEELY, GENESIS, HAVAL, HAVAL PRO, HONDA, HYUNDAI, JAC, JAECOO, JAGUAR, JETOUR, KGM, KIA, KAIYI, KNEWSTAR, LADA, LAND ROVER, LI AUTO, LIVAN, MITSUBISHI, NORDCROSS, OPEL, ORA, OMODA, PEUGEOT, ROX, SKODA, SOLARIS, SUZUKI, SOLLERS, TANK, TENET, VOLKSWAGEN, WEY, XCITE, АМБЕРАВТО, МОСКВИЧ</span>.</p>
+                <p>С нами это сделать просто, так как Юг-Авто официальный дилер 51 мирового автомобильного бренда: <span class="text-uppercase">AVATR, BAIC, BELGEE, CADILLAC, CHANGAN, CHERY, CHEVROLET, CITROEN, DEEPAL, EONYX, FORD, GAC, GEELY, GENESIS, HAVAL, HAVAL PRO, HONDA, HYUNDAI, JAC, JAECOO, JAGUAR, JELAND, JETOUR, KIA, KAIYI, KNEWSTAR, LADA, LAND ROVER, LI AUTO, LIVAN, NORDCROSS (LYNK&Co), MITSUBISHI, NORDCROSS, OPEL, ORA, OMODA, PEUGEOT, ROX, SKODA, SOLARIS, SUZUKI, SOLLERS, TANK, TENET, UMO, VOLGA, VOLKSWAGEN, WEY, XCITE, АМБЕРАВТО</span>.</p>
                 <p class="m-0">В наших шоу-румах вы найдете и купите автомобиль последнего поколения: легковой, спортивный и коммерческий, всех комплектаций и цветов. В Юг-Авто всегда действуют выгодные условия покупки авто, доступные программы кредитования и страхования. Получить одобрение кредита можно в т.ч. онлайн.</p>
             </div>
         </div>
@@ -56,13 +56,13 @@ $APPLICATION->SetTitle("О Компании");
 			<div class="b-radius-yaradius-16 bg-yawhite p-3 p-lg-5 text-uppercase d-flex flex-column flex-lg-row justify-content-between align-items-lg-center main-filter-futures text-uppercase">
 				<h2 class="d-lg-none fw-bold text-uppercase">ЮГ-АВТО ЭТО</h2>
 				<div class="main-filter-futures-item text-lg-center ms-2 d-flex d-lg-block justify-content-start align-items-center my-2 my-lg-0">
-					<div class="title fw-light me-3 me-lg-0">28</div>
+					<div class="title fw-light me-3 me-lg-0">29</div>
 					<div class="text c-yadarkgray fw-light">лет</div>
 				</div>
 				<div class="separator mx-2 bg-yayellow"></div>
 				<div class="main-filter-futures-item text-lg-center ms-2 d-flex d-lg-block justify-content-start align-items-center my-2 my-lg-0">
-					<div class="title fw-light me-3 me-lg-0">48</div>
-					<div class="text c-yadarkgray fw-light">брендов</div>
+					<div class="title fw-light me-3 me-lg-0">51</div>
+					<div class="text c-yadarkgray fw-light">бренд</div>
 				</div>
 				<div class="separator mx-2 bg-yayellow"></div>
 				<div class="main-filter-futures-item text-lg-center ms-2 d-flex d-lg-block justify-content-start align-items-center my-2 my-lg-0">

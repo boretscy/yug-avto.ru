@@ -37,7 +37,18 @@ $app = new YAppShowroom($conf);
 $filter = $app->makeFilter(CURRENT_URL, $_GET);
 if ( !$filter['city'] ) $filter['city'] = $app->getCityCookie();
 
-$data = json_decode( YAppShowroom::httpGet($app->makeApiUrl($filter, (($filter['vehicle'])?'vehicle':'vehicles'))), true );
+$rawResponse = YAppShowroom::httpGet($app->makeApiUrl($filter, (($filter['vehicle'])?'vehicle':'vehicles')));
+$data = (!empty($rawResponse)) ? json_decode($rawResponse, true) : null;
+
+// Защита от сбоя сети / недоступности API: при сетевой ошибке отдаем 503 без кэширования в Nginx (не 404!)
+if ( empty($rawResponse) || !is_array($data) ) {
+	header("HTTP/1.1 503 Service Unavailable");
+	header("Retry-After: 5");
+	header("Cache-Control: no-cache, no-store, must-revalidate, max-age=0");
+	header("Pragma: no-cache");
+	echo "Сервис временно недоступен. Пожалуйста, обновите страницу через несколько секунд.";
+	die();
+}
 
 // === Ранняя валидация и 404 / 301 (ДО отправки HTML и prolog_after.php) ===
 if ( $filter['vehicle'] && (!isset($data['id']) || isset($data['error']) || (isset($data['code']) && $data['code'] == 404)) ) {

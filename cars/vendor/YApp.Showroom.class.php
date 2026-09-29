@@ -498,19 +498,44 @@
 			if ( empty($res) ) foreach ( explode(',', 'Краснодар,Яблоновский,Новороссийск,Майкоп') as $q ) $res[] = $q;
 			return $res;
 		}
+		public static $lastHttpCode = 0;
+		public static $lastError = '';
 
 		public static function httpGet($url) {
 			$ch = curl_init($url);
 			curl_setopt_array($ch, [
 				CURLOPT_RETURNTRANSFER => true,
-				CURLOPT_TIMEOUT => 3,
+				CURLOPT_CONNECTTIMEOUT => 2,
+				CURLOPT_TIMEOUT => 4,
 				CURLOPT_SSL_VERIFYPEER => false,
 				CURLOPT_SSL_VERIFYHOST => false,
 				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 				CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2,
 			]);
 			$resp = curl_exec($ch);
+			self::$lastHttpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			self::$lastError = curl_error($ch);
 			curl_close($ch);
+
+			// Быстрый retry при сетевом сбое или таймауте
+			if ($resp === false || self::$lastHttpCode >= 500) {
+				usleep(150000); // 150 ms
+				$ch = curl_init($url);
+				curl_setopt_array($ch, [
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_CONNECTTIMEOUT => 2,
+					CURLOPT_TIMEOUT => 4,
+					CURLOPT_SSL_VERIFYPEER => false,
+					CURLOPT_SSL_VERIFYHOST => false,
+					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+					CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2,
+				]);
+				$resp = curl_exec($ch);
+				self::$lastHttpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+				self::$lastError = curl_error($ch);
+				curl_close($ch);
+			}
+
 			return $resp;
 		}
 
