@@ -13,25 +13,34 @@
 global $arFilterBlog;
 $arFilterBlog = [];
 if (!empty($_GET['tag'])) {
-	$tagVal = trim((string)$_GET['tag']);
-	$enum = \Bitrix\Iblock\PropertyEnumerationTable::getList([
-		'select' => ['ID'],
-		'filter' => [
-			'=PROPERTY.IBLOCK_ID' => (int)$arParams['IBLOCK_ID'],
-			'=PROPERTY.CODE' => 'TAGS',
-			[
-				'LOGIC' => 'OR',
-				['=XML_ID' => $tagVal],
-				['=VALUE' => $tagVal],
-			],
-		],
-		'limit' => 1,
-	])->fetch();
+	$rawTags = explode(',', (string)$_GET['tag']);
+	$tags = [];
+	foreach ($rawTags as $t) {
+		$t = trim($t);
+		if ($t !== '') {
+			$tags[] = $t;
+		}
+	}
 
-	if ($enum && !empty($enum['ID'])) {
-		$arFilterBlog['PROPERTY_TAGS'] = (int)$enum['ID'];
-	} else {
-		$arFilterBlog['ID'] = false;
+	if (!empty($tags)) {
+		$tagRows = \Bitrix\Iblock\PropertyEnumerationTable::getList([
+			'select' => ['ID'],
+			'filter' => [
+				'=PROPERTY.IBLOCK_ID' => (int)$arParams['IBLOCK_ID'],
+				'=PROPERTY.CODE' => 'TAGS',
+				[
+					'LOGIC' => 'OR',
+					['=XML_ID' => $tags],
+					['=VALUE' => $tags],
+				],
+			],
+		])->fetchAll();
+
+		if (!empty($tagRows)) {
+			$arFilterBlog['PROPERTY_TAGS'] = array_map('intval', array_column($tagRows, 'ID'));
+		} else {
+			$arFilterBlog['ID'] = false;
+		}
 	}
 }
 ?>
