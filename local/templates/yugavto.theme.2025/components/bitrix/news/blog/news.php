@@ -14,23 +14,24 @@ global $arFilterBlog;
 $arFilterBlog = [];
 if (!empty($_GET['tag'])) {
 	$tagVal = trim((string)$_GET['tag']);
-	$enum = CIBlockPropertyEnum::GetList(
-		[],
-		[
-			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-			"CODE" => "TAGS",
+	$enum = \Bitrix\Iblock\PropertyEnumerationTable::getList([
+		'select' => ['ID'],
+		'filter' => [
+			'=PROPERTY.IBLOCK_ID' => (int)$arParams['IBLOCK_ID'],
+			'=PROPERTY.CODE' => 'TAGS',
 			[
-				"LOGIC" => "OR",
-				["=XML_ID" => $tagVal],
-				["=VALUE" => $tagVal]
-			]
-		]
-	)->Fetch();
+				'LOGIC' => 'OR',
+				['=XML_ID' => $tagVal],
+				['=VALUE' => $tagVal],
+			],
+		],
+		'limit' => 1,
+	])->fetch();
 
 	if ($enum && !empty($enum['ID'])) {
 		$arFilterBlog['PROPERTY_TAGS'] = (int)$enum['ID'];
 	} else {
-		$arFilterBlog['PROPERTY_TAGS'] = -1;
+		$arFilterBlog['ID'] = false;
 	}
 }
 ?>
