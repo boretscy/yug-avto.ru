@@ -41,36 +41,27 @@ if ( count($arSections) > 1) {
     foreach ( $arResult['ITEMS'] as $i ) $arModels[] = $i['CODE'];
 	$APPLICATION->AddChainItem($arResult['SECTION']['NAME']);
 
-    $goBase = 'https://apps.avatr-yugavto.ru/api/v1/cis';
+    $goBase = 'https://' . (class_exists('YApp') ? YApp::GO_API_DOMAIN : 'apps.yug-avto.ru') . '/api/v1/cis';
     $token = 'ef6541490c8bb9d481d37020b6a1953e';
     $brandCode = $arResult['SECTION']['CODE'];
 
     $cacheTime = 300;
 
-    $filterNew = json_decode(
-        file_get_contents($goBase.'/filter?type=new&brand='.$brandCode.'&token='.$token),
-        true
-    );
+    $filterNew = YApp::safeJsonGet($goBase.'/filter?type=new&brand='.$brandCode.'&token='.$token, []);
     $arResult['NEW_COUNT'] = $filterNew['totalCount'] ?? 0;
     $arResult['VEHICLES_NEW'] = [];
     foreach ( $filterNew['dropLists']['models'] ?? [] as $m ) {
         $arResult['VEHICLES_NEW'][$m['code']] = ['vehicles' => $m['vehicles']];
     }
 
-    $filterUsed = json_decode(
-        file_get_contents($goBase.'/filter?type=used&brand='.$brandCode.'&token='.$token),
-        true
-    );
+    $filterUsed = YApp::safeJsonGet($goBase.'/filter?type=used&brand='.$brandCode.'&token='.$token, []);
     $arResult['USED_COUNT'] = $filterUsed['totalCount'] ?? 0;
     $arResult['VEHICLES_USED'] = [];
     foreach ( $filterUsed['dropLists']['models'] ?? [] as $m ) {
         $arResult['VEHICLES_USED'][$m['code']] = ['vehicles' => $m['vehicles']];
     }
 
-    $vehiclesUsed = json_decode(
-        file_get_contents($goBase.'/vehicles?type=used&brand='.$brandCode.'&limit=12&token='.$token),
-        true
-    );
+    $vehiclesUsed = YApp::safeJsonGet($goBase.'/vehicles?type=used&brand='.$brandCode.'&limit=12&token='.$token, []);
     $arResult['USED'] = $vehiclesUsed['items'] ?? [];
 
 	// $arResult['DEALERSHIPS'] = null;

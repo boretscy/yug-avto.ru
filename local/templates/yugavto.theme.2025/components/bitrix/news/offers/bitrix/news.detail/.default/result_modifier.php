@@ -57,9 +57,10 @@
     $arResult['MODE'] = ( !in_array('service', $arResult['PROPERTIES']['TAG']['VALUE_XML_ID']) ) ? 'new' : 'used';
     if ( !in_array('service', $arResult['PROPERTIES']['TAG']['VALUE_XML_ID']) ) {
 
-        $arResult['VEHICLES'] = json_decode(
-            file_get_contents('https://apps.yug-avto.ru/API/get/cis/limit/'.$arResult['MODE'].'/?token=34b5ac8b71018c0bc7e5c050ed90b243&limit=12'.(($arResult['DCs'])?'&dealership='.implode(',', $arResult['DCs']):'')),
-            true
+        $offersApiBase = 'https://' . (class_exists('YApp') ? YApp::API_DOMAIN : 'apps.yug-avto.ru') . '/API/get/cis';
+        $arResult['VEHICLES'] = YApp::safeJsonGet(
+            $offersApiBase . '/limit/' . $arResult['MODE'] . '/?token=34b5ac8b71018c0bc7e5c050ed90b243&limit=12' . ((!empty($arResult['DCs'])) ? '&dealership=' . implode(',', $arResult['DCs']) : ''),
+            []
         );
     }
     YApp::sp($arResult['DISPLAY_PROPERTIES']['DEALERSHIP'], true);

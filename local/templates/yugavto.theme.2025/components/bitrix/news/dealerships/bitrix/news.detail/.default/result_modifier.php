@@ -45,7 +45,7 @@ while ( $ob = $rs->GetNextElement() ) $arResult['NEWS'][] = $ob->GetFields();
 
 $arResult['MODE'] = ( $arResult['PROPERTIES']['IS_NEW']['VALUE'] == 'Да' ) ? 'new' : 'used';
 
-$goBase = 'https://apps.avatr-yugavto.ru/api/v1/cis';
+$goBase = 'https://' . (class_exists('YApp') ? YApp::GO_API_DOMAIN : 'apps.yug-avto.ru') . '/api/v1/cis';
 $token = 'ef6541490c8bb9d481d37020b6a1953e';
 $mode = $arResult['MODE'];
 $dealershipExtId = $arResult['PROPERTIES']['EXTERNAL_CODE']['VALUE'];
@@ -56,7 +56,7 @@ if ($mode == 'new' && $brandCode) {
     $vehiclesUrl .= '&brand='.$brandCode;
 }
 
-$vehiclesResp = json_decode(file_get_contents($vehiclesUrl), true);
+$vehiclesResp = YApp::safeJsonGet($vehiclesUrl, []);
 $arResult['VEHICLES'] = $vehiclesResp['items'] ?? [];
 $arResult['COUNT'] = $vehiclesResp['totalCount'] ?? 0;
 if ( is_countable($arResult['PROPERTIES']['SERVICES']['VALUE']) ) {

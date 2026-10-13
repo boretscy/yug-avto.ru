@@ -457,31 +457,74 @@
 			return $baseUrl;
 		}
 
-		public static function httpGet($url) {
-			$attempts = 6;
-			$resp = false;
-			for ($i = 0; $i < $attempts; $i++) {
-				$ch = curl_init($url);
-				curl_setopt_array($ch, [
-					CURLOPT_RETURNTRANSFER => true,
-					CURLOPT_TIMEOUT => 3,
-					CURLOPT_SSL_VERIFYPEER => false,
-					CURLOPT_SSL_VERIFYHOST => false,
-					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-					CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2,
-				]);
-				$resp = curl_exec($ch);
-				$err = curl_errno($ch);
-				curl_close($ch);
-				
-				if ($resp !== false && $err === 0) {
-					break;
-				}
-				if ($i < $attempts - 1) {
-					usleep(100000); // 100 мс
-				}
+		public static function isCircuitOpen(string $host): bool {
+			$lockFile = sys_get_temp_dir() . '/cb_' . md5($host) . '.lock';
+			if (!file_exists($lockFile)) {
+				return false;
 			}
-			return $resp;
+			$expiry = (int)@file_get_contents($lockFile);
+			if ($expiry > time()) {
+				return true;
+			}
+			@unlink($lockFile);
+			return false;
+		}
+
+		public static function tripCircuit(string $host, int $ttl = 30): void {
+			$lockFile = sys_get_temp_dir() . '/cb_' . md5($host) . '.lock';
+			@file_put_contents($lockFile, (string)(time() + $ttl));
+		}
+
+		public static function resetCircuit(string $host): void {
+			$lockFile = sys_get_temp_dir() . '/cb_' . md5($host) . '.lock';
+			if (file_exists($lockFile)) {
+				@unlink($lockFile);
+			}
+		}
+
+		public static function httpGet($url) {
+			$host = parse_url($url, PHP_URL_HOST) ?? '';
+			if ($host && self::isCircuitOpen($host)) {
+				return false;
+			}
+
+			$ch = curl_init($url);
+			curl_setopt_array($ch, [
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_CONNECTTIMEOUT => 1,
+				CURLOPT_TIMEOUT => 2,
+				CURLOPT_SSL_VERIFYPEER => false,
+				CURLOPT_SSL_VERIFYHOST => false,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1_2,
+			]);
+			$resp = curl_exec($ch);
+			$httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			$err = curl_errno($ch);
+			curl_close($ch);
+
+			if ($resp !== false && $err === 0 && ($httpCode < 500 || $httpCode === 0)) {
+				if ($host) {
+					self::resetCircuit($host);
+				}
+				return $resp;
+			}
+
+			// Фиксируем сбой хоста для защиты от лавины зависаний
+			if ($host && ($err !== 0 || $httpCode >= 500)) {
+				self::tripCircuit($host, 30);
+			}
+
+			return false;
+		}
+
+		public static function safeJsonGet($url, $default = []) {
+			$resp = self::httpGet($url);
+			if (!$resp) {
+				return $default;
+			}
+			$decoded = json_decode($resp, true);
+			return is_array($decoded) ? $decoded : $default;
 		}
 
 		public static function InArrValues($array, $needle){

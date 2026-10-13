@@ -1,5 +1,19 @@
 # Changelog
 
+## [2026-10-13]
+### Fixed
+- **Отказоустойчивость и защита от каскадных отказов при сбое yapps / Go API:**
+  - В `local/php_interface/YApp/YApp.php`:
+    - Переработан метод `YApp::httpGet`: число попыток сокращено до 1, таймаут соединения установлен в 1с (`CONNECTTIMEOUT = 1s`), общий таймаут — 2с (`TIMEOUT = 2s`).
+    - Внедрен паттерн **Circuit Breaker (Fail-Fast)**: при сетевом сбое или 5xx ошибке хост помечается недоступным на 30 секунд. Все последующие запросы к нему мгновенно возвращают `false` за 0.0001с, предотвращая накопление зависших PHP-воркеров и исчерпание лимитов веб-сервера.
+    - Добавлен метод `YApp::safeJsonGet($url, $default = [])` для безопасного разбора ответа внешних API без генерации PHP-предупреждений.
+  - Устранены блокирующие вызовы `file_get_contents` без таймаута (зависавшие ранее до 60с по `default_socket_timeout`) с переводом на `YApp::safeJsonGet`:
+    - `local/templates/yugavto.theme.2025/components/bitrix/news/pages/bitrix/news.detail/.default/result_modifier.php` (детальные страницы моделей и брендов)
+    - `local/templates/yugavto.theme.2025/components/bitrix/news/offers/bitrix/news.detail/.default/result_modifier.php` (акции и спецпредложения)
+    - `local/templates/yugavto.theme.2025/components/bitrix/news/dealerships/bitrix/news.detail/.default/result_modifier.php` (страницы дилерских центров)
+    - `local/templates/yugavto.theme.2025/components/bitrix/news/pages/bitrix/news.list/.default/result_modifier.php` (каталог моделей)
+  - Устранены устаревшие обращения к неактивному домену `apps.avatr-yugavto.ru` в шаблонах `dealerships`, `pages/news.list` и `main.compilations`.
+
 ## [2026-10-01]
 ### Fixed
 - **Фильтрация статей блога по тегам (`components/bitrix/news/blog/news.php`):**
