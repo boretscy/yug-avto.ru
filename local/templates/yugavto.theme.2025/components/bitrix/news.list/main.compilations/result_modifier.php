@@ -15,7 +15,7 @@ if ($cache->initCache($cacheTime, $cacheId, $cacheDir)) {
 } else {
     $goApiBase = defined("YApp::GO_API_DOMAIN")
         ? "https://" . YApp::GO_API_DOMAIN . "/api/v1/cis"
-        : "https://apps.avatr-yugavto.ru/api/v1/cis";
+        : "https://apps.yug-avto.ru/api/v1/cis";
     $token = "ef6541490c8bb9d481d37020b6a1953e";
 
     $filterResp = YApp::httpGet($goApiBase . "/filter?token=" . $token . "&type=new");
