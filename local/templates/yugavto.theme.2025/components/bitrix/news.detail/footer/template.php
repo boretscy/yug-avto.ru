@@ -16,7 +16,7 @@ $this->setFrameMode(true);
 	<div class="container">
 		
 		<!-- Footer SEO -->
-		<?php $APPLICATION->ShowViewContent('footer_seo'); ?>
+		<!--#FOOTER_SEO#-->
 		<!-- // Footer SEO -->
 
 		<!-- Footer BRANDS -->

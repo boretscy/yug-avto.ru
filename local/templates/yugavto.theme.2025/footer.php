@@ -1,4 +1,4 @@
-        <?$APPLICATION->IncludeComponent(
+        <?php ob_start(); $APPLICATION->IncludeComponent(
 	"bitrix:news.detail", 
 	"footer", 
 	[
@@ -60,7 +60,11 @@
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	],
 	false
-);?>
+);
+$footerHtml = ob_get_clean();
+$footerSeoHtml = include __DIR__ . '/components/bitrix/news.detail/footer/seo.php';
+echo str_replace('<!--#FOOTER_SEO#-->', $footerSeoHtml, $footerHtml);
+?>
 
         <?php include $_SERVER['DOCUMENT_ROOT'].SITE_TEMPLATE_PATH.'/include/modals.php'; ?>
 
