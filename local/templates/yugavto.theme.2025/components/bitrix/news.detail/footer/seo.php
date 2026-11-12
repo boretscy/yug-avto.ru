@@ -37,9 +37,12 @@ if (empty($seoText) && !empty($GLOBALS['META']['meta']['seo_text'])) {
     $seoText = (!empty($seoTitle) ? '<h2 class="fw-normal">' . $seoTitle . '</h2>' : '') . '<p>' . $GLOBALS['META']['meta']['seo_text'] . '</p>';
 }
 
-if (!empty($seoText)) {
-    ob_start();
-    ?>
+if (empty($seoText)) {
+    return '';
+}
+
+ob_start();
+?>
 		<div class="row">
 			<div class="col footer-seo">
 				<div class="footer-seo-text mb-3">
@@ -56,6 +59,5 @@ if (!empty($seoText)) {
 			</div>
 		</div>
 		<div class="row py-3"><div class="col"><hr /></div></div>
-    <?php
-    $APPLICATION->AddViewContent('footer_seo', ob_get_clean());
-}
+<?php
+return ob_get_clean();
