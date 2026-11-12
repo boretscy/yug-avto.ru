@@ -16,25 +16,8 @@ $this->setFrameMode(true);
 	<div class="container">
 		
 		<!-- Footer SEO -->
-		<?php if ( $arResult['SEO_TEXT'] ) { ?>
-		<div class="row">
-			<div class="col footer-seo">
-				<div class="footer-seo-text mb-3">
-					<?= $arResult['SEO_TEXT'];?>
-				</div>
-				<a href="#" class="c-yawhite c-h-yawhite text-decoration-none" role="footer-seo-expand">
-					Читать далее
-					<svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#corner-down"></use></svg>
-				</a>
-				<a href="#" class="c-yawhite c-h-yawhite text-decoration-none" style="display: none;" role="footer-seo-collapse">
-					Свернуть
-					<svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#corner-up"></use></svg>
-				</a>
-			</div>
-		</div>
-		<div class="row py-3"><div class="col"><hr /></div></div>
+		<?php $APPLICATION->ShowViewContent('footer_seo'); ?>
 		<!-- // Footer SEO -->
-		<?php } ?>
 
 		<!-- Footer BRANDS -->
 		<div class="row">
