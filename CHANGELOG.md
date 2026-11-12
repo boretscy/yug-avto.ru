@@ -1,5 +1,12 @@
 # Changelog
 
+## [2026-11-12]
+### Fixed
+- **Динамический вывод SEO-текста в футере (`local/templates/yugavto.theme.2025/components/bitrix/news.detail/footer/`):**
+  - Вывод блока `.footer-seo` в `template.php` переведён на отложенный контейнер `$APPLICATION->ShowViewContent('footer_seo')`.
+  - Получение SEO-текста из `YApp::IBLOCK_SEO` (с кэшем `/footer_seo_text` на 3600с) и fallback на `$GLOBALS['META']['meta']['seo_text']` / `seo_title` перенесено из `result_modifier.php` в `component_epilog.php` (выполняется на каждом хите независимо от кэша компонента).
+  - Устранено залипание закэшированного SEO-текста главной страницы на страницах каталога (в т.ч. `/cars/new/haval-city/`).
+
 ## [2026-10-13]
 ### Fixed
 - **Отказоустойчивость и защита от каскадных отказов при сбое yapps / Go API:**
