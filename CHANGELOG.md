@@ -1,5 +1,15 @@
 # Changelog
 
+## [2026-11-23]
+### Fixed
+- **Адаптивная верстка главного фильтра и баннера под ноутбучные экраны 1333px (`main.filter`):**
+  - В `local/templates/yugavto.theme.2025/components/bitrix/news.list/main.filter/template.php`:
+    - Классы сетки для левого блока (`main-filter-left`) изменены на `col-12 col-lg-8 col-xl-8 col-xxl-9 pe-lg-3`, для правого баннера (`main-filter-right`) — на `col-3 col-lg-4 col-xl-4 col-xxl-3 ps-0 d-none d-xl-block`.
+    - На разрешениях ноутбуков (от 992px до 1366px, включая 1333px) левый блок занимает 8 колонок (66.67%), а правый баннер — 4 колонки (33.33%), обеспечивая баланс высоты блоков.
+  - В `local/templates/yugavto.theme.2025/components/bitrix/news.list/main.filter/style.css`:
+    - Для блока марок `.main-filter .brands-on-main-items` задана высота `height: 130px;` (на экранах >= 1366.02px сохраняется `height: 95px;` под 3 строки). Устранено сжатие и наползание 4 строк марок.
+
+
 ## [2026-11-12]
 ### Fixed
 - **Динамический вывод SEO-текста в футере (`local/templates/yugavto.theme.2025/components/bitrix/news.detail/footer/`):**

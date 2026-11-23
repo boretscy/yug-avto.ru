@@ -119,7 +119,7 @@ $this->setFrameMode(true);
 <div class="my-5 mt-3 mt-lg-5 main-filter">
 	<div class="container">
 		<div class="row mb-3">
-			<div class="col-12 col-lg-9 pe-lg-3 main-filter-left">
+			<div class="col-12 col-lg-8 col-xl-8 col-xxl-9 pe-lg-3 main-filter-left">
 				<div class="main-filter-tabs d-flex w-100">
 					<div class="main-filter-tabs-item b-yawhite cursor-pointer flex-fill active d-none d-lg-flex justify-content-center align-items-center" role="toggleEntity" data-action="cis" data-entity="new">
 						<span>Новые авто</span>
@@ -414,7 +414,7 @@ $this->setFrameMode(true);
 					</div>
 				</div>
 			</div>
-			<div class="col-3 ps-0 d-none d-xl-block main-filter-right">
+			<div class="col-3 col-lg-4 col-xl-4 col-xxl-3 ps-0 d-none d-xl-block main-filter-right">
 				<div class="position-relative">
 					<div class="swiper-main-stories b-radius-yaradius-16 overflow-hidden">
 						<div class="swiper-wrapper">
