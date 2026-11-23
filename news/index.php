@@ -43,7 +43,8 @@ $APPLICATION->SetTitle("Новости Юг-Авто");
 		"DETAIL_PAGER_TITLE" => "Страница",
 		"DETAIL_PROPERTY_CODE" => [
 			0 => "VIDEO",
-			1 => "",
+			1 => "GALLERY",
+			2 => "",
 		],
 		"DETAIL_SET_CANONICAL_URL" => "Y",
 		"DISPLAY_BOTTOM_PAGER" => "Y",

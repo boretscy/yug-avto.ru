@@ -67,7 +67,22 @@ $articleType = (!empty($arResult['PROPERTIES']['IS_ARTICLE']['VALUE']) && $arRes
 				</div>
 			</div>
 		</div>
-		<?php if ( $arResult['PROPERTIES']['DISCLAMER']['~VALUE'] ) { ?>
+		<?php if (!empty($arResult['GALLERY'])) { ?>
+		<div class="row mb-4">
+			<div class="col">
+				<div class="bg-yawhite b-radius-yaradius-16 p-4">
+					<div class="row">
+						<?php foreach ($arResult['GALLERY'] as $k => $g) { ?>
+						<div class="col-12 col-lg-4 mb-4 mb-lg-0">
+							<img src="<?= $g;?>" class="w-100 b-radius-yaradius-16 overflow-hidden" alt="<?= htmlspecialchars(YApp::getCleanAltText($arResult['NAME'].' - галерея '.$k));?>" title="<?= htmlspecialchars(YApp::getCleanAltText($arResult['NAME'].' - галерея '.$k));?>" />
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+		<?php if ( !empty($arResult['PROPERTIES']['DISCLAMER']['~VALUE']) ) { ?>
 		<div class="row mb-4">
 			<div class="col">
 				<div class="offer-disclamer c-yadarkgray text-minus bg-yawhite b-radius-yaradius-16 p-4">

@@ -1,6 +1,14 @@
 # Changelog
 
 ## [2026-11-23]
+### Added
+- **Поддержка фотогалереи в новостях (по аналогии со статьями блога):**
+  - В инфоблоке новостей (`IBLOCK_ID = 11`) создано множественное свойство типа «Файл» `GALLERY` («Галерея», сортировка 500, форматы: jpg, gif, bmp, png, jpeg, webp).
+  - В конфигурации формы редактирования элементов инфоблока новостей (`form_element_11` в `b_user_option`) поле `GALLERY` добавлено на основную вкладку «Элемент» после детального описания.
+  - В `/news/index.php`: в вызове комплексного компонента `bitrix:news` свойство `GALLERY` добавлено в `DETAIL_PROPERTY_CODE`.
+  - В `local/templates/yugavto.theme.2025/components/bitrix/news/news/bitrix/news.detail/.default/result_modifier.php`: добавлено извлечение прямых путей к файлам галереи в `$arResult['GALLERY']` с проверками на совместимость с PHP 8.x.
+  - В `local/templates/yugavto.theme.2025/components/bitrix/news/news/bitrix/news.detail/.default/template.php`: добавлен блок вывода сетки фотографий галереи (`.bg-yawhite .b-radius-yaradius-16 .row > .col-12 .col-lg-4`) после контента статьи.
+
 ### Fixed
 - **Адаптивная верстка главного фильтра и баннера под ноутбучные экраны 1333px (`main.filter`):**
   - В `local/templates/yugavto.theme.2025/components/bitrix/news.list/main.filter/template.php`:
