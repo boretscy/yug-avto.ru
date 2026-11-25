@@ -32,5 +32,32 @@ class SEO
             header('Location: ' . $cleanUri);
             exit();
         }
+
+        // 3. 301-редиректы устаревших слагов моделей (novaya-* -> *-new)
+        if (is_string($cleanPath) && str_starts_with($cleanPath, '/cars/new/')) {
+            $slugMap = [
+                'novaya-granta-sedan'     => 'granta-sedan-new',
+                'novaya-granta-liftbek'   => 'granta-liftbek-new',
+                'novaya-granta-khetchbek' => 'granta-khetchbek-new',
+                'novaya-granta-wagon'     => 'granta-wagon-new',
+                'novaya-granta-cross'     => 'granta-cross-new',
+                'novaya-vesta'            => 'vesta-new',
+                'novaya-vesta-sw'         => 'vesta-sw-new',
+                'novaya-vesta-cross'      => 'vesta-cross-new',
+                'novaya-vesta-sw-cross'   => 'vesta-sw-cross-new',
+                'novaya-elantra'          => 'elantra-new',
+                'novaya-creta'            => 'creta-new',
+            ];
+            if (preg_match('#^(/cars/new/[^/]+/)([^/]+)(/.*)?$#', $cleanPath, $m)) {
+                $oldSlug = $m[2];
+                if (isset($slugMap[$oldSlug])) {
+                    $queryString = $_SERVER['QUERY_STRING'] ?? '';
+                    $targetUrl = $m[1] . $slugMap[$oldSlug] . ($m[3] ?? '/') . ($queryString !== '' ? '?' . $queryString : '');
+                    header('HTTP/1.1 301 Moved Permanently');
+                    header('Location: ' . $targetUrl);
+                    exit();
+                }
+            }
+        }
     }
 }

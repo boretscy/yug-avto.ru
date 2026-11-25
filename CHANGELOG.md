@@ -1,5 +1,10 @@
 # Changelog
 
+## [2026-11-25]
+### Added
+- **301-редиректы устаревших URL моделей `novaya-*` -> `*-new` (`local/php_interface/classes/Local/Project/Handlers/SEO.php`):**
+  - В метод `\Local\Project\Handlers\SEO::handleRedirects()` добавлено сопоставление 11 слагов моделей (`novaya-granta-sedan`, `novaya-granta-liftbek`, `novaya-granta-khetchbek`, `novaya-granta-wagon`, `novaya-granta-cross`, `novaya-vesta`, `novaya-vesta-sw`, `novaya-vesta-cross`, `novaya-vesta-sw-cross`, `novaya-elantra`, `novaya-creta`) на актуальные слаги `*-new` с сохранением остатка пути и query-параметров (`?dealership=...`).
+
 ## [2026-11-23]
 ### Added
 - **Поддержка фотогалереи в новостях (по аналогии со статьями блога):**
