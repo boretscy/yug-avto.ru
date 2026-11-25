@@ -29,7 +29,7 @@
                     class="c-yalightblack c-h-yalightblack text-decoration-none text-uppercase d-block text-center b-radius-yaradius-15 bg-yayellow vehicles-more-button"
                     data-current="<?= $pagination['current'];?>"
                     data-total="<?= $pagination['total'];?>"
-                    data-url="<?= $app->makeApiUrl($filter, (($filter['vehicle'])?'vehicle':'vehicles'));?>"
+                    data-url="<?= htmlspecialchars(rtrim(preg_replace('/([?&])token=[^&]*(&?)/', '$1', $app->makeApiUrl($filter, (($filter['vehicle'])?'vehicle':'vehicles'))), '?&'));?>"
                     data-app-url="<?= $app->Conf()['assetsUrl'];?>"
                     role="not-cover"
                     rel="nofollow"

@@ -23,6 +23,7 @@ if ( $_POST ) {
         parse_str($parsed['query'], $params);
     }
     $params['page'] = (int)$_POST['next'];
+    $params['token'] = $conf['Api']['token'];
     $newQuery = http_build_query($params);
     
     $apiUrl = (isset($parsed['scheme']) ? $parsed['scheme'] . '://' : '') .
